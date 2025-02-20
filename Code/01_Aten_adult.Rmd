@@ -1,0 +1,223 @@
+---
+title: "Untitled"
+output: html_document
+date: "2025-01-13"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Load packages and tools
+```{r}
+library(tidyverse)
+library(ggpubr)
+library(dartR)
+library(wesanderson)
+library(janitor)
+library(glmnet)
+
+set.seed(123)
+
+#colour palette
+pal <- wes_palette("Zissou1", 5, type = "discrete")
+
+#theme for plots
+theme_Publication <- function(base_size=14, base_family="arial") {
+      library(grid)
+      library(ggthemes)
+      (theme_foundation(base_size=base_size, base_family=base_family)
+       + theme(plot.title = element_text(face = "bold",
+                                         size = rel(1.2), hjust = 0.5),
+               text = element_text(),
+               panel.background = element_rect(colour = NA),
+               plot.background = element_rect(colour = NA),
+               panel.border = element_rect(colour = NA),
+               axis.title = element_text(face = "bold",size = rel(1)),
+               axis.title.y = element_text(angle=90,vjust =2),
+               axis.title.x = element_text(vjust = -0.2),
+               axis.text = element_text(), 
+               axis.line = element_line(colour="black"),
+               axis.ticks = element_line(),
+               panel.grid.major = element_line(colour="#f0f0f0"),
+               panel.grid.minor = element_blank(),
+               legend.key = element_rect(colour = NA),
+               legend.position = "bottom",
+               legend.direction = "horizontal",
+               legend.key.size= unit(0.2, "cm"),
+               legend.margin = unit(0, "cm"),
+               legend.title = element_text(face="italic"),
+               plot.margin=unit(c(10,5,5,5),"mm"),
+               strip.background=element_rect(colour="#f0f0f0",fill="#f0f0f0"),
+               strip.text = element_text(face="bold")
+          ))
+      
+}
+
+scale_fill_Publication <- function(...){
+      library(scales)
+      discrete_scale("fill","Publication",manual_pal(values = c("#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")), ...)
+
+}
+
+scale_colour_Publication <- function(...){
+      library(scales)
+      discrete_scale("colour","Publication",manual_pal(values = c("#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")), ...)
+
+}
+
+# Function for summarising survival standard error
+summarySE <- function(data=NULL, measurevar=NULL, groupvars=NULL, na.rm=FALSE,
+                      conf.interval=.95, .drop=TRUE) {
+  require(plyr)
+  
+  # New version of length which can handle NA's: if na.rm==T, don't count them
+  length2 <- function (x, na.rm=FALSE) {
+    if (na.rm==TRUE) sum(!is.na(x))
+    else       length(x)
+  }
+  
+  # This does the summary. For each group's data frame, return a vector with
+  # N, mean, and sd
+  datac <- ddply(data, groupvars, .drop=.drop,
+                 .fun = function(xx, col) {
+                   c(N    = length2(xx[[col]], na.rm=na.rm),
+                     mean = mean   (xx[[col]], na.rm=na.rm),
+                     sd   = sd     (xx[[col]], na.rm=na.rm)
+                   )
+                 },
+                 measurevar
+  )
+  
+  # Commenting this rename mean column line, as not assigning measurevar name properly
+  # # Rename the "mean" column    
+  # datac <- rename(datac, measurevar = mean)
+  
+  datac$se <- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
+  
+  # Confidence interval multiplier for standard error
+  # Calculate t-statistic for confidence interval: 
+  # e.g., if conf.interval is .95, use .975 (above/below), and use df=N-1
+  ciMult <- qt(conf.interval/2 + .5, datac$N-1)
+  datac$ci <- datac$se * ciMult
+  
+  return(datac)
+}
+```
+
+Load data
+```{r}
+#all dart data
+ten <- readRDS("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data/ten_filter.RDS")
+larvae <- readRDS("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data/ten_larvae_filter.RDS")
+adult <- readRDS("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data/ten_adult_filter.RDS")
+```
+
+GRM- check parentage of larvae and juveniles
+```{r}
+grm<- gl.grm(ten)
+```
+
+PCA of parents
+```{r}
+#filter for 
+#filter for maf
+ad_filter<- gl.filter.maf(adult, threshold = 1/(2*nInd(adult)))
+#filter for hwe
+ad_filter<- gl.filter.hwe(adult)
+nLoc(ad_filter)
+
+#Filter only used parents
+ad_filter <- gl.keep.ind(ad_filter, ind.list=c(
+'A.ten_Davies_1',
+'A.ten_Davies_10',
+'A.ten_Davies_13',
+'A.ten_Davies_6',
+'A.ten_Davies_8',
+'A.ten_B.Jewell_2',
+'A.ten_B.Jewell_3',
+'A.ten_B.Jewell_6',
+'A.ten_B.Jewell_8',
+'A.ten_Palms_1',
+'A.ten_Palms_2',
+'A.ten_Palms_4',
+'A.ten_Palms_5',
+'A.ten_Parke_2',
+'A.ten_Parke_4',
+'A.ten_Parke_5',
+'A.ten_Switzer_4',
+'A.ten_Switzer_6',
+'A.ten_Switzer_7'))
+
+#remove Parke
+ad_filter <- gl.keep.ind(ad_filter, ind.list=c(
+'A.ten_Davies_1',
+'A.ten_Davies_10',
+'A.ten_Davies_13',
+'A.ten_Davies_6',
+'A.ten_Davies_8',
+'A.ten_B.Jewell_2',
+'A.ten_B.Jewell_3',
+'A.ten_B.Jewell_6',
+'A.ten_B.Jewell_8',
+'A.ten_Palms_1',
+'A.ten_Palms_2',
+'A.ten_Palms_4',
+'A.ten_Palms_5',
+'A.ten_Switzer_4',
+'A.ten_Switzer_6',
+'A.ten_Switzer_7'))
+
+pcoa<- gl.pcoa(ad_filter)
+pca<- gl.pcoa.plot(pcoa, ad_filter, scale = T)
+explained_variance <- c(9.4, 9.0)  # % Variation for PC1 and PC2
+
+pcascore<- as.data.frame(pcoa$scores) |> rownames_to_column(var = "Labels")
+pops<- as.data.frame(ad_filter$pop)|> dplyr::rename(pop = `ad_filter$pop`)
+
+pcascore<- cbind(pops, pcascore)
+
+# Plot PCA loadings for PC1 and PC2
+pca1<- ggplot(pcascore, aes(x = PC1, y = PC2, colour = pop)) +
+  geom_point(size = 3) +  # Add points
+  #geom_text(vjust = -0.5, hjust = 0.5) +  # Add labels near points
+  labs(x = paste0("PC1 (", explained_variance[1], "%)"), y = paste0("PC2 (", explained_variance[2], "%)"), colour = "Reef") +
+  coord_fixed(ratio = explained_variance[2] / explained_variance[1]) +
+  theme_Publication() +
+  scale_colour_Publication()
+pca1
+
+#all adults
+adult2<- gl.drop.pop(adult, pop.list = c('Backnumbers','Parke'))
+pcoa2<- gl.pcoa(adult2)
+pca<- gl.pcoa.plot(pcoa2, adult2, scale = F)
+explained_variance <- c(9.3, 7.4)  # % Variation for PC1 and PC2
+
+pcascore<- as.data.frame(pcoa2$scores) |> rownames_to_column(var = "Labels")
+pops<- as.data.frame(adult2$pop)|> dplyr::rename(pop = `adult2$pop`)
+
+pcascore<- cbind(pops, pcascore)
+
+# Plot PCA loadings for PC1 and PC2
+pca2<-ggplot(pcascore, aes(x = PC1, y = PC2, colour = pop)) +
+  geom_point(size = 3) +  # Add points
+  #geom_text(vjust = -0.5, hjust = 0.5) +  # Add labels near points
+  labs(x = paste0("PC1 (", explained_variance[1], "%)"), y = paste0("PC2 (", explained_variance[2], "%)"), colour = "Reef") +
+  coord_fixed(ratio = explained_variance[2] / explained_variance[1]) +
+  theme_Publication() +
+  scale_colour_Publication()
+pca2
+```
+
+combine plots
+```{r}
+library(patchwork)
+pca_both<- pca1 + pca2
+pca_both
+```
+
+calculate genetic distance
+```{r}
+dist<- gl.dist.pop(ad_filter)
+dist
+```

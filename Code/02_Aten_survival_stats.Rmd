@@ -1,0 +1,390 @@
+---
+title: "DArT- survival statistics- bayes"
+author: "Alex Macadam"
+date: "2023-10-19"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+##Survival statistics
+```{r}
+set.seed(123)
+library(tidyverse) #for data wrangling
+library(car)       #for regression diagnostics
+library(broom)     #for tidy output
+library(ggfortify) #for model diagnostics
+library(sjPlot)    #for outputs
+library(knitr)     #for kable
+library(effects)   #for partial effects plots
+library(emmeans)   #for estimating marginal means
+library(MASS)      #for glm.nb
+library(MuMIn)     #for AICc
+library(brms)
+library(broom.mixed)
+library(tidybayes)
+library(bayesplot)
+#library(standist)   #for visualizing distributions
+library(rstanarm)
+library(ggeffects)
+library(rstan)
+library(DHARMa)
+library(ggridges)
+library(easystats)     #framework for stats, modelling and visualisation
+library(patchwork)
+library(car)       #for regression diagnostics
+library(broom)     #for tidy output
+library(broom.mixed)
+library(ggfortify) #for model diagnostics
+#library(sjPlot)    #for outputs
+library(knitr)     #for kable
+source('/Users/alexmacadam/Dropbox/PhD/Chapter5_Outplanting/Chapter 5 Scripts/Chapter-5--Outplanting-AGF-corals/helperFunctions.R')
+```
+
+```{r}
+# PERCENT SURVIVAL
+# Function for summarising survival standard error
+summarySE <- function(data=NULL, measurevar=NULL, groupvars=NULL, na.rm=FALSE,
+                      conf.interval=.95, .drop=TRUE) {
+  require(plyr)
+  
+  # New version of length which can handle NA's: if na.rm==T, don't count them
+  length2 <- function (x, na.rm=FALSE) {
+    if (na.rm==TRUE) sum(!is.na(x))
+    else       length(x)
+  }
+  
+  # This does the summary. For each group's data frame, return a vector with
+  # N, mean, and sd
+  datac <- ddply(data, groupvars, .drop=.drop,
+                 .fun = function(xx, col) {
+                   c(N    = length2(xx[[col]], na.rm=na.rm),
+                     mean = mean   (xx[[col]], na.rm=na.rm),
+                     sd   = sd     (xx[[col]], na.rm=na.rm)
+                   )
+                 },
+                 measurevar
+  )
+  
+  # Commenting this rename mean column line, as not assigning measurevar name properly
+  # # Rename the "mean" column    
+  # datac <- rename(datac, measurevar = mean)
+  
+  datac$se <- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
+  
+  # Confidence interval multiplier for standard error
+  # Calculate t-statistic for confidence interval: 
+  # e.g., if conf.interval is .95, use .975 (above/below), and use df=N-1
+  ciMult <- qt(conf.interval/2 + .5, datac$N-1)
+  datac$ci <- datac$se * ciMult
+  
+  return(datac)
+}
+```
+
+```{r}
+#load data
+survival <- read.csv("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data/larvae_surv2020.csv", header=T, fileEncoding="UTF-8-BOM")
+```
+
+```{r}
+#change catagorical columns to factors and remove NAs
+survival <- survival |>
+  mutate(Family = factor(Family),
+         Temp = factor(Temp),
+         Treatment = factor(Treatment),
+         Cone = factor(Cone),
+         CrossType = factor(CrossType),
+         BoatID = factor(BoatID),
+         Cone = factor(Cone),
+         Culture = factor(Culture),
+         popcross = factor(popcross),
+         Region_cross = factor(Region_cross),
+         BoatID = factor(BoatID)
+         ) |>
+  filter(Timepoint == "2", Year==2020, CrossType != 'BulkCross', Species == "A.ten", Treatment == "Hot") |> 
+  drop_na(No.LarvaeIn)  # drop nas from the start
+```
+
+```{r}
+surv.summ <- summarySE(survival, measurevar="Percent_Survival_atend",
+                     groupvars=c("Region_cross"), na.rm=TRUE)
+```
+
+# Fit the model
+## Random intercept
+form
+```{r}
+survival.form <- bf(Survival | trials(1) ~ Region_cross + (1|BoatID),
+                  family=binomial(link='logit'))
+```
+
+priors
+```{r fitModel2h1, results='markdown', eval=TRUE, mhidden=TRUE, cache=TRUE}
+priors <-
+    prior(normal(1, 1.5), class = 'Intercept') +
+    prior(normal(0, 3), class = 'b') +
+    prior(student_t(3, 0, 1.5), class = 'sd') 
+```
+
+run model- n
+```{r}
+survival.brm2 <- brm(survival.form, 
+                  data = survival,
+                  prior = priors,
+                  sample_prior = 'yes',
+                  iter = 5000,
+                  warmup = 2500,
+                  chains = 3, cores = 3,
+                  thin = 5,
+                  control = list(adapt_delta = 0.99, max_treedepth = 20),
+                  refresh = 100,
+                  backend = "rstan"
+                  )
+```
+
+
+```{r}
+survival.brm2 %>% SUYR_prior_and_posterior()
+```
+
+```{r}
+survival.brm2$fit |> stan_trace()
+```
+
+```{r}
+survival.brm2$fit |> stan_ac()
+```
+
+```{r}
+survival.brm2$fit |> stan_rhat()
+```
+
+```{r}
+survival.brm2$fit |> stan_ess()
+```
+
+```{r}
+survival.brm2 |> pp_check(type = 'dens_overlay', nsamples = 250)
+```
+
+Dharma residuals
+```{r}
+survival.resids<- make_brms_dharma_res(survival.brm2, integerResponse = FALSE)
+wrap_elements(~testUniformity(survival.resids)) +
+wrap_elements(~plotResiduals(survival.resids, form = factor(rep(1,nrow(survival))))) +
+wrap_elements(~plotResiduals(survival.resids, quantreg = FALSE))+
+wrap_elements(~testDispersion(survival.resids))
+
+survival.resids<- make_brms_dharma_res(survival.brm2, integerResponse = FALSE)
+testUniformity(survival.resids)
+plotResiduals(survival.resids, form = factor(rep(1,nrow(survival))))
+plotResiduals(survival.resids, quantreg = FALSE)
+testDispersion(survival.resids)
+```
+
+```{r}
+survival.brm2 %>%
+    conditional_effects() %>%
+    plot(points = TRUE)
+```
+
+```{r}
+survival.brm2 |>
+  emmeans(~Region_cross, type = "response")
+```
+
+```{r}
+cmat=cbind(
+  "Central vs Hybrid" = c(-1, 1, 0),
+  "Central vs North" = c(-1, 0, 1),
+  "North vs Hybrid" = c(0, 1, -1)
+)
+```
+
+```{r}
+survival.em<- survival.brm2 |>
+  emmeans(~Region_cross, type = 'response') |>
+  contrast(method=list(cmat)) |>
+  gather_emmeans_draws() |>
+  mutate(across(everything(), exp)) |>
+#on odds ratio scale
+  dplyr::summarise(median_hdci(.value),
+            Pl = mean(.value < 1),
+            Pg = mean(.value > 1)
+            )
+survival.em
+```
+
+```{r}
+larv.surv.plot<- survival.brm2 |>
+  emmeans(~Region_cross) |>
+  gather_emmeans_draws() |>
+    ggplot() +
+  #geom_vline(xintercept = 0, linetype = "dashed") +
+  stat_slab(aes(
+    x = .value, y = Region_cross,
+    fill = stat(ggdist::cut_cdf_qi(cdf,
+      .width = c(0.5, 0.8, 0.95),
+      labels = scales::percent_format()
+    ))
+  ), color = "black") +
+  scale_fill_brewer("Interval", direction = -1, na.translate = FALSE) +
+  theme_classic() +
+  labs(x = "Survival", y = "Treatment")
+larv.surv.plot
+```
+
+##############
+Juv
+
+```{r}
+#load data
+survival <- read.csv("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data/juv_surv2020.csv", header=T, fileEncoding="UTF-8-BOM")
+```
+
+```{r}
+#change catagorical columns to factors and remove NAs
+survival <- survival |>
+  mutate(Family = factor(Family),
+         Species = factor(Species),
+         Temp = factor(Temp),
+         Tank = factor(Tank),
+         Timepoint = factor(Timepoint),
+         Cassette = factor(Cassette),
+         Plate.Slide = factor(Plate.Slide),
+         Treatment = factor(Treatment),
+         Cone = factor(Cone),
+         Cross = factor(Cross),
+         Crosstype = factor(Crosstype),
+         RegionCross = factor(RegionCross),
+         popcross = factor(popcross)
+         ) |>
+  filter(Timepoint == "6", Crosstype == "Individual Cross", Temp == "HOT")
+```
+
+# Fit the model
+## Random intercept
+form
+```{r}
+survival.form <- bf(Survival | trials(1) ~ RegionCross + (1|Tank),
+                  family=binomial(link='logit'))
+```
+
+priors
+```{r fitModel2h1, results='markdown', eval=TRUE, mhidden=TRUE, cache=TRUE}
+priors <-
+    prior(normal(2, 1.7), class = 'Intercept') +
+    prior(normal(0, 1.7), class = 'b') +
+    prior(student_t(3, 0, 1.7), class = 'sd') 
+```
+
+run model- n
+```{r}
+survival.brm2 <- brm(survival.form, 
+                  data = survival,
+                  prior = priors,
+                  sample_prior = 'yes',
+                  iter = 5000,
+                  warmup = 2500,
+                  chains = 3, cores = 3,
+                  thin = 5,
+                  control = list(adapt_delta = 0.99, max_treedepth = 20),
+                  refresh = 100,
+                  backend = "rstan"
+                  )
+```
+
+```{r}
+survival.brm2 %>% SUYR_prior_and_posterior()
+```
+
+```{r}
+survival.brm2$fit |> stan_trace()
+```
+
+```{r}
+survival.brm2$fit |> stan_ac()
+```
+
+```{r}
+survival.brm2$fit |> stan_rhat()
+```
+
+```{r}
+survival.brm2$fit |> stan_ess()
+```
+
+```{r}
+survival.brm2 |> pp_check(type = 'dens_overlay', nsamples = 250)
+```
+
+Dharma residuals
+```{r}
+survival.resids<- make_brms_dharma_res(survival.brm2, integerResponse = FALSE)
+wrap_elements(~testUniformity(survival.resids)) +
+wrap_elements(~plotResiduals(survival.resids, form = factor(rep(1,nrow(survival))))) +
+wrap_elements(~plotResiduals(survival.resids, quantreg = FALSE))+
+wrap_elements(~testDispersion(survival.resids))
+```
+
+Summarise model
+conditional effects
+```{r}
+survival.brm2 %>%
+    conditional_effects() %>%
+    plot(points = TRUE)
+```
+
+```{r}
+survival.brm2 |>
+  emmeans(~RegionCross, type = "response")
+```
+
+```{r}
+cmat=cbind(
+  "Central vs Hybrid" = c(-1, 1, 0),
+  "Central vs North" = c(-1, 0, 1),
+  "North vs Hybrid" = c(0, 1, -1)
+)
+```
+
+```{r}
+survival.em<- survival.brm2 |>
+  emmeans(~RegionCross, type = 'response') |>
+  contrast(method=list(cmat)) |>
+  gather_emmeans_draws() |>
+  mutate(across(everything(), exp)) |>
+#on odds ratio scale
+  dplyr::summarise(median_hdci(.value),
+            Pl = mean(.value < 1),
+            Pg = mean(.value > 1)
+            )
+survival.em
+```
+
+```{r}
+juv.surv.plot<- survival.brm2 |>
+  emmeans(~RegionCross) |>
+  gather_emmeans_draws() |>
+    ggplot() +
+  geom_vline(xintercept = 1, linetype = "dashed", size = 1) +
+  stat_slab(aes(
+    x = .value, y = RegionCross,
+    fill = stat(ggdist::cut_cdf_qi(cdf,
+      .width = c(0.5, 0.8, 0.95),
+      labels = scales::percent_format()
+    ))
+  ), color = "black") +
+  scale_fill_brewer("Interval", direction = -1, na.translate = FALSE) +
+  theme_classic() +
+  labs(x = "Survival", y = "Treatment")
+juv.surv.plot
+```
+
+```{r}
+surv.plot<- larv.surv.plot + juv.surv.plot + plot_layout(guides = "collect")
+```
+
