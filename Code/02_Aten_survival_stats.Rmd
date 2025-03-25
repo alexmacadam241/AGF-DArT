@@ -131,6 +131,7 @@ priors <-
 
 run model- n
 ```{r}
+set.seed(123)
 survival.brm2 <- brm(survival.form, 
                   data = survival,
                   prior = priors,
