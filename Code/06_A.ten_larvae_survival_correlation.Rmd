@@ -976,6 +976,27 @@ grm<- gl.grm(sig_adult)
 grm_plot<- gl.plot.heatmap(grm)
 
 dist<- dist(grm)
+
+pcoa<- gl.pcoa(sig_adult)
+pca<- gl.pcoa.plot(pcoa, sig_adult)
+
+explained_variance <- c(39.2, 13.9)  # % Variation for PC1 and PC2
+
+pcascore<- as.data.frame(pcoa$scores) |> rownames_to_column(var = "Labels")
+pops<- as.data.frame(sig_adult$pop)|> dplyr::rename(pop = `sig_adult$pop`)
+
+pcascore<- cbind(pops, pcascore)
+
+# Plot PCA loadings for PC1 and PC2
+pca1<- ggplot(pcascore, aes(x = PC1, y = PC2, colour = pop)) +
+  geom_point(size = 3) +  # Add points
+  #geom_text(vjust = -0.5, hjust = 0.5) +  # Add labels near points
+  labs(x = paste0("PC1 (", explained_variance[1], "%)"), y = paste0("PC2 (", explained_variance[2], "%)"), colour = "Reef") +
+  coord_fixed(ratio = explained_variance[2] / explained_variance[1]) +
+  theme_Publication() +
+  scale_colour_Publication()
+pca1
+
 ```
 
 ```{r}

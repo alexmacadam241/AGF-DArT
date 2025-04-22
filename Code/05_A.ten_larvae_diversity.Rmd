@@ -141,7 +141,7 @@ summarySE <- function(data=NULL, measurevar=NULL, groupvars=NULL, na.rm=FALSE,
 load meta data
 ```{r}
 #load metadata
-meta<- read.csv("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/A_tenuis/04_larvae/diversity_metrics/aten_metadata.csv") |>
+meta<- read.csv("/Users/alexmacadam/Documents/GitHub/AGF-DArT/Data/aten_metadata.csv") |>
   filter(lifestage == "larvae")
 
 #remove models and summarise
@@ -153,7 +153,7 @@ sum<- meta |> filter(Temp == "T0", !family %in% c("Mod1","Mod2", "Mod3", "Mod4",
 Load data
 ```{r}
 #dart data
-ten_larvae <- readRDS("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/A_tenuis/04_larvae/diversity_metrics/ten_larvae_filter.RDS")
+ten_larvae <- readRDS("/Users/alexmacadam/Documents/GitHub/AGF-DArT/Data/ten_larvae_filter.RDS")
 ten_larvae <- gl.drop.pop(ten_larvae, pop.list=c('ParxDav_T0', 'ParxDav_Amb', 'ParxDav_Hot'),mono.rm=FALSE,recalc=TRUE)
 ```
 

@@ -108,9 +108,9 @@ summarySE <- function(data=NULL, measurevar=NULL, groupvars=NULL, na.rm=FALSE,
 Load data
 ```{r}
 #all dart data
-ten <- readRDS("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data/ten_filter.RDS")
-larvae <- readRDS("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data/ten_larvae_filter.RDS")
-adult <- readRDS("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data/ten_adult_filter.RDS")
+ten <- readRDS("/Users/alexmacadam/Documents/GitHub/AGF-DArT/Data/ten_filter.RDS")
+larvae <- readRDS("/Users/alexmacadam/Documents/GitHub/AGF-DArT/Data/ten_larvae_filter.RDS")
+adult <- readRDS("/Users/alexmacadam/Documents/GitHub/AGF-DArT/Data/ten_adult_filter.RDS")
 ```
 
 GRM- check parentage of larvae and juveniles
@@ -220,4 +220,11 @@ calculate genetic distance
 ```{r}
 dist<- gl.dist.pop(ad_filter)
 dist
+```
+
+Private alleles
+```{r}
+adult2 <- gl.merge.pop(adult, old=c('Jewell','Parke','Switzer'), new='north')
+adult2 <- gl.merge.pop(adult2, old=c('Davies','Backnumbers','Palms'), new='central')
+pa<-gl.report.pa(adult)
 ```
