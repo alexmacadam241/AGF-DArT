@@ -1,0 +1,19 @@
+
+VCFtools - 0.1.16
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--vcf aten_larvae_T0.vcf
+	--out filtered.vcf
+	--recode
+	--snps sig_SNPs_cor.txt
+
+Warning: Expected at least 2 parts in INFO entry: ID=AvgCountRef,Number=1,Type=Float,Description="The sum of the tag read counts for all samples, divided by the number of samples with non-zero tag read counts, for the Reference allele row">
+Warning: Expected at least 2 parts in INFO entry: ID=AvgCountRef,Number=1,Type=Float,Description="The sum of the tag read counts for all samples, divided by the number of samples with non-zero tag read counts, for the Reference allele row">
+Warning: Expected at least 2 parts in INFO entry: ID=AvgCountSnp,Number=1,Type=Float,Description="The sum of the tag read counts for all samples, divided by the number of samples with non-zero tag read counts, for the SNP allele row">
+Warning: Expected at least 2 parts in INFO entry: ID=AvgCountSnp,Number=1,Type=Float,Description="The sum of the tag read counts for all samples, divided by the number of samples with non-zero tag read counts, for the SNP allele row">
+Warning: Expected at least 2 parts in INFO entry: ID=TrimmedSequence,Number=1,Type=String,Description="Same as the full sequence, but with removed adapters in short marker tags">
+After filtering, kept 174 out of 174 Individuals
+Outputting VCF file...
+After filtering, kept 278 out of a possible 11658 Sites
+Run Time = 0.00 seconds

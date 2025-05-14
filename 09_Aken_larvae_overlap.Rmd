@@ -1,0 +1,37 @@
+---
+title: "Untitled"
+output: html_document
+date: "2025-01-16"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+# load sig SNPs from corr analysis
+cor<- read.csv("/Users/alexmacadam/Documents/GitHub/AGF-DArT/data/cor_sig_SNP_names.csv", header = T)
+cor<- as.vector(cor$x)
+# load sig SNPs from fisher test
+fisher<- read.csv("/Users/alexmacadam/Documents/GitHub/AGF-DArT/data/fisher_sig_SNP_names.csv", header = T)
+fisher<- as.vector(fisher$x)
+
+in_both <- intersect(cor, fisher)
+```
+
+```{r}
+#create a list object of significant genes 
+sig_SNP_list<- list(Correlation=cor, 
+                 Fisher_test=fisher
+                 )
+
+library(ggvenn)
+af_venn<- ggvenn(
+  sig_SNP_list,
+  fill_color = c("#0073C2FF", "#CD534CFF")
+  #stroke_size = 0.5, set_name_size = 4
+  )
+af_venn
+```
+
