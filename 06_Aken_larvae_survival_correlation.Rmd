@@ -42,27 +42,28 @@ theme_Publication <- function(base_size=14, base_family="arial") {
                panel.grid.major = element_line(colour="#f0f0f0"),
                panel.grid.minor = element_blank(),
                legend.key = element_rect(colour = NA),
-               legend.position = "bottom",
+               legend.position = "right",
                legend.direction = "horizontal",
                legend.key.size= unit(0.2, "cm"),
                legend.margin = unit(0, "cm"),
                legend.title = element_text(face="italic"),
                plot.margin=unit(c(10,5,5,5),"mm"),
-               strip.background=element_rect(colour="#f0f0f0",fill="#f0f0f0"),
-               strip.text = element_text(face="bold")
+               #strip.background=element_rect(colour="#f0f0f0",fill="#f0f0f0"),
+               strip.text = element_text(face="bold"),
+               strip.background = element_rect(fill = "white", colour = "black", size = rel(2))
           ))
       
 }
 
 scale_fill_Publication <- function(...){
       library(scales)
-      discrete_scale("fill","Publication",manual_pal(values = c("#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33","grey")), ...)
+      discrete_scale("fill","Publication",manual_pal(values = c("#3b9ab2","#f21a00","#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33","grey")), ...)
 
 }
 
 scale_colour_Publication <- function(...){
       library(scales)
-      discrete_scale("colour","Publication",manual_pal(values = c("#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33","grey")), ...)
+      discrete_scale("colour","Publication",manual_pal(values = c("#3b9ab2","#f21a00","#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33","grey")), ...)
 
 }
 
@@ -403,8 +404,18 @@ vio_af_plot<- ggplot(summary_AF, aes(x = Region, y = allele_frequency, colour = 
   scale_color_manual(values=pal[c(1,3,5)]) +
   scale_fill_manual(values=pal[c(1,3,5)]) +
   theme_Publication()+
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.direction = "vertical")
 vio_af_plot
+
+hist_plot<- ggplot(summary_AF) +
+  geom_histogram(aes(x =allele_frequency, fill = Region)) +
+  facet_wrap(~Region) +
+  labs(x = "Allele Frequency", y = "Count") +
+  scale_color_manual(values=pal[c(1,3,5)]) +
+  scale_fill_manual(values=pal[c(1,3,5)]) +
+  theme_Publication()+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.direction = "vertical")
+hist_plot
 ```
 
 Line plot of SNPs
@@ -446,7 +457,7 @@ lin_af_plot<-ggplot(highlighted_data, aes(x = Region, y = allele_frequency, colo
   scale_color_manual(values = pal[c(1, 3, 5)]) + 
   scale_fill_manual(values = pal[c(1, 3, 5)]) + 
   theme_Publication() + 
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.direction = "vertical")
 lin_af_plot
 ```
 
@@ -529,10 +540,12 @@ AF_means <- summarySE(summary_AF, measurevar="allele_frequency",
 Larvae PCA
 ```{r}
 #fixed<- highlighted_data |> filter(Region == "Central") |> pull(SNP)
-filtered_T0<- gl.keep.loc(ten_larvae_T0, loc.list = sig_als)
+filtered_T0<- gl.keep.loc(ten_larvae_T0, loc.list = fixed)
+#fixed<- highlighted_data |> filter(Region == "Central") |> pull(SNP)
+filtered_T0<- gl.keep.pop(filtered_T0, pop.list = c("DavxDav_T0","PalxPal_T0","PalxDav_T0","JewxJew_T0","JewxDav_T0","JewxPal_T0"))
 
 pcoa<- gl.pcoa(filtered_T0)
-pca<- gl.pcoa.plot(pcoa, filtered_T0, scale = T)
+pca<- gl.pcoa.plot(pcoa, filtered_T0, scale = F)
 explained_variance <- c(48.5, 5.8)  # % Variation for PC1 and PC2
 
 pcascore<- as.data.frame(pcoa$scores) |> rownames_to_column(var = "Labels")
@@ -540,14 +553,21 @@ pops<- as.data.frame(filtered_T0$pop)|> dplyr::rename(pop = `filtered_T0$pop`)
 
 pcascore<- cbind(pops, pcascore)
 
+pcascore <- pcascore |>
+  mutate(Region = case_when(
+    pop %in% c("DavxDav_T0", "PalxDav_T0", "PalxPal_T0") ~ "Central",
+    pop %in% c("JewxJew_T0", "ParxPar_T0", "SwixSwi_T0") ~ "North",
+    pop %in% c("JewxDav_T0", "JewxPal_T0", "ParxDav_T0", "SwixDav_T0") ~ "Inter-region"
+  ))
+
 # Plot PCA loadings for PC1 and PC2
-pca1<- ggplot(pcascore, aes(x = PC1, y = PC2, colour = pop)) +
+pca1<- ggplot(pcascore, aes(x = PC1, y = PC2, colour = Region)) +
   geom_point(size = 3) +  # Add points
   #geom_text(vjust = -0.5, hjust = 0.5) +  # Add labels near points
   labs(x = paste0("PC1 (", explained_variance[1], "%)"), y = paste0("PC2 (", explained_variance[2], "%)"), colour = "Reef") +
   #coord_fixed(ratio = explained_variance[2] / explained_variance[1]) +
   theme_Publication() +
-  scale_colour_Publication()
+  scale_colour_manual(values = pal[c(1, 3, 5)])
 pca1
 ```
 
@@ -576,27 +596,82 @@ adult <- gl.keep.ind(adult, ind.list=c(
 'A.ten_Switzer_6',
 'A.ten_Switzer_7'))
 
+#all sig SNPs
 adult2<- gl.keep.loc(adult, loc.list = sig_als)
+```
 
-pcoa<- gl.pcoa(adult2)
-pca<- gl.pcoa.plot(pcoa, adult2, scale = T)
+```{r}
+pcoa2<- gl.pcoa(adult2)
+pca2<- gl.pcoa.plot(pcoa2, adult2, scale = F, ellipse = T, plevel = 0.95)
 explained_variance <- c(41.6, 7.9)  # % Variation for PC1 and PC2
 
-pcascore<- as.data.frame(pcoa$scores) |> rownames_to_column(var = "Labels")
+pcascore<- as.data.frame(pcoa2$scores) |> rownames_to_column(var = "Labels")
 pops<- as.data.frame(adult2$pop)|> dplyr::rename(pop = `adult2$pop`)
 
 pcascore<- cbind(pops, pcascore)
 
+pcascore <- pcascore %>%
+  mutate(Region = case_when(
+    pop %in% c("Davies", "Palms") ~ "Central",
+    pop %in% c("Jewell", "Parke", "Switzer") ~ "North",
+    TRUE ~ NA_character_  # for any unmatched reefs
+  ))
+
 # Plot PCA loadings for PC1 and PC2
-pca2<- ggplot(pcascore, aes(x = PC1, y = PC2, colour = pop)) +
+pca2<- ggplot(pcascore, aes(x = PC1, y = PC2, colour = Region, shape = pop)) +
   geom_point(size = 3) +  # Add points
   #geom_text(vjust = -0.5, hjust = 0.5) +  # Add labels near points
   labs(x = paste0("PC1 (", explained_variance[1], "%)"), y = paste0("PC2 (", explained_variance[2], "%)"), colour = "Reef") +
   #coord_fixed(ratio = explained_variance[2] / explained_variance[1]) +
+  scale_color_manual(values = pal[c(1, 3, 5)]) + 
+  scale_fill_manual(values = pal[c(1, 3, 5)]) + 
   theme_Publication() +
+  theme(legend.position = "bottom", legend.direction = "horizontal") +
   scale_colour_Publication()
 pca2
 
+#just Fixed SNPs
+adult3<- gl.keep.loc(adult, loc.list = fixed)
+
+pcoa3<- gl.pcoa(adult3)
+pca3<- gl.pcoa.plot(pcoa3, adult3, scale = F, ellipse = F)
+explained_variance <- c(49.5, 10.2)  # % Variation for PC1 and PC2
+
+pcascore<- as.data.frame(pcoa3$scores) |> rownames_to_column(var = "Labels")
+pops<- as.data.frame(adult3$pop)|> dplyr::rename(pop = `adult3$pop`)
+
+pcascore<- cbind(pops, pcascore)
+
+pcascore <- pcascore %>%
+  mutate(Region = case_when(
+    pop %in% c("Davies", "Palms") ~ "Central",
+    pop %in% c("Jewell", "Parke", "Switzer") ~ "North",
+    TRUE ~ NA_character_  # for any unmatched reefs
+  ))
+
+# Plot PCA loadings for PC1 and PC2
+pca3<- ggplot(pcascore, aes(x = PC1, y = PC2, colour = Region, shape = pop)) +
+  geom_point(size = 3) +  # Add points
+  #geom_text(vjust = -0.5, hjust = 0.5) +  # Add labels near points
+  labs(x = paste0("PC1 (", explained_variance[1], "%)"), y = paste0("PC2 (", explained_variance[2], "%)"), colour = "Reef") +
+  #coord_fixed(ratio = explained_variance[2] / explained_variance[1]) +
+  scale_color_manual(values = pal[c(1, 3, 5)]) + 
+  scale_fill_manual(values = pal[c(1, 3, 5)]) +
+  theme_Publication() +
+  theme(legend.position = "bottom", legend.direction = "horizontal") +
+  scale_colour_Publication()
+pca3
+
+pca2 + pca3
+
+library(vegan)
+pc_mat <- pcascore[, c("PC1","PC2","PC3","PC4","PC5")]
+dist_mat <- dist(pc_mat, method = "euclidean")
+adonis2(dist_mat ~ Region, data = pcascore)
+adonis2(dist_mat ~ pop, data = pcascore)
+```
+
+```{r}
 #coloured by deviances
 deviances<- read.csv("/Users/alexmacadam/Documents/GitHub/AGF-DArT/data/pm_deviance.csv")
 larv<- deviances |> filter(Lifestage == "larv")
@@ -610,7 +685,7 @@ pcascore$Labels <- str_replace_all(pcascore$Labels, "B.", "")
 
 pcascore3<- left_join(pcascore, larv_dam, by = "Labels")
 
-pca3<- ggplot(pcascore3, aes(x = PC1, y = PC2)) +
+pca4<- ggplot(pcascore3, aes(x = PC1, y = PC2)) +
   geom_point(aes(colour = mean), size=3) + 
   geom_point(shape = 1, size = 3,colour = "black") +
   #geom_text(vjust = -0.5, hjust = 0.5) +
@@ -619,24 +694,51 @@ pca3<- ggplot(pcascore3, aes(x = PC1, y = PC2)) +
   scale_color_gradient2(low = "blue", high = "red", space = "Lab")
   #coord_fixed(ratio = explained_variance[2] / explained_variance[1]) +
   #scale_colour_Publication()
-pca3
+pca4
 
-pcascore4<- left_join(pcascore, larv_sire, by = "Labels")
+pcascore5<- left_join(pcascore, larv_sire, by = "Labels")
 
-pca4<- ggplot(pcascore4, aes(x = PC1, y = PC2)) +
+pca5<- ggplot(pcascore4, aes(x = PC1, y = PC2)) +
   geom_point(aes(colour = mean), size=3) + 
   geom_point(shape = 1, size = 3,colour = "black") +
   #geom_text(vjust = -0.5, hjust = 0.5) +
   labs(x = paste0("PC1 (", explained_variance[1], "%)"), y = paste0("PC2 (", explained_variance[2], "%)"), colour = "Paternal posterior means") +
   theme_Publication() +
+  theme(legend.position = "bottom", legend.direction = "horizontal") +
   scale_color_gradient2(mid = "white",low = "blue", high = "red", space = "Lab")
   #coord_fixed(ratio = explained_variance[2] / explained_variance[1]) +
-  #scale_colour_Publication()
-pca4
+  #scale_colour_Publication() 
+pca5
 ```
 
 ```{r}
 (pca1 + pca2) / (pca3 + pca4)
+```
+
+```{r}
+adult_list<- c('A.ten_Davies_1',
+'A.ten_Davies_10',
+'A.ten_Davies_13',
+'A.ten_Davies_6',
+'A.ten_Davies_8',
+'A.ten_B.Jewell_2',
+'A.ten_B.Jewell_3',
+'A.ten_B.Jewell_6',
+'A.ten_B.Jewell_8',
+'A.ten_Palms_1',
+'A.ten_Palms_2',
+'A.ten_Palms_4',
+'A.ten_Palms_5',
+'A.ten_Parke_2',
+'A.ten_Parke_4',
+'A.ten_Parke_5',
+'A.ten_Switzer_4',
+'A.ten_Switzer_6',
+'A.ten_Switzer_7')
+
+b<- adult$other$loc.metrics$maf
+
+adult2
 ```
 
 ```{r}
@@ -646,7 +748,6 @@ post_means_larv<- read.csv("/Users/alexmacadam/Documents/GitHub/AGF-DArT/data/po
 
 #make SNP matrix
 parent_af<- as.data.frame(adult2) |> t()
-
 
 #rename samples to match larvae
 colnames(parent_af) <- colnames(parent_af) %>%
@@ -749,12 +850,6 @@ final_plot <- final_plot +
 final_plot
 ```
 
-
-
-
-
-
-
 ########
 Genotype of sig SNPs in parents vs survival deviance
 ```{r}
@@ -819,254 +914,7 @@ pca1
 
 ```
 
-```{r}
-#write csv of filtered only positive and negative SNPs
-
-#gl.write.csv(ten_adult2_pos, outfile = "ten_adult2_pos.csv", outpath = "/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/A_tenuis/04_larvae/alfreq_surv_correlation/corr_version/parental_genotype_corr", verbose = NULL)
-
-#gl.write.csv(ten_adult2_neg, outfile = "ten_adult2_neg.csv", outpath = "/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/A_tenuis/04_larvae/alfreq_surv_correlation/corr_version/parental_genotype_corr", verbose = NULL)
-
-#gl.write.csv(ten_adult2_pos, outfile = "ten_adult2_pos_05.csv", outpath = "/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/A_tenuis/04_larvae/alfreq_surv_correlation/corr_version/parental_genotype_corr", verbose = NULL)
-
-#gl.write.csv(ten_adult2_neg, outfile = "ten_adult2_neg_05.csv", outpath = "/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/A_tenuis/04_larvae/alfreq_surv_correlation/corr_version/parental_genotype_corr", verbose = NULL)
-```
-
-```{r}
-#get allele freq of all significant SNPs
-
-#A.ten_Palms_5 <- gl.keep.pop(ten_adult2_pos, pop.list= c("A.ten_Palms_5"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Palms_5_alf <- gl.alf(A.ten_Palms_5)
-#A.ten_Palms_5_alf<- A.ten_Palms_5_alf |> rownames_to_column() |> dplyr::rename(A.ten_Palms_5 = alf1) |> dplyr::select(A.ten_Palms_5)
-
-#A.ten_Switzer_2 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Switzer_2"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Switzer_2_alf <- gl.alf(A.ten_Switzer_2)
-#A.ten_Switzer_2_alf<- A.ten_Switzer_2_alf |> rownames_to_column() |> dplyr::rename(A.ten_Switzer_2 = alf1) |> dplyr::select(A.ten_Switzer_2)
-
-#A.ten_B.Jewell_7 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_B.Jewell_7"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_B.Jewell_7_alf <- gl.alf(A.ten_B.Jewell_7)
-#A.ten_B.Jewell_7_alf<- A.ten_B.Jewell_7_alf |> rownames_to_column() |> dplyr::rename(A.ten_B.Jewell_7 = alf1) |> dplyr::select(A.ten_B.Jewell_7)
-
-#A.ten_Davies_4 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Davies_4"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Davies_4_alf <- gl.alf(A.ten_Davies_4)
-#A.ten_Davies_4_alf<- A.ten_Davies_4_alf |> rownames_to_column() |> dplyr::rename(A.ten_Davies_4 = alf1) |> dplyr::select(A.ten_Davies_4)
-
-#A.ten_Davies_12 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Davies_12"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Davies_12_alf <- gl.alf(A.ten_Davies_12)
-#A.ten_Davies_12_alf<- A.ten_Davies_12_alf |> rownames_to_column() |> dplyr::rename(A.ten_Davies_12 = alf1) |> dplyr::select(A.ten_Davies_12)
-
-#A.ten_Palms_6 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Palms_6"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Palms_6_alf <- gl.alf(A.ten_Palms_6)
-#A.ten_Palms_6_alf<- A.ten_Palms_6_alf |> rownames_to_column() |> dplyr::rename(A.ten_Palms_6 = alf1) |> dplyr::select(A.ten_Palms_6)
-
-#A.ten_Switzer_3 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Switzer_3"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Switzer_3_alf <- gl.alf(A.ten_Switzer_3)
-#A.ten_Switzer_3_alf<- A.ten_Switzer_3_alf |> rownames_to_column() |> dplyr::rename(A.ten_Switzer_3 = alf1) |> dplyr::select(A.ten_Switzer_3)
-
-#A.ten_B.Jewell_8 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_B.Jewell_8"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_B.Jewell_8_alf <- gl.alf(A.ten_B.Jewell_8)
-#A.ten_B.Jewell_8_alf<- A.ten_B.Jewell_8_alf |> rownames_to_column() |> dplyr::rename(A.ten_B.Jewell_8 = alf1) |> dplyr::select(A.ten_B.Jewell_8)
-
-#A.ten_Davies_5 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Davies_5"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Davies_5_alf <- gl.alf(A.ten_Davies_5)
-#A.ten_Davies_5_alf<- A.ten_Davies_5_alf |> rownames_to_column() |> dplyr::rename(A.ten_Davies_5 = alf1) |> dplyr::select(A.ten_Davies_5)
-
-#A.ten_Davies_13 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Davies_13"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Davies_13_alf <- gl.alf(A.ten_Davies_13)
-#A.ten_Davies_13_alf<- A.ten_Davies_13_alf |> rownames_to_column() |> dplyr::rename(A.ten_Davies_13 = alf1) |> dplyr::select(A.ten_Davies_13)
-
-#A.ten_Parke_1 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Parke_1"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Parke_1_alf <- gl.alf(A.ten_Parke_1)
-#A.ten_Parke_1_alf<- A.ten_Parke_1_alf |> rownames_to_column() |> dplyr::rename(A.ten_Parke_1 = alf1) |> dplyr::select(A.ten_Parke_1)
-
-#A.ten_Switzer_4 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Switzer_4"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Switzer_4_alf <- gl.alf(A.ten_Switzer_4)
-#A.ten_Switzer_4_alf<- A.ten_Switzer_4_alf |> rownames_to_column() |> dplyr::rename(A.ten_Switzer_4 = alf1) |> dplyr::select(A.ten_Switzer_4)
-
-#A.ten_B.Jewell_1 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_B.Jewell_1"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_B.Jewell_1_alf <- gl.alf(A.ten_B.Jewell_1)
-#A.ten_B.Jewell_1_alf<- A.ten_B.Jewell_1_alf |> rownames_to_column() |> dplyr::rename(A.ten_B.Jewell_1 = alf1) |> dplyr::select(A.ten_B.Jewell_1)
-
-#A.ten_Backnumbers_1 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Backnumbers_1"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Backnumbers_1_alf <- gl.alf(A.ten_Backnumbers_1)
-#A.ten_Backnumbers_1_alf<- A.ten_Backnumbers_1_alf |> rownames_to_column() |> dplyr::rename(A.ten_Backnumbers_1 = alf1) |> dplyr::select(A.ten_Backnumbers_1)
-
-#A.ten_Davies_6 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Davies_6"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Davies_6_alf <- gl.alf(A.ten_Davies_6)
-#A.ten_Davies_6_alf<- A.ten_Davies_6_alf |> rownames_to_column() |> dplyr::rename(A.ten_Davies_6 = alf1) |> dplyr::select(A.ten_Davies_6)
-
-#A.ten_Davies_D1 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Davies_D1"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Davies_D1_alf <- gl.alf(A.ten_Davies_D1)
-#A.ten_Davies_D1_alf<- A.ten_Davies_D1_alf |> rownames_to_column() |> dplyr::rename(A.ten_Davies_D1 = alf1) |> dplyr::select(A.ten_Davies_D1)
-
-#A.ten_Parke_2 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Parke_2"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Parke_2_alf <- gl.alf(A.ten_Parke_2)
-#A.ten_Parke_2_alf<- A.ten_Parke_2_alf |> rownames_to_column() |> dplyr::rename(A.ten_Parke_2 = alf1) |> dplyr::select(A.ten_Parke_2)
-
-#A.ten_Switzer_5 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Switzer_5"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Switzer_5_alf <- gl.alf(A.ten_Switzer_5)
-#A.ten_Switzer_5_alf<- A.ten_Switzer_5_alf |> rownames_to_column() |> dplyr::rename(A.ten_Switzer_5 = alf1) |> dplyr::select(A.ten_Switzer_5)
-
-#A.ten_B.Jewell_2 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_B.Jewell_2"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_B.Jewell_2_alf <- gl.alf(A.ten_B.Jewell_2)
-#A.ten_B.Jewell_2_alf<- A.ten_B.Jewell_2_alf |> rownames_to_column() |> dplyr::rename(A.ten_B.Jewell_2 = alf1) |> dplyr::select(A.ten_B.Jewell_2)
-
-#A.ten_Backnumbers_2 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Backnumbers_2"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Backnumbers_2_alf <- gl.alf(A.ten_Backnumbers_2)
-#A.ten_Backnumbers_2_alf<- A.ten_Backnumbers_2_alf |> rownames_to_column() |> dplyr::rename(A.ten_Backnumbers_2 = alf1) |> dplyr::select(A.ten_Backnumbers_2)
-
-#A.ten_Davies_7 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Davies_7"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Davies_7_alf <- gl.alf(A.ten_Davies_7)
-#A.ten_Davies_7_alf<- A.ten_Davies_7_alf |> rownames_to_column() |> dplyr::rename(A.ten_Davies_7 = alf1) |> dplyr::select(A.ten_Davies_7)
-
-#A.ten_Davies_D2 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Davies_D2"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Davies_D2_alf <- gl.alf(A.ten_Davies_D2)
-#A.ten_Davies_D2_alf<- A.ten_Davies_D2_alf |> rownames_to_column() |> dplyr::rename(A.ten_Davies_D2 = alf1) |> dplyr::select(A.ten_Davies_D2)
-
-#A.ten_Parke_3 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Parke_3"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Parke_3_alf <- gl.alf(A.ten_Parke_3)
-#A.ten_Parke_3_alf<- A.ten_Parke_3_alf |> rownames_to_column() |> dplyr::rename(A.ten_Parke_3 = alf1) |> dplyr::select(A.ten_Parke_3)
-
-#A.ten_Switzer_6 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Switzer_6"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Switzer_6_alf <- gl.alf(A.ten_Switzer_6)
-#A.ten_Switzer_6_alf<- A.ten_Switzer_6_alf |> rownames_to_column() |> dplyr::rename(A.ten_Switzer_6 = alf1) |> dplyr::select(A.ten_Switzer_6)
-
-#A.ten_B.Jewell_3 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_B.Jewell_3"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_B.Jewell_3_alf <- gl.alf(A.ten_B.Jewell_3)
-#A.ten_B.Jewell_3_alf<- A.ten_B.Jewell_3_alf |> rownames_to_column() |> dplyr::rename(A.ten_B.Jewell_3 = alf1) |> dplyr::select(A.ten_B.Jewell_3)
-
-#A.ten_Backnumbers_3 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Backnumbers_3"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Backnumbers_3_alf <- gl.alf(A.ten_Backnumbers_3)
-#A.ten_Backnumbers_3_alf<- A.ten_Backnumbers_3_alf |> rownames_to_column() |> dplyr::rename(A.ten_Backnumbers_3 = alf1) |> dplyr::select(A.ten_Backnumbers_3)
-
-#A.ten_Davies_8 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Davies_8"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Davies_8_alf <- gl.alf(A.ten_Davies_8)
-#A.ten_Davies_8_alf<- A.ten_Davies_8_alf |> rownames_to_column() |> dplyr::rename(A.ten_Davies_8 = alf1) |> dplyr::select(A.ten_Davies_8)
-
-#A.ten_Palms_1 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Palms_1"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Palms_1_alf <- gl.alf(A.ten_Palms_1)
-#A.ten_Palms_1_alf<- A.ten_Palms_1_alf |> rownames_to_column() |> dplyr::rename(A.ten_Palms_1 = alf1) |> dplyr::select(A.ten_Palms_1)
-
-#A.ten_Parke_4 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Parke_4"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Parke_4_alf <- gl.alf(A.ten_Parke_4)
-#A.ten_Parke_4_alf<- A.ten_Parke_4_alf |> rownames_to_column() |> dplyr::rename(A.ten_Parke_4 = alf1) |> dplyr::select(A.ten_Parke_4)
-
-#A.ten_Switzer_7 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Switzer_7"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Switzer_7_alf <- gl.alf(A.ten_Switzer_7)
-#A.ten_Switzer_7_alf<- A.ten_Switzer_7_alf |> rownames_to_column() |> dplyr::rename(A.ten_Switzer_7 = alf1) |> dplyr::select(A.ten_Switzer_7)
-
-#A.ten_B.Jewell_4 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_B.Jewell_4"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_B.Jewell_4_alf <- gl.alf(A.ten_B.Jewell_4)
-#A.ten_B.Jewell_4_alf<- A.ten_B.Jewell_4_alf |> rownames_to_column() |> dplyr::rename(A.ten_B.Jewell_4 = alf1) |> dplyr::select(A.ten_B.Jewell_4)
-
-#A.ten_Davies_1 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Davies_1"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Davies_1_alf <- gl.alf(A.ten_Davies_1)
-#A.ten_Davies_1_alf<- A.ten_Davies_1_alf |> rownames_to_column() |> dplyr::rename(A.ten_Davies_1 = alf1) |> dplyr::select(A.ten_Davies_1)
-
-#A.ten_Davies_9 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Davies_9"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Davies_9_alf <- gl.alf(A.ten_Davies_9)
-#A.ten_Davies_9_alf<- A.ten_Davies_9_alf |> rownames_to_column() |> dplyr::rename(A.ten_Davies_9 = alf1) |> dplyr::select(A.ten_Davies_9)
-
-#A.ten_Palms_2 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Palms_2"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Palms_2_alf <- gl.alf(A.ten_Palms_2)
-#A.ten_Palms_2_alf<- A.ten_Palms_2_alf |> rownames_to_column() |> dplyr::rename(A.ten_Palms_2 = alf1) |> dplyr::select(A.ten_Palms_2)
-
-#A.ten_Parke_5 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Parke_5"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Parke_5_alf <- gl.alf(A.ten_Parke_5)
-#A.ten_Parke_5_alf<- A.ten_Parke_5_alf |> rownames_to_column() |> dplyr::rename(A.ten_Parke_5 = alf1) |> dplyr::select(A.ten_Parke_5)
-
-#A.ten_B.Jewell_5 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_B.Jewell_5"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_B.Jewell_5_alf <- gl.alf(A.ten_B.Jewell_5)
-#A.ten_B.Jewell_5_alf<- A.ten_B.Jewell_5_alf |> rownames_to_column() |> dplyr::rename(A.ten_B.Jewell_5 = alf1) |> dplyr::select(A.ten_B.Jewell_5)
-
-#A.ten_Davies_2 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Davies_2"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Davies_2_alf <- gl.alf(A.ten_Davies_2)
-#A.ten_Davies_2_alf<- A.ten_Davies_2_alf |> rownames_to_column() |> dplyr::rename(A.ten_Davies_2 = alf1) |> dplyr::select(A.ten_Davies_2)
-
-#A.ten_Davies_10 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Davies_10"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Davies_10_alf <- gl.alf(A.ten_Davies_10)
-#A.ten_Davies_10_alf<- A.ten_Davies_10_alf |> rownames_to_column() |> dplyr::rename(A.ten_Davies_10 = alf1) |> dplyr::select(A.ten_Davies_10)
-
-#A.ten_Palms_3 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Palms_3"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Palms_3_alf <- gl.alf(A.ten_Palms_3)
-#A.ten_Palms_3_alf<- A.ten_Palms_3_alf |> rownames_to_column() |> dplyr::rename(A.ten_Palms_3 = alf1) |> dplyr::select(A.ten_Palms_3)
-
-#A.ten_Switzer_1 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Switzer_1"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Switzer_1_alf <- gl.alf(A.ten_Switzer_1)
-#A.ten_Switzer_1_alf<- A.ten_Switzer_1_alf |> rownames_to_column() |> dplyr::rename(A.ten_Switzer_1 = alf1) |> dplyr::select(A.ten_Switzer_1)
-
-#A.ten_B.Jewell_6 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_B.Jewell_6"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_B.Jewell_6_alf <- gl.alf(A.ten_B.Jewell_6)
-#A.ten_B.Jewell_6_alf<- A.ten_B.Jewell_6_alf |> rownames_to_column() |> dplyr::rename(A.ten_B.Jewell_6 = alf1) |> dplyr::select(A.ten_B.Jewell_6)
-
-#A.ten_Davies_3 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Davies_3"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Davies_3_alf <- gl.alf(A.ten_Davies_3)
-#A.ten_Davies_3_alf<- A.ten_Davies_3_alf |> rownames_to_column() |> dplyr::rename(A.ten_Davies_3 = alf1) |> dplyr::select(A.ten_Davies_3)
-
-#A.ten_Davies_11 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Davies_11"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Davies_11_alf <- gl.alf(A.ten_Davies_11)
-#A.ten_Davies_11_alf<- A.ten_Davies_11_alf |> rownames_to_column() |> dplyr::rename(A.ten_Davies_11 = alf1) |> dplyr::select(A.ten_Davies_11)
-
-#A.ten_Palms_4 <- gl.keep.pop(ten_adult2, pop.list= c("A.ten_Palms_4"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
-#A.ten_Palms_4_alf <- gl.alf(A.ten_Palms_4)
-#A.ten_Palms_4_alf<- A.ten_Palms_4_alf |> rownames_to_column() |> dplyr::rename(A.ten_Palms_4 = alf1) |> dplyr::select(A.ten_Palms_4)
-```
-
-```{r}
-#bind all together
-
-#ad_alf<- cbind(
-#A.ten_Davies_1_alf,
-#A.ten_Davies_2_alf,
-#A.ten_Davies_3_alf,
-#A.ten_Davies_4_alf,
-#A.ten_Davies_5_alf,
-#A.ten_Davies_6_alf,
-#A.ten_Davies_7_alf,
-#A.ten_Davies_8_alf,
-#A.ten_Davies_9_alf,
-#A.ten_Davies_10_alf,
-#A.ten_Davies_11_alf,
-#A.ten_Davies_12_alf,
-#A.ten_Davies_13_alf,
-#A.ten_Davies_D1_alf,
-#A.ten_Davies_D2_alf,
-#A.ten_Backnumbers_1_alf,
-#A.ten_Backnumbers_2_alf,
-#A.ten_Backnumbers_3_alf,
-#A.ten_Palms_1_alf,
-#A.ten_Palms_2_alf,
-#A.ten_Palms_3_alf,
-#A.ten_Palms_4_alf,
-#A.ten_Palms_5_alf,
-#A.ten_Palms_6_alf,
-#A.ten_Parke_1_alf,
-#A.ten_Parke_2_alf,
-#A.ten_Parke_3_alf,
-#A.ten_Parke_4_alf,
-#A.ten_Parke_5_alf,
-#A.ten_B.Jewell_1_alf,
-#A.ten_B.Jewell_2_alf,
-#A.ten_B.Jewell_3_alf,
-#A.ten_B.Jewell_4_alf,
-#A.ten_B.Jewell_5_alf,
-#A.ten_B.Jewell_6_alf,
-#A.ten_B.Jewell_7_alf,
-#A.ten_B.Jewell_8_alf,
-#A.ten_Switzer_1_alf,
-#A.ten_Switzer_2_alf,
-#A.ten_Switzer_3_alf,
-#A.ten_Switzer_4_alf,
-#A.ten_Switzer_5_alf,
-#A.ten_Switzer_6_alf,
-#A.ten_Switzer_7_alf
-#)
-```
-
-```{r}
-#get mean allele freq for each individual
-#ad_alf2<- colMeans(ad_alf) |> as.data.frame() |> dplyr::rename(ad_alf = `colMeans(ad_alf)`) |> rownames_to_column(var = "IID")
-```
-
+##################
 ```{r}
 #load adult significant SNP allele frequency and survival deviance data
 #ad_alf plot is 0.10 sig
@@ -1128,21 +976,4 @@ alf_point<- alf3 |> filter(IID != "A.ten_B.Jewell_7") |>
   theme(axis.text.x = element_text(angle = 90, vjust = 1, hjust=1)) +
   labs(x = "Allele Frequency", y = "Parental ICC")
 alf_point
-
-# View the correlation coefficient and p-value
-#cor_test_result2$estimate  # Correlation coefficient
-#cor_test_result2$p.value   # P-value
-
-#alf_point<- alf4 |> ggplot() +
-#    geom_point(aes(x=alf, y=Deviance, color=Reef), size = 2) +
-    #geom_line(stat = "identity") +
-    #geom_smooth(aes(x=alf, y=Deviance), method=lm, se=FALSE, colour = "black") +
-    #theme_Publication() +
-    #scale_color_manual(values=pal[c(1,2,3,4,5)]) +
-    #scale_colour_Publication() +
-    #ylim(0.11,0.13) +
-  #theme(axis.text.x = element_text(angle = 90, vjust = 1, hjust=1)) +
-  #labs(x = "Allele Frequency")
-#alf_point
-
 ```
