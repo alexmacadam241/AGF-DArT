@@ -141,7 +141,7 @@ summarySE <- function(data=NULL, measurevar=NULL, groupvars=NULL, na.rm=FALSE,
 load meta data
 ```{r}
 #load metadata
-meta<- read.csv("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/A_tenuis/04_larvae/diversity_metrics/aten_metadata.csv") |>
+meta<- read.csv("/Users/alexmacadam/Documents/GitHub/AGF-DArT/data/aten_metadata.csv") |>
   filter(lifestage == "larvae")
 
 #remove models and summarise
