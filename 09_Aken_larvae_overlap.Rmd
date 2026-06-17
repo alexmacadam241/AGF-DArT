@@ -35,3 +35,36 @@ af_venn<- ggvenn(
 af_venn
 ```
 
+
+Map
+```{r}
+# Chromosome length info
+lengths <- read_tsv("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data/ragtag.scaffold_lengths.txt", col_names = c("chr","length"),show_col_types = FALSE)
+
+#load chromosome offsets
+offsets <- lengths %>% arrange(dplyr::desc(length)) %>% 
+  dplyr::mutate(offset=cumsum(length)-length) %>% 
+  dplyr::mutate(scaffold_num = row_number())
+
+axis_chr<- offsets %>% 
+  mutate(centre=offset+length/2) %>% 
+  mutate(chr_id=ifelse(grepl(chr,pattern="chr"),chr,"Unplaced")) %>% 
+  mutate(chr_id=str_remove(chr_id,"_RagTag"),chr_id=str_remove(chr_id,"chr")) %>% 
+  group_by(chr_id) %>% 
+  dplyr::summarise(centre = mean(centre))
+```
+
+```{r}
+mh_data_corr <- read_table("/Users/alexmacadam/Documents/GitHub/AGF-DArT/data/ci.ragtag.txt",col_names = c("chr","pos","SNP2","SNP","chr_orig","pos_orig")) %>% 
+  left_join(offsets) %>%
+  mutate(abs_pos = pos + offset) %>%
+  mutate(chr_type=ifelse(scaffold_num %% 2 == 0,"dark", "light")) %>% 
+  mutate(chr_type=ifelse(grepl(chr,pattern="chr"),chr_type,"unplaced"))
+
+mh_data_corr<- left_join(mh_data_corr, ci, by = "SNP")
+```
+
+```{r}
+
+```
+
