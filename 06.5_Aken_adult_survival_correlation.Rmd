@@ -1,0 +1,549 @@
+---
+title: "Untitled"
+output: html_document
+date: "2025-05-15"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(ggpubr)
+library(dartR)
+library(wesanderson)
+library(janitor)
+library(glmnet)
+
+set.seed(123)
+
+#colour palette
+pal <- wes_palette("Zissou1", 5, type = "discrete")
+
+#theme for plots
+theme_Publication <- function(base_size=14, base_family="arial") {
+      library(grid)
+      library(ggthemes)
+      (theme_foundation(base_size=base_size, base_family=base_family)
+       + theme(plot.title = element_text(face = "bold",
+                                         size = rel(1.2), hjust = 0.5),
+               text = element_text(),
+               panel.background = element_rect(colour = NA),
+               plot.background = element_rect(colour = NA),
+               panel.border = element_rect(colour = NA),
+               axis.title = element_text(face = "bold",size = rel(1)),
+               axis.title.y = element_text(angle=90,vjust =2),
+               axis.title.x = element_text(vjust = -0.2),
+               axis.text = element_text(), 
+               axis.line = element_line(colour="black"),
+               axis.ticks = element_line(),
+               panel.grid.major = element_line(colour="#f0f0f0"),
+               panel.grid.minor = element_blank(),
+               legend.key = element_rect(colour = NA),
+               legend.position = "bottom",
+               legend.direction = "horizontal",
+               legend.key.size= unit(0.2, "cm"),
+               legend.margin = unit(0, "cm"),
+               legend.title = element_text(face="italic"),
+               plot.margin=unit(c(10,5,5,5),"mm"),
+               strip.background=element_rect(colour="#f0f0f0",fill="#f0f0f0"),
+               strip.text = element_text(face="bold")
+          ))
+      
+}
+
+scale_fill_Publication <- function(...){
+      library(scales)
+      discrete_scale("fill","Publication",manual_pal(values = c("#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33","grey")), ...)
+
+}
+
+scale_colour_Publication <- function(...){
+      library(scales)
+      discrete_scale("colour","Publication",manual_pal(values = c("#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33","grey")), ...)
+
+}
+
+# Function for summarising survival standard error
+summarySE <- function(data=NULL, measurevar=NULL, groupvars=NULL, na.rm=FALSE,
+                      conf.interval=.95, .drop=TRUE) {
+  require(plyr)
+  
+  # New version of length which can handle NA's: if na.rm==T, don't count them
+  length2 <- function (x, na.rm=FALSE) {
+    if (na.rm==TRUE) sum(!is.na(x))
+    else       length(x)
+  }
+  
+  # This does the summary. For each group's data frame, return a vector with
+  # N, mean, and sd
+  datac <- ddply(data, groupvars, .drop=.drop,
+                 .fun = function(xx, col) {
+                   c(N    = length2(xx[[col]], na.rm=na.rm),
+                     mean = mean   (xx[[col]], na.rm=na.rm),
+                     sd   = sd     (xx[[col]], na.rm=na.rm)
+                   )
+                 },
+                 measurevar
+  )
+  
+  # Commenting this rename mean column line, as not assigning measurevar name properly
+  # # Rename the "mean" column    
+  # datac <- rename(datac, measurevar = mean)
+  
+  datac$se <- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
+  
+  # Confidence interval multiplier for standard error
+  # Calculate t-statistic for confidence interval: 
+  # e.g., if conf.interval is .95, use .975 (above/below), and use df=N-1
+  ciMult <- qt(conf.interval/2 + .5, datac$N-1)
+  datac$ci <- datac$se * ciMult
+  
+  return(datac)
+}
+```
+
+Load adult DArT data
+```{r}
+adult <- readRDS("/Users/alexmacadam/Documents/GitHub/AGF-DArT/Data/ten_adult_filter.RDS")
+sig_als9<- read.csv("/Users/alexmacadam/Documents/GitHub/AGF-DArT/data/sig_als.csv", header = F)
+sig_als <- as.vector(sig_als9$V1)
+rm(sig_als9)
+
+#Filter only used parents
+adult <- gl.keep.ind(adult, ind.list=c(
+'A.ten_Davies_1',
+'A.ten_Davies_10',
+'A.ten_Davies_13',
+'A.ten_Davies_6',
+'A.ten_Davies_8',
+'A.ten_B.Jewell_2',
+'A.ten_B.Jewell_3',
+'A.ten_B.Jewell_6',
+'A.ten_B.Jewell_8',
+'A.ten_Palms_1',
+'A.ten_Palms_2',
+'A.ten_Palms_4',
+'A.ten_Palms_5',
+'A.ten_Parke_2',
+'A.ten_Parke_4',
+'A.ten_Parke_5',
+'A.ten_Switzer_4',
+'A.ten_Switzer_6',
+'A.ten_Switzer_7'))
+
+adult2<- gl.keep.loc(adult, loc.list = sig_als)
+```
+
+Create objects for each family
+```{r}
+A.ten_Davies_1 <- gl.keep.pop(adult2, pop.list= c("A.ten_Davies_1"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
+A.ten_Davies_10 <- gl.keep.pop(adult2, pop.list= c("A.ten_Davies_10"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
+A.ten_Davies_13 <- gl.keep.pop(adult2, pop.list= c("A.ten_Davies_13"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
+A.ten_Davies_6 <- gl.keep.pop(adult2, pop.list= c("A.ten_Davies_6"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
+A.ten_Davies_8 <- gl.keep.pop(adult2, pop.list= c("A.ten_Davies_8"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
+A.ten_B.Jewell_2 <- gl.keep.pop(adult2, pop.list= c("A.ten_B.Jewell_2"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
+A.ten_B.Jewell_3 <- gl.keep.pop(adult2, pop.list= c("A.ten_B.Jewell_3"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
+A.ten_B.Jewell_6 <- gl.keep.pop(adult2, pop.list= c("A.ten_B.Jewell_6"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
+A.ten_B.Jewell_8 <- gl.keep.pop(adult2, pop.list= c("A.ten_B.Jewell_8"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
+A.ten_Palms_1 <- gl.keep.pop(adult2, pop.list= c("A.ten_Palms_1"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
+A.ten_Palms_3 <- gl.keep.pop(adult2, pop.list= c("A.ten_Palms_2"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
+A.ten_Palms_4 <- gl.keep.pop(adult2, pop.list= c("A.ten_Palms_4"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
+A.ten_Palms_5 <- gl.keep.pop(adult2, pop.list= c("A.ten_Palms_5"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
+A.ten_Parke_2 <- gl.keep.pop(adult2, pop.list= c("A.ten_Parke_2"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
+A.ten_Parke_4 <- gl.keep.pop(adult2, pop.list= c("A.ten_Parke_4"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
+A.ten_Parke_5 <- gl.keep.pop(adult2, pop.list= c("A.ten_Parke_5"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
+A.ten_Switzer_4 <- gl.keep.pop(adult2, pop.list= c("A.ten_Switzer_4"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
+A.ten_Switzer_6 <- gl.keep.pop(adult2, pop.list= c("A.ten_Switzer_6"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
+A.ten_Switzer_7 <- gl.keep.pop(adult2, pop.list= c("A.ten_Switzer_7"), as.pop = "id", mono.rm = FALSE, recalc=TRUE)
+```
+
+Define positively and negativelty corellated SNPs
+```{r}
+highly_pred_SNPs<- read.csv("/Users/alexmacadam/Documents/GitHub/AGF-DArT/data/sig_SNPs_stats_cor.csv", header = T)
+
+#sort positive and negative SNPs
+pos_SNPs<- highly_pred_SNPs |> filter(r > 0) |> pull(SNP)
+neg_SNPs<- highly_pred_SNPs |> filter(r < 0) |> pull(SNP)
+```
+
+Create PCAs of positive and negative SNPs
+```{r}
+adult_pos<- gl.keep.loc(adult2, loc.list = pos_SNPs)
+pcoa_pos<- gl.pcoa(adult_pos)
+pca_pos<- gl.pcoa.plot(pcoa_pos, adult_pos, scale = F)
+
+adult_neg<- gl.keep.loc(adult2, loc.list = neg_SNPs)
+pcoa_neg<- gl.pcoa(adult_neg)
+pca_neg<- gl.pcoa.plot(pcoa_neg, adult_neg, scale = F)
+```
+
+Create object of only positively correlated SNPs
+```{r}
+A.ten_Davies_1_pos<- gl.keep.loc(A.ten_Davies_1, loc.list = pos_SNPs)
+A.ten_Davies_10_pos<- gl.keep.loc(A.ten_Davies_10, loc.list = pos_SNPs)
+A.ten_Davies_13_pos<- gl.keep.loc(A.ten_Davies_13, loc.list = pos_SNPs)
+A.ten_Davies_6_pos<- gl.keep.loc(A.ten_Davies_6, loc.list = pos_SNPs)
+A.ten_Davies_8_pos<- gl.keep.loc(A.ten_Davies_8, loc.list = pos_SNPs)
+A.ten_B.Jewell_2_pos<- gl.keep.loc(A.ten_B.Jewell_2, loc.list = pos_SNPs)
+A.ten_B.Jewell_3_pos<- gl.keep.loc(A.ten_B.Jewell_3, loc.list = pos_SNPs)
+A.ten_B.Jewell_6_pos<- gl.keep.loc(A.ten_B.Jewell_6, loc.list = pos_SNPs)
+A.ten_B.Jewell_8_pos<- gl.keep.loc(A.ten_B.Jewell_8, loc.list = pos_SNPs)
+A.ten_Palms_1_pos<- gl.keep.loc(A.ten_Palms_1, loc.list = pos_SNPs)
+A.ten_Palms_3_pos<- gl.keep.loc(A.ten_Palms_3, loc.list = pos_SNPs)
+A.ten_Palms_4_pos<- gl.keep.loc(A.ten_Palms_4, loc.list = pos_SNPs)
+A.ten_Palms_5_pos<- gl.keep.loc(A.ten_Palms_5, loc.list = pos_SNPs)
+A.ten_Parke_2_pos<- gl.keep.loc(A.ten_Parke_2, loc.list = pos_SNPs)
+A.ten_Parke_4_pos<- gl.keep.loc(A.ten_Parke_4, loc.list = pos_SNPs)
+A.ten_Parke_5_pos<- gl.keep.loc(A.ten_Parke_5, loc.list = pos_SNPs)
+A.ten_Switzer_4_pos<- gl.keep.loc(A.ten_Switzer_4, loc.list = pos_SNPs)
+A.ten_Switzer_6_pos<- gl.keep.loc(A.ten_Switzer_6, loc.list = pos_SNPs)
+A.ten_Switzer_7_pos<- gl.keep.loc(A.ten_Switzer_7, loc.list = pos_SNPs)
+```
+
+Create object of only negatively correlated SNPs
+```{r}
+A.ten_Davies_1_neg<- gl.keep.loc(A.ten_Davies_1, loc.list = neg_SNPs)
+A.ten_Davies_10_neg<- gl.keep.loc(A.ten_Davies_10, loc.list = neg_SNPs)
+A.ten_Davies_13_neg<- gl.keep.loc(A.ten_Davies_13, loc.list = neg_SNPs)
+A.ten_Davies_6_neg<- gl.keep.loc(A.ten_Davies_6, loc.list = neg_SNPs)
+A.ten_Davies_8_neg<- gl.keep.loc(A.ten_Davies_8, loc.list = neg_SNPs)
+A.ten_B.Jewell_2_neg<- gl.keep.loc(A.ten_B.Jewell_2, loc.list = neg_SNPs)
+A.ten_B.Jewell_3_neg<- gl.keep.loc(A.ten_B.Jewell_3, loc.list = neg_SNPs)
+A.ten_B.Jewell_6_neg<- gl.keep.loc(A.ten_B.Jewell_6, loc.list = neg_SNPs)
+A.ten_B.Jewell_8_neg<- gl.keep.loc(A.ten_B.Jewell_8, loc.list = neg_SNPs)
+A.ten_Palms_1_neg<- gl.keep.loc(A.ten_Palms_1, loc.list = neg_SNPs)
+A.ten_Palms_3_neg<- gl.keep.loc(A.ten_Palms_3, loc.list = neg_SNPs)
+A.ten_Palms_4_neg<- gl.keep.loc(A.ten_Palms_4, loc.list = neg_SNPs)
+A.ten_Palms_5_neg<- gl.keep.loc(A.ten_Palms_5, loc.list = neg_SNPs)
+A.ten_Parke_2_neg<- gl.keep.loc(A.ten_Parke_2, loc.list = neg_SNPs)
+A.ten_Parke_4_neg<- gl.keep.loc(A.ten_Parke_4, loc.list = neg_SNPs)
+A.ten_Parke_5_neg<- gl.keep.loc(A.ten_Parke_5, loc.list = neg_SNPs)
+A.ten_Switzer_4_neg<- gl.keep.loc(A.ten_Switzer_4, loc.list = neg_SNPs)
+A.ten_Switzer_6_neg<- gl.keep.loc(A.ten_Switzer_6, loc.list = neg_SNPs)
+A.ten_Switzer_7_neg<- gl.keep.loc(A.ten_Switzer_7, loc.list = neg_SNPs)
+```
+
+Create dataframe of positive allele frequency for each family
+```{r}
+A.ten_Davies_1_pos_alf <- gl.alf(A.ten_Davies_1_pos) |> rownames_to_column() |> dplyr::rename(A.ten_Davies_1_pos = alf1) |> dplyr::select(A.ten_Davies_1_pos)
+A.ten_Davies_10_pos_alf <- gl.alf(A.ten_Davies_10_pos) |> rownames_to_column() |> dplyr::rename(A.ten_Davies_10_pos = alf1) |> dplyr::select(A.ten_Davies_10_pos)
+A.ten_Davies_13_pos_alf <- gl.alf(A.ten_Davies_13_pos) |> rownames_to_column() |> dplyr::rename(A.ten_Davies_13_pos = alf1) |> dplyr::select(A.ten_Davies_13_pos)
+A.ten_Davies_6_pos_alf <- gl.alf(A.ten_Davies_6_pos) |> rownames_to_column() |> dplyr::rename(A.ten_Davies_6_pos = alf1) |> dplyr::select(A.ten_Davies_6_pos)
+A.ten_Davies_8_pos_alf <- gl.alf(A.ten_Davies_8_pos) |> rownames_to_column() |> dplyr::rename(A.ten_Davies_8_pos = alf1) |> dplyr::select(A.ten_Davies_8_pos)
+A.ten_B.Jewell_2_pos_alf <- gl.alf(A.ten_B.Jewell_2_pos) |> rownames_to_column() |> dplyr::rename(A.ten_B.Jewell_2_pos = alf1) |> dplyr::select(A.ten_B.Jewell_2_pos)
+A.ten_B.Jewell_3_pos_alf <- gl.alf(A.ten_B.Jewell_3_pos) |> rownames_to_column() |> dplyr::rename(A.ten_B.Jewell_3_pos = alf1) |> dplyr::select(A.ten_B.Jewell_3_pos)
+A.ten_B.Jewell_6_pos_alf <- gl.alf(A.ten_B.Jewell_6_pos) |> rownames_to_column() |> dplyr::rename(A.ten_B.Jewell_6_pos = alf1) |> dplyr::select(A.ten_B.Jewell_6_pos)
+A.ten_B.Jewell_8_pos_alf <- gl.alf(A.ten_B.Jewell_8_pos) |> rownames_to_column() |> dplyr::rename(A.ten_B.Jewell_8_pos = alf1) |> dplyr::select(A.ten_B.Jewell_8_pos)
+A.ten_Palms_1_pos_alf <- gl.alf(A.ten_Palms_1_pos) |> rownames_to_column() |> dplyr::rename(A.ten_Palms_1_pos = alf1) |> dplyr::select(A.ten_Palms_1_pos)
+A.ten_Palms_3_pos_alf <- gl.alf(A.ten_Palms_3_pos) |> rownames_to_column() |> dplyr::rename(A.ten_Palms_3_pos = alf1) |> dplyr::select(A.ten_Palms_3_pos)
+A.ten_Palms_4_pos_alf <- gl.alf(A.ten_Palms_4_pos) |> rownames_to_column() |> dplyr::rename(A.ten_Palms_4_pos = alf1) |> dplyr::select(A.ten_Palms_4_pos)
+A.ten_Palms_5_pos_alf <- gl.alf(A.ten_Palms_5_pos) |> rownames_to_column() |> dplyr::rename(A.ten_Palms_5_pos = alf1) |> dplyr::select(A.ten_Palms_5_pos)
+A.ten_Parke_2_pos_alf <- gl.alf(A.ten_Parke_2_pos) |> rownames_to_column() |> dplyr::rename(A.ten_Parke_2_pos = alf1) |> dplyr::select(A.ten_Parke_2_pos)
+A.ten_Parke_4_pos_alf <- gl.alf(A.ten_Parke_4_pos) |> rownames_to_column() |> dplyr::rename(A.ten_Parke_4_pos = alf1) |> dplyr::select(A.ten_Parke_4_pos)
+A.ten_Parke_5_pos_alf <- gl.alf(A.ten_Parke_5_pos) |> rownames_to_column() |> dplyr::rename(A.ten_Parke_5_pos = alf1) |> dplyr::select(A.ten_Parke_5_pos)
+A.ten_Switzer_4_pos_alf <- gl.alf(A.ten_Switzer_4_pos) |> rownames_to_column() |> dplyr::rename(A.ten_Switzer_4_pos = alf1) |> dplyr::select(A.ten_Switzer_4_pos)
+A.ten_Switzer_6_pos_alf <- gl.alf(A.ten_Switzer_6_pos) |> rownames_to_column() |> dplyr::rename(A.ten_Switzer_6_pos = alf1) |> dplyr::select(A.ten_Switzer_6_pos)
+A.ten_Switzer_7_pos_alf <- gl.alf(A.ten_Switzer_7_pos) |> rownames_to_column() |> dplyr::rename(A.ten_Switzer_7_pos = alf1) |> dplyr::select(A.ten_Switzer_7_pos)
+```
+
+Create dataframe of negative allele frequency for each family
+```{r}
+A.ten_Davies_1_neg_alf <- gl.alf(A.ten_Davies_1_neg) |> rownames_to_column() |> dplyr::rename(A.ten_Davies_1_neg = alf1) |> dplyr::select(A.ten_Davies_1_neg)
+A.ten_Davies_10_neg_alf <- gl.alf(A.ten_Davies_10_neg) |> rownames_to_column() |> dplyr::rename(A.ten_Davies_10_neg = alf1) |> dplyr::select(A.ten_Davies_10_neg)
+A.ten_Davies_13_neg_alf <- gl.alf(A.ten_Davies_13_neg) |> rownames_to_column() |> dplyr::rename(A.ten_Davies_13_neg = alf1) |> dplyr::select(A.ten_Davies_13_neg)
+A.ten_Davies_6_neg_alf <- gl.alf(A.ten_Davies_6_neg) |> rownames_to_column() |> dplyr::rename(A.ten_Davies_6_neg = alf1) |> dplyr::select(A.ten_Davies_6_neg)
+A.ten_Davies_8_neg_alf <- gl.alf(A.ten_Davies_8_neg) |> rownames_to_column() |> dplyr::rename(A.ten_Davies_8_neg = alf1) |> dplyr::select(A.ten_Davies_8_neg)
+A.ten_B.Jewell_2_neg_alf <- gl.alf(A.ten_B.Jewell_2_neg) |> rownames_to_column() |> dplyr::rename(A.ten_B.Jewell_2_neg = alf1) |> dplyr::select(A.ten_B.Jewell_2_neg)
+A.ten_B.Jewell_3_neg_alf <- gl.alf(A.ten_B.Jewell_3_neg) |> rownames_to_column() |> dplyr::rename(A.ten_B.Jewell_3_neg = alf1) |> dplyr::select(A.ten_B.Jewell_3_neg)
+A.ten_B.Jewell_6_neg_alf <- gl.alf(A.ten_B.Jewell_6_neg) |> rownames_to_column() |> dplyr::rename(A.ten_B.Jewell_6_neg = alf1) |> dplyr::select(A.ten_B.Jewell_6_neg)
+A.ten_B.Jewell_8_neg_alf <- gl.alf(A.ten_B.Jewell_8_neg) |> rownames_to_column() |> dplyr::rename(A.ten_B.Jewell_8_neg = alf1) |> dplyr::select(A.ten_B.Jewell_8_neg)
+A.ten_Palms_1_neg_alf <- gl.alf(A.ten_Palms_1_neg) |> rownames_to_column() |> dplyr::rename(A.ten_Palms_1_neg = alf1) |> dplyr::select(A.ten_Palms_1_neg)
+A.ten_Palms_3_neg_alf <- gl.alf(A.ten_Palms_3_neg) |> rownames_to_column() |> dplyr::rename(A.ten_Palms_3_neg = alf1) |> dplyr::select(A.ten_Palms_3_neg)
+A.ten_Palms_4_neg_alf <- gl.alf(A.ten_Palms_4_neg) |> rownames_to_column() |> dplyr::rename(A.ten_Palms_4_neg = alf1) |> dplyr::select(A.ten_Palms_4_neg)
+A.ten_Palms_5_neg_alf <- gl.alf(A.ten_Palms_5_neg) |> rownames_to_column() |> dplyr::rename(A.ten_Palms_5_neg = alf1) |> dplyr::select(A.ten_Palms_5_neg)
+A.ten_Parke_2_neg_alf <- gl.alf(A.ten_Parke_2_neg) |> rownames_to_column() |> dplyr::rename(A.ten_Parke_2_neg = alf1) |> dplyr::select(A.ten_Parke_2_neg)
+A.ten_Parke_4_neg_alf <- gl.alf(A.ten_Parke_4_neg) |> rownames_to_column() |> dplyr::rename(A.ten_Parke_4_neg = alf1) |> dplyr::select(A.ten_Parke_4_neg)
+A.ten_Parke_5_neg_alf <- gl.alf(A.ten_Parke_5_neg) |> rownames_to_column() |> dplyr::rename(A.ten_Parke_5_neg = alf1) |> dplyr::select(A.ten_Parke_5_neg)
+A.ten_Switzer_4_neg_alf <- gl.alf(A.ten_Switzer_4_neg) |> rownames_to_column() |> dplyr::rename(A.ten_Switzer_4_neg = alf1) |> dplyr::select(A.ten_Switzer_4_neg)
+A.ten_Switzer_6_neg_alf <- gl.alf(A.ten_Switzer_6_neg) |> rownames_to_column() |> dplyr::rename(A.ten_Switzer_6_neg = alf1) |> dplyr::select(A.ten_Switzer_6_neg)
+A.ten_Switzer_7_neg_alf <- gl.alf(A.ten_Switzer_7_neg) |> rownames_to_column() |> dplyr::rename(A.ten_Switzer_7_neg = alf1) |> dplyr::select(A.ten_Switzer_7_neg)
+```
+
+extract SNP names
+```{r}
+pos_SNPs <- gl.alf(A.ten_Davies_1_pos) |> rownames_to_column() |> dplyr::rename(SNPs = rowname) |> dplyr::select(SNPs)
+neg_SNPs <- gl.alf(A.ten_Davies_1_neg) |> rownames_to_column() |> dplyr::rename(SNPs = rowname) |> dplyr::select(SNPs)
+```
+
+Bind all positive allele frequencies together
+```{r}
+pos_alf<- cbind(
+pos_SNPs,
+A.ten_Davies_1_pos_alf$A.ten_Davies_1_pos,
+A.ten_Davies_10_pos_alf$A.ten_Davies_10_pos,
+A.ten_Davies_13_pos_alf$A.ten_Davies_13_pos,
+A.ten_Davies_6_pos_alf$A.ten_Davies_6_pos,
+A.ten_Davies_8_pos_alf$A.ten_Davies_8_pos,
+A.ten_B.Jewell_2_pos_alf$A.ten_B.Jewell_2_pos,
+A.ten_B.Jewell_3_pos_alf$A.ten_B.Jewell_3_pos,
+A.ten_B.Jewell_6_pos_alf$A.ten_B.Jewell_6_pos,
+A.ten_B.Jewell_8_pos_alf$A.ten_B.Jewell_8_pos,
+A.ten_Palms_1_pos_alf$A.ten_Palms_1_pos,
+A.ten_Palms_3_pos_alf$A.ten_Palms_3_pos,
+A.ten_Palms_4_pos_alf$A.ten_Palms_4_pos,
+A.ten_Palms_5_pos_alf$A.ten_Palms_5_pos,
+A.ten_Parke_2_pos_alf$A.ten_Parke_2_pos,
+A.ten_Parke_4_pos_alf$A.ten_Parke_4_pos,
+A.ten_Parke_5_pos_alf$A.ten_Parke_5_pos,
+A.ten_Switzer_4_pos_alf$A.ten_Switzer_4_pos,
+A.ten_Switzer_6_pos_alf$A.ten_Switzer_6_pos,
+A.ten_Switzer_7_pos_alf$A.ten_Switzer_7_pos
+)
+```
+
+Bind all negative allele frequencies together
+```{r}
+neg_alf<- cbind(
+neg_SNPs,
+A.ten_Davies_1_neg_alf$A.ten_Davies_1_neg,
+A.ten_Davies_10_neg_alf$A.ten_Davies_10_neg,
+A.ten_Davies_13_neg_alf$A.ten_Davies_13_neg,
+A.ten_Davies_6_neg_alf$A.ten_Davies_6_neg,
+A.ten_Davies_8_neg_alf$A.ten_Davies_8_neg,
+A.ten_B.Jewell_2_neg_alf$A.ten_B.Jewell_2_neg,
+A.ten_B.Jewell_3_neg_alf$A.ten_B.Jewell_3_neg,
+A.ten_B.Jewell_6_neg_alf$A.ten_B.Jewell_6_neg,
+A.ten_B.Jewell_8_neg_alf$A.ten_B.Jewell_8_neg,
+A.ten_Palms_1_neg_alf$A.ten_Palms_1_neg,
+A.ten_Palms_3_neg_alf$A.ten_Palms_3_neg,
+A.ten_Palms_4_neg_alf$A.ten_Palms_4_neg,
+A.ten_Palms_5_neg_alf$A.ten_Palms_5_neg,
+A.ten_Parke_2_neg_alf$A.ten_Parke_2_neg,
+A.ten_Parke_4_neg_alf$A.ten_Parke_4_neg,
+A.ten_Parke_5_neg_alf$A.ten_Parke_5_neg,
+A.ten_Switzer_4_neg_alf$A.ten_Switzer_4_neg,
+A.ten_Switzer_6_neg_alf$A.ten_Switzer_6_neg,
+A.ten_Switzer_7_neg_alf$A.ten_Switzer_7_neg
+)
+```
+
+Transpose and create rownames
+```{r}
+pos_alf<- pos_alf |> 
+  t() |>
+  row_to_names(row_number = 1)
+
+neg_alf<- neg_alf |> 
+  t() |>
+  row_to_names(row_number = 1)
+```
+
+Change class of matrix
+```{r}
+class(pos_alf) <- "numeric"
+pos_alf2<- as.data.frame(pos_alf)
+
+class(neg_alf) <- "numeric"
+neg_alf2<- as.data.frame(neg_alf)
+```
+
+Calculate mean AF per samples
+```{r}
+pos_alf2$pos_av <- rowMeans(pos_alf2, na.rm = TRUE)
+neg_alf2$neg_av <- rowMeans(neg_alf2, na.rm = TRUE)
+```
+
+Keep the averages
+```{r}
+pos_alf2<- pos_alf2 |> rownames_to_column(var = "ID")
+pos_alf2<- pos_alf2 |> dplyr::select(ID, pos_av)
+
+neg_alf2<- neg_alf2 |> rownames_to_column(var = "ID")
+neg_alf2<- neg_alf2 |> dplyr::select(ID, neg_av)
+```
+
+Bind positives and negatives together
+```{r}
+pos_alf2$ID <- sub("_pos_alf.*", "", pos_alf2$ID)
+neg_alf2$ID <- sub("_neg_alf.*", "", neg_alf2$ID)
+adult_alf<- left_join(pos_alf2, neg_alf2, by = "ID")
+adult_alf$ID <- sub("A.ten_B.", "", adult_alf$ID)
+adult_alf$ID <- sub("A.ten_", "", adult_alf$ID)
+adult_alf$ID <- sub("_", "", adult_alf$ID)
+```
+
+Load parent deviances
+```{r}
+#coloured by deviances
+deviances<- read.csv("/Users/alexmacadam/Documents/GitHub/AGF-DArT/data/pm_deviance.csv") |> filter(Lifestage == "larv")
+larv<- deviances |> filter(Lifestage == "larv")
+dev_dam<- larv |> filter(group == "Dams") |> dplyr::rename(ID = parent) |> dplyr::select(ID, Region, mean)
+dev_sire<- larv |> filter(group == "Sires") |> dplyr::rename(ID = parent) |> dplyr::select(ID, Region, mean)
+```
+
+Join deviances with alf
+```{r}
+dev_alf_dam<- left_join(dev_dam, adult_alf, by = "ID") |> na.omit()
+dev_alf_sire<- left_join(dev_sire, adult_alf, by = "ID") |> na.omit()
+```
+
+Plot
+```{r}
+ad_cor <- cor.test(dev_alf_dam$mean, dev_alf_dam$pos_av)
+# View the correlation coefficient and p-value
+r<- ad_cor$estimate  # Correlation coefficient
+p<- ad_cor$p.value   # P-value
+
+dev_alf_dam |>
+  ggplot() +
+  geom_point(aes(x = pos_av, y = mean, label = label_pos_dam), color = "red") +
+  geom_point(aes(x = neg_av, y = mean, label = label_neg_dam), color = "blue") +
+  geom_smooth(aes(x = neg_av, y = mean), method = "lm", se = F, color = "red") +
+  geom_smooth(aes(x = pos_av, y = mean), method = "lm", se = F, color = "blue")
+
+dev_alf_sire |>
+  ggplot() +
+  geom_point(aes(x = pos_av, y = mean), color = "red") +
+  geom_point(aes(x = neg_av, y = mean), color = "blue") +
+  geom_smooth(aes(x = neg_av, y = mean), method = "lm", se = F) +
+  geom_smooth(aes(x = pos_av, y = mean), method = "lm", se = F)
+```
+
+```{r}
+dev_alf_dam2<- dev_alf_dam |>
+  mutate(neg_av = 1 - neg_av) |>
+  pivot_longer(cols = c("pos_av","neg_av"), names_to = "direction", values_to = "av")
+
+ad_cor <- cor.test(dev_alf_dam2$mean, dev_alf_dam2$av)
+# View the correlation coefficient and p-value
+r<- ad_cor$estimate  # Correlation coefficient
+p<- ad_cor$p.value   # P-value
+
+dev_alf_dam2$Reef <- gsub("[0-9]", "", dev_alf_dam2$ID)
+
+parent_af<- dev_alf_dam2 |>
+  ggplot() +
+  geom_point(aes(x = av, y = mean, color = Region, shape = Reef)) +
+  geom_smooth(aes(x = av, y = mean), method = "lm", se = F, color = "black") +
+  annotate("text", x=0.17, y=2.4, label= "R = 0.513, p = 0.002", size = 6) +
+  theme_Publication() +
+    scale_colour_Publication() +
+    scale_color_manual(values=pal[c(1,5)]) +
+    #ylim(0.11,0.13) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 1, hjust=1), legend.direction = "vertical") +
+  labs(x = "Average AF", y = "Posterior Mean")
+parent_af
+```
+
+```{r}
+dev_alf_sire2<- dev_alf_sire |>
+  mutate(neg_av = 1 - neg_av) |>
+  pivot_longer(cols = c("pos_av","neg_av"), names_to = "direction", values_to = "av")
+
+ad_cor <- cor.test(dev_alf_sire2$mean, dev_alf_sire2$av)
+# View the correlation coefficient and p-value
+r<- ad_cor$estimate  # Correlation coefficient
+p<- ad_cor$p.value   # P-value
+
+dev_alf_sire2 |>
+  ggplot() +
+  geom_point(aes(x = av, y = mean)) +
+  geom_smooth(aes(x = av, y = mean), method = "lm", se = F) +
+  annotate("text", x=0.17, y=0.6, label= "R = 0.197, p = 0.279", size = 6)
+```
+
+```{r}
+dev_alf_2<- rbind(dev_alf_dam2, dev_alf_sire2)
+
+ad_cor <- cor.test(dev_alf_2$mean, dev_alf_2$av)
+# View the correlation coefficient and p-value
+r<- ad_cor$estimate  # Correlation coefficient
+p<- ad_cor$p.value   # P-value
+
+dev_alf_2 |>
+  ggplot() +
+  geom_point(aes(x = av, y = mean)) +
+  geom_smooth(aes(x = av, y = mean), method = "lm", se = F) +
+  annotate("text", x=0.17, y=2.4, label= "R = 0.513, p = 0.002", size = 6)
+```
+
+##########
+```{r}
+#swap 0s and 1s
+neg_alf_swapped <- ifelse(neg_alf == 0, 1, ifelse(neg_alf == 1, 0, 0.5)) |> as.data.frame()
+neg_alf_swapped <- neg_alf_swapped |> rownames_to_column(var = "ID")
+neg_alf_swapped$ID <- sub("_neg_alf.*", "", neg_alf_swapped$ID)
+
+pos_alf_swapped <- pos_alf |> as.data.frame() |> rownames_to_column(var = "ID")
+pos_alf_swapped$ID <- sub("_pos_alf.*", "", pos_alf_swapped$ID)
+
+#join pos and neg SNPs
+alf_swapped<- left_join(pos_alf_swapped, neg_alf_swapped, by = "ID")
+```
+
+Calculate mean AF per samples
+```{r}
+alf_swapped<- alf_swapped |> column_to_rownames(var = "ID")
+alf_swapped$av_alf <- rowMeans(alf_swapped, na.rm = TRUE)
+alf_swapped<- alf_swapped |> rownames_to_column(var = "ID") |> dplyr::select(ID, av_alf)
+```
+
+Join deviances with alf
+```{r}
+alf_swapped$ID <- sub("A.ten_", "", alf_swapped$ID)
+alf_swapped$ID <- sub("_", "", alf_swapped$ID)
+alf_swapped$ID <- sub("B.", "", alf_swapped$ID)
+dev_alf_swapped_dam<- left_join(dev_dam, alf_swapped, by = "ID") |> na.omit()
+dev_alf_swapped_sire<- left_join(dev_sire, alf_swapped, by = "ID") |> na.omit()
+```
+
+```{r}
+ad_cor <- cor.test(dev_alf_swapped_dam$mean, dev_alf_swapped_dam$av_alf)
+# View the correlation coefficient and p-value
+r<- ad_cor$estimate  # Correlation coefficient
+p<- ad_cor$p.value   # P-value
+
+dev_alf_swapped_dam |>
+  ggplot() +
+  geom_point(aes(x = av_alf, y = mean)) +
+  geom_smooth(aes(x = av_alf, y = mean), method = "lm", se = F) +
+  annotate("text", x=0.17, y=0.6, label= "R = 0.526, p = 0.036", size = 6)
+```
+
+```{r}
+ad_cor <- cor.test(dev_alf_swapped_sire$mean, dev_alf_swapped_sire$av_alf)
+# View the correlation coefficient and p-value
+r<- ad_cor$estimate  # Correlation coefficient
+p<- ad_cor$p.value   # P-value
+
+dev_alf_swapped_sire |>
+  ggplot() +
+  geom_point(aes(x = av_alf, y = mean)) +
+  geom_smooth(aes(x = av_alf, y = mean), method = "lm", se = F) +
+  annotate("text", x=0.17, y=0.6, label= "R = 0.197, p = 0.465", size = 6)
+```
+
+```{r}
+dev_alf_swapped<- rbind(dev_alf_swapped_dam, dev_alf_swapped_sire)
+
+ad_cor <- cor.test(dev_alf_swapped$mean, dev_alf_swapped$av_alf)
+# View the correlation coefficient and p-value
+r<- ad_cor$estimate  # Correlation coefficient
+p<- ad_cor$p.value   # P-value
+
+dev_alf_swapped |>
+  ggplot() +
+  geom_point(aes(x = av_alf, y = mean)) +
+  geom_smooth(aes(x = av_alf, y = mean), method = "lm", se = F) +
+  annotate("text", x=0.17, y=0.6, label= "R = 0.397, p = 0.024", size = 6)
+```
+
+#############
+Plot
+```{r}
+corr_plot<- vio_af_plot + lin_af_plot + parent_af + plot_annotation(tag_levels = "A") + plot_layout(nrow = 1, guides = "collect")
+corr_plot
+```
+
