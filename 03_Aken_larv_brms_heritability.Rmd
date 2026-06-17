@@ -53,13 +53,13 @@ theme_Publication <- function(base_size=14, base_family="arial") {
 
 scale_fill_Publication <- function(...){
       library(scales)
-      discrete_scale("fill","Publication",manual_pal(values = c("#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")), ...)
+      discrete_scale("fill","Publication",manual_pal(values = c("#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")), ...)
 
 }
 
 scale_colour_Publication <- function(...){
       library(scales)
-      discrete_scale("colour","Publication",manual_pal(values = c("#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")), ...)
+      discrete_scale("colour","Publication",manual_pal(values = c("#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")), ...)
 
 }
 ```
@@ -90,17 +90,58 @@ Amat <- as.matrix(nadiv::makeA(Ped))
 ```
 
 ```{r}
+library(brms)
+
+prior_strong <- c(
+  # Stronger prior on intercept: centered near expected mean survival, e.g. 0.5
+  prior(normal(0.5, 0.2), class = "Intercept"),
+
+  # Stronger prior on animal random effect SD (genetic effect)
+  prior(exponential(5), class = "sd", group = "animal"),
+
+  # Stronger prior on residual variance
+  prior(exponential(5), class = "sigma")
+)
+
+#
+brms_m1.1_larv <- brm(
+  survival ~ 1 + (1 | gr(animal, cov = Amat)),
+  data = Data,
+  data2 = list(Amat = Amat),
+  family = gaussian(),
+  prior = prior_strong,
+  chains = 3, cores = 3,
+  thin = 25,
+  iter = 5000, warmup = 1000,
+  control = list(adapt_delta = 0.999999, max_treedepth = 20),
+  refresh = 100
+)
+#
+brms_m1.1_larv <- brm(
+  survival ~ 1 + (1 | gr(animal, cov = Amat)),
+  data = Data,
+  data2 = list(Amat = Amat),
+  family = gaussian(),
+  prior = prior_strong,
+  chains = 3, cores = 3,
+  iter = 25000000, warmup = 250000, thin = 25,
+  control = list(adapt_delta = 0.999999, max_treedepth = 20),
+  refresh = 100
+)
+```
+
+```{r}
 #brms_m1.1_larv <- brm(
 #  survival ~ 1 + (1 | gr(animal, cov = Amat)),
 #  data = Data,
 #  data2 = list(Amat = Amat),
 #  family = gaussian(),
-#  chains = 3, cores = 3, iter = 15000000, warmup = 150000, thin = 1500,
-#  control = list(adapt_delta = 0.9999, max_treedepth = 20),
+#  chains = 3, cores = 3, iter = 25000000, warmup = 250000, thin = 150,
+#  control = list(adapt_delta = 0.99999, max_treedepth = 20),
 #  refresh = 100
 #)
 
-#save(brms_m1.1_larv, file = "brms_m1.1_larv.rda")
+#save(brms_m1.1_larv, file = "/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data/brms_m1.2_larv.rda")
 ```
 
 ```{r}
@@ -342,4 +383,73 @@ her_plot_larv<- heritability_all |>
         ) +
   scale_fill_Publication()
 her_plot_larv
+```
+
+```{r}
+heritability_all <- heritability_all |> mutate(group = factor(Method, levels = c("BRMS_juv", "BRMS_larv", "BayesR")))
+
+her_plot<- heritability_all |> filter(Method != "BayesR") |>
+  ggplot() +
+  geom_density(aes(Heritability, fill = Method), alpha = 0.8) +
+  geom_vline(aes(xintercept = 0.91462), colour = "#7fc97f", size = 1, linetype="dashed") +
+  geom_vline(aes(xintercept = 0.661388), colour = "#fdb462", size = 1, linetype="dashed") +
+  theme_Publication() +
+  labs(y="Density") +
+  theme(plot.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.border = element_blank()
+        ) +
+  scale_fill_Publication()
+her_plot
+```
+
+```{r}
+larv_her_plot<- heritability_all |> filter(Method == "BRMS_larv") |>
+  ggplot() +
+  geom_density(aes(Heritability, fill = Method), alpha = 0.8) +
+  geom_vline(aes(xintercept = 0.91462), colour = "#7fc97f", size = 1, linetype="dashed") +
+  facet_wrap(~Method, drop = T) +
+  theme_Publication() +
+  labs(y="Density") +
+  theme(plot.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.border = element_blank()
+        ) +
+  scale_fill_manual(values = c("#7fc97f"))
+larv_her_plot
+
+juv_her_plot<- heritability_all |> filter(Method == "BRMS_juv") |>
+  ggplot() +
+  geom_density(aes(Heritability, fill = Method), alpha = 0.8) +
+  geom_vline(aes(xintercept = 0.661388), colour = "#fdb462", size = 1, linetype="dashed") +
+  facet_wrap(~Method, drop = T) +
+  theme_Publication() +
+  labs(y="Density") +
+  theme(plot.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.border = element_blank()
+        ) +
+  scale_fill_manual(values = c("#fdb462"))
+juv_her_plot
+
+her_plots<- larv_her_plot + juv_her_plot
+```
+
+```{r}
+her_plot_bayesr<- heritability_all |> filter(Method == "BayesR") |>
+  ggplot() +
+  geom_density(aes(Heritability, fill = Method), alpha = 0.8) +
+  geom_vline(aes(xintercept = 0.889959), colour = "#984ea3", size = 1, linetype="dashed") +
+  theme_Publication() +
+  labs(y="Density") +
+  theme(plot.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.border = element_blank()
+        ) +
+  scale_fill_manual(values = c("#984ea3"))
+her_plot_bayesr
 ```
