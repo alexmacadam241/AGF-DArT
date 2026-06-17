@@ -1,0 +1,648 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+##Survival statistics
+```{r}
+set.seed(123)
+library(tidyverse) #for data wrangling
+library(car)       #for regression diagnostics
+library(broom)     #for tidy output
+library(ggfortify) #for model diagnostics
+library(sjPlot)    #for outputs
+library(knitr)     #for kable
+library(effects)   #for partial effects plots
+library(emmeans)   #for estimating marginal means
+library(MASS)      #for glm.nb
+library(MuMIn)     #for AICc
+library(brms)
+library(broom.mixed)
+library(tidybayes)
+library(bayesplot)
+#library(standist)   #for visualizing distributions
+library(rstanarm)
+library(ggeffects)
+library(wesanderson)
+library(rstan)
+library(DHARMa)
+library(ggridges)
+library(easystats)     #framework for stats, modelling and visualisation
+library(patchwork)
+library(car)       #for regression diagnostics
+library(broom)     #for tidy output
+library(broom.mixed)
+library(ggfortify) #for model diagnostics
+#library(sjPlot)    #for outputs
+library(knitr)     #for kable
+source('/Users/alexmacadam/Dropbox/PhD/Chapter5_Outplanting/Chapter 5 Scripts/Chapter-5--Outplanting-AGF-corals/helperFunctions.R')
+```
+
+```{r}
+# PERCENT SURVIVAL
+# Function for summarising survival standard error
+summarySE <- function(data=NULL, measurevar=NULL, groupvars=NULL, na.rm=FALSE,
+                      conf.interval=.95, .drop=TRUE) {
+  require(plyr)
+  
+  # New version of length which can handle NA's: if na.rm==T, don't count them
+  length2 <- function (x, na.rm=FALSE) {
+    if (na.rm==TRUE) sum(!is.na(x))
+    else       length(x)
+  }
+  
+  # This does the summary. For each group's data frame, return a vector with
+  # N, mean, and sd
+  datac <- ddply(data, groupvars, .drop=.drop,
+                 .fun = function(xx, col) {
+                   c(N    = length2(xx[[col]], na.rm=na.rm),
+                     mean = mean   (xx[[col]], na.rm=na.rm),
+                     sd   = sd     (xx[[col]], na.rm=na.rm)
+                   )
+                 },
+                 measurevar
+  )
+  
+  # Commenting this rename mean column line, as not assigning measurevar name properly
+  # # Rename the "mean" column    
+  # datac <- rename(datac, measurevar = mean)
+  
+  datac$se <- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
+  
+  # Confidence interval multiplier for standard error
+  # Calculate t-statistic for confidence interval: 
+  # e.g., if conf.interval is .95, use .975 (above/below), and use df=N-1
+  ciMult <- qt(conf.interval/2 + .5, datac$N-1)
+  datac$ci <- datac$se * ciMult
+  
+  return(datac)
+}
+```
+
+```{r}
+theme_Publication <- function(base_size=14, base_family="arial") {
+      library(grid)
+      library(ggthemes)
+      (theme_foundation(base_size=base_size, base_family=base_family)
+       + theme(plot.title = element_text(face = "bold",
+                                         size = rel(1.2), hjust = 0.5),
+               text = element_text(),
+               panel.background = element_rect(colour = NA),
+               plot.background = element_rect(colour = NA),
+               panel.border = element_rect(colour = NA),
+               axis.title = element_text(face = "bold",size = rel(1)),
+               axis.title.y = element_text(angle=90,vjust =2),
+               axis.title.x = element_text(vjust = -0.2),
+               axis.text = element_text(), 
+               axis.line = element_line(colour="black"),
+               axis.ticks = element_line(),
+               panel.grid.major = element_line(colour="#f0f0f0"),
+               panel.grid.minor = element_blank(),
+               legend.key = element_rect(colour = NA),
+               legend.position = "bottom",
+               legend.direction = "horizontal",
+               legend.key.size= unit(0.2, "cm"),
+               legend.margin = unit(0, "cm"),
+               legend.title = element_text(face="italic"),
+               plot.margin=unit(c(10,5,5,5),"mm"),
+               strip.background=element_rect(colour="#f0f0f0",fill="#f0f0f0"),
+               strip.text = element_text(face="bold")
+          ))
+      
+}
+
+scale_fill_Publication <- function(...){
+      library(scales)
+      discrete_scale("fill","Publication",manual_pal(values = c("#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")), ...)
+
+}
+
+scale_colour_Publication <- function(...){
+      library(scales)
+      discrete_scale("colour","Publication",manual_pal(values = c("#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")), ...)
+
+}
+
+pal <- wes_palette("Zissou1", 5, type = "discrete")
+```
+
+```{r}
+#load data
+fit_larv <- readRDS("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data/aten_parental_cont.rds")
+fit_juv <- readRDS("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data/aten_parental_cont_juv.rds")
+```
+
+```{r}
+## Shared workflow for larvae and juveniles: regional sire/dam contributions
+
+library(tidyverse)
+library(tidybayes)
+
+inv_logit <- function(x) 1 / (1 + exp(-x))
+
+compute_parent_region_summary <- function(fit, dad_name = "Dad", mom_name = "Mom") {
+  # Posterior draws for intercept
+  draws_df <- as_draws_df(fit)
+  b_int    <- as.numeric(dplyr::pull(draws_df, b_Intercept))  # length = n_draws
+  
+  ## ---------- Sires ----------
+  re_sire_arr <- ranef(fit, summary = FALSE)[[dad_name]][, , "Intercept", drop = FALSE]
+  sire_levels <- dimnames(re_sire_arr)[[2]]
+  
+  sire_regions <- tibble(parent = sire_levels) %>%
+    mutate(
+      Region = case_when(
+        grepl("^Davies[0-9]+|^Palms[0-9]+", parent) ~ "Central",
+        grepl("^Jewell|^Parke|^Switzer", parent)    ~ "North",
+        TRUE ~ NA_character_
+      )
+    )
+  
+  re_sire_mat <- re_sire_arr[, , 1, drop = TRUE]
+  if (is.vector(re_sire_mat)) re_sire_mat <- matrix(re_sire_mat, ncol = 1)
+  
+  logit_sire <- sweep(re_sire_mat, 1, b_int, `+`)
+  prob_sire  <- inv_logit(logit_sire)
+  
+  idx_north_sire   <- which(sire_regions$Region == "North")
+  idx_central_sire <- which(sire_regions$Region == "Central")
+  
+  north_mean_draws_sire   <- rowMeans(prob_sire[, idx_north_sire,   drop = FALSE], na.rm = TRUE)
+  central_mean_draws_sire <- rowMeans(prob_sire[, idx_central_sire, drop = FALSE], na.rm = TRUE)
+  
+  x_percent_sire_draws <- (north_mean_draws_sire - central_mean_draws_sire) /
+                          central_mean_draws_sire * 100
+  
+  p_sire <- mean(x_percent_sire_draws > 0, na.rm = TRUE)
+  
+  sire_row <- tibble(
+    Group = "Sires",
+    Mean_percent_difference = mean(x_percent_sire_draws, na.rm = TRUE),
+    Lower_95 = quantile(x_percent_sire_draws, 0.025, na.rm = TRUE),
+    Upper_95 = quantile(x_percent_sire_draws, 0.975, na.rm = TRUE),
+    P_North_greater = p_sire
+  )
+  
+  ## ---------- Dams ----------
+  re_dam_arr <- ranef(fit, summary = FALSE)[[mom_name]][, , "Intercept", drop = FALSE]
+  dam_levels <- dimnames(re_dam_arr)[[2]]
+  
+  dam_regions <- tibble(parent = dam_levels) %>%
+    mutate(
+      Region = case_when(
+        grepl("^Davies[0-9]+|^Palms[0-9]+", parent) ~ "Central",
+        grepl("^Jewell|^Parke|^Switzer", parent)    ~ "North",
+        TRUE ~ NA_character_
+      )
+    )
+  
+  re_dam_mat <- re_dam_arr[, , 1, drop = TRUE]
+  if (is.vector(re_dam_mat)) re_dam_mat <- matrix(re_dam_mat, ncol = 1)
+  
+  logit_dam <- sweep(re_dam_mat, 1, b_int, `+`)
+  prob_dam  <- inv_logit(logit_dam)
+  
+  idx_north_dam   <- which(dam_regions$Region == "North")
+  idx_central_dam <- which(dam_regions$Region == "Central")
+  
+  north_mean_draws_dam   <- rowMeans(prob_dam[, idx_north_dam,   drop = FALSE], na.rm = TRUE)
+  central_mean_draws_dam <- rowMeans(prob_dam[, idx_central_dam, drop = FALSE], na.rm = TRUE)
+  
+  x_percent_dam_draws <- (north_mean_draws_dam - central_mean_draws_dam) /
+                         central_mean_draws_dam * 100
+  
+  p_dam <- mean(x_percent_dam_draws > 0, na.rm = TRUE)
+  
+  dam_row <- tibble(
+    Group = "Dams",
+    Mean_percent_difference = mean(x_percent_dam_draws, na.rm = TRUE),
+    Lower_95 = quantile(x_percent_dam_draws, 0.025, na.rm = TRUE),
+    Upper_95 = quantile(x_percent_dam_draws, 0.975, na.rm = TRUE),
+    P_North_greater = p_dam
+  )
+  
+  bind_rows(sire_row, dam_row)
+}
+
+## ---------- Apply to larvae and juveniles (identical workflow) ----------
+
+larv_parent_region_summary <- compute_parent_region_summary(
+  fit_larv,
+  dad_name = "Dad",
+  mom_name = "Mom"
+)
+
+juv_parent_region_summary <- compute_parent_region_summary(
+  fit_juv,
+  dad_name = "Dad",
+  mom_name = "Mum"
+)
+
+larv_parent_region_summary
+juv_parent_region_summary
+
+```
+
+```{r}
+## Planned contrasts: North vs Central (Sires vs Dams) for larvae & juveniles
+
+logit <- function(p) log(p / (1 - p))
+
+compute_parent_region_contrasts <- function(fit, dad_name = "Dad", mom_name = "Mom") {
+  # Posterior draws for intercept
+  draws_df <- as_draws_df(fit)
+  b_int    <- as.numeric(dplyr::pull(draws_df, b_Intercept))
+
+  ## ---------- Sires ----------
+  re_sire_arr <- ranef(fit, summary = FALSE)[[dad_name]][, , "Intercept", drop = FALSE]
+  sire_levels <- dimnames(re_sire_arr)[[2]]
+
+  sire_regions <- tibble(parent = sire_levels) %>%
+    mutate(
+      Region = case_when(
+        grepl("^Davies[0-9]+|^Palms[0-9]+", parent) ~ "Central",
+        grepl("^Jewell|^Parke|^Switzer", parent)    ~ "North",
+        TRUE ~ NA_character_
+      )
+    )
+
+  re_sire_mat <- re_sire_arr[, , 1, drop = TRUE]
+  if (is.vector(re_sire_mat)) re_sire_mat <- matrix(re_sire_mat, ncol = 1)
+
+  logit_sire <- sweep(re_sire_mat, 1, b_int, `+`)
+  prob_sire  <- inv_logit(logit_sire)
+
+  idx_north_sire   <- which(sire_regions$Region == "North")
+  idx_central_sire <- which(sire_regions$Region == "Central")
+
+  north_mean_draws_sire   <- rowMeans(prob_sire[, idx_north_sire,   drop = FALSE], na.rm = TRUE)
+  central_mean_draws_sire <- rowMeans(prob_sire[, idx_central_sire, drop = FALSE], na.rm = TRUE)
+
+  or_sire <- exp(logit(north_mean_draws_sire) - logit(central_mean_draws_sire))
+
+  ## ---------- Dams ----------
+  re_dam_arr <- ranef(fit, summary = FALSE)[[mom_name]][, , "Intercept", drop = FALSE]
+  dam_levels <- dimnames(re_dam_arr)[[2]]
+
+  dam_regions <- tibble(parent = dam_levels) %>%
+    mutate(
+      Region = case_when(
+        grepl("^Davies[0-9]+|^Palms[0-9]+", parent) ~ "Central",
+        grepl("^Jewell|^Parke|^Switzer", parent)    ~ "North",
+        TRUE ~ NA_character_
+      )
+    )
+
+  re_dam_mat <- re_dam_arr[, , 1, drop = TRUE]
+  if (is.vector(re_dam_mat)) re_dam_mat <- matrix(re_dam_mat, ncol = 1)
+
+  logit_dam <- sweep(re_dam_mat, 1, b_int, `+`)
+  prob_dam  <- inv_logit(logit_dam)
+
+  idx_north_dam   <- which(dam_regions$Region == "North")
+  idx_central_dam <- which(dam_regions$Region == "Central")
+
+  north_mean_draws_dam   <- rowMeans(prob_dam[, idx_north_dam,   drop = FALSE], na.rm = TRUE)
+  central_mean_draws_dam <- rowMeans(prob_dam[, idx_central_dam, drop = FALSE], na.rm = TRUE)
+
+  or_dam <- exp(logit(north_mean_draws_dam) - logit(central_mean_draws_dam))
+
+  ## ---------- Summarise contrasts (North vs Central) ----------
+  parent_or_draws <- tibble(
+    Group = c(rep("Sires", length(or_sire)), rep("Dams", length(or_dam))),
+    or    = c(or_sire, or_dam)
+  )
+
+  parent_or_draws %>%
+    group_by(Group) %>%
+    dplyr::summarise(
+      median_hdci(or),
+      Pl = mean(or < 1),
+      Pg = mean(or > 1),
+      .groups = "drop"
+    )
+}
+
+## Apply to larvae and juveniles (uses the same planned contrast structure)
+larv_contrasts <- compute_parent_region_contrasts(fit_larv, dad_name = "Dad", mom_name = "Mom")
+juv_contrasts  <- compute_parent_region_contrasts(fit_juv,  dad_name = "Dad", mom_name = "Mum")
+
+larv_contrasts
+juv_contrasts
+```
+
+```{r}
+#summarise the contributions of larvae and juveniles
+#summary_larv <- summarySE(ranef_summary_larv, measurevar="mean",
+#                     groupvars=c("Region","group"), na.rm=TRUE)
+
+#summary_juv <- summarySE(ranef_summary_juv, measurevar="mean",
+#                     groupvars=c("Region","group"), na.rm=TRUE)
+```
+
+Larvae plot
+```{r}
+inv_logit <- function(x) 1 / (1 + exp(-x))
+
+# Posterior predicted survival (per parent, per draw) for larvae
+larv_emm_draws <- bind_rows(
+  # Sires (Dad)
+  fit_larv %>%
+    spread_draws(b_Intercept, r_Dad[Parent, Intercept]) %>%
+    mutate(
+      ParentType = "Sires",
+      Region = case_when(
+        grepl("^Davies[0-9]+|^Palms[0-9]+", Parent) ~ "Central",
+        grepl("^Jewell|^Parke|^Switzer", Parent)    ~ "North",
+        TRUE                                        ~ NA_character_
+      ),
+      prob = inv_logit(b_Intercept + r_Dad)
+    ),
+  # Dams (Mom)
+  fit_larv %>%
+    spread_draws(b_Intercept, r_Mom[Parent, Intercept]) %>%
+    mutate(
+      ParentType = "Dams",
+      Region = case_when(
+        grepl("^Davies[0-9]+|^Palms[0-9]+", Parent) ~ "Central",
+        grepl("^Jewell|^Parke|^Switzer", Parent)    ~ "North",
+        TRUE                                        ~ NA_character_
+      ),
+      prob = inv_logit(b_Intercept + r_Mom)
+    )
+) %>%
+  filter(!is.na(Region))
+
+# Per-draw EMM within each ParentType × Region
+larv_group_draws <- larv_emm_draws %>%
+  group_by(.draw, ParentType, Region) %>%
+  dplyr::summarise(emm = mean(prob), .groups = "drop")
+
+# Per-draw grand EMM (across all parents, both sexes, both regions)
+larv_grand_draws <- larv_emm_draws %>%
+  group_by(.draw) %>%
+  dplyr::summarise(grand_emm = mean(prob), .groups = "drop")
+
+# Deviance draws
+larv_dev_draws <- larv_group_draws %>%
+  left_join(larv_grand_draws, by = ".draw") %>%
+  mutate(
+    dev = emm - grand_emm,
+    ParentType = factor(ParentType, levels = c("Dams", "Sires")),
+    Region     = factor(Region, levels = c("Central", "North"))
+  )
+
+# 4 boxplots: grouped by ParentType, coloured by Region (deviance scale)
+larv_dev_plot<-
+ggplot(larv_dev_draws, aes(x = ParentType, y = dev, fill = Region)) +
+  geom_hline(yintercept = 0, linetype = "dashed", linewidth = 0.8) +
+  geom_boxplot(
+    position = position_dodge(width = 0.75),
+    width = 0.6,
+    alpha = 0.8,
+    outlier.shape = NA
+  ) +
+  scale_fill_manual(values = c("Central" = "#3182bd", "North" = "#f21a00")) +
+  theme_minimal() +
+  theme_Publication() +
+  theme(legend.position = "bottom") +
+  labs(
+    x = "Parent",
+    y = "EMM deviance",
+    fill = "Region"
+  )
+larv_dev_plot
+```
+
+```{r}
+# Larvae: LOG-ODDS deviance (group EMM − grand EMM), then boxplot
+
+# Posterior predicted log-odds (per parent, per draw) for larvae
+larv_emm_draws <- bind_rows(
+  # Sires (Dad)
+  fit_larv %>%
+    spread_draws(b_Intercept, r_Dad[Parent, Intercept]) %>%
+    mutate(
+      ParentType = "Sires",
+      Region = case_when(
+        grepl("^Davies[0-9]+|^Palms[0-9]+", Parent) ~ "Central",
+        grepl("^Jewell|^Parke|^Switzer", Parent)    ~ "North",
+        TRUE                                        ~ NA_character_
+      ),
+      logit = b_Intercept + r_Dad
+    ),
+  # Dams (Mom)
+  fit_larv %>%
+    spread_draws(b_Intercept, r_Mom[Parent, Intercept]) %>%
+    mutate(
+      ParentType = "Dams",
+      Region = case_when(
+        grepl("^Davies[0-9]+|^Palms[0-9]+", Parent) ~ "Central",
+        grepl("^Jewell|^Parke|^Switzer", Parent)    ~ "North",
+        TRUE                                        ~ NA_character_
+      ),
+      logit = b_Intercept + r_Mom
+    )
+) %>%
+  filter(!is.na(Region))
+
+# Per-draw EMM within each ParentType × Region (log-odds)
+larv_group_draws <- larv_emm_draws %>%
+  group_by(.draw, ParentType, Region) %>%
+  dplyr::summarise(emm = mean(logit), .groups = "drop")
+
+# Per-draw grand EMM (log-odds) across all parents, both sexes, both regions
+larv_grand_draws <- larv_emm_draws %>%
+  group_by(.draw) %>%
+  dplyr::summarise(grand_emm = mean(logit), .groups = "drop")
+
+# Deviance draws (log-odds)
+larv_dev_draws <- larv_group_draws %>%
+  left_join(larv_grand_draws, by = ".draw") %>%
+  mutate(
+    dev = emm - grand_emm,
+    ParentType = factor(ParentType, levels = c("Dams", "Sires")),
+    Region     = factor(Region, levels = c("Central", "North"))
+  )
+
+# Boxplot: log-odds deviance
+larv_dev_plot2 <-
+  ggplot(larv_dev_draws, aes(x = ParentType, y = dev, fill = Region)) +
+  geom_hline(yintercept = 0, linetype = "dashed", linewidth = 0.8) +
+  geom_boxplot(
+    position = position_dodge(width = 0.75),
+    width = 0.6,
+    alpha = 0.8,
+    outlier.shape = NA
+  ) +
+  scale_fill_manual(values = c("Central" = "#3182bd", "North" = "#f21a00")) +
+  theme_minimal() +
+  theme_Publication() +
+  theme(legend.position = "bottom") +
+  labs(
+    x = "Parent",
+    y = "EMM deviance (log-odds)",
+    fill = "Region"
+  )
+
+larv_dev_plot2
+```
+
+Juvenile plot
+```{r}
+inv_logit <- function(x) 1 / (1 + exp(-x))
+
+# Posterior predicted survival (per parent, per draw) for juveniles
+juv_emm_draws <- bind_rows(
+  # Sires (Dad)
+  fit_juv %>%
+    spread_draws(b_Intercept, r_Dad[Parent, Intercept]) %>%
+    mutate(
+      ParentType = "Sires",
+      Region = case_when(
+        grepl("^Davies[0-9]+|^Palms[0-9]+", Parent) ~ "Central",
+        grepl("^Jewell|^Parke|^Switzer", Parent)    ~ "North",
+        TRUE                                        ~ NA_character_
+      ),
+      prob = inv_logit(b_Intercept + r_Dad)
+    ),
+  # Dams (Mom)
+  fit_juv %>%
+    spread_draws(b_Intercept, r_Mum[Parent, Intercept]) %>%
+    mutate(
+      ParentType = "Dams",
+      Region = case_when(
+        grepl("^Davies[0-9]+|^Palms[0-9]+", Parent) ~ "Central",
+        grepl("^Jewell|^Parke|^Switzer", Parent)    ~ "North",
+        TRUE                                        ~ NA_character_
+      ),
+      prob = inv_logit(b_Intercept + r_Mum)
+    )
+) %>%
+  filter(!is.na(Region))
+
+# Per-draw EMM within each ParentType × Region
+juv_group_draws <- juv_emm_draws %>%
+  group_by(.draw, ParentType, Region) %>%
+  dplyr::summarise(emm = mean(prob), .groups = "drop")
+
+# Per-draw grand EMM (across all parents, both sexes, both regions)
+juv_grand_draws <- juv_emm_draws %>%
+  group_by(.draw) %>%
+  dplyr::summarise(grand_emm = mean(prob), .groups = "drop")
+
+# Deviance draws
+juv_dev_draws <- juv_group_draws %>%
+  left_join(juv_grand_draws, by = ".draw") %>%
+  mutate(
+    dev = emm - grand_emm,
+    ParentType = factor(ParentType, levels = c("Dams", "Sires")),
+    Region     = factor(Region, levels = c("Central", "North"))
+  )
+
+# 4 boxplots: grouped by ParentType, coloured by Region (deviance scale)
+juv_dev_plot<-
+ggplot(juv_dev_draws, aes(x = ParentType, y = dev, fill = Region)) +
+  geom_hline(yintercept = 0, linetype = "dashed", linewidth = 0.8) +
+  geom_boxplot(
+    position = position_dodge(width = 0.75),
+    width = 0.6,
+    alpha = 0.8,
+    outlier.shape = NA
+  ) +
+  scale_fill_manual(values = c("Central" = "#3182bd", "North" = "#f21a00")) +
+  theme_minimal() +
+  theme_Publication() +
+  theme(legend.position = "bottom") +
+  labs(
+    x = "Parent",
+    y = "EMM deviance",
+    fill = "Region"
+  )
+juv_dev_plot
+```
+
+```{r}
+# Juveniles: LOG-ODDS deviance (group EMM − grand EMM), then boxplot
+
+# Posterior predicted log-odds (per parent, per draw) for juveniles
+juv_emm_draws <- bind_rows(
+  # Sires (Dad)
+  fit_juv %>%
+    spread_draws(b_Intercept, r_Dad[Parent, Intercept]) %>%
+    mutate(
+      ParentType = "Sires",
+      Region = case_when(
+        grepl("^Davies[0-9]+|^Palms[0-9]+", Parent) ~ "Central",
+        grepl("^Jewell|^Parke|^Switzer", Parent)    ~ "North",
+        TRUE                                        ~ NA_character_
+      ),
+      logit = b_Intercept + r_Dad
+    ),
+  # Dams (Mum)
+  fit_juv %>%
+    spread_draws(b_Intercept, r_Mum[Parent, Intercept]) %>%
+    mutate(
+      ParentType = "Dams",
+      Region = case_when(
+        grepl("^Davies[0-9]+|^Palms[0-9]+", Parent) ~ "Central",
+        grepl("^Jewell|^Parke|^Switzer", Parent)    ~ "North",
+        TRUE                                        ~ NA_character_
+      ),
+      logit = b_Intercept + r_Mum
+    )
+) %>%
+  filter(!is.na(Region))
+
+# Per-draw EMM within each ParentType × Region (log-odds)
+juv_group_draws <- juv_emm_draws %>%
+  group_by(.draw, ParentType, Region) %>%
+  dplyr::summarise(emm = mean(logit), .groups = "drop")
+
+# Per-draw grand EMM (log-odds) across all parents, both sexes, both regions
+juv_grand_draws <- juv_emm_draws %>%
+  group_by(.draw) %>%
+  dplyr::summarise(grand_emm = mean(logit), .groups = "drop")
+
+# Deviance draws (log-odds)
+juv_dev_draws <- juv_group_draws %>%
+  left_join(juv_grand_draws, by = ".draw") %>%
+  mutate(
+    dev = emm - grand_emm,
+    ParentType = factor(ParentType, levels = c("Dams", "Sires")),
+    Region     = factor(Region, levels = c("Central", "North"))
+  )
+
+# Boxplot: log-odds deviance
+juv_dev_plot2 <-
+  ggplot(juv_dev_draws, aes(x = ParentType, y = dev, fill = Region)) +
+  geom_hline(yintercept = 0, linetype = "dashed", linewidth = 0.8) +
+  geom_boxplot(
+    position = position_dodge(width = 0.75),
+    width = 0.6,
+    alpha = 0.8,
+    outlier.shape = NA
+  ) +
+  scale_fill_manual(values = c("Central" = "#3182bd", "North" = "#f21a00")) +
+  theme_minimal() +
+  theme_Publication() +
+  theme(legend.position = "bottom") +
+  labs(
+    x = "Parent",
+    y = "EMM deviance (log-odds)",
+    fill = "Region"
+  )
+
+juv_dev_plot2
+
+```
+
+```{r}
+a<- larv_dev_plot + juv_dev_plot + plot_annotation(tag_levels = 'A') + plot_layout(guides='collect') &
+  theme(legend.position='bottom')
+a
+
+b<- larv_dev_plot2 + juv_dev_plot2 + plot_annotation(tag_levels = 'A') + plot_layout(guides='collect') &
+  theme(legend.position='bottom')
+b
+```
