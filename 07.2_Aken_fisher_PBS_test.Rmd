@@ -1,0 +1,498 @@
+---
+title: "Untitled"
+output: html_document
+date: "2025-12-07"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+North
+```{bash}
+# Fst between hot and ambient
+vcftools --vcf /Users/alexmacadam/Desktop/pbs/Aten_dart_larvae_filtered.vcf \
+  --weir-fst-pop larvae_hot_north.txt \
+  --weir-fst-pop larvae_amb_north.txt \
+  --out fst_north_hot_vs_amb
+
+# Fst between hot and pre
+vcftools --vcf /Users/alexmacadam/Desktop/pbs/Aten_dart_larvae_filtered.vcf \
+  --weir-fst-pop larvae_hot_north.txt \
+  --weir-fst-pop larvae_pre_north.txt \
+  --out fst_north_hot_vs_pre
+
+# Fst between ambient and pre
+vcftools --vcf /Users/alexmacadam/Desktop/pbs/Aten_dart_larvae_filtered.vcf \
+  --weir-fst-pop larvae_amb_north.txt \
+  --weir-fst-pop larvae_pre_north.txt \
+  --out fst_north_amb_vs_pre
+
+```
+
+```{r}
+library(dplyr)
+library(readr)
+
+# Read Fst files
+fst_hot_amb <- read_tsv("/Users/alexmacadam/Desktop/pbs/fst_north_hot_vs_amb.weir.fst")
+fst_hot_pre <- read_tsv("/Users/alexmacadam/Desktop/pbs/fst_north_hot_vs_pre.weir.fst")
+fst_amb_pre <- read_tsv("/Users/alexmacadam/Desktop/pbs/fst_north_amb_vs_pre.weir.fst")
+
+#pbs_north <- fst_hot_amb %>%
+  # adjust column names to match your file
+#  dplyr::rename(SNP = CHROM, Fst_hot_amb = WEIR_AND_COCKERHAM_FST) %>%
+#  left_join(
+#    fst_hot_pre %>%
+#      dplyr::rename(SNP = CHROM, Fst_hot_pre = WEIR_AND_COCKERHAM_FST),
+#    by = "SNP"
+#  ) %>%
+#  left_join(
+#    fst_amb_pre %>%
+#      dplyr::rename(SNP = CHROM, Fst_amb_pre = WEIR_AND_COCKERHAM_FST),
+#    by = "SNP"
+#  ) %>%
+#  mutate(
+#    # clamp negatives / NAs to 0
+#    Fst_hot_amb = pmax(Fst_hot_amb, 0, na.rm = TRUE),
+#    Fst_hot_pre = pmax(Fst_hot_pre, 0, na.rm = TRUE),
+#    Fst_amb_pre = pmax(Fst_amb_pre, 0, na.rm = TRUE),
+
+#    T_hot_amb = -log(1 - Fst_hot_amb),
+#    T_hot_pre = -log(1 - Fst_hot_pre),
+#    T_amb_pre = -log(1 - Fst_amb_pre),
+
+#    PBS_north_hot = (T_hot_amb + T_hot_pre - T_amb_pre) / 2
+#  )
+
+#pbs_north2<- pbs_north |> dplyr::filter(PBS_north_hot != "0")
+
+##
+library(data.table)
+
+fst_hot_amb <- fread("/Users/alexmacadam/Desktop/pbs/fst_north_hot_vs_amb.weir.fst")
+fst_hot_pre <- fread("/Users/alexmacadam/Desktop/pbs/fst_north_hot_vs_pre.weir.fst")
+fst_amb_pre <- fread("/Users/alexmacadam/Desktop/pbs/fst_north_amb_vs_pre.weir.fst")
+
+# Standardise CHROM col name if needed
+if ("#CHROM" %in% names(fst_hot_amb)) {
+  setnames(fst_hot_amb, "#CHROM", "CHROM")
+  setnames(fst_hot_pre, "#CHROM", "CHROM")
+  setnames(fst_amb_pre, "#CHROM", "CHROM")
+}
+
+# Keep just what we need and rename Fst columns
+fst_hot_amb <- fst_hot_amb[, .(
+  CHROM, POS,
+  Fst_hot_amb = WEIR_AND_COCKERHAM_FST
+)]
+
+fst_hot_pre <- fst_hot_pre[, .(
+  CHROM, POS,
+  Fst_hot_pre = WEIR_AND_COCKERHAM_FST
+)]
+
+fst_amb_pre <- fst_amb_pre[, .(
+  CHROM, POS,
+  Fst_amb_pre = WEIR_AND_COCKERHAM_FST
+)]
+
+pbs_north <- merge(fst_hot_amb, fst_hot_pre,
+                   by = c("CHROM", "POS"), all = FALSE)
+pbs_north <- merge(pbs_north, fst_amb_pre,
+                   by = c("CHROM", "POS"), all = FALSE)
+
+# Clamp negatives / NAs to 0
+pbs_north[is.na(Fst_hot_amb) | Fst_hot_amb < 0, Fst_hot_amb := 0]
+pbs_north[is.na(Fst_hot_pre) | Fst_hot_pre < 0, Fst_hot_pre := 0]
+pbs_north[is.na(Fst_amb_pre) | Fst_amb_pre < 0, Fst_amb_pre := 0]
+
+# Calculate T and PBS in place
+pbs_north[, T_hot_amb := -log(1 - Fst_hot_amb)]
+pbs_north[, T_hot_pre := -log(1 - Fst_hot_pre)]
+pbs_north[, T_amb_pre := -log(1 - Fst_amb_pre)]
+
+pbs_north[, PBS_north_hot := (T_hot_amb + T_hot_pre - T_amb_pre) / 2]
+
+# Optional: drop T columns if you don't need them
+pbs_north[, c("T_hot_amb", "T_hot_pre", "T_amb_pre") := NULL]
+
+# Remove negatives and NAs
+pbs_north[Fst_hot_amb < 0 | is.na(Fst_hot_amb), Fst_hot_amb := 0]
+pbs_north[Fst_hot_pre < 0 | is.na(Fst_hot_pre), Fst_hot_pre := 0]
+pbs_north[Fst_amb_pre < 0 | is.na(Fst_amb_pre), Fst_amb_pre := 0]
+
+# Calculate T distances
+pbs_north[, T_hot_amb := -log(1 - Fst_hot_amb)]
+pbs_north[, T_hot_pre := -log(1 - Fst_hot_pre)]
+pbs_north[, T_amb_pre := -log(1 - Fst_amb_pre)]
+
+# Final PBS
+pbs_north[, PBS_north_hot := (T_hot_amb + T_hot_pre - T_amb_pre) / 2]
+
+# Optional: remove intermediate T columns
+pbs_north[, c("T_hot_amb", "T_hot_pre", "T_amb_pre") := NULL]
+
+pbs_north <- pbs_north |> mutate(region = "north")
+
+pbs_north <- pbs_north |> dplyr::rename(PBS = PBS_north_hot)
+```
+
+Central
+```{bash}
+# Fst between hot and ambient
+vcftools --vcf aten_larvae.vcf \
+  --weir-fst-pop larvae_hot_central.txt \
+  --weir-fst-pop larvae_amb_central.txt \
+  --out fst_central_hot_vs_amb
+
+# Fst between hot and pre
+vcftools --vcf aten_larvae.vcf \
+  --weir-fst-pop larvae_hot_central.txt \
+  --weir-fst-pop larvae_pre_central.txt \
+  --out fst_central_hot_vs_pre
+
+# Fst between ambient and pre
+vcftools --vcf aten_larvae.vcf \
+  --weir-fst-pop larvae_amb_central.txt \
+  --weir-fst-pop larvae_pre_central.txt \
+  --out fst_central_amb_vs_pre
+
+```
+
+```{r}
+library(data.table)
+
+fst_hot_amb <- fread("/Users/alexmacadam/Desktop/pbs/fst_central_hot_vs_amb.weir.fst")
+fst_hot_pre <- fread("/Users/alexmacadam/Desktop/pbs/fst_central_hot_vs_pre.weir.fst")
+fst_amb_pre <- fread("/Users/alexmacadam/Desktop/pbs/fst_central_amb_vs_pre.weir.fst")
+
+# Standardise CHROM col name if needed
+if ("#CHROM" %in% names(fst_hot_amb)) {
+  setnames(fst_hot_amb, "#CHROM", "CHROM")
+  setnames(fst_hot_pre, "#CHROM", "CHROM")
+  setnames(fst_amb_pre, "#CHROM", "CHROM")
+}
+
+# Keep just what we need and rename Fst columns
+fst_hot_amb <- fst_hot_amb[, .(
+  CHROM, POS,
+  Fst_hot_amb = WEIR_AND_COCKERHAM_FST
+)]
+
+fst_hot_pre <- fst_hot_pre[, .(
+  CHROM, POS,
+  Fst_hot_pre = WEIR_AND_COCKERHAM_FST
+)]
+
+fst_amb_pre <- fst_amb_pre[, .(
+  CHROM, POS,
+  Fst_amb_pre = WEIR_AND_COCKERHAM_FST
+)]
+
+pbs_central <- merge(fst_hot_amb, fst_hot_pre,
+                   by = c("CHROM", "POS"), all = FALSE)
+pbs_central <- merge(pbs_central, fst_amb_pre,
+                   by = c("CHROM", "POS"), all = FALSE)
+
+# Clamp negatives / NAs to 0
+pbs_central[is.na(Fst_hot_amb) | Fst_hot_amb < 0, Fst_hot_amb := 0]
+pbs_central[is.na(Fst_hot_pre) | Fst_hot_pre < 0, Fst_hot_pre := 0]
+pbs_central[is.na(Fst_amb_pre) | Fst_amb_pre < 0, Fst_amb_pre := 0]
+
+# Calculate T and PBS in place
+pbs_central[, T_hot_amb := -log(1 - Fst_hot_amb)]
+pbs_central[, T_hot_pre := -log(1 - Fst_hot_pre)]
+pbs_central[, T_amb_pre := -log(1 - Fst_amb_pre)]
+
+pbs_central[, PBS_central_hot := (T_hot_amb + T_hot_pre - T_amb_pre) / 2]
+
+# Optional: drop T columns if you don't need them
+pbs_central[, c("T_hot_amb", "T_hot_pre", "T_amb_pre") := NULL]
+
+# Remove negatives and NAs
+pbs_central[Fst_hot_amb < 0 | is.na(Fst_hot_amb), Fst_hot_amb := 0]
+pbs_central[Fst_hot_pre < 0 | is.na(Fst_hot_pre), Fst_hot_pre := 0]
+pbs_central[Fst_amb_pre < 0 | is.na(Fst_amb_pre), Fst_amb_pre := 0]
+
+# Calculate T distances
+pbs_central[, T_hot_amb := -log(1 - Fst_hot_amb)]
+pbs_central[, T_hot_pre := -log(1 - Fst_hot_pre)]
+pbs_central[, T_amb_pre := -log(1 - Fst_amb_pre)]
+
+# Final PBS
+pbs_central[, PBS_central_hot := (T_hot_amb + T_hot_pre - T_amb_pre) / 2]
+
+# Optional: remove intermediate T columns
+pbs_central[, c("T_hot_amb", "T_hot_pre", "T_amb_pre") := NULL]
+
+pbs_central <- pbs_central |> mutate(region = "central")
+
+pbs_central <- pbs_central |> dplyr::rename(PBS = PBS_central_hot)
+```
+
+Hybrid
+```{bash}
+# Fst between hot and ambient
+vcftools --vcf aten_larvae.vcf \
+  --weir-fst-pop larvae_hot_hybrid.txt \
+  --weir-fst-pop larvae_amb_hybrid.txt \
+  --out fst_hybrid_hot_vs_amb
+
+# Fst between hot and pre
+vcftools --vcf aten_larvae.vcf \
+  --weir-fst-pop larvae_hot_hybrid.txt \
+  --weir-fst-pop larvae_pre_hybrid.txt \
+  --out fst_hybrid_hot_vs_pre
+
+# Fst between ambient and pre
+vcftools --vcf aten_larvae.vcf \
+  --weir-fst-pop larvae_amb_hybrid.txt \
+  --weir-fst-pop larvae_pre_hybrid.txt \
+  --out fst_hybrid_amb_vs_pre
+
+```
+
+```{r}
+fst_hot_amb <- fread("/Users/alexmacadam/Desktop/pbs/fst_hybrid_hot_vs_amb.weir.fst")
+fst_hot_pre <- fread("/Users/alexmacadam/Desktop/pbs/fst_hybrid_hot_vs_pre.weir.fst")
+fst_amb_pre <- fread("/Users/alexmacadam/Desktop/pbs/fst_hybrid_amb_vs_pre.weir.fst")
+
+# Standardise CHROM col name if needed
+if ("#CHROM" %in% names(fst_hot_amb)) {
+  setnames(fst_hot_amb, "#CHROM", "CHROM")
+  setnames(fst_hot_pre, "#CHROM", "CHROM")
+  setnames(fst_amb_pre, "#CHROM", "CHROM")
+}
+
+# Keep just what we need and rename Fst columns
+fst_hot_amb <- fst_hot_amb[, .(
+  CHROM, POS,
+  Fst_hot_amb = WEIR_AND_COCKERHAM_FST
+)]
+
+fst_hot_pre <- fst_hot_pre[, .(
+  CHROM, POS,
+  Fst_hot_pre = WEIR_AND_COCKERHAM_FST
+)]
+
+fst_amb_pre <- fst_amb_pre[, .(
+  CHROM, POS,
+  Fst_amb_pre = WEIR_AND_COCKERHAM_FST
+)]
+
+pbs_hybrid <- merge(fst_hot_amb, fst_hot_pre,
+                   by = c("CHROM", "POS"), all = FALSE)
+pbs_hybrid <- merge(pbs_hybrid, fst_amb_pre,
+                   by = c("CHROM", "POS"), all = FALSE)
+
+# Clamp negatives / NAs to 0
+pbs_hybrid[is.na(Fst_hot_amb) | Fst_hot_amb < 0, Fst_hot_amb := 0]
+pbs_hybrid[is.na(Fst_hot_pre) | Fst_hot_pre < 0, Fst_hot_pre := 0]
+pbs_hybrid[is.na(Fst_amb_pre) | Fst_amb_pre < 0, Fst_amb_pre := 0]
+
+# Calculate T and PBS in place
+pbs_hybrid[, T_hot_amb := -log(1 - Fst_hot_amb)]
+pbs_hybrid[, T_hot_pre := -log(1 - Fst_hot_pre)]
+pbs_hybrid[, T_amb_pre := -log(1 - Fst_amb_pre)]
+
+pbs_hybrid[, PBS_hybrid_hot := (T_hot_amb + T_hot_pre - T_amb_pre) / 2]
+
+# Optional: drop T columns if you don't need them
+pbs_hybrid[, c("T_hot_amb", "T_hot_pre", "T_amb_pre") := NULL]
+
+# Remove negatives and NAs
+pbs_hybrid[Fst_hot_amb < 0 | is.na(Fst_hot_amb), Fst_hot_amb := 0]
+pbs_hybrid[Fst_hot_pre < 0 | is.na(Fst_hot_pre), Fst_hot_pre := 0]
+pbs_hybrid[Fst_amb_pre < 0 | is.na(Fst_amb_pre), Fst_amb_pre := 0]
+
+# Calculate T distances
+pbs_hybrid[, T_hot_amb := -log(1 - Fst_hot_amb)]
+pbs_hybrid[, T_hot_pre := -log(1 - Fst_hot_pre)]
+pbs_hybrid[, T_amb_pre := -log(1 - Fst_amb_pre)]
+
+# Final PBS
+pbs_hybrid[, PBS_hybrid_hot := (T_hot_amb + T_hot_pre - T_amb_pre) / 2]
+
+# Optional: remove intermediate T columns
+pbs_hybrid[, c("T_hot_amb", "T_hot_pre", "T_amb_pre") := NULL]
+
+pbs_hybrid <- pbs_hybrid |> mutate(region = "hybrid")
+
+pbs_hybrid <- pbs_hybrid |> dplyr::rename(PBS = PBS_hybrid_hot)
+```
+
+```{r}
+pbs<- rbind(pbs_central, pbs_hybrid, pbs_north)
+pos<- read.table("/Users/alexmacadam/Desktop/pbs/aten_larvae_pos.txt", header = T)
+
+pbs2<- left_join(pbs, pos, by = c("POS","CHROM"))
+
+#change Inf to relevant values
+finite_max <- max(pbs2$PBS[is.finite(pbs2$PBS)])
+pbs2$PBS[pbs2$PBS == Inf] <- finite_max + 1e-6
+
+#change Inf to relevant values
+finite_min <- min(pbs2$PBS[is.finite(pbs2$PBS)])
+pbs2$PBS[pbs2$PBS == -Inf] <- finite_min - 1e-6
+
+# Compute empirical p-values
+pbs <- pbs2$PBS
+pbs2$pval <- rank(-pbs, ties.method = "first") / length(pbs)
+pbs2$padj <- p.adjust(pbs2$pval, method = "BH")
+```
+
+```{r}
+#top and bottom 1%
+thr_high <- quantile(pbs2$PBS, 0.95, na.rm = TRUE)
+thr_low  <- quantile(pbs2$PBS, 0.05, na.rm = TRUE)
+
+top_hits    <- subset(pbs2, PBS >= thr_high)
+bottom_hits <- subset(pbs2, PBS <= thr_low)
+```
+
+```{r}
+cols<- c("#277da1","#f94144","#43aa8b")
+
+pbs2 |> ggplot() +
+  geom_violin(aes(x = region, y = PBS, fill = region)) +
+    theme_classic() +
+  scale_fill_manual(values=cols) +
+  labs(x="PBS", y="Density") +
+  ylim(-0.05, 0.05)
+
+pbs2 |> 
+  ggplot() +
+  geom_density(aes(PBS, fill = region)) +
+  facet_wrap(~region, nrow = 1) +  
+  theme_classic() +
+  scale_fill_manual(values=cols) +
+  labs(x="PBS", y="Density")
+```
+
+```{r}
+# Perform pairwise Wilcoxon tests by metric × temperature
+pbs2 |> rstatix::pairwise_wilcox_test(PBS ~ region, p.adjust.method = "bonferroni")
+```
+
+```{r}
+library(effsize)
+
+# Make sure PBS is numeric
+pbs2$PBS <- as.numeric(pbs2$PBS)
+
+#north hybrids
+# Keep only north + hybrid
+pbs_nor_hyb <- subset(pbs2, region %in% c("north", "hybrid"))
+
+# Drop NA, NaN, and Inf in PBS explicitly
+pbs_nor_hyb <- pbs_nor_hyb[is.finite(pbs_nor_hyb$PBS), ]
+
+# Make region a factor (after subsetting)
+pbs_nor_hyb$region <- factor(pbs_nor_hyb$region)
+
+# sanity check:
+any(!is.finite(pbs_nor_hyb$PBS))  # should return FALSE
+summary(pbs_nor_hyb$PBS)
+table(pbs_nor_hyb$region)
+
+# Choose reference level if you care (optional)
+pbs_nor_hyb$region <- relevel(pbs_nor_hyb$region, ref = "north")
+
+nor_hyb_wilcox_result <- wilcox.test(PBS ~ region, data = pbs_nor_hyb)
+nor_hyb_wilcox_result
+
+cohen.d(PBS ~ region, data = pbs_nor_hyb)
+cliff.delta(PBS ~ region, data = pbs_nor_hyb)
+```
+
+```{r}
+#central hybrids
+# Keep only central + hybrid
+pbs_cen_hyb <- subset(pbs2, region %in% c("central", "hybrid"))
+
+# Drop NA, NaN, and Inf in PBS explicitly
+pbs_cen_hyb <- pbs_cen_hyb[is.finite(pbs_cen_hyb$PBS), ]
+
+# Make region a factor (after subsetting)
+pbs_cen_hyb$region <- factor(pbs_cen_hyb$region)
+
+# sanity check:
+any(!is.finite(pbs_cen_hyb$PBS))  # should return FALSE
+summary(pbs_cen_hyb$PBS)
+table(pbs_cen_hyb$region)
+
+# Choose reference level if you care (optional)
+pbs_cen_hyb$region <- relevel(pbs_cen_hyb$region, ref = "central")
+
+cen_hyb_wilcox_result <- wilcox.test(PBS ~ region, data = pbs_cen_hyb)
+cen_hyb_wilcox_result
+
+cohen.d(PBS ~ region, data = pbs_cen_hyb)
+cliff.delta(PBS ~ region, data = pbs_cen_hyb)
+```
+
+```{r}
+#central north
+# Keep only north + central
+pbs_cen_nor <- subset(pbs2, region %in% c("central", "north"))
+
+# Drop NA, NaN, and Inf in PBS explicitly
+pbs_cen_nor <- pbs_cen_nor[is.finite(pbs_cen_nor$PBS), ]
+
+# Make region a factor (after subsetting)
+pbs_cen_nor$region <- factor(pbs_cen_nor$region)
+
+# sanity check:
+any(!is.finite(pbs_cen_nor$PBS))  # should return FALSE
+summary(pbs_cen_nor$PBS)
+table(pbs_cen_nor$region)
+
+# Choose reference level if you care (optional)
+pbs_cen_nor$region <- relevel(pbs_cen_nor$region, ref = "central")
+
+cen_nor_wilcox_result <- wilcox.test(PBS ~ region, data = pbs_cen_nor)
+cen_nor_wilcox_result
+
+cohen.d(PBS ~ region, data = pbs_cen_nor)
+cliff.delta(PBS ~ region, data = pbs_cen_nor)
+```
+
+```{r}
+# Remove NA, NaN, Inf
+pbs_clean <- pbs2[is.finite(pbs2$PBS), ]
+
+pbs_means <- pbs_clean %>%
+  group_by(region) %>%
+  dplyr::summarise(mean_PBS = mean(PBS, na.rm = TRUE))
+pbs_means
+
+# Get means as named vectors
+means <- tapply(pbs_clean$PBS, pbs_clean$region, mean, na.rm = TRUE)
+means
+
+# Calculate % differences
+pct_hybrid_vs_north   <- (means["hybrid"]  - means["north"])  / means["north"]  * 100
+pct_hybrid_vs_central <- (means["hybrid"]  - means["central"]) / means["central"] * 100
+pct_north_vs_central  <- (means["north"]   - means["central"]) / means["central"] * 100
+
+pct_hybrid_vs_north
+pct_hybrid_vs_central
+pct_north_vs_central
+```
+
+```{r}
+pbs2$SNP <- gsub(
+  "^(\\d+)\\|F\\|0--(\\d+):([^>]+)>([^>]+)$",
+  "\\1-\\2-\\3/\\4",
+  pbs2$ID
+)
+```
+
+```{r}
+#write.csv(pbs2, "/Users/alexmacadam/Documents/GitHub/AGF-DArT/data/PBS_sig.csv")
+```
