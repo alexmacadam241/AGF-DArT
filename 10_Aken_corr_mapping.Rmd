@@ -111,13 +111,13 @@ NOTE: remove column names from dataframe before this step
 ```
 
 ```{r}
-mh_data <- read_table("/Users/alexmacadam/Documents/GitHub/AGF-DArT/data/ci.ragtag.txt",col_names = c("chr","pos","SNP2","SNP","chr_orig","pos_orig")) %>% 
+mh_data_corr <- read_table("/Users/alexmacadam/Documents/GitHub/AGF-DArT/data/ci.ragtag.txt",col_names = c("chr","pos","SNP2","SNP","chr_orig","pos_orig")) %>% 
   left_join(offsets) %>%
   mutate(abs_pos = pos + offset) %>%
   mutate(chr_type=ifelse(scaffold_num %% 2 == 0,"dark", "light")) %>% 
   mutate(chr_type=ifelse(grepl(chr,pattern="chr"),chr_type,"unplaced"))
 
-mh_data<- left_join(mh_data, ci, by = "SNP")
+mh_data_corr<- left_join(mh_data_corr, ci, by = "SNP")
 ```
 
 ```{r}
@@ -125,7 +125,7 @@ mh_data<- left_join(mh_data, ci, by = "SNP")
 ccols <- hcl.colors(n=3,palette = "Tropic")
 
 #plot manhatten plot
-mh_plot_corr<- mh_data %>% 
+mh_plot_corr<- mh_data_corr %>% 
   ggplot() + 
   geom_point(aes(x=abs_pos/1e+6, y=`-log10(p)`,color=chr_type),size=1,alpha=.6) + 
   scale_x_continuous(label = axis_chr$chr_id, breaks = axis_chr$centre/1e6) +
@@ -144,7 +144,7 @@ mh_plot_corr
 Find genes that SNPs are in
 ```{r}
 #filter highly predictive
-sig_SNPs<- mh_data |> dplyr::filter(pa < 0.05)
+sig_SNPs<- mh_data_corr |> dplyr::filter(pa < 0.05)
 
 #select only the SNP column
 sig_SNPs<- sig_SNPs |> dplyr::select(SNP2)
@@ -232,14 +232,14 @@ gene2kog_aten<- gene2kog_aten |> mutate(
 
 ```{r}
 #significant SNPs R and p values
-sig_SNPs1<- mh_data_corr |> dplyr::select(SNP, r, p)
+sig_SNPs1<- mh_data_corr |> dplyr::select(SNP2, r, p)
 
 #load gene names of flanking genes to SNPs
 snps_flanking_gene_names_m1<- read.table("/Users/alexmacadam/Documents/GitHub/AGF-DArT/data/snps_flanking_gene_names.txt", header = F) |>
   dplyr::rename(SNP = V1, gene = V3)
 
 #find gene names for sig SNPs
-sig_SNPs<- sig_SNPs1 |> left_join(snps_flanking_gene_names_m1, by = "SNP") |>
+sig_SNPs<- sig_SNPs1 |> left_join(snps_flanking_gene_names_m1, by = c("SNP2" = "SNP")) |>
   dplyr::select(gene, r) |>
   na.omit() |>
   distinct(gene, .keep_all=TRUE) |>
@@ -272,11 +272,29 @@ KOG_plot1<- ggplot(data = KOG, aes(x = reorder(term, nseqs), y = nseqs, fill = d
   theme_minimal()
 KOG_plot1
 
+KOG_plot2<- ggplot(data = KOG, aes(x = delta.rank, y = reorder(term, delta.rank), color = nseqs, size = nseqs)) +
+  geom_point() +
+  scale_color_gradient(low = "red", high = "blue") +
+  labs(x = "Delta Rank", y = "KOG Term", color = "N Seqs", size = "N Seqs") +
+  theme_minimal()
+KOG_plot2
+
 KOG_plot<- KOG_plot1 + KOG_plot2
 ```
 
+```{r}
+KOG_corr<- ggplot(data = KOG, aes(x = delta.rank, y = reorder(term, delta.rank))) +
+  geom_bar(stat = "identity") +
+  scale_fill_gradient(low = "red", high = "blue") +
+  labs(x = "Delta Rank", y = "KOG Term") +
+  theme_Publication()
+KOG_corr
+```
+
+
 GO enrichment analysis
 ```{r}
+sig_SNPs1<- sig_SNPs1 |> dplyr::rename(SNP = SNP2)
 #read in sig genes
 #find gene names for sig SNPs
 sig_SNPs_GO<- sig_SNPs1 |> left_join(snps_flanking_gene_names_m1, by = "SNP") |>
@@ -304,13 +322,13 @@ sig_genes3<- sig_genes2 |> dplyr::select(gene, r)
 #genes of only the significant SNPs
 sig_genes4<- sig_genes2 |> dplyr::filter(p < 0.000149431) |> dplyr::select(gene, r)
 #write dataframe
-write.csv(sig_genes4, "/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data/sig_genes_only.csv")
+#write.csv(sig_genes4, "/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data/sig_genes_only.csv")
 ```
 
 ```{r}
 #All genes
 # First, press command-D on mac or ctrl-shift-H in Rstudio and navigate to the directory containing scripts and input files. Then edit, mark and execute the following bits of code, one after another.
-setwd("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data")
+setwd("/Users/alexmacadam/Documents/GitHub/AGF-DArT/data")
 getwd()
 # Edit these to match your data file names: 
 # two columns of comma-separated values: gene id, continuous measure of significance. To perform standard GO enrichment analysis based on Fisher's exact test, use binary measure (0 or 1, i.e., either sgnificant or not).
@@ -325,7 +343,7 @@ source("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data/gom
  
 gomwuStats(input, goDatabase, goAnnotations, goDivision,
 	perlPath="perl", # replace with full path to perl executable if it is not in your system's PATH already
-	largest=0.5,  # a GO category will not be considered if it contains more than this fraction of the total number of genes
+	largest=0.2,  # a GO category will not be considered if it contains more than this fraction of the total number of genes
 	smallest=2,   # a GO category should contain at least this many genes to be considered
 	clusterCutHeight=0.25, # threshold for merging similar (gene-sharing) terms. See README for details.
 #	Alternative="g" # by default the MWU test is two-tailed; specify "g" or "l" of you want to test for "greater" or "less" instead. 
@@ -337,7 +355,7 @@ gomwuStats(input, goDatabase, goAnnotations, goDivision,
 # ----------- Plotting results
 quartz()
 results=gomwuPlot(input,goAnnotations,goDivision,
- 	absValue=-log(0.001,10),  # genes with the measure value exceeding this will be counted as "good genes". This setting is for signed log-pvalues. Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").
+ 	absValue=-log(0.05,10),  # genes with the measure value exceeding this will be counted as "good genes". This setting is for signed log-pvalues. Specify absValue=0.001 if you are doing Fisher's exact test for standard GO enrichment or analyzing a WGCNA module (all non-zero genes = "good genes").
  #	absValue=1, # un-remark this if you are using log2-fold changes
  	level1=0.1, # FDR threshold for plotting. Specify level1=1 to plot all GO categories containing genes exceeding the absValue.
  	level2=0.05, # FDR cutoff to print in regular (not italic) font.
@@ -478,3 +496,9 @@ bestGOs
 #write.csv(mwus,"/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/A_tenuis/04_larvae/alfreq_surv_correlation/corr_version/GO_Aten_mwus.csv")
 #write.csv(bestGOs,"/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/A_tenuis/04_larvae/alfreq_surv_correlation/corr_version/GO_Aten_bestGOs.csv")
 ```
+
+```{r}
+mh_plot_corr
+KOG_plot2
+```
+
