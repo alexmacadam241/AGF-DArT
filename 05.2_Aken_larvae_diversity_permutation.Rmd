@@ -1,0 +1,1862 @@
+---
+title: "05_A.ten_larvae_diversity"
+output: html_document
+date: "2024-04-12"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+alpha= within popualtion, eg heterozygosity, allelic richness, Nucleotide diversity
+beta= between populations, eg, Fst, AMOVA, Jaccard Index, Bray curtis
+
+#calculate alpha and beta diversity for q=0, q=1 and q=2
+#within population diversity, i.e. alpha values:
+#q=0 represents allelic richness index
+#q=1 Shannon information index
+#q=2 heterozygosity index
+#indices are represented by H values. These H values can then be converted to a common scale of effective numbers, D.
+#For between population comparisons of diversity, i.e. beta values:
+#q=0 represents number of allelic types not shared between pops
+#q=1 measures the chance of a type of individuals providing #info on the sampling locality
+#q=2 measured the chance of two random individuals from different localities having different allelic types
+
+##############
+load packages
+```{r}
+set.seed(123)
+library(dartRverse)
+library(tidyverse)
+library(adegenet)
+library(poppr)
+library(hierfstat)
+library(reshape2)
+library(RColorBrewer)
+library(scales)
+library(LEA)
+library(wesanderson)
+library(tibble)
+library(purrr)
+library(ggthemes)
+library(vegan)
+library(rstatix)
+```
+
+Load personal theme
+```{r}
+theme_Publication <- function(base_size=14, base_family="arial") {
+      library(grid)
+      library(ggthemes)
+      (theme_foundation(base_size=base_size, base_family=base_family)
+       + theme(plot.title = element_text(face = "bold",
+                                         size = rel(1.2), hjust = 0.5),
+               text = element_text(),
+               panel.background = element_rect(colour = NA),
+               plot.background = element_rect(colour = NA),
+               panel.border = element_rect(colour = NA),
+               axis.title = element_text(face = "bold",size = rel(1)),
+               axis.title.y = element_text(angle=90,vjust =2),
+               axis.title.x = element_text(vjust = -0.2),
+               axis.text = element_text(), 
+               axis.line = element_line(colour="black"),
+               axis.ticks = element_line(),
+               panel.grid.major = element_line(colour="#f0f0f0"),
+               panel.grid.minor = element_blank(),
+               legend.key = element_rect(colour = NA),
+               legend.position = "bottom",
+               legend.direction = "horizontal",
+               legend.key.size= unit(0.2, "cm"),
+               legend.margin = unit(0, "cm"),
+               legend.title = element_text(face="italic"),
+               plot.margin=unit(c(10,5,5,5),"mm"),
+               strip.background=element_rect(colour="#f0f0f0",fill="#f0f0f0"),
+               strip.text = element_text(face="bold")
+          ))
+      
+}
+
+scale_fill_Publication <- function(...){
+      library(scales)
+      discrete_scale("fill","Publication",manual_pal(values = c("#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")), ...)
+
+}
+
+scale_colour_Publication <- function(...){
+      library(scales)
+      discrete_scale("colour","Publication",manual_pal(values = c("#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")), ...)
+
+}
+
+#pallets
+pd <- position_dodge(width=0.2)
+pal <- wes_palette("Zissou1", 5, type = "discrete")
+scalesize <- function(x) sprintf("%.1f", x)
+pal2 <- c("#386cb0","#7fc97f","#fdb462")
+```
+
+PERCENT SURVIVAL function
+```{r}
+# Function for summarising survival standard error
+summarySE <- function(data=NULL, measurevar=NULL, groupvars=NULL, na.rm=FALSE,
+                      conf.interval=.95, .drop=TRUE) {
+  require(plyr)
+  
+  # New version of length which can handle NA's: if na.rm==T, don't count them
+  length2 <- function (x, na.rm=FALSE) {
+    if (na.rm==TRUE) sum(!is.na(x))
+    else       length(x)
+  }
+  
+  # This does the summary. For each group's data frame, return a vector with
+  # N, mean, and sd
+  datac <- ddply(data, groupvars, .drop=.drop,
+                 .fun = function(xx, col) {
+                   c(N    = length2(xx[[col]], na.rm=na.rm),
+                     mean = mean   (xx[[col]], na.rm=na.rm),
+                     sd   = sd     (xx[[col]], na.rm=na.rm)
+                   )
+                 },
+                 measurevar
+  )
+  
+  # Commenting this rename mean column line, as not assigning measurevar name properly
+  # # Rename the "mean" column    
+  # datac <- rename(datac, measurevar = mean)
+  
+  datac$se <- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
+  
+  # Confidence interval multiplier for standard error
+  # Calculate t-statistic for confidence interval: 
+  # e.g., if conf.interval is .95, use .975 (above/below), and use df=N-1
+  ciMult <- qt(conf.interval/2 + .5, datac$N-1)
+  datac$ci <- datac$se * ciMult
+  
+  return(datac)
+  
+  #Use the function like this:
+  #summarySE(data, measurevar="Value", groupvars=c("Metric1","Metric2"), na.rm=TRUE)
+}
+```
+
+load meta data
+```{r}
+#load metadata
+meta<- read.csv("/Users/alexmacadam/Documents/GitHub/AGF-DArT/Data/aten_metadata.csv") |>
+  filter(lifestage == "larvae")
+
+#remove models and summarise
+sum<- meta |> filter(Temp == "T0", !family %in% c("Mod1","Mod2", "Mod3", "Mod4","Mod5","Mod6")) |>
+  group_by(pop, indcross) |>
+  dplyr::summarise(n = n())
+```
+
+Load data
+```{r}
+#dart data
+ten_larvae <- readRDS("/Users/alexmacadam/Documents/GitHub/AGF-DArT/Data/ten_larvae_filter.RDS")
+ten_larvae <- gl.drop.pop(ten_larvae, pop.list=c('ParxDav_T0', 'ParxDav_Amb', 'ParxDav_Hot'),mono.rm=FALSE,recalc=TRUE)
+```
+
+Remove model samples
+```{r}
+ten_larvae<- gl.drop.ind(ten_larvae, ind.list = c("Mod1-JewBotxDav6Bul-Cn1-T0-rep1","Mod2-Par6BulxPar6Bul-Cn3-T0-rep3","Mod3-Par6BulxDav6Bul-Cn5-T0-rep5","Mod5-Swi6BulxDav6Bul-Cn9-T0-rep1","Mod6-MunPalBulxDav6Bul-Cn13-T0-rep3","Mod1-JewBotxDav6Bul-Cn1-T0-rep2","Mod2-Par6BulxPar6Bul-Cn3-T0-rep4","Mod3-Par6BulxDav6Bul-Cn5-T0-rep6","Mod5-Swi6BulxDav6Bul-Cn9-T0-rep2","Mod6-MunPalBulxDav6Bul-Cn13-T0-rep4","Mod1-JewBotxDav6Bul-Cn1-T0-rep3","Mod2-Par6BulxPar6Bul-Cn3-T0-rep5","Mod4-Swi6BulxSwi6Bul-Cn7-T0-rep1","Mod5-Swi6BulxDav6Bul-Cn9-T0-rep3","Mod6-MunPalBulxDav6Bul-Cn13-T0-rep5","Mod1-JewBotxDav6Bul-Cn1-T0-rep4","Mod2-Par6BulxPar6Bul-Cn3-T0-rep6","Mod4-Swi6BulxSwi6Bul-Cn7-T0-rep2","Mod5-Swi6BulxDav6Bul-Cn9-T0-rep4","Mod6-MunPalBulxDav6Bul-Cn13-T0-rep6","Mod1-JewBotxDav6Bul-Cn1-T0-rep5","Mod3-Par6BulxDav6Bul-Cn5-T0-rep1","Mod4-Swi6BulxSwi6Bul-Cn7-T0-rep3","Mod5-Swi6BulxDav6Bul-Cn9-T0-rep5","Mod1-JewBotxDav6Bul-Cn1-T0-rep6","Mod3-Par6BulxDav6Bul-Cn5-T0-rep2","Mod4-Swi6BulxSwi6Bul-Cn7-T0-rep4","Mod5-Swi6BulxDav6Bul-Cn9-T0-rep6","Mod2-Par6BulxPar6Bul-Cn3-T0-rep1","Mod3-Par6BulxDav6Bul-Cn5-T0-rep3","Mod4-Swi6BulxSwi6Bul-Cn7-T0-rep5","Mod6-MunPalBulxDav6Bul-Cn13-T0-rep1","Mod2-Par6BulxPar6Bul-Cn3-T0-rep2","Mod3-Par6BulxDav6Bul-Cn5-T0-rep4","Mod4-Swi6BulxSwi6Bul-Cn7-T0-rep6","Mod6-MunPalBulxDav6Bul-Cn13-T0-rep2","Mod6-MunPalBulxDav6Bul-Bt87-T3-Amb-rep5","Mod1-JewBotxDav6Bul-Bt122-T3-Amb-rep3","Mod2-Par6BulxPar6Bul-Bt109-T3-Amb-rep5","Mod3-Par6BulxDav6Bul-Bt137-T3-Amb-rep1","Mod4-Swi6BulxSwi6Bul-Bt125-T3-Amb-rep5","Mod6-MunPalBulxDav6Bul-Bt87-T3-Amb-rep6","Mod1-JewBotxDav6Bul-Bt122-T3-Amb-rep4","Mod2-Par6BulxPar6Bul-Bt109-T3-Amb-rep6","Mod3-Par6BulxDav6Bul-Bt137-T3-Amb-rep2","Mod4-Swi6BulxSwi6Bul-Bt125-T3-Amb-rep6","Mod1-JewBotxDav6Bul-Bt122-T3-Amb-rep5","Mod3-Par6BulxDav6Bul-Bt137-T3-Amb-rep3","Mod5-Swi6BulxDav6Bul-Bt122-T3-Amb-rep1","Mod1-JewBotxDav6Bul-Bt122-T3-Amb-rep6","Mod3-Par6BulxDav6Bul-Bt137-T3-Amb-rep4","Mod5-Swi6BulxDav6Bul-Bt122-T3-Amb-rep2","Mod2-Par6BulxPar6Bul-Bt109-T3-Amb-rep1","Mod3-Par6BulxDav6Bul-Bt137-T3-Amb-rep5","Mod4-Swi6BulxSwi6Bul-Bt125-T3-Amb-rep1","Mod5-Swi6BulxDav6Bul-Bt122-T3-Amb-rep3","Mod6-MunPalBulxDav6Bul-Bt87-T3-Amb-rep1","Mod2-Par6BulxPar6Bul-Bt109-T3-Amb-rep2","Mod3-Par6BulxDav6Bul-Bt137-T3-Amb-rep6","Mod4-Swi6BulxSwi6Bul-Bt125-T3-Amb-rep2","Mod5-Swi6BulxDav6Bul-Bt122-T3-Amb-rep4","Mod6-MunPalBulxDav6Bul-Bt87-T3-Amb-rep2","Mod1-JewBotxDav6Bul-Bt122-T3-Amb-rep1","Mod2-Par6BulxPar6Bul-Bt109-T3-Amb-rep3","Mod4-Swi6BulxSwi6Bul-Bt125-T3-Amb-rep3","Mod5-Swi6BulxDav6Bul-Bt122-T3-Amb-rep5","Mod6-MunPalBulxDav6Bul-Bt87-T3-Amb-rep3","Mod1-JewBotxDav6Bul-Bt122-T3-Amb-rep2","Mod2-Par6BulxPar6Bul-Bt109-T3-Amb-rep4","Mod4-Swi6BulxSwi6Bul-Bt125-T3-Amb-rep4","Mod5-Swi6BulxDav6Bul-Bt122-T3-Amb-rep6","Mod6-MunPalBulxDav6Bul-Bt87-T3-Amb-rep4","Mod1-JewBotxDav6Bul-Bt121-T2-Hot-rep1","Mod4-Swi6BulxSwi6Bul-Bt126-T2-Hot-rep3","Mod5-Swi6BulxDav6Bul-Bt19-T2-Hot-rep1","Mod6-MunPalBulxDav6Bul-Bt136-T2-Hot-rep3","Mod1-JewBotxDav6Bul-Bt121-T2-Hot-rep2","Mod4-Swi6BulxSwi6Bul-Bt126-T2-Hot-rep4","Mod5-Swi6BulxDav6Bul-Bt19-T2-Hot-rep2","Mod6-MunPalBulxDav6Bul-Bt136-T2-Hot-rep4","Mod1-JewBotxDav6Bul-Bt121-T2-Hot-rep3","Mod3-Par6BulxDav6Bul-Bt159-T2-Hot-rep1","Mod4-Swi6BulxSwi6Bul-Bt126-T2-Hot-rep5","Mod5-Swi6BulxDav6Bul-Bt19-T2-Hot-rep3","Mod6-MunPalBulxDav6Bul-Bt136-T2-Hot-rep5","Mod1-JewBotxDav6Bul-Bt121-T2-Hot-rep4","Mod3-Par6BulxDav6Bul-Bt159-T2-Hot-rep2","Mod4-Swi6BulxSwi6Bul-Bt126-T2-Hot-rep6","Mod5-Swi6BulxDav6Bul-Bt19-T2-Hot-rep4","Mod6-MunPalBulxDav6Bul-Bt136-T2-Hot-rep6","Mod1-JewBotxDav6Bul-Bt121-T2-Hot-rep5","Mod3-Par6BulxDav6Bul-Bt159-T2-Hot-rep3","Mod5-Swi6BulxDav6Bul-Bt19-T2-Hot-rep5","Mod1-JewBotxDav6Bul-Bt121-T2-Hot-rep6","Mod5-Swi6BulxDav6Bul-Bt19-T2-Hot-rep6","Mod4-Swi6BulxSwi6Bul-Bt126-T2-Hot-rep1","Mod6-MunPalBulxDav6Bul-Bt136-T2-Hot-rep1","Mod4-Swi6BulxSwi6Bul-Bt126-T2-Hot-rep2","Mod6-MunPalBulxDav6Bul-Bt136-T2-Hot-rep2"), mono.rm = FALSE, recalc=TRUE)
+```
+
+Create Pre, Hot and Ambient gl objects
+```{r}
+ten_larvae_Amb<- gl.keep.pop(ten_larvae, pop.list = c('Amb'), as.pop = 'Temp', mono.rm = FALSE, recalc=TRUE)
+ten_larvae_Hot<- gl.keep.pop(ten_larvae, pop.list = c('Hot'), as.pop = 'Temp', mono.rm = FALSE, recalc=TRUE)
+ten_larvae_T0<- gl.keep.pop(ten_larvae, pop.list = c('T0'), as.pop = 'Temp', mono.rm = FALSE, recalc=TRUE)
+```
+
+Skip to line
+#############
+By reef
+50 iterations of diversity metrics
+Pre
+```{r}
+# Check how many samples per population
+table(pop(ten_larvae_T0))
+
+# Define the minimum sample size and number of draws
+min_sample_size_T0 <- 12
+num_draws_T0 <- 50
+
+# Initialize a list to store results for each draw
+subsample_results_T0 <- vector("list", num_draws_T0)
+
+# Perform 50 random draws
+set.seed(123) # For reproducibility
+for (i in 1:num_draws_T0) {
+  subsample_results_T0[[i]] <- gl.subsample.ind(
+    x = ten_larvae_T0,          # The genlight object
+    n = min_sample_size_T0,        # Number of individuals per subsample
+    replace = FALSE,            # Sampling without replacement
+    by.pop = TRUE,              # Subsample by population
+    error.check = TRUE,         # Enable error checking
+    verbose = 0                 # Reduce verbosity
+  )
+}
+
+# Verify subsampled populations for the first draw
+print("Subsampled populations for first draw:")
+print(pop(subsample_results_T0[[1]]))
+
+# Calculate diversity metrics for each draw
+diversity_results_T0 <- lapply(subsample_results_T0, function(subsample) {
+  gl.report.diversity(
+    x = subsample,             # Subsampled genlight object
+    verbose = 0                # Reduce verbosity
+  )
+})
+
+# Initialize an empty list to store dataframes for each iteration
+diversity_summary_list_T0 <- list()
+
+# Loop through each iteration and extract the required data
+for (i in 1:50) {
+  # Extract data for the current iteration
+  iteration_data_T0 <- diversity_results_T0[[i]]
+  
+  # Create a dataframe with the relevant columns
+  df_T0 <- data.frame(
+    #Population = rownames(iteration_data$zero_H_alpha),  # Assuming populations are row names
+    zero_H_alpha = iteration_data_T0$zero_H_alpha,
+    zero_H_alpha_sd = iteration_data_T0$zero_H_alpha_sd,
+    one_H_alpha = iteration_data_T0$one_H_alpha,
+    one_H_alpha_sd = iteration_data_T0$one_H_alpha_sd,
+    two_H_alpha = iteration_data_T0$two_H_alpha,
+    two_H_alpha_sd = iteration_data_T0$two_H_alpha_sd,
+    Iteration = paste0("iteration_", i)
+  )
+  
+  # Append the dataframe to the list
+  diversity_summary_list_T0[[i]] <- df_T0
+}
+
+# Combine all the dataframes into one
+diversity_combined_T0 <- do.call(rbind, diversity_summary_list_T0) |>
+  rownames_to_column(var = "population") |>
+  plyr::mutate(Reefcross = substr(population, 1, 7))|>
+  dplyr::rename(`Allelic Richness` = zero_H_alpha, `AR_sd` = zero_H_alpha_sd, `Shannon Index` = one_H_alpha, SI_sd = one_H_alpha_sd, `He` = two_H_alpha, `He_sd` = two_H_alpha_sd) |>
+  dplyr::select(Iteration, Reefcross, `Allelic Richness`, AR_sd, `Shannon Index`, `SI_sd`, He, `He_sd`)
+
+# Separate the three metrics and pivot them longer
+# Allelic Richness
+long_ar_T0 <- diversity_combined_T0 |>
+  dplyr::select(Iteration, Reefcross, `Allelic Richness`, `AR_sd`) |>
+  pivot_longer(
+    cols = `Allelic Richness`,
+    names_to = "Metric",
+    values_to = "Value"
+  ) |>
+  dplyr::select(Iteration, Metric, Reefcross, Value, AR_sd) |>
+  dplyr::rename(sd = `AR_sd`)
+# Shannon Index
+long_SI_T0 <- diversity_combined_T0 |>
+  dplyr::select(Iteration, Reefcross, `Shannon Index`, `SI_sd`) |>
+  pivot_longer(
+    cols = `Shannon Index`,
+    names_to = "Metric",
+    values_to = "Value"
+  ) |>
+  dplyr::select(Iteration, Metric, Reefcross, Value, SI_sd) |>
+  dplyr::rename(sd = `SI_sd`)
+# He
+long_He_T0 <- diversity_combined_T0 |>
+  dplyr::select(Iteration, Reefcross, `He`, `He_sd`) |>
+  pivot_longer(
+    cols = `He`,
+    names_to = "Metric",
+    values_to = "Value"
+  ) |>
+  dplyr::select(Iteration, Metric, Reefcross, Value, He_sd) |>
+  dplyr::rename(sd = `He_sd`)
+
+# Combine three metrics
+long_diversity_T0<- rbind(long_ar_T0, long_SI_T0, long_He_T0)
+
+# Calculate SE
+long_diversity_T0<- long_diversity_T0 |> mutate(se = sd/sqrt(48))
+
+diversity_sum_T0 <- summarySE(long_diversity_T0, measurevar="Value",
+                     groupvars=c("Metric","Reefcross"), na.rm=TRUE) |>
+  dplyr::select(Metric, Reefcross, mean)
+
+diversity_se_T0 <- summarySE(long_diversity_T0, measurevar="se",
+                     groupvars=c("Metric","Reefcross"), na.rm=TRUE) |>
+  dplyr::rename(SE = mean) |>
+  dplyr::select(SE)
+
+diversity_pre <- cbind(diversity_sum_T0, diversity_se_T0) |>
+  mutate(Temp = "Pre")
+```
+
+Amb
+```{r}
+# Check how many samples per population
+table(pop(ten_larvae_Amb))
+
+# Define the minimum sample size and number of draws
+min_sample_size_Amb <- 12
+num_draws_Amb <- 50
+
+# Initialize a list to store results for each draw
+subsample_results_Amb <- vector("list", num_draws_Amb)
+
+# Perform 50 random draws
+set.seed(123) # For reproducibility
+for (i in 1:num_draws_Amb) {
+  subsample_results_Amb[[i]] <- gl.subsample.ind(
+    x = ten_larvae_Amb,          # The genlight object
+    n = min_sample_size_Amb,        # Number of individuals per subsample
+    replace = FALSE,            # Sampling without replacement
+    by.pop = TRUE,              # Subsample by population
+    error.check = TRUE,         # Enable error checking
+    verbose = 0                 # Reduce verbosity
+  )
+}
+
+# Verify subsampled populations for the first draw
+print("Subsampled populations for first draw:")
+print(pop(subsample_results_Amb[[1]]))
+
+# Calculate diversity metrics for each draw
+diversity_results_Amb <- lapply(subsample_results_Amb, function(subsample) {
+  gl.report.diversity(
+    x = subsample,             # Subsampled genlight object
+    verbose = 0                # Reduce verbosity
+  )
+})
+
+# Initialize an empty list to store dataframes for each iteration
+diversity_summary_list_Amb <- list()
+
+# Loop through each iteration and extract the required data
+for (i in 1:50) {
+  # Extract data for the current iteration
+  iteration_data_Amb <- diversity_results_Amb[[i]]
+  
+  # Create a dataframe with the relevant columns
+  df_Amb <- data.frame(
+    #Population = rownames(iteration_data$zero_H_alpha),  # Assuming populations are row names
+    zero_H_alpha = iteration_data_Amb$zero_H_alpha,
+    zero_H_alpha_sd = iteration_data_Amb$zero_H_alpha_sd,
+    one_H_alpha = iteration_data_Amb$one_H_alpha,
+    one_H_alpha_sd = iteration_data_Amb$one_H_alpha_sd,
+    two_H_alpha = iteration_data_Amb$two_H_alpha,
+    two_H_alpha_sd = iteration_data_Amb$two_H_alpha_sd,
+    Iteration = paste0("iteration_", i)
+  )
+  
+  # Append the dataframe to the list
+  diversity_summary_list_Amb[[i]] <- df_Amb
+}
+
+# Combine all the dataframes into one
+diversity_combined_Amb <- do.call(rbind, diversity_summary_list_Amb) |>
+  rownames_to_column(var = "population") |>
+  plyr::mutate(Reefcross = substr(population, 1, 7))|>
+  dplyr::rename(`Allelic Richness` = zero_H_alpha, `AR_sd` = zero_H_alpha_sd, `Shannon Index` = one_H_alpha, SI_sd = one_H_alpha_sd, `He` = two_H_alpha, `He_sd` = two_H_alpha_sd) |>
+  dplyr::select(Iteration, Reefcross, `Allelic Richness`, AR_sd, `Shannon Index`, `SI_sd`, He, `He_sd`)
+
+# Separate the three metrics and pivot them longer
+# Allelic Richness
+long_ar_Amb <- diversity_combined_Amb |>
+  dplyr::select(Iteration, Reefcross, `Allelic Richness`, `AR_sd`) |>
+  pivot_longer(
+    cols = `Allelic Richness`,
+    names_to = "Metric",
+    values_to = "Value"
+  ) |>
+  dplyr::select(Iteration, Metric, Reefcross, Value, AR_sd) |>
+  dplyr::rename(sd = `AR_sd`)
+# Shannon Index
+long_SI_Amb <- diversity_combined_Amb |>
+  dplyr::select(Iteration, Reefcross, `Shannon Index`, `SI_sd`) |>
+  pivot_longer(
+    cols = `Shannon Index`,
+    names_to = "Metric",
+    values_to = "Value"
+  ) |>
+  dplyr::select(Iteration, Metric, Reefcross, Value, SI_sd) |>
+  dplyr::rename(sd = `SI_sd`)
+# He
+long_He_Amb <- diversity_combined_Amb |>
+  dplyr::select(Iteration, Reefcross, `He`, `He_sd`) |>
+  pivot_longer(
+    cols = `He`,
+    names_to = "Metric",
+    values_to = "Value"
+  ) |>
+  dplyr::select(Iteration, Metric, Reefcross, Value, He_sd) |>
+  dplyr::rename(sd = `He_sd`)
+
+# Combine three metrics
+long_diversity_Amb<- rbind(long_ar_Amb, long_SI_Amb, long_He_Amb)
+
+# Calculate SE
+long_diversity_Amb<- long_diversity_Amb |> mutate(se = sd/sqrt(48))
+
+diversity_sum_Amb <- summarySE(long_diversity_Amb, measurevar="Value",
+                     groupvars=c("Metric","Reefcross"), na.rm=TRUE) |>
+  dplyr::select(Metric, Reefcross, mean)
+
+diversity_se_Amb <- summarySE(long_diversity_Amb, measurevar="se",
+                     groupvars=c("Metric","Reefcross"), na.rm=TRUE) |>
+  dplyr::rename(SE = mean) |>
+  dplyr::select(SE)
+
+diversity_amb <- cbind(diversity_sum_Amb, diversity_se_Amb) |>
+  mutate(Temp = "Amb")
+```
+
+Hot
+```{r}
+# Check how many samples per population
+table(pop(ten_larvae_Hot))
+
+# Define the minimum sample size and number of draws
+min_sample_size_Hot <- 6
+num_draws_Hot <- 50
+
+# Initialize a list to store results for each draw
+subsample_results_Hot <- vector("list", num_draws_Hot)
+
+# Perform 50 random draws
+set.seed(123) # For reproducibility
+for (i in 1:num_draws_Hot) {
+  subsample_results_Hot[[i]] <- gl.subsample.ind(
+    x = ten_larvae_Hot,          # The genlight object
+    n = min_sample_size_Hot,        # Number of individuals per subsample
+    replace = FALSE,            # Sampling without replacement
+    by.pop = TRUE,              # Subsample by population
+    error.check = TRUE,         # Enable error checking
+    verbose = 0                 # Reduce verbosity
+  )
+}
+
+# Verify subsampled populations for the first draw
+print("Subsampled populations for first draw:")
+print(pop(subsample_results_Hot[[1]]))
+
+# Calculate diversity metrics for each draw
+diversity_results_Hot <- lapply(subsample_results_Hot, function(subsample) {
+  gl.report.diversity(
+    x = subsample,             # Subsampled genlight object
+    verbose = 0                # Reduce verbosity
+  )
+})
+
+# Initialize an empty list to store dataframes for each iteration
+diversity_summary_list_Hot <- list()
+
+# Loop through each iteration and extract the required data
+for (i in 1:50) {
+  # Extract data for the current iteration
+  iteration_data_Hot <- diversity_results_Hot[[i]]
+  
+  # Create a dataframe with the relevant columns
+  df_Hot <- data.frame(
+    #Population = rownames(iteration_data$zero_H_alpha),  # Assuming populations are row names
+    zero_H_alpha = iteration_data_Hot$zero_H_alpha,
+    zero_H_alpha_sd = iteration_data_Hot$zero_H_alpha_sd,
+    one_H_alpha = iteration_data_Hot$one_H_alpha,
+    one_H_alpha_sd = iteration_data_Hot$one_H_alpha_sd,
+    two_H_alpha = iteration_data_Hot$two_H_alpha,
+    two_H_alpha_sd = iteration_data_Hot$two_H_alpha_sd,
+    Iteration = paste0("iteration_", i)
+  )
+  
+  # Append the dataframe to the list
+  diversity_summary_list_Hot[[i]] <- df_Hot
+}
+
+# Combine all the dataframes into one
+diversity_combined_Hot <- do.call(rbind, diversity_summary_list_Hot) |>
+  rownames_to_column(var = "population") |>
+  plyr::mutate(Reefcross = substr(population, 1, 7)) |>
+  dplyr::rename(`Allelic Richness` = zero_H_alpha, `AR_sd` = zero_H_alpha_sd, `Shannon Index` = one_H_alpha, SI_sd = one_H_alpha_sd, `He` = two_H_alpha, `He_sd` = two_H_alpha_sd) |>
+  dplyr::select(Iteration, Reefcross, `Allelic Richness`, AR_sd, `Shannon Index`, `SI_sd`, He, `He_sd`)
+
+# Separate the three metrics and pivot them longer
+# Allelic Richness
+long_ar_Hot <- diversity_combined_Hot |>
+  dplyr::select(Iteration, Reefcross, `Allelic Richness`, `AR_sd`) |>
+  pivot_longer(
+    cols = `Allelic Richness`,
+    names_to = "Metric",
+    values_to = "Value"
+  ) |>
+  dplyr::select(Iteration, Metric, Reefcross, Value, AR_sd) |>
+  dplyr::rename(sd = `AR_sd`)
+# Shannon Index
+long_SI_Hot <- diversity_combined_Hot |>
+  dplyr::select(Iteration, Reefcross, `Shannon Index`, `SI_sd`) |>
+  pivot_longer(
+    cols = `Shannon Index`,
+    names_to = "Metric",
+    values_to = "Value"
+  ) |>
+  dplyr::select(Iteration, Metric, Reefcross, Value, SI_sd) |>
+  dplyr::rename(sd = `SI_sd`)
+# He
+long_He_Hot <- diversity_combined_Hot |>
+  dplyr::select(Iteration, Reefcross, `He`, `He_sd`) |>
+  pivot_longer(
+    cols = `He`,
+    names_to = "Metric",
+    values_to = "Value"
+  ) |>
+  dplyr::select(Iteration, Metric, Reefcross, Value, He_sd) |>
+  dplyr::rename(sd = `He_sd`)
+
+# Combine three metrics
+long_diversity_Hot<- rbind(long_ar_Hot, long_SI_Hot, long_He_Hot)
+
+# Calculate SE
+long_diversity_Hot<- long_diversity_Hot |> mutate(se = sd/sqrt(48))
+
+diversity_sum_Hot <- summarySE(long_diversity_Hot, measurevar="Value",
+                     groupvars=c("Metric","Reefcross"), na.rm=TRUE) |>
+  dplyr::select(Metric, Reefcross, mean)
+
+diversity_se_Hot <- summarySE(long_diversity_Hot, measurevar="se",
+                     groupvars=c("Metric","Reefcross"), na.rm=TRUE) |>
+  dplyr::rename(SE = mean) |>
+  dplyr::select(SE)
+
+diversity_hot <- cbind(diversity_sum_Hot, diversity_se_Hot) |>
+  mutate(Temp = "Hot")
+```
+
+```{r}
+#join dataframes and add Region crosses column
+diversity_summary <- rbind(diversity_pre, diversity_amb, diversity_hot) |>
+    mutate(Region = case_when(
+    grepl("DavxDav|PalxPal|PalxDav", Reefcross) ~ "Central",
+    grepl("JewxDav|JewxPal|SwixDav", Reefcross) ~ "Hybrid",
+    grepl("JewxJew|ParxPar|SwixSwi", Reefcross) ~ "North",
+    TRUE ~ NA_character_  # Assign NA if none of the conditions match
+  )) |>
+  mutate(Temp = factor(Temp, levels = c("Pre","Amb","Hot")))
+```
+
+```{r}
+#saveRDS(diversity_summary, file = "/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/A_tenuis/04_larvae/diversity_metrics/diversity_summary.rds")
+diversity_summary <- readRDS("/Users/alexmacadam/Documents/GitHub/AGF-DArT/data/diversity_summary.rds") |>
+  mutate(Metric = factor(Metric, levels = c("Allelic Richness","Shannon Index","He")))
+```
+
+```{r}
+#create diversity by region
+div_sum_sum <- summarySE(diversity_summary, measurevar="mean",
+                     groupvars=c("Temp","Metric","Region"), na.rm=TRUE) |>
+  dplyr::select(Temp, Metric, Region, mean, sd)
+div_sum_se <- summarySE(diversity_summary, measurevar="SE",
+                     groupvars=c("Temp","Metric","Region"), na.rm=TRUE) |>
+  dplyr::rename(SE = mean) |> dplyr::select(Temp, Metric, Region, SE)
+
+diversity_region <- left_join(div_sum_sum, div_sum_se, by = c("Temp", "Metric", "Region"))
+```
+
+```{r}
+# Add temperature labels to each dataset first
+long_diversity_T0 <- long_diversity_T0 %>% mutate(Temp = "Pre")
+long_diversity_Amb <- long_diversity_Amb %>% mutate(Temp = "Amb")
+long_diversity_Hot <- long_diversity_Hot %>% mutate(Temp = "Hot")
+
+# Combine all 50-iteration datasets
+diversity_long_all <- bind_rows(long_diversity_T0, long_diversity_Amb, long_diversity_Hot)
+
+diversity_long_all <- diversity_long_all %>%
+  mutate(Region = case_when(
+    grepl("DavxDav|PalxPal|PalxDav", Reefcross) ~ "Central",
+    grepl("JewxDav|JewxPal|SwixDav", Reefcross) ~ "Hybrid",
+    grepl("JewxJew|ParxPar|SwixSwi", Reefcross) ~ "North",
+    TRUE ~ NA_character_
+  )) %>%
+  filter(!is.na(Region))
+
+# Perform pairwise Wilcoxon tests by metric × temperature
+pairwise_iter_wilcox <- diversity_long_all %>%
+  group_by(Metric, Temp) %>%
+  rstatix::pairwise_wilcox_test(
+    Value ~ Region,
+    p.adjust.method = "BH"
+  )
+
+pairwise_iter_wilcox <- pairwise_iter_wilcox %>%
+  add_significance("p.adj") %>%
+  arrange(Metric, Temp, group1, group2)
+
+# Perform pairwise Wilcoxon tests by metric × Region
+pairwise_iter_wilcox2 <- diversity_long_all %>%
+  group_by(Metric, Region) %>%
+  rstatix::pairwise_wilcox_test(
+    Value ~ Temp,
+    p.adjust.method = "BH"
+  )
+```
+
+```{r}
+div_plot1<- diversity_summary |>
+  ggplot(aes(x=Reefcross, y=mean))+
+  geom_pointrange(aes(ymin=`mean`-`SE`, ymax=`mean`+`SE`, color=Region, group = Temp, shape = Region), position=position_dodge(width=0.8))+
+  facet_grid(Metric~Temp, scales = "free_y") +
+  labs(x='Reef Cross', y="Diversity")+
+  theme_Publication() +
+  theme(legend.key.height = unit(0.3, "cm"),
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(0,0,0,0),
+        plot.margin = margin(rep(0.5,4)),
+        legend.position="right",
+        legend.direction = "vertical",
+        axis.text.x = element_text(angle = 90),
+        axis.text.y = element_text(angle = 90),
+        strip.background = element_rect(fill = "white", color = "black")
+        ) +
+  scale_x_discrete(limits = c("DavxDav","PalxPal","PalxDav","JewxDav","JewxPal","SwixDav", "JewxJew", "ParxPar", "SwixSwi")) +
+    scale_color_manual(values=pal[c(1,3,5)])
+div_plot1
+
+div_plot2<- diversity_summary |>
+  ggplot(aes(x=Reefcross, y=mean))+
+  geom_pointrange(aes(ymin=`mean`-`SE`, ymax=`mean`+`SE`, color=Region, group = Temp, shape = Temp), position=position_dodge(width=0.6))+
+  facet_wrap(~Metric, scales = "free_y") +
+  labs(x='Reef Cross', y="Diversity")+
+  theme_Publication() +
+  theme(legend.key.height = unit(0.3, "cm"),
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(0,0,0,0),
+        plot.margin = margin(rep(0.5,4)),
+        legend.position="right",
+        legend.direction = "vertical",
+        axis.text.x = element_text(angle = 90),
+        axis.text.y = element_text(angle = 90),
+        strip.background = element_rect(fill = "white", color = "black")
+        ) +
+  scale_x_discrete(limits = c("DavxDav","PalxPal","PalxDav","JewxDav","JewxPal","SwixDav", "JewxJew", "ParxPar", "SwixSwi")) +
+    scale_color_manual(values=pal[c(1,3,5)])
+div_plot2
+
+div_plot3<- diversity_region |>
+  ggplot(aes(x=Region, y=mean))+
+  geom_pointrange(aes(ymin=`mean`-`SE`, ymax=`mean`+`SE`, color=Region, group = Temp, shape = Temp), position=position_dodge(width=0.6))+
+  facet_wrap(~Metric, scales = "free_y") +
+  labs(x='Reef Cross', y="Diversity")+
+  theme_Publication() +
+  theme(legend.key.height = unit(0.3, "cm"),
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(0,0,0,0),
+        plot.margin = margin(rep(0.5,4)),
+        legend.position="right",
+        legend.direction = "vertical",
+        axis.text.x = element_text(angle = 90),
+        axis.text.y = element_text(angle = 90),
+        strip.background = element_rect(fill = "white", color = "black")
+        ) +
+  #scale_x_discrete(limits = c("DavxDav","PalxPal","PalxDav","JewxDav","JewxPal","SwixDav", "JewxJew", "ParxPar", "SwixSwi")) +
+    scale_color_manual(values=pal[c(1,3,5)])
+div_plot3
+```
+
+PERMANOVA Pre
+```{r}
+#permanova pre
+div<- diversity_summary |>
+  dplyr::filter(Temp == "Pre") |>
+  dplyr::select(Reefcross, Region, Metric, mean) |>
+  pivot_wider(names_from = Metric, values_from = mean)
+
+matrix<- as.matrix(div[,3:5]) # response variables
+div$regioncross<-as.factor(div$Region)
+
+#manova<-manova(matrix~as.factor(Region), data=div)
+#summary(manova)
+#summary.aov(manova)
+
+dist<-vegdist(matrix, method='bray')
+dist
+
+set.seed(123) #reproducible results
+bird.div<-adonis2(dist~as.factor(regioncross), data=div, permutations=9999)
+bird.div
+
+birdMDS<-metaMDS(matrix, distance="bray", k=2, trymax=35, autotransform=TRUE) ##k is the number of dimensions
+stressplot(birdMDS)
+NMDS1<-birdMDS$points[,1]
+NMDS2<-birdMDS$points[,2]
+bird.plot<- cbind(div,NMDS1, NMDS2)
+# remove duplicated columns
+b.plot <- bird.plot[,!duplicated(colnames(bird.plot))]
+
+p<-ggplot(b.plot, aes(NMDS1, NMDS2, color=regioncross))+
+  geom_point(position=position_jitter(.1), shape=3)+##separates overlapping points
+  stat_ellipse(type='t',size =1)+ ##draws 95% confidence interval ellipses
+  geom_text(data=b.plot,aes(NMDS1, NMDS2, label=regioncross), position=position_jitter(.2))+
+  theme_minimal()
+p
+```
+
+PERMANOVA amb vs hot
+```{r}
+div2<- diversity_summary |>
+  dplyr::filter(Temp %in% c("Amb","Hot")) |>
+  dplyr::select(Reefcross, Region, Temp, Metric, mean) |>
+  pivot_wider(names_from = Metric, values_from = mean)
+
+matrix2<- as.matrix(div2[,4:6]) # response variables
+div2$Temp<-as.factor(div2$Temp)
+div2$regioncross<-as.factor(div2$Region)
+
+#manova<-manova(matrix2~as.factor(Temp) * as.factor(Region), data=div2)
+#summary(manova)
+#summary.aov(manova)
+
+dist<-vegdist(matrix2, method='bray')
+dist
+
+set.seed(123) #reproducible results
+bird.div<-adonis2(dist~as.factor(Temp) * as.factor(regioncross), data=div2, permutations=9999)
+bird.div
+
+birdMDS<-metaMDS(matrix2, distance="bray", k=2, trymax=35, autotransform=TRUE) ##k is the number of dimensions
+stressplot(birdMDS)
+NMDS1<-birdMDS$points[,1]
+NMDS2<-birdMDS$points[,2]
+bird.plot<- cbind(div2,NMDS1, NMDS2)
+# remove duplicated columns
+b.plot <- bird.plot[,!duplicated(colnames(bird.plot))]
+
+b.plot$region_temp <- paste(b.plot$regioncross, b.plot$Temp, sep = "_")
+
+p<-ggplot(b.plot, aes(NMDS1, NMDS2, color=regioncross))+
+  geom_point(position=position_jitter(.1), shape=3)+##separates overlapping points
+  stat_ellipse(type='t',size =1)+ ##draws 95% confidence interval ellipses
+  geom_text(data=b.plot,aes(NMDS1, NMDS2, label=Temp), position=position_jitter(.2))+
+  theme_minimal()
+p
+```
+
+Kruskall wallis comparing deviance of region crosses and temp treatments
+```{r}
+diversity_summary_ah <- diversity_summary |> dplyr::filter(Temp %in% c("Amb","Hot"))
+
+# Subset the data for each region cross
+central_data <- filter(diversity_summary_ah, Region == "Central")
+hybrid_data <- filter(diversity_summary_ah, Region == "Hybrid")
+north_data <- filter(diversity_summary_ah, Region == "North")
+
+# Kruskal-Wallis test for each metric (separately)
+
+# Central region
+# Allelic Richness
+central_allelic_kw <- kruskal.test(mean ~ Temp, data = filter(central_data, Metric == "Allelic Richness"))
+# Shannon Diversity
+central_shannon_kw <- kruskal.test(mean ~ Temp, data = filter(central_data, Metric == "Shannon Index"))
+# Expected Heterozygosity
+central_heterozygosity_kw <- kruskal.test(mean ~ Temp, data = filter(central_data, Metric == "He"))
+
+# Hybrid region
+# Allelic Richness
+hybrid_allelic_kw <- kruskal.test(mean ~ Temp, data = filter(hybrid_data, Metric == "Allelic Richness"))
+# Shannon Diversity
+hybrid_shannon_kw <- kruskal.test(mean ~ Temp, data = filter(hybrid_data, Metric == "Shannon Index"))
+# Expected Heterozygosity
+hybrid_heterozygosity_kw <- kruskal.test(mean ~ Temp, data = filter(hybrid_data, Metric == "He"))
+
+# Northern region
+# Allelic Richness
+north_allelic_kw <- kruskal.test(mean ~ Temp, data = filter(north_data, Metric == "Allelic Richness"))
+# Shannon Diversity
+north_shannon_kw <- kruskal.test(mean ~ Temp, data = filter(north_data, Metric == "Shannon Index"))
+# Expected Heterozygosity
+north_heterozygosity_kw <- kruskal.test(mean ~ Temp, data = filter(north_data, Metric == "He"))
+
+# Print the results for each test
+central_allelic_kw
+central_shannon_kw
+central_heterozygosity_kw
+
+hybrid_allelic_kw
+hybrid_shannon_kw
+hybrid_heterozygosity_kw
+
+north_allelic_kw
+north_shannon_kw
+north_heterozygosity_kw
+```
+
+```{r}
+# Region cross differences between Ambient and Hot
+
+# Subset the data for each region cross
+central_data <- filter(diversity_region, Region == "Central")
+hybrid_data <- filter(diversity_region, Region == "Hybrid")
+north_data <- filter(diversity_region, Region == "North")
+
+# Reshape data to be wider
+# Central
+central_data2 <- central_data %>%
+  pivot_wider(
+    names_from = Temp,                   # Separate columns for 'Amb' and 'Hot'
+    values_from = c(mean, sd, SE),           # Fill mean and SE values
+    names_glue = "{Temp}_{.value}"       # Create descriptive column names
+  )
+# Hybrid
+hybrid_data2 <- hybrid_data %>%
+  pivot_wider(
+    names_from = Temp,                   # Separate columns for 'Amb' and 'Hot'
+    values_from = c(mean, sd, SE),           # Fill mean and SE values
+    names_glue = "{Temp}_{.value}"       # Create descriptive column names
+  )
+# North
+north_data2 <- north_data %>%
+  pivot_wider(
+    names_from = Temp,                   # Separate columns for 'Amb' and 'Hot'
+    values_from = c(mean, sd, SE),           # Fill mean and SE values
+    names_glue = "{Temp}_{.value}"       # Create descriptive column names
+  )
+
+# Make a difference column
+# Central
+central_data2 <- central_data2 |>
+  mutate(mean_dif = Amb_mean - Hot_mean)
+# Hybrid
+hybrid_data2 <- hybrid_data2 |>
+  mutate(mean_dif = Amb_mean - Hot_mean)
+# North
+north_data2 <- north_data2 |>
+  mutate(mean_dif = Amb_mean - Hot_mean)
+
+# Bind together
+div_data <- rbind(central_data2, hybrid_data2, north_data2)
+
+# Recalculate the SE
+div_data$se_dif <- sqrt((div_data$Amb_sd^2 / 3) + (div_data$Hot_sd^2 / 3))
+```
+
+Work out permutation for each timepoint
+```{r}
+#pemutation test
+perm_region_test <- function(data, regionA, regionB, metric="He", nperm=9999) {
+
+  # Extract only the metric you are testing
+  dat <- data %>%
+    filter(Metric == metric, Region %in% c(regionA, regionB)) %>%
+    select(Iteration2, Region, Value)
+
+  # Reshape wide to pair values within iteration
+  paired <- dat %>%
+    tidyr::pivot_wider(names_from = Region, values_from = Value)
+
+  # Convert to numeric to avoid subtraction errors
+  paired[[regionA]] <- as.numeric(paired[[regionA]])
+  paired[[regionB]] <- as.numeric(paired[[regionB]])
+
+  # Observed difference in means
+  obs_diff <- mean(paired[[regionA]] - paired[[regionB]])
+
+  # Permutation null distribution
+  null_dist <- numeric(nperm)
+
+  set.seed(123)
+  for (i in 1:nperm) {
+    shuffled <- paired
+    flip <- sample(c(TRUE, FALSE), nrow(paired), replace = TRUE)
+
+    shuffled[[regionA]][flip] <- paired[[regionB]][flip]
+    shuffled[[regionB]][flip] <- paired[[regionA]][flip]
+
+    null_dist[i] <- mean(shuffled[[regionA]] - shuffled[[regionB]])
+  }
+
+  # Two-sided p-value
+  p_val <- mean(abs(null_dist) >= abs(obs_diff))
+
+  return(list(
+    regionA = regionA,
+    regionB = regionB,
+    obs_diff = obs_diff,
+    p_value = p_val
+  ))
+}
+```
+
+T0
+```{r}
+#create region column
+long_diversity_T0 <- long_diversity_T0 %>%
+  dplyr::mutate(
+    Region = dplyr::case_when(
+      Reefcross %in% c("PalxPal", "PalxDav", "DavxDav") ~ "Central",
+      Reefcross %in% c("SwixSwi", "ParxPar", "JewxJew") ~ "North",
+      Reefcross %in% c("JewxDav", "JewxPal", "SwixDav") ~ "Hybrid",
+      TRUE ~ NA_character_
+    )
+  )
+
+#add coolumn with proper iteration number
+pattern <- c(".1", ".1", ".1", ".2", ".2", ".3", ".2", ".3", ".3")
+vec150 <- rep(pattern, times = 150)
+long_diversity_T0 <- long_diversity_T0 %>%
+  mutate(Pattern = vec150)
+long_diversity_T0$Iteration2 <- paste(long_diversity_T0$Iteration, long_diversity_T0$Pattern, sep = "")
+
+#save results
+test_CH_T0 <- perm_region_test(long_diversity_T0, "Central", "Hybrid")
+test_CN_T0 <- perm_region_test(long_diversity_T0, "Central", "North")
+test_NH_T0 <- perm_region_test(long_diversity_T0, "North", "Hybrid")
+perm_results_T0 <- dplyr::bind_rows(test_CH_T0, test_CN_T0, test_NH_T0)
+
+####
+#He
+He_perm<- long_diversity_T0|> filter(Metric == "He")
+test_CH_T0_He <- perm_region_test(He_perm, "Central", "Hybrid")
+test_CN_T0_He <- perm_region_test(He_perm, "Central", "North")
+test_NH_T0_He <- perm_region_test(He_perm, "North", "Hybrid")
+perm_results_T0_He <- dplyr::bind_rows(test_CH_T0_He, test_CN_T0_He, test_NH_T0_He) |>  mutate(Metric = "Pre He")
+
+#AR
+AR_perm<- long_diversity_T0|> filter(Metric == "Allelic Richness")
+test_CH_T0_AR <- perm_region_test(AR_perm, "Central", "Hybrid")
+test_CN_T0_AR <- perm_region_test(AR_perm, "Central", "North")
+test_NH_T0_AR <- perm_region_test(AR_perm, "North", "Hybrid")
+perm_results_T0_AR <- dplyr::bind_rows(test_CH_T0_AR, test_CN_T0_AR, test_NH_T0_AR) |>  mutate(Metric = "Pre Allelic Richness")
+
+#SI
+SI_perm<- long_diversity_T0|> filter(Metric == "Shannon Index")
+test_CH_T0_SI <- perm_region_test(SI_perm, "Central", "Hybrid")
+test_CN_T0_SI <- perm_region_test(SI_perm, "Central", "North")
+test_NH_T0_SI <- perm_region_test(SI_perm, "North", "Hybrid")
+perm_results_T0_SI <- dplyr::bind_rows(test_CH_T0_SI, test_CN_T0_SI, test_NH_T0_SI) |>  mutate(Metric = "Pre Shannon Index")
+```
+
+Amb
+```{r}
+#create region column
+long_diversity_Amb <- long_diversity_Amb %>%
+  dplyr::mutate(
+    Region = dplyr::case_when(
+      Reefcross %in% c("PalxPal", "PalxDav", "DavxDav") ~ "Central",
+      Reefcross %in% c("SwixSwi", "ParxPar", "JewxJew") ~ "North",
+      Reefcross %in% c("JewxDav", "JewxPal", "SwixDav") ~ "Hybrid",
+      TRUE ~ NA_character_
+    )
+  )
+
+#add coolumn with proper iteration number
+pattern <- c(".1", ".1", ".1", ".2", ".2", ".3", ".2", ".3", ".3")
+vec150 <- rep(pattern, times = 150)
+long_diversity_Amb <- long_diversity_Amb %>%
+  mutate(Pattern = vec150)
+long_diversity_Amb$Iteration2 <- paste(long_diversity_Amb$Iteration, long_diversity_Amb$Pattern, sep = "")
+
+#save results
+test_CH_Amb <- perm_region_test(long_diversity_Amb, "Central", "Hybrid")
+test_CN_Amb <- perm_region_test(long_diversity_Amb, "Central", "North")
+test_NH_Amb <- perm_region_test(long_diversity_Amb, "North", "Hybrid")
+perm_results_Amb <- dplyr::bind_rows(test_CH_Amb, test_CN_Amb, test_NH_Amb)
+
+####
+#He
+He_perm<- long_diversity_Amb|> filter(Metric == "He")
+test_CH_Amb_He <- perm_region_test(He_perm, "Central", "Hybrid")
+test_CN_Amb_He <- perm_region_test(He_perm, "Central", "North")
+test_NH_Amb_He <- perm_region_test(He_perm, "North", "Hybrid")
+perm_results_Amb_He <- dplyr::bind_rows(test_CH_Amb_He, test_CN_Amb_He, test_NH_Amb_He) |>  mutate(Metric = "Amb Allelic Richness")
+
+#AR
+AR_perm<- long_diversity_Amb|> filter(Metric == "Allelic Richness")
+test_CH_Amb_AR <- perm_region_test(AR_perm, "Central", "Hybrid")
+test_CN_Amb_AR <- perm_region_test(AR_perm, "Central", "North")
+test_NH_Amb_AR <- perm_region_test(AR_perm, "North", "Hybrid")
+perm_results_Amb_AR <- dplyr::bind_rows(test_CH_Amb_AR, test_CN_Amb_AR, test_NH_Amb_AR) |>  mutate(Metric = "Amb Allelic Richness")
+
+#SI
+SI_perm<- long_diversity_Amb|> filter(Metric == "Shannon Index")
+test_CH_Amb_SI <- perm_region_test(SI_perm, "Central", "Hybrid")
+test_CN_Amb_SI <- perm_region_test(SI_perm, "Central", "North")
+test_NH_Amb_SI <- perm_region_test(SI_perm, "North", "Hybrid")
+perm_results_Amb_SI <- dplyr::bind_rows(test_CH_Amb_SI, test_CN_Amb_SI, test_NH_Amb_SI)|>  mutate(Metric = "Amb Shannon Index")
+```
+
+Hot
+```{r}
+#create region column
+long_diversity_Hot <- long_diversity_Hot %>%
+  dplyr::mutate(
+    Region = dplyr::case_when(
+      Reefcross %in% c("PalxPal", "PalxDav", "DavxDav") ~ "Central",
+      Reefcross %in% c("SwixSwi", "ParxPar", "JewxJew") ~ "North",
+      Reefcross %in% c("JewxDav", "JewxPal", "SwixDav") ~ "Hybrid",
+      TRUE ~ NA_character_
+    )
+  )
+
+#add coolumn with proper iteration number
+pattern <- c(".1", ".1", ".1", ".2", ".2", ".3", ".2", ".3", ".3")
+vec150 <- rep(pattern, times = 150)
+long_diversity_Hot <- long_diversity_Hot %>%
+  mutate(Pattern = vec150)
+long_diversity_Hot$Iteration2 <- paste(long_diversity_Hot$Iteration, long_diversity_Hot$Pattern, sep = "")
+
+#save results
+test_CH_Hot <- perm_region_test(long_diversity_Hot, "Central", "Hybrid")
+test_CN_Hot <- perm_region_test(long_diversity_Hot, "Central", "North")
+test_NH_Hot <- perm_region_test(long_diversity_Hot, "North", "Hybrid")
+perm_results_Hot <- dplyr::bind_rows(test_CH_Hot, test_CN_Hot, test_NH_Hot)
+
+####
+#He
+He_perm<- long_diversity_Hot|> filter(Metric == "He")
+test_CH_Hot_He <- perm_region_test(He_perm, "Central", "Hybrid")
+test_CN_Hot_He <- perm_region_test(He_perm, "Central", "North")
+test_NH_Hot_He <- perm_region_test(He_perm, "North", "Hybrid")
+perm_results_Hot_He <- dplyr::bind_rows(test_CH_Hot_He, test_CN_Hot_He, test_NH_Hot_He) |>  mutate(Metric = "Hot He")
+
+#AR
+AR_perm<- long_diversity_Hot|> filter(Metric == "Allelic Richness")
+test_CH_Hot_AR <- perm_region_test(AR_perm, "Central", "Hybrid")
+test_CN_Hot_AR <- perm_region_test(AR_perm, "Central", "North")
+test_NH_Hot_AR <- perm_region_test(AR_perm, "North", "Hybrid")
+perm_results_Hot_AR <- dplyr::bind_rows(test_CH_Hot_AR, test_CN_Hot_AR, test_NH_Hot_AR) |>  mutate(Metric = "Hot Allelic Richness")
+
+#SI
+SI_perm<- long_diversity_Hot|> filter(Metric == "Shannon Index")
+test_CH_Hot_SI <- perm_region_test(SI_perm, "Central", "Hybrid")
+test_CN_Hot_SI <- perm_region_test(SI_perm, "Central", "North")
+test_NH_Hot_SI <- perm_region_test(SI_perm, "North", "Hybrid")
+perm_results_Hot_SI <- dplyr::bind_rows(test_CH_Hot_SI, test_CN_Hot_SI, test_NH_Hot_SI) |>  mutate(Metric = "Hot Shannon Index")
+```
+
+```{r}
+#combined results
+a<- rbind(perm_results_T0_He, perm_results_T0_AR, perm_results_T0_SI, perm_results_Amb_He, perm_results_Amb_AR, perm_results_Amb_SI, perm_results_Hot_SI, perm_results_Hot_SI, perm_results_Hot_SI)
+```
+
+#################
+#################
+Population level
+```{r}
+popNames(ten_larvae)
+ten_larvae2<- gl.merge.pop(ten_larvae, old = c('DavxDav_Amb','PalxPal_Amb','PalxDav_Amb'), new = 'Central_Amb')
+ten_larvae2<- gl.merge.pop(ten_larvae2, old = c('DavxDav_Hot','PalxPal_Hot','PalxDav_Hot'), new = 'Central_Hot')
+ten_larvae2<- gl.merge.pop(ten_larvae2, old = c('DavxDav_T0','PalxPal_T0','PalxDav_T0'), new = 'Central_T0')
+ten_larvae2<- gl.merge.pop(ten_larvae2, old = c('SwixSwi_Amb','ParxPar_Amb','JewxJew_Amb'), new = 'North_Amb')
+ten_larvae2<- gl.merge.pop(ten_larvae2, old = c('SwixSwi_Hot','ParxPar_Hot','JewxJew_Hot'), new = 'North_Hot')
+ten_larvae2<- gl.merge.pop(ten_larvae2, old = c('SwixSwi_T0','ParxPar_T0','JewxJew_T0'), new = 'North_T0')
+ten_larvae2<- gl.merge.pop(ten_larvae2, old = c('SwixDav_Amb','JewxDav_Amb','JewxPal_Amb'), new = 'Hybrid_Amb')
+ten_larvae2<- gl.merge.pop(ten_larvae2, old = c('SwixDav_Hot','JewxDav_Hot','JewxPal_Hot'), new = 'Hybrid_Hot')
+ten_larvae2<- gl.merge.pop(ten_larvae2, old = c('SwixDav_T0','JewxDav_T0','JewxPal_T0'), new = 'Hybrid_T0')
+#ten_larvae<- gl.drop.pop(ten_larvae2, pop.list = c("ParxDav_Amb", "ParxDav_Hot", "ParxDav_T0"))
+ten_larvae<- ten_larvae2
+popNames(ten_larvae)
+```
+
+Create Pre, Hot and Ambient gl objects
+```{r}
+ten_larvae_Amb<- gl.keep.pop(ten_larvae, pop.list = c('Amb'), as.pop = 'Temp', mono.rm = FALSE, recalc=TRUE)
+ten_larvae_Hot<- gl.keep.pop(ten_larvae, pop.list = c('Hot'), as.pop = 'Temp', mono.rm = FALSE, recalc=TRUE)
+ten_larvae_T0<- gl.keep.pop(ten_larvae, pop.list = c('T0'), as.pop = 'Temp', mono.rm = FALSE, recalc=TRUE)
+```
+
+#############
+By region
+50 iterations of diversity metrics
+Pre
+```{r}
+# Check how many samples per population
+table(pop(ten_larvae_T0))
+
+# Define the minimum sample size and number of draws
+min_sample_size_T0 <- 48
+num_draws_T0 <- 50
+
+# Initialize a list to store results for each draw
+subsample_results_T0 <- vector("list", num_draws_T0)
+
+# Perform 50 random draws
+set.seed(123) # For reproducibility
+for (i in 1:num_draws_T0) {
+  subsample_results_T0[[i]] <- gl.subsample.ind(
+    x = ten_larvae_T0,          # The genlight object
+    n = min_sample_size_T0,        # Number of individuals per subsample
+    replace = FALSE,            # Sampling without replacement
+    by.pop = TRUE,              # Subsample by population
+    error.check = TRUE,         # Enable error checking
+    verbose = 0                 # Reduce verbosity
+  )
+}
+
+# Verify subsampled populations for the first draw
+print("Subsampled populations for first draw:")
+print(pop(subsample_results_T0[[1]]))
+
+# Calculate diversity metrics for each draw
+diversity_results_T0 <- lapply(subsample_results_T0, function(subsample) {
+  gl.report.diversity(
+    x = subsample,             # Subsampled genlight object
+    verbose = 0                # Reduce verbosity
+  )
+})
+
+# Initialize an empty list to store dataframes for each iteration
+diversity_summary_list_T0 <- list()
+
+# Loop through each iteration and extract the required data
+for (i in 1:50) {
+  # Extract data for the current iteration
+  iteration_data_T0 <- diversity_results_T0[[i]]
+  
+  # Create a dataframe with the relevant columns
+  df_T0 <- data.frame(
+    #Population = rownames(iteration_data$zero_H_alpha),  # Assuming populations are row names
+    zero_H_alpha = iteration_data_T0$zero_H_alpha,
+    zero_H_alpha_sd = iteration_data_T0$zero_H_alpha_sd,
+    one_H_alpha = iteration_data_T0$one_H_alpha,
+    one_H_alpha_sd = iteration_data_T0$one_H_alpha_sd,
+    two_H_alpha = iteration_data_T0$two_H_alpha,
+    two_H_alpha_sd = iteration_data_T0$two_H_alpha_sd,
+    Iteration = paste0("iteration_", i)
+  )
+  
+  # Append the dataframe to the list
+  diversity_summary_list_T0[[i]] <- df_T0
+}
+
+# Combine all the dataframes into one
+diversity_combined_T0 <- do.call(rbind, diversity_summary_list_T0) |>
+  rownames_to_column(var = "Population") |>
+  mutate(Region = case_when(
+    grepl("Central", Population) ~ "Central",
+    grepl("Hybrid", Population) ~ "Hybrid",
+    grepl("North", Population) ~ "North",
+    TRUE ~ NA_character_  # Assign NA if none of the conditions match
+  )) |>
+  dplyr::rename(`Allelic Richness` = zero_H_alpha, `AR_sd` = zero_H_alpha_sd, `Shannon Index` = one_H_alpha, SI_sd = one_H_alpha_sd, `He` = two_H_alpha, `He_sd` = two_H_alpha_sd) |>
+  dplyr::select(Iteration, Region, `Allelic Richness`, AR_sd, `Shannon Index`, `SI_sd`, He, `He_sd`)
+
+# Separate the three metrics and pivot them longer
+# Allelic Richness
+long_ar_T0 <- diversity_combined_T0 |>
+  dplyr::select(Iteration, Region, `Allelic Richness`, `AR_sd`) |>
+  pivot_longer(
+    cols = `Allelic Richness`,
+    names_to = "Metric",
+    values_to = "Value"
+  ) |>
+  dplyr::select(Iteration, Metric, Region, Value, AR_sd) |>
+  dplyr::rename(sd = `AR_sd`)
+# Shannon Index
+long_SI_T0 <- diversity_combined_T0 |>
+  dplyr::select(Iteration, Region, `Shannon Index`, `SI_sd`) |>
+  pivot_longer(
+    cols = `Shannon Index`,
+    names_to = "Metric",
+    values_to = "Value"
+  ) |>
+  dplyr::select(Iteration, Metric, Region, Value, SI_sd) |>
+  dplyr::rename(sd = `SI_sd`)
+# He
+long_He_T0 <- diversity_combined_T0 |>
+  dplyr::select(Iteration, Region, `He`, `He_sd`) |>
+  pivot_longer(
+    cols = `He`,
+    names_to = "Metric",
+    values_to = "Value"
+  ) |>
+  dplyr::select(Iteration, Metric, Region, Value, He_sd) |>
+  dplyr::rename(sd = `He_sd`)
+
+# Combine three metrics
+long_diversity_T0<- rbind(long_ar_T0, long_SI_T0, long_He_T0)
+
+# Calculate SE
+long_diversity_T0<- long_diversity_T0 |> mutate(se = sd/sqrt(48))
+
+diversity_sum_T0 <- summarySE(long_diversity_T0, measurevar="Value",
+                     groupvars=c("Metric","Region"), na.rm=TRUE) |>
+  dplyr::select(Metric, Region, mean)
+
+diversity_se_T0 <- summarySE(long_diversity_T0, measurevar="se",
+                     groupvars=c("Metric","Region"), na.rm=TRUE) |>
+  dplyr::rename(SE = mean) |>
+  dplyr::select(SE)
+
+diversity_pre <- cbind(diversity_sum_T0, diversity_se_T0) |>
+  mutate(Temp = "Pre")
+```
+
+Amb
+```{r}
+# Check how many samples per population
+table(pop(ten_larvae_Amb))
+
+# Define the minimum sample size and number of draws
+min_sample_size_Amb <- 48
+num_draws_Amb <- 50
+
+# Initialize a list to store results for each draw
+subsample_results_Amb <- vector("list", num_draws_Amb)
+
+# Perform 50 random draws
+set.seed(123) # For reproducibility
+for (i in 1:num_draws_Amb) {
+  subsample_results_Amb[[i]] <- gl.subsample.ind(
+    x = ten_larvae_Amb,          # The genlight object
+    n = min_sample_size_Amb,        # Number of individuals per subsample
+    replace = FALSE,            # Sampling without replacement
+    by.pop = TRUE,              # Subsample by population
+    error.check = TRUE,         # Enable error checking
+    verbose = 0                 # Reduce verbosity
+  )
+}
+
+# Verify subsampled populations for the first draw
+print("Subsampled populations for first draw:")
+print(pop(subsample_results_Amb[[1]]))
+
+# Calculate diversity metrics for each draw
+diversity_results_Amb <- lapply(subsample_results_Amb, function(subsample) {
+  gl.report.diversity(
+    x = subsample,             # Subsampled genlight object
+    verbose = 0                # Reduce verbosity
+  )
+})
+
+# Initialize an empty list to store dataframes for each iteration
+diversity_summary_list_Amb <- list()
+
+# Loop through each iteration and extract the required data
+for (i in 1:50) {
+  # Extract data for the current iteration
+  iteration_data_Amb <- diversity_results_Amb[[i]]
+  
+  # Create a dataframe with the relevant columns
+  df_Amb <- data.frame(
+    #Population = rownames(iteration_data$zero_H_alpha),  # Assuming populations are row names
+    zero_H_alpha = iteration_data_Amb$zero_H_alpha,
+    zero_H_alpha_sd = iteration_data_Amb$zero_H_alpha_sd,
+    one_H_alpha = iteration_data_Amb$one_H_alpha,
+    one_H_alpha_sd = iteration_data_Amb$one_H_alpha_sd,
+    two_H_alpha = iteration_data_Amb$two_H_alpha,
+    two_H_alpha_sd = iteration_data_Amb$two_H_alpha_sd,
+    Iteration = paste0("iteration_", i)
+  )
+  
+  # Append the dataframe to the list
+  diversity_summary_list_Amb[[i]] <- df_Amb
+}
+
+# Combine all the dataframes into one
+diversity_combined_Amb <- do.call(rbind, diversity_summary_list_Amb) |>
+  rownames_to_column(var = "Population") |>
+  mutate(Region = case_when(
+    grepl("Central", Population) ~ "Central",
+    grepl("Hybrid", Population) ~ "Hybrid",
+    grepl("North", Population) ~ "North",
+    TRUE ~ NA_character_  # Assign NA if none of the conditions match
+  )) |>
+  dplyr::rename(`Allelic Richness` = zero_H_alpha, `AR_sd` = zero_H_alpha_sd, `Shannon Index` = one_H_alpha, SI_sd = one_H_alpha_sd, `He` = two_H_alpha, `He_sd` = two_H_alpha_sd) |>
+  dplyr::select(Iteration, Region, `Allelic Richness`, AR_sd, `Shannon Index`, `SI_sd`, He, `He_sd`)
+
+# Separate the three metrics and pivot them longer
+# Allelic Richness
+long_ar_Amb <- diversity_combined_Amb |>
+  dplyr::select(Iteration, Region, `Allelic Richness`, `AR_sd`) |>
+  pivot_longer(
+    cols = `Allelic Richness`,
+    names_to = "Metric",
+    values_to = "Value"
+  ) |>
+  dplyr::select(Iteration, Metric, Region, Value, AR_sd) |>
+  dplyr::rename(sd = `AR_sd`)
+# Shannon Index
+long_SI_Amb <- diversity_combined_Amb |>
+  dplyr::select(Iteration, Region, `Shannon Index`, `SI_sd`) |>
+  pivot_longer(
+    cols = `Shannon Index`,
+    names_to = "Metric",
+    values_to = "Value"
+  ) |>
+  dplyr::select(Iteration, Metric, Region, Value, SI_sd) |>
+  dplyr::rename(sd = `SI_sd`)
+# He
+long_He_Amb <- diversity_combined_Amb |>
+  dplyr::select(Iteration, Region, `He`, `He_sd`) |>
+  pivot_longer(
+    cols = `He`,
+    names_to = "Metric",
+    values_to = "Value"
+  ) |>
+  dplyr::select(Iteration, Metric, Region, Value, He_sd) |>
+  dplyr::rename(sd = `He_sd`)
+
+# Combine three metrics
+long_diversity_Amb<- rbind(long_ar_Amb, long_SI_Amb, long_He_Amb)
+
+# Calculate SE
+long_diversity_Amb<- long_diversity_Amb |> mutate(se = sd/sqrt(48))
+
+diversity_sum_Amb <- summarySE(long_diversity_Amb, measurevar="Value",
+                     groupvars=c("Metric","Region"), na.rm=TRUE) |>
+  dplyr::select(Metric, Region, mean)
+
+diversity_se_Amb <- summarySE(long_diversity_Amb, measurevar="se",
+                     groupvars=c("Metric","Region"), na.rm=TRUE) |>
+  dplyr::rename(SE = mean) |>
+  dplyr::select(SE)
+
+diversity_amb <- cbind(diversity_sum_Amb, diversity_se_Amb) |>
+  mutate(Temp = "Amb")
+```
+
+Hot
+```{r}
+# Check how many samples per population
+table(pop(ten_larvae_Hot))
+
+# Define the minimum sample size and number of draws
+min_sample_size_Hot <- 27
+num_draws_Hot <- 50
+
+# Initialize a list to store results for each draw
+subsample_results_Hot <- vector("list", num_draws_Hot)
+
+# Perform 50 random draws
+set.seed(123) # For reproducibility
+for (i in 1:num_draws_Hot) {
+  subsample_results_Hot[[i]] <- gl.subsample.ind(
+    x = ten_larvae_Hot,          # The genlight object
+    n = min_sample_size_Hot,        # Number of individuals per subsample
+    replace = FALSE,            # Sampling without replacement
+    by.pop = TRUE,              # Subsample by population
+    error.check = TRUE,         # Enable error checking
+    verbose = 0                 # Reduce verbosity
+  )
+}
+
+# Verify subsampled populations for the first draw
+print("Subsampled populations for first draw:")
+print(pop(subsample_results_Hot[[1]]))
+
+# Calculate diversity metrics for each draw
+diversity_results_Hot <- lapply(subsample_results_Hot, function(subsample) {
+  gl.report.diversity(
+    x = subsample,             # Subsampled genlight object
+    verbose = 0                # Reduce verbosity
+  )
+})
+
+# Initialize an empty list to store dataframes for each iteration
+diversity_summary_list_Hot <- list()
+
+# Loop through each iteration and extract the required data
+for (i in 1:50) {
+  # Extract data for the current iteration
+  iteration_data_Hot <- diversity_results_Hot[[i]]
+  
+  # Create a dataframe with the relevant columns
+  df_Hot <- data.frame(
+    #Population = rownames(iteration_data$zero_H_alpha),  # Assuming populations are row names
+    zero_H_alpha = iteration_data_Hot$zero_H_alpha,
+    zero_H_alpha_sd = iteration_data_Hot$zero_H_alpha_sd,
+    one_H_alpha = iteration_data_Hot$one_H_alpha,
+    one_H_alpha_sd = iteration_data_Hot$one_H_alpha_sd,
+    two_H_alpha = iteration_data_Hot$two_H_alpha,
+    two_H_alpha_sd = iteration_data_Hot$two_H_alpha_sd,
+    Iteration = paste0("iteration_", i)
+  )
+  
+  # Append the dataframe to the list
+  diversity_summary_list_Hot[[i]] <- df_Hot
+}
+
+# Combine all the dataframes into one
+diversity_combined_Hot <- do.call(rbind, diversity_summary_list_Hot) |>
+  rownames_to_column(var = "Population") |>
+  mutate(Region = case_when(
+    grepl("Central", Population) ~ "Central",
+    grepl("Hybrid", Population) ~ "Hybrid",
+    grepl("North", Population) ~ "North",
+    TRUE ~ NA_character_  # Assign NA if none of the conditions match
+  )) |>
+  dplyr::rename(`Allelic Richness` = zero_H_alpha, `AR_sd` = zero_H_alpha_sd, `Shannon Index` = one_H_alpha, SI_sd = one_H_alpha_sd, `He` = two_H_alpha, `He_sd` = two_H_alpha_sd) |>
+  dplyr::select(Iteration, Region, `Allelic Richness`, AR_sd, `Shannon Index`, `SI_sd`, He, `He_sd`)
+
+# Separate the three metrics and pivot them longer
+# Allelic Richness
+long_ar_Hot <- diversity_combined_Hot |>
+  dplyr::select(Iteration, Region, `Allelic Richness`, `AR_sd`) |>
+  pivot_longer(
+    cols = `Allelic Richness`,
+    names_to = "Metric",
+    values_to = "Value"
+  ) |>
+  dplyr::select(Iteration, Metric, Region, Value, AR_sd) |>
+  dplyr::rename(sd = `AR_sd`)
+# Shannon Index
+long_SI_Hot <- diversity_combined_Hot |>
+  dplyr::select(Iteration, Region, `Shannon Index`, `SI_sd`) |>
+  pivot_longer(
+    cols = `Shannon Index`,
+    names_to = "Metric",
+    values_to = "Value"
+  ) |>
+  dplyr::select(Iteration, Metric, Region, Value, SI_sd) |>
+  dplyr::rename(sd = `SI_sd`)
+# He
+long_He_Hot <- diversity_combined_Hot |>
+  dplyr::select(Iteration, Region, `He`, `He_sd`) |>
+  pivot_longer(
+    cols = `He`,
+    names_to = "Metric",
+    values_to = "Value"
+  ) |>
+  dplyr::select(Iteration, Metric, Region, Value, He_sd) |>
+  dplyr::rename(sd = `He_sd`)
+
+# Combine three metrics
+long_diversity_Hot<- rbind(long_ar_Hot, long_SI_Hot, long_He_Hot)
+
+# Calculate SE
+long_diversity_Hot<- long_diversity_Hot |> mutate(se = sd/sqrt(48))
+
+diversity_sum_Hot <- summarySE(long_diversity_Hot, measurevar="Value",
+                     groupvars=c("Metric","Region"), na.rm=TRUE) |>
+  dplyr::select(Metric, Region, mean)
+
+diversity_se_Hot <- summarySE(long_diversity_Hot, measurevar="se",
+                     groupvars=c("Metric","Region"), na.rm=TRUE) |>
+  dplyr::rename(SE = mean) |>
+  dplyr::select(SE)
+
+diversity_hot <- cbind(diversity_sum_Hot, diversity_se_Hot) |>
+  mutate(Temp = "Hot")
+```
+
+```{r}
+diversity_summary_region <- rbind(diversity_pre, diversity_amb, diversity_hot)
+```
+
+```{r}
+#saveRDS(diversity_summary_region, file = "/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/A_tenuis/04_larvae/diversity_metrics/diversity_summary_region.rds")
+diversity_summary_region <- readRDS("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/A_tenuis/04_larvae/diversity_metrics/diversity_summary_region.rds") |>
+  mutate(Temp = factor(Temp, levels = c("Pre","Amb","Hot")))
+```
+
+```{r}
+div_reg_plot<- diversity_summary_region |>
+  ggplot(aes(x=Region, y=mean))+
+  geom_pointrange(aes(ymin=`mean`-`SE`, ymax=`mean`+`SE`, color=Region, group = Temp, shape = Temp), position=position_dodge(width=0.6))+
+  facet_wrap(~Metric, scales = "free_y") +
+  labs(x='Reef Cross', y="Diversity")+
+  theme_Publication() +
+  theme(legend.key.height = unit(0.3, "cm"),
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(0,0,0,0),
+        plot.margin = margin(rep(0.5,4)),
+        legend.position="right",
+        legend.direction = "vertical",
+        axis.text.x = element_text(angle = 90),
+        axis.text.y = element_text(angle = 90),
+        strip.background = element_rect(fill = "white", color = "black")
+        ) +
+  #scale_x_discrete(limits = c("DavxDav","PalxPal","PalxDav","JewxDav","JewxPal","SwixDav", "JewxJew", "ParxPar", "SwixSwi")) +
+    scale_color_manual(values=pal[c(1,3,5)])
+div_reg_plot
+```
+
+```{r}
+# Save results to calculate difference in Pre diversity metrics
+# Allelic Richness
+mean_central_AR <- diversity_summary_region$mean[1]
+mean_hybrid_AR <- diversity_summary_region$mean[4]
+mean_north_AR <- diversity_summary_region$mean[7]
+se_central_AR <- diversity_summary_region$SE[1]
+se_hybrid_AR <- diversity_summary_region$SE[4]
+se_north_AR <- diversity_summary_region$SE[7]
+
+#AR central hybrid
+mean_hybrid_AR - mean_central_AR
+sqrt(se_hybrid_AR^2 + se_central_AR^2)
+#AR north hybrid
+mean_hybrid_AR - mean_north_AR
+sqrt(se_hybrid_AR^2 + se_north_AR^2)
+#AR central north
+mean_north_AR - mean_central_AR
+sqrt(se_central_AR^2 + se_central_AR^2)
+
+#Heterozygosity
+mean_central_HE <- diversity_summary_region$mean[1]
+mean_hybrid_HE <- diversity_summary_region$mean[4]
+mean_north_HE <- diversity_summary_region$mean[7]
+se_central_HE <- diversity_summary_region$SE[1]
+se_hybrid_HE <- diversity_summary_region$SE[4]
+se_north_HE <- diversity_summary_region$SE[7]
+
+#HE central hybrid
+mean_hybrid_HE - mean_central_HE
+sqrt(se_hybrid_HE^2 + se_central_HE^2)
+#HE north hybrid
+mean_hybrid_HE - mean_north_HE
+sqrt(se_hybrid_HE^2 + se_north_HE^2)
+#HE central north
+mean_north_HE - mean_central_HE
+sqrt(se_central_HE^2 + se_central_HE^2)
+
+mean_central_SI <- diversity_summary_region$mean[1]
+mean_hybrid_SI <- diversity_summary_region$mean[4]
+mean_north_SI <- diversity_summary_region$mean[7]
+se_central_SI <- diversity_summary_region$SE[1]
+se_hybrid_SI <- diversity_summary_region$SE[4]
+se_north_SI <- diversity_summary_region$SE[7]
+
+#SI central hybrid
+mean_hybrid_SI - mean_central_SI
+sqrt(se_hybrid_SI^2 + se_central_SI^2)
+#SI north hybrid
+mean_hybrid_SI - mean_north_SI
+sqrt(se_hybrid_SI^2 + se_north_SI^2)
+#SI central north
+mean_north_SI - mean_central_SI
+sqrt(se_central_SI^2 + se_central_SI^2)
+```
+
+####
+Heterozygosity
+```{r}
+#het2<- gl.report.heterozygosity(ten_larvae, plot.out = F)
+het<- read.table("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/A_tenuis/04_larvae/diversity_metrics/heterosis.txt", header = T) |>
+  mutate(temp = factor(temp, levels = c("Pre", "Amb", "Hot"))) |>
+  dplyr::filter(mod.sing == "sing") |>
+  mutate(region_temp = paste(region.cross2, temp, sep = "_")) |>
+  mutate(reef_temp = paste(reef.cross, temp, sep = "_")) |>
+  mutate(metric = "Ho")
+```
+
+```{r}
+het_box<- het |>
+  ggplot(aes(x = region_temp, y = Ho, fill = region.cross2)) +
+  geom_boxplot() +
+  facet_wrap(~metric) +
+  #theme(axis.text.x = element_text(angle = 90, vjust = 1, hjust=1)) +
+  labs(x = "Region & Temperature", y = "Heterozygosity", fill = "Region") +
+  theme_Publication()+
+  #scale_fill_manual(values=c("#386cb0","#7fc97f","#fdb462"))+
+  theme(legend.key.height = unit(0.3, "cm"),
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(0,0,0,0),
+        plot.margin = margin(rep(0.5,4)),
+        legend.position="right",
+        legend.direction = "vertical",
+        axis.text.x = element_text(angle = 90),
+        axis.text.y = element_text(angle = 90),
+        strip.background = element_rect(fill = "white", color = "black")
+        ) +
+    scale_x_discrete(limits = c("Central_Pre","Central_Amb", "Central_Hot", "Hybrid_Pre", "Hybrid_Amb", "Hybrid_Hot", "North_Pre", "North_Amb", "North_Hot"))+
+    scale_fill_manual(values=pal[c(1,3,5)]) +
+  scale_y_continuous(limits = c(0.04, 0.12), breaks = seq(0.04, 0.12, 0.02))
+het_box
+```
+
+```{r}
+#stat test for variance per temp treatment
+het_sum <- summarySE(het, measurevar="Ho",
+                     groupvars=c("region.cross2","temp"), na.rm=TRUE)
+
+#normally distributed?
+ks.test(het$Ho, "pnorm", mean=mean(het$Ho), sd=sd(het$Ho))
+qqnorm(het$Ho)
+qqline(het$Ho, col = "red")
+
+#plot
+het|> ggplot() + geom_boxplot(aes(x=temp, y=Ho))
+#not normally distributed
+
+##Variance between Temp treatments
+#test dispersion in all temp treatment between Pre, 27.5C and 35.5C
+het_pre<- het |> dplyr::filter(temp == "Pre")
+het_amb<- het |> dplyr::filter(temp == "Amb")
+het_hot<- het |> dplyr::filter(temp == "Hot")
+het_amb_hot<- het |> dplyr::filter(temp != "Pre")
+#F test
+var.test(het_pre$Ho, het_amb$Ho)
+var.test(het_pre$Ho, het_hot$Ho)
+var.test(het_amb$Ho, het_hot$Ho)
+
+##Dispersion between Temp treatments and regions
+het_pre_cen<- het_pre |> dplyr::filter(region.cross == "Central")
+het_pre_hyb<- het_pre |> dplyr::filter(region.cross == "Hybrid")
+het_pre_nor<- het_pre |> dplyr::filter(region.cross == "North")
+het_amb_cen<- het_amb |> dplyr::filter(region.cross == "Central")
+het_amb_hyb<- het_amb |> dplyr::filter(region.cross == "Hybrid")
+het_amb_nor<- het_amb |> dplyr::filter(region.cross == "North")
+het_hot_cen<- het_hot |> dplyr::filter(region.cross == "Central")
+het_hot_hyb<- het_hot |> dplyr::filter(region.cross == "Hybrid")
+het_hot_nor<- het_hot |> dplyr::filter(region.cross == "North")
+
+#test dispersion between 27.5C and 35.5C in central, hybrid and north crosses
+#F test
+var.test(het_hot_cen$Ho, het_amb_cen$Ho)
+var.test(het_hot_hyb$Ho, het_amb_hyb$Ho)
+var.test(het_hot_nor$Ho, het_amb_nor$Ho)
+
+#test dispersion between Pre and 27.5C in central, hybrid and north crosses
+#F test
+var.test(het_pre_cen$Ho, het_amb_cen$Ho)
+var.test(het_pre_hyb$Ho, het_amb_hyb$Ho)
+var.test(het_pre_nor$Ho, het_amb_nor$Ho)
+
+#test dispersion between Pre and 35.5C in central, hybrid and north crosses
+#F test
+var.test(het_pre_cen$Ho, het_hot_cen$Ho)
+var.test(het_pre_hyb$Ho, het_hot_hyb$Ho)
+var.test(het_pre_nor$Ho, het_hot_nor$Ho)
+
+##Dispersion between regions
+#test dispersion of 35.5C treatment between central, hybrid and north crosses
+#F test
+var.test(het_hot_cen$Ho, het_hot_hyb$Ho)
+var.test(het_hot_cen$Ho, het_hot_nor$Ho)
+var.test(het_hot_nor$Ho, het_hot_hyb$Ho)
+
+#F test Pre treatment comparison
+var.test(het_pre_cen$Ho, het_pre_hyb$Ho)
+var.test(het_pre_cen$Ho, het_pre_nor$Ho)
+var.test(het_pre_nor$Ho, het_pre_hyb$Ho)
+```
+
+```{r}
+# Perform Kruskal-Wallis test Ho Pre heat
+#by region cross
+kw_cross_pre <- kruskal.test(Ho ~ region.cross2, data = het_pre)
+kw_cross_pre
+
+# If significant, perform post hoc pairwise comparisons
+if (kw_cross_pre$p.value < 0.05) {
+  # Use the pairwise Wilcoxon test for post hoc analysis
+  posthoc <- pairwise.wilcox.test(het_pre$Ho, het_pre$region.cross2, p.adjust.method = "none")
+  print(posthoc)
+} else {
+  print("No significant differences, skipping post hoc analysis.")
+}
+
+# Perform Kruskal-Wallis test Ho Amb treatment
+#by region cross
+kw_cross_amb <- kruskal.test(Ho ~ region.cross, data = het_amb)
+kw_cross_amb
+
+# If significant, perform post hoc pairwise comparisons
+if (kw_cross_amb$p.value < 0.05) {
+  # Use the pairwise Wilcoxon test for post hoc analysis
+  posthoc <- pairwise.wilcox.test(het_amb$Ho, het_amb$region.cross2, p.adjust.method = "none")
+  print(posthoc)
+} else {
+  print("No significant differences, skipping post hoc analysis.")
+}
+
+# Perform Kruskal-Wallis test Ho Hot treatment
+#by region cross
+kw_cross_hot <- kruskal.test(Ho ~ region.cross, data = het_hot)
+kw_cross_hot
+
+# If significant, perform post hoc pairwise comparisons
+if (kw_cross_hot$p.value < 0.05) {
+  # Use the pairwise Wilcoxon test for post hoc analysis
+  posthoc <- pairwise.wilcox.test(het_hot$Ho, het_hot$region.cross2, p.adjust.method = "none")
+  print(posthoc)
+} else {
+  print("No significant differences, skipping post hoc analysis.")
+}
+
+# Perform Kruskal-Wallis test Ho Hot treatment
+#by region cross
+kw_cross_amb_hot <- kruskal.test(Ho ~ region.cross, data = het_amb_hot)
+kw_cross_amb_hot
+
+# If significant, perform post hoc pairwise comparisons
+if (kw_cross_amb_hot$p.value < 0.05) {
+  # Use the pairwise Wilcoxon test for post hoc analysis
+  posthoc <- pairwise.wilcox.test(het_amb_hot$Ho, het_amb_hot$region.cross2, p.adjust.method = "none")
+  print(posthoc)
+} else {
+  print("No significant differences, skipping post hoc analysis.")
+}
+
+het_amb_hot_cen<- het_amb_hot |> filter(region.cross2 == "Central")
+het_amb_hot_hyb<- het_amb_hot |> filter(region.cross2 == "Hybrid")
+het_amb_hot_nor<- het_amb_hot |> filter(region.cross2 == "North")
+
+# Perform Kruskal-Wallis test Ho temp Central treatment
+#by region cross
+kw_cross_amb_hot_cen <- kruskal.test(Ho ~ temp, data = het_amb_hot_cen)
+kw_cross_amb_hot_cen
+
+# Perform Kruskal-Wallis test Ho temp Hybrid treatment
+#by region cross
+kw_cross_amb_hot_hyb <- kruskal.test(Ho ~ temp, data = het_amb_hot_hyb)
+kw_cross_amb_hot_hyb
+
+# Perform Kruskal-Wallis test Ho temp North treatment
+#by region cross
+kw_cross_amb_hot_nor <- kruskal.test(Ho ~ temp, data = het_amb_hot_nor)
+kw_cross_amb_hot_nor
+```
+
+```{r}
+library(patchwork)
+a<- div_plot2 + het_box +plot_annotation(tag_levels = "A") + plot_layout(nrow = 1, guides = "collect", widths = c(5,1))
+a
+```
+
+```{r}
+ar<- diversity_summary |> filter(Metric == "Allelic Richness")
+si<- diversity_summary |> filter(Metric == "Shannon Index")
+he<- diversity_summary |> filter(Metric == "He")
+
+ar_plot<- ar |>
+  ggplot(aes(x=Reefcross, y=mean))+
+  geom_pointrange(aes(ymin=`mean`-`SE`, ymax=`mean`+`SE`, color=Region, group = Temp, shape = Temp), position=position_dodge(width=0.6))+
+  facet_wrap(~Metric, scales = "free_y") +
+  labs(x='Reef Cross', y="Diversity")+
+  theme_Publication() +
+  theme(legend.key.height = unit(0.3, "cm"),
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(0,0,0,0),
+        plot.margin = margin(rep(0.5,4)),
+        legend.position="right",
+        legend.direction = "vertical",
+        axis.text.x = element_text(angle = 90),
+        axis.text.y = element_text(angle = 90),
+        strip.background = element_rect(fill = "white", color = "black")
+        ) +
+  scale_x_discrete(limits = c("DavxDav","PalxPal","PalxDav","JewxDav","JewxPal","SwixDav", "JewxJew", "ParxPar", "SwixSwi")) +
+    scale_color_manual(values=pal[c(1,3,5)])
+ar_plot
+
+si_plot<- si |>
+  ggplot(aes(x=Reefcross, y=mean))+
+  geom_pointrange(aes(ymin=`mean`-`SE`, ymax=`mean`+`SE`, color=Region, group = Temp, shape = Temp), position=position_dodge(width=0.6))+
+  facet_wrap(~Metric, scales = "free_y") +
+  labs(x='Reef Cross', y="Diversity")+
+  theme_Publication() +
+  theme(legend.key.height = unit(0.3, "cm"),
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(0,0,0,0),
+        plot.margin = margin(rep(0.5,4)),
+        legend.position="right",
+        legend.direction = "vertical",
+        axis.text.x = element_text(angle = 90),
+        axis.text.y = element_text(angle = 90),
+        strip.background = element_rect(fill = "white", color = "black")
+        ) +
+  scale_x_discrete(limits = c("DavxDav","PalxPal","PalxDav","JewxDav","JewxPal","SwixDav", "JewxJew", "ParxPar", "SwixSwi")) +
+    scale_color_manual(values=pal[c(1,3,5)])
+si_plot
+
+he_plot<- he |>
+  ggplot(aes(x=Reefcross, y=mean))+
+  geom_pointrange(aes(ymin=`mean`-`SE`, ymax=`mean`+`SE`, color=Region, group = Temp, shape = Temp), position=position_dodge(width=0.6))+
+  facet_wrap(~Metric, scales = "free_y") +
+  labs(x='Reef Cross', y="Diversity")+
+  theme_Publication() +
+  theme(legend.key.height = unit(0.3, "cm"),
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(0,0,0,0),
+        plot.margin = margin(rep(0.5,4)),
+        legend.position="right",
+        legend.direction = "vertical",
+        axis.text.x = element_text(angle = 90),
+        axis.text.y = element_text(angle = 90),
+        strip.background = element_rect(fill = "white", color = "black")
+        ) +
+  scale_x_discrete(limits = c("DavxDav","PalxPal","PalxDav","JewxDav","JewxPal","SwixDav", "JewxJew", "ParxPar", "SwixSwi")) +
+    scale_color_manual(values=pal[c(1,3,5)])
+he_plot
+
+b<- ar_plot + si_plot + he_plot + het_box +plot_annotation(tag_levels = "A") + plot_layout(nrow = 2, guides = "collect")
+b
+```
+
+```{r}
+div_plot3<- diversity_region
+
+ar<- diversity_region |> filter(Metric == "Allelic Richness")
+si<- diversity_region |> filter(Metric == "Shannon Index")
+he<- diversity_region |> filter(Metric == "He")
+
+ar_plot<- ar |>
+  ggplot(aes(x=Region, y=mean))+
+  geom_pointrange(aes(ymin=`mean`-`SE`, ymax=`mean`+`SE`, color=Region, group = Temp, shape = Temp), position=position_dodge(width=0.6))+
+  facet_wrap(~Metric, scales = "free_y") +
+  labs(x='Reef Cross', y="Diversity")+
+  theme_Publication() +
+  theme(legend.key.height = unit(0.3, "cm"),
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(0,0,0,0),
+        plot.margin = margin(rep(0.5,4)),
+        legend.position="right",
+        legend.direction = "vertical",
+        axis.text.x = element_text(angle = 90),
+        axis.text.y = element_text(angle = 90),
+        strip.background = element_rect(fill = "white", color = "black")
+        ) +
+  #scale_x_discrete(limits = c("DavxDav","PalxPal","PalxDav","JewxDav","JewxPal","SwixDav", "JewxJew", "ParxPar", "SwixSwi")) +
+    scale_color_manual(values=pal[c(1,3,5)])
+ar_plot
+
+si_plot<- si |>
+  ggplot(aes(x=Region, y=mean))+
+  geom_pointrange(aes(ymin=`mean`-`SE`, ymax=`mean`+`SE`, color=Region, group = Temp, shape = Temp), position=position_dodge(width=0.6))+
+  facet_wrap(~Metric, scales = "free_y") +
+  labs(x='Reef Cross', y="Diversity")+
+  theme_Publication() +
+  theme(legend.key.height = unit(0.3, "cm"),
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(0,0,0,0),
+        plot.margin = margin(rep(0.5,4)),
+        legend.position="right",
+        legend.direction = "vertical",
+        axis.text.x = element_text(angle = 90),
+        axis.text.y = element_text(angle = 90),
+        strip.background = element_rect(fill = "white", color = "black")
+        ) +
+  #scale_x_discrete(limits = c("DavxDav","PalxPal","PalxDav","JewxDav","JewxPal","SwixDav", "JewxJew", "ParxPar", "SwixSwi")) +
+    scale_color_manual(values=pal[c(1,3,5)])
+si_plot
+
+he_plot<- he |>
+  ggplot(aes(x=Region, y=mean))+
+  geom_pointrange(aes(ymin=`mean`-`SE`, ymax=`mean`+`SE`, color=Region, group = Temp, shape = Temp), position=position_dodge(width=0.6))+
+  facet_wrap(~Metric, scales = "free_y") +
+  labs(x='Reef Cross', y="Diversity")+
+  theme_Publication() +
+  theme(legend.key.height = unit(0.3, "cm"),
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(0,0,0,0),
+        plot.margin = margin(rep(0.5,4)),
+        legend.position="right",
+        legend.direction = "vertical",
+        axis.text.x = element_text(angle = 90),
+        axis.text.y = element_text(angle = 90),
+        strip.background = element_rect(fill = "white", color = "black")
+        ) +
+  #scale_x_discrete(limits = c("DavxDav","PalxPal","PalxDav","JewxDav","JewxPal","SwixDav", "JewxJew", "ParxPar", "SwixSwi")) +
+    scale_color_manual(values=pal[c(1,3,5)])
+he_plot
+
+b<- ar_plot + si_plot + he_plot + het_box +plot_annotation(tag_levels = "A") + plot_layout(nrow = 2, guides = "collect")
+b
+```
+
+```{r}
+b<- ar_plot + si_plot + he_plot + het_box +plot_annotation(tag_levels = "A") + plot_layout(nrow = 1, guides = "collect")
+b
+
+b<- ar_plot + si_plot + he_plot + het_box + plot_layout(nrow = 1, guides = "collect")
+b
+```
