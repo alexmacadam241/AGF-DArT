@@ -1,0 +1,737 @@
+---
+title: "Untitled"
+output: html_document
+date: "2025-07-24"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(sf)
+library(raster)
+library(terra)
+library(ncdf4)
+library(viridis)
+library(ggspatial)
+library(dataaimsr)
+library(gisaimsr)
+library(ggrepel)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(cowplot)
+```
+
+```{r}
+theme_Publication <- function(base_size=14, base_family="arial") {
+      library(grid)
+      library(ggthemes)
+      (theme_foundation(base_size=base_size, base_family=base_family)
+       + theme(plot.title = element_text(face = "bold",
+                                         size = rel(1.2), hjust = 0.5),
+               text = element_text(),
+               panel.background = element_rect(colour = NA),
+               plot.background = element_rect(colour = NA),
+               panel.border = element_rect(colour = NA),
+               axis.title = element_text(face = "bold",size = rel(1)),
+               axis.title.y = element_text(angle=90,vjust =2),
+               axis.title.x = element_text(vjust = -0.2),
+               axis.text = element_text(), 
+               axis.line = element_line(colour="black"),
+               axis.ticks = element_line(),
+               panel.grid.major = element_line(colour="#f0f0f0"),
+               panel.grid.minor = element_blank(),
+               legend.key = element_rect(colour = NA),
+               legend.position = "bottom",
+               legend.direction = "horizontal",
+               legend.key.size= unit(0.2, "cm"),
+               legend.margin = unit(0, "cm"),
+               legend.title = element_text(face="italic"),
+               plot.margin=unit(c(10,5,5,5),"mm"),
+               strip.background=element_rect(colour="#f0f0f0",fill="#f0f0f0"),
+               strip.text = element_text(face="bold")
+          ))
+      
+}
+
+scale_fill_Publication <- function(...){
+      library(scales)
+      discrete_scale("fill","Publication",manual_pal(values = c("#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")), ...)
+
+}
+
+scale_colour_Publication <- function(...){
+      library(scales)
+      discrete_scale("colour","Publication",manual_pal(values = c("#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")), ...)
+
+}
+```
+
+```{r}
+# Define URL for specific date
+date <- "2019-03-01"
+date_fmt <- gsub("-", "", date)  # YYYYMMDD
+
+# July 2023 file from NOAA
+url <- "https://www.ncei.noaa.gov/data/sea-surface-temperature-optimum-interpolation/v2.1/access/avhrr/202307/oisst-avhrr-v02r01.20230701.nc"
+
+download.file(url, destfile = "oisst_20230701.nc", mode = "wb")
+```
+
+```{r}
+library(terra)
+
+# Load NetCDF file (no `var =`)
+sst_stack <- rast("oisst_20230701.nc")
+
+# Check layer names
+names(sst_stack)
+
+sst <- sst_stack[["sst_zlev=0"]]
+```
+
+```{r}
+# Define extent for GBR
+gbr_ext <- ext(140, 148, -20, -10)
+sst_gbr <- crop(sst, gbr_ext)
+```
+
+```{r}
+library(rnaturalearth)
+library(sf)
+library(ggplot2)
+library(viridis)
+
+# Get land
+land <- ne_countries(scale = "medium", returnclass = "sf")
+
+# Convert raster to data.frame
+sst_df <- as.data.frame(sst_gbr, xy = TRUE, na.rm = TRUE)
+names(sst_df)[3] <- "sst"
+
+# Plot
+ggplot() +
+  geom_sf(data = land, fill = "grey70", color = NA) +
+  geom_raster(data = sst_df, aes(x = x, y = y, fill = sst)) +
+  scale_fill_viridis(name = "SST (°C)", option = "plasma", na.value = NA) +
+  coord_sf(xlim = c(140, 148), ylim = c(-20, -10), expand = FALSE) +
+  theme_minimal()
+
+ggplot() +
+  geom_sf(data = land, fill = "grey70", color = NA) +
+  geom_raster(data = sst_df, aes(x = x, y = y, fill = sst), interpolate = TRUE) +  # smooth appearance
+  scale_fill_viridis(name = "SST (°C)", option = "plasma") +
+  coord_sf(xlim = c(140, 148), ylim = c(-20, -10), expand = FALSE) +
+  theme_minimal()
+```
+
+##############
+Start here
+```{r}
+library(tidyverse)
+library(terra)
+library(rnaturalearth)
+library(ggplot2)
+library(viridis)
+library(rerddap)
+library(sf)
+
+# 1. Define date and bounding box
+date      <- "2019-02-07"
+lat_range <- c(-20, -10)
+lon_range <- c(140, 148)
+
+erddap_url <- "https://coastwatch.pfeg.noaa.gov/erddap/"
+
+# 2. Get DHW and DHW max from NOAA_DHW dataset
+dhw     <- griddap(datasetx = "NOAA_DHW",
+                   url      = erddap_url,
+                   time     = c(date, date),
+                   latitude = lat_range,
+                   longitude= lon_range,
+                   fields   = "CRW_DHW",
+                   fmt      = "nc")
+```
+
+```{r}
+# 3. Load rasters
+r_dhw     <- rast(dhw$summary$filename)
+
+# Crop just to be safe
+ext_gbr <- ext(lon_range[1], lon_range[2], lat_range[1], lat_range[2])
+r_dhw     <- crop(r_dhw, ext_gbr)
+r_dhw_flipped <- flip(r_dhw, direction = "vertical")
+```
+
+```{r}
+# 4. Convert to data frames
+df_dhw <- as.data.frame(r_dhw_flipped, xy = TRUE, na.rm = TRUE) %>%
+  rename(DHW = CRW_DHW)
+```
+
+```{r}
+# 5. Get land polygons
+land <- ne_countries(scale = "medium", returnclass = "sf")
+```
+
+```{r}
+ggplot() +
+  geom_sf(data = land, fill = "grey70", color = NA) +
+  geom_raster(data = df_dhw, aes(x = x, y = y, fill = DHW)) +
+  scale_fill_viridis(name = "DHW (°C‑weeks)", option = "magma") +
+  coord_sf(xlim = lon_range, ylim = lat_range, expand = FALSE) +
+  theme_minimal()
+```
+
+Plot single dates
+```{r}
+#“CRW_BAA”, “CRW_BAA_7D_MAX”, “CRW_BAA_7D_MAX_mask”, “CRW_BAA_mask”, “CRW_DHW”, “CRW_DHW_mask”, “CRW_HOTSPOT”, “CRW_HOTSPOT_mask”, “CRW_SEAICE”, “CRW_SST”, “CRW_SSTANOMALY”, “CRW_SSTANOMALY_mask”, “none”, “all”
+
+#CRW_SSTANOMALY 2019-01-08
+#CRW_SST 2016-03-11 and 04, 2020-01-24 and 31 20. 26-03-4 and 11
+#CRW_HOTSPOT 2016-01-01, 2016-03-04 to 11 (try a few) and 2018-03-2 or 9, 2019-01-11
+#CRW_DHW 2016-03-11 to 2016-04-29, 2017-03-17 to 2017-04-28. 
+
+library(tidyverse)
+library(terra)
+library(rnaturalearth)
+library(ggplot2)
+library(viridis)
+library(rerddap)
+
+# 1. Define date and bounding box
+date      <- "2018-04-08"
+lat_range <- c(-20, -10)
+lon_range <- c(140, 148)
+
+erddap_url <- "https://coastwatch.pfeg.noaa.gov/erddap/"
+
+# 2. Get DHW max from NOAA_DHW dataset
+dhw_max <- griddap(datasetx = "NOAA_DHW",
+                   url      = erddap_url,
+                   time     = c(date, date),
+                   latitude = lat_range,
+                   longitude= lon_range,
+                   fields   = "CRW_DHW",
+                   fmt      = "nc")
+
+# 3. Load raster
+r_dhw_max <- rast(dhw_max$summary$filename)
+
+# Crop to bounding box
+ext_gbr <- ext(lon_range[1], lon_range[2], lat_range[1], lat_range[2])
+r_dhw_max <- crop(r_dhw_max, ext_gbr)
+
+# Flip vertically for correct orientation
+r_dhw_max_flipped <- flip(r_dhw_max, direction = "vertical")
+
+# 4. Convert to data.frame
+df_dhw_max <- as.data.frame(r_dhw_max_flipped, xy = TRUE, na.rm = TRUE) %>%
+  rename(DHW_max = CRW_DHW)
+
+# 5. Get land polygons
+land <- ne_countries(scale = "medium", returnclass = "sf")
+
+# 6. Plot
+ggplot() +
+  geom_sf(data = land, fill = "grey70", color = NA) +
+  geom_raster(data = df_dhw_max, aes(x = x, y = y, fill = DHW_max)) +
+  scale_fill_viridis(name = "DHW max (°C‑weeks)", option = "magma") +
+  coord_sf(xlim = lon_range, ylim = lat_range, expand = FALSE) +
+  theme_minimal()
+
+```
+
+Plot all
+```{r}
+library(tidyverse)
+library(terra)
+library(rnaturalearth)
+library(ggplot2)
+library(viridis)
+library(rerddap)
+library(lubridate)
+
+# 1. Define bounding box and ERDDAP base URL
+lat_range <- c(-20, -10)
+lon_range <- c(140, 148)
+erddap_url <- "https://coastwatch.pfeg.noaa.gov/erddap/"
+
+# 2. Create a sequence of dates: every 7 days from Jan 1 to Apr 30 for years 2016-2020
+dates <- seq.Date(from = as.Date("2016-01-01"),
+                  to   = as.Date("2020-04-30"),
+                  by   = "7 days") %>%
+  # Keep only dates in Jan-Apr for each year
+  keep(~ month(.) %in% 1:4)
+
+# 3. Pre-download land polygons once
+land <- ne_countries(scale = "medium", returnclass = "sf")
+
+# 4. Function to download and process a single date
+get_dhw_max_df <- function(date, lat_range, lon_range, erddap_url) {
+  date_chr <- as.character(date)
+  message("Processing ", date_chr)
+  
+  # 4a. Use tryCatch to handle any errors (e.g., missing data)
+  tryCatch({
+    dhw_max <- griddap(datasetx = "NOAA_DHW",
+                       url      = erddap_url,
+                       time     = c(date_chr, date_chr),
+                       latitude = lat_range,
+                       longitude= lon_range,
+                       fields   = "CRW_DHW",
+                       fmt      = "nc")
+    
+    # 4b. Load raster
+    r <- rast(dhw_max$summary$filename)
+    
+    # 4c. Crop and flip for orientation
+    ext_gbr <- ext(lon_range[1], lon_range[2], lat_range[1], lat_range[2])
+    r <- crop(r, ext_gbr)
+    r <- flip(r, direction = "vertical")
+    
+    # 4d. Convert to dataframe, add date
+    df <- as.data.frame(r, xy = TRUE, na.rm = TRUE) %>%
+      rename(DHW_max = CRW_DHW) %>%
+      mutate(date = date_chr)
+    
+    return(df)
+    
+  }, error = function(e) {
+    message("Failed for ", date_chr, ": ", e$message)
+    return(NULL)
+  })
+}
+
+# 5. Loop over all dates, download and process data
+all_dfs <- map(dates, get_dhw_max_df, lat_range = lat_range, lon_range = lon_range, erddap_url = erddap_url)
+
+# 6. Bind all results together and filter out NULLs
+all_dhw <- bind_rows(all_dfs)
+
+# 7. Convert date to factor or Date for plotting facets
+all_dhw <- all_dhw %>% mutate(date = as.Date(date))
+
+# 8. Plot grid of maps using facets (e.g. facet_wrap by date)
+
+DHW<- ggplot() +
+  geom_sf(data = land, fill = "grey70", color = NA) +
+  geom_raster(data = all_dhw, aes(x = x, y = y, fill = DHW_max)) +
+  scale_fill_viridis(name = "DHW max (°C‑weeks)", option = "magma", na.value = "transparent") +
+  coord_sf(xlim = lon_range, ylim = lat_range, expand = FALSE) +
+  facet_wrap(~ date, ncol = 20) +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 6),
+        strip.text = element_text(size = 8))
+DHW
+```
+
+Max DHW
+```{r}
+library(tidyverse)
+library(terra)
+library(rnaturalearth)
+library(ggplot2)
+library(viridis)
+library(rerddap)
+library(lubridate)
+
+httr::set_config(httr::config(connecttimeout = 120, timeout = 240))
+
+# 1. Set spatial and temporal parameters
+lat_range <- c(-20, -10)
+lon_range <- c(140, 148)
+erddap_url <- "https://coastwatch.pfeg.noaa.gov/erddap/"
+
+# 2. Define weekly dates from Jan 1 2015 to Dec 31 2020
+dates <- seq.Date(from = as.Date("2015-01-01"),
+                  to   = as.Date("2020-12-31"),
+                  by   = "7 days")
+
+# 3. Download land only once
+land <- ne_countries(scale = "medium", returnclass = "sf")
+
+# 4. Function to download and process a raster for a given date
+get_dhw_raster <- function(date, lat_range, lon_range, erddap_url) {
+  date_chr <- as.character(date)
+  message("Processing ", date_chr)
+  
+  tryCatch({
+    dhw <- griddap(datasetx = "NOAA_DHW",
+                   url      = erddap_url,
+                   time     = c(date_chr, date_chr),
+                   latitude = lat_range,
+                   longitude= lon_range,
+                   fields   = "CRW_DHW",
+                   fmt      = "nc")
+    
+    # Load and crop raster
+    r <- rast(dhw$summary$filename)
+    r <- crop(r, ext(lon_range[1], lon_range[2], lat_range[1], lat_range[2]))
+    r <- flip(r, direction = "vertical")  # flip for correct orientation
+    
+    return(r)
+  }, error = function(e) {
+    message("Failed for ", date_chr, ": ", e$message)
+    return(NULL)
+  })
+}
+
+# 5. Loop over all dates and collect rasters
+dhw_rasters <- map(dates, get_dhw_raster, lat_range = lat_range, lon_range = lon_range, erddap_url = erddap_url)
+
+# 6. Filter out NULLs (failed downloads)
+dhw_rasters <- compact(dhw_rasters)
+
+# 7. Stack rasters and compute the per-pixel maximum
+dhw_stack <- rast(dhw_rasters)
+dhw_max_raster <- app(dhw_stack, fun = max, na.rm = TRUE)
+
+# 8. Convert raster to data.frame for plotting
+df_dhw_max <- as.data.frame(dhw_max_raster, xy = TRUE, na.rm = TRUE) %>%
+  rename(DHW_max = names(dhw_max_raster))
+
+# 9. Plot the max DHW across all years
+ggplot() +
+  geom_sf(data = land, fill = "grey70", color = NA) +
+  geom_raster(data = df_dhw_max, aes(x = x, y = y, fill = DHW_max)) +
+  scale_fill_viridis(name = "Max DHW\n(°C-weeks)", option = "plasma", na.value = "transparent") +
+  coord_sf(xlim = lon_range, ylim = lat_range, expand = FALSE) +
+  theme_minimal()+
+  scale_fill_distiller(palette = "YlOrRd", direction = 1)
+
+unlink("dhw_nc", recursive = TRUE)
+
+```
+##
+final map
+```{r}
+gbr_feat<- gbr_feat
+```
+
+```{r}
+coordinates <- read.csv("/Users/alexmacadam/Documents/GitHub/AGF-DArT/data/coordinates.csv") |>
+  mutate(Reef = factor(Reef, levels=c("Davies","Palm Is.","Switzer","Jewell","Parke")))
+
+sf <-
+  coordinates %>% 
+    st_as_sf(coords = c("Lon", "Lat"), crs= 4326, remove = F)
+```
+
+```{r}
+cols = c("#0161b2","#0161b2","#f74652","#f74652","#f74652")
+```
+
+```{r}
+esri_topo <- paste0('https://services.arcgisonline.com/arcgis/rest/services/',
+                   'World_Topo_Map/MapServer/tile/${z}/${y}/${x}.jpeg')
+
+map2<- ggplot() +
+  annotation_map_tile(type = esri_topo, zoom = 8) +
+  layer_spatial(data = sf, color = 'black', size = 4) +
+  coord_sf(xlim = c(140, 148), ylim = c(-10, -20), expand = F, crs= 4326) +
+  annotation_scale() +
+  geom_label_repel(data = coordinates, mapping = aes(x = Lon, y = Lat, label = Reef, fill = Reef), hjust = 0, vjust = 0, show.legend = FALSE) +
+  scale_fill_manual(values = cols)+
+  scale_colour_manual(values = cols) +
+  labs(x = "Longitude", y = "Latitude")
+map2
+
+
+```
+
+```{r}
+# Small Map of Australia
+sf_use_s2(FALSE) #We don't want to use a spherical geometry for now
+
+world <- ne_countries(scale = "medium", returnclass = "sf")
+AUS <- world %>% 
+  filter(name_long == "Australia") 
+
+map_aus <- ggplot(data = AUS) +
+  geom_sf(size = 0.1, fill = "#333333") +
+  coord_sf(expand = F, xlim = c(112,154), ylim = c(-45,-10)) +
+  geom_rect(aes(xmin=142, xmax=153, ymin=-25, ymax=-10),fill="transparent", linetype = "dotted", color="firebrick") +
+  theme(plot.background = element_rect(fill = "transparent", colour = NA),
+        panel.background = element_rect(fill = "transparent"),
+        panel.grid = element_blank(),
+        panel.border= element_blank(),
+        axis.text.x= element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank())
+
+map_aus
+```
+
+```{r}
+# first define box
+cropbox <- extent(142, 152, -22, -10) %>%
+  as("SpatialPolygons") %>%
+  st_as_sf %>%
+  st_set_crs(st_crs(gbr_feat))
+```
+
+```{r}
+site_map2<- map2 + annotation_custom(ggplotGrob(map_aus), xmin = 139, xmax = 144, 
+                       ymin = -20, ymax = -17)
+site_map2
+```
+
+```{r}
+final_map<- ggplot() +
+  geom_sf(data = land, fill = "grey70", color = NA) +
+  annotation_map_tile(type = esri_topo, zoom = 8) +
+  layer_spatial(data = sf, color = 'black', size = 4) +
+  geom_raster(data = df_dhw_max, aes(x = x, y = y, fill = DHW_max)) +
+  #scale_fill_viridis(name = "Max DHW\n(°C-weeks)", option = "plasma", na.value = "transparent") +
+  coord_sf(xlim = lon_range, ylim = lat_range, expand = FALSE) +
+  annotation_scale() +
+  theme_minimal()+
+  #scale_fill_distiller(palette = "YlOrRd", direction = 1) +
+  #scale_fill_gradientn(colors = c("white", "orange", "red", "darkred")) +
+  #scale_fill_gradientn(colors = c("blue", "green", "yellow", "orange", "red")) +
+  #scale_fill_gradientn(colors = c("#0081a7", "#fdfcdc", "#f07167")) +
+  scale_fill_gradientn(colors = c("#264653", "#2a9d8f", "#e9c46a", "#e76f51")) +
+  geom_label_repel(data = coordinates, mapping = aes(x = Lon, y = Lat, label = Reef), hjust = 0, vjust = 0, show.legend = FALSE) +
+  labs(x = "Longitude", y = "Latitude")
+final_map
+```
+
+```{r}
+final_map2<- final_map + annotation_custom(ggplotGrob(map_aus), xmin = 139, xmax = 144, 
+                       ymin = -20, ymax = -17)
+final_map2
+```
+
+####
+Plot SST
+```{r}
+library(tidyverse)
+library(terra)
+library(rnaturalearth)
+library(ggplot2)
+library(viridis)
+library(rerddap)
+library(lubridate)
+```
+
+```{r}
+erddap_url <- "https://coastwatch.pfeg.noaa.gov/erddap/"
+```
+
+```{r}
+# Create a sequence of dates: every 7 days from Jan 1 to Apr 30 for years 2016-2020
+dates <- seq.Date(from = as.Date("2016-01-01"),
+                  to   = as.Date("2019-12-30"),
+                  by   = "7 days") %>%
+  # Keep only dates in Jan-Apr for each year
+  keep(~ month(.) %in% 1:12)
+```
+
+```{r}
+# Function to download and process a single date
+get_sst_df <- function(date, lat_range, lon_range, erddap_url) {
+  date_chr <- as.character(date)
+  message("Processing ", date_chr)
+  
+  # 4a. Use tryCatch to handle any errors (e.g., missing data)
+  tryCatch({
+    sst <- griddap(datasetx = "NOAA_DHW",
+                       url      = erddap_url,
+                       time     = c(date_chr, date_chr),
+                       latitude = lat_range,
+                       longitude= lon_range,
+                       fields   = "CRW_SST",
+                       fmt      = "nc")
+    
+    # 4b. Load raster
+    r <- rast(sst$summary$filename)
+    
+    # 4c. Crop and flip for orientation
+    ext_gbr <- ext(lon_range[1], lon_range[2], lat_range[1], lat_range[2])
+    r <- crop(r, ext_gbr)
+    r <- flip(r, direction = "vertical")
+    
+    # 4d. Convert to dataframe, add date
+    df <- as.data.frame(r, xy = TRUE, na.rm = TRUE) %>%
+      rename(SST = CRW_SST) %>%
+      mutate(date = date_chr)
+    
+    return(df)
+    
+  }, error = function(e) {
+    message("Failed for ", date_chr, ": ", e$message)
+    return(NULL)
+  })
+}
+```
+
+Davies
+```{r}
+# Define bounding box and ERDDAP base URL
+lat_range <- c(-18.85, -18.8)
+lon_range<- c(147.62, 147.68)
+
+# Loop over all dates, download and process data
+all_dfs <- map(dates, get_sst_df, lat_range = lat_range, lon_range = lon_range, erddap_url = erddap_url)
+
+# Bind all results together and filter out NULLs
+dav_sst <- bind_rows(all_dfs)
+
+# Convert date to factor or Date for plotting facets
+dav_sst <- dav_sst %>% mutate(date = as.Date(date))
+
+dav_sst2 <- dav_sst %>% dplyr::group_by(date) |>
+  dplyr::summarise(SST) |>
+  dplyr::mutate(Reef = "Davies")
+
+rm(dav_sst)
+```
+
+Palms
+```{r}
+# Define bounding box and ERDDAP base URL
+lat_range <- c(-18.8, -18.75)
+lon_range<- c(146.55, 146.63)
+
+# Loop over all dates, download and process data
+all_dfs <- map(dates, get_sst_df, lat_range = lat_range, lon_range = lon_range, erddap_url = erddap_url)
+
+# Bind all results together and filter out NULLs
+pal_sst <- bind_rows(all_dfs)
+
+# Convert date to factor or Date for plotting facets
+pal_sst <- pal_sst %>% mutate(date = as.Date(date))
+
+pal_sst2 <- pal_sst %>% dplyr::group_by(date) |>
+  dplyr::summarise(SST) |>
+  dplyr::mutate(Reef = "Palms")
+
+rm(pal_sst)
+```
+
+Switzer
+```{r}
+# Define bounding box and ERDDAP base URL
+lat_range <- c(-14.38, -14.34)
+lon_range<- c(144.73, 144.78)
+
+# Loop over all dates, download and process data
+all_dfs <- map(dates, get_sst_df, lat_range = lat_range, lon_range = lon_range, erddap_url = erddap_url)
+
+# Bind all results together and filter out NULLs
+swi_sst <- bind_rows(all_dfs)
+
+# Convert date to factor or Date for plotting facets
+swi_sst <- swi_sst %>% mutate(date = as.Date(date))
+
+swi_sst2 <- swi_sst %>% dplyr::group_by(date) |>
+  dplyr::summarise(SST) |>
+  dplyr::mutate(Reef = "Switzer")
+
+rm(swi_sst)
+```
+
+Jewell
+```{r}
+# Define bounding box and ERDDAP base URL
+lat_range <- c(-14.43, -14.38)
+lon_range<- c(145.3, 145.4)
+
+# Loop over all dates, download and process data
+all_dfs <- map(dates, get_sst_df, lat_range = lat_range, lon_range = lon_range, erddap_url = erddap_url)
+
+# Bind all results together and filter out NULLs
+jew_sst <- bind_rows(all_dfs)
+
+# Convert date to factor or Date for plotting facets
+jew_sst <- jew_sst %>% mutate(date = as.Date(date))
+
+jew_sst2 <- jew_sst %>% dplyr::group_by(date) |>
+  dplyr::summarise(SST) |>
+  dplyr::mutate(Reef = "Jewell")
+
+rm(jew_sst)
+```
+
+Parke
+```{r}
+# Define bounding box and ERDDAP base URL
+lat_range <- c(-14.43, -14.38)
+lon_range<- c(145.32, 145.35)
+
+# Loop over all dates, download and process data
+all_dfs <- map(dates, get_sst_df, lat_range = lat_range, lon_range = lon_range, erddap_url = erddap_url)
+
+# Bind all results together and filter out NULLs
+par_sst <- bind_rows(all_dfs)
+
+# Convert date to factor or Date for plotting facets
+par_sst <- par_sst %>% mutate(date = as.Date(date))
+
+par_sst2 <- par_sst %>% dplyr::group_by(date) |>
+  dplyr::summarise(SST) |>
+  dplyr::mutate(Reef = "Parke")
+
+rm(par_sst)
+```
+
+Combine datasets
+```{r}
+sst<- rbind(dav_sst2, pal_sst2, swi_sst2, jew_sst2,  par_sst2)
+#save(sst, file = "/Users/alexmacadam/Documents/GitHub/AGF-DArT/data/sst.rda")
+load("/Users/alexmacadam/Documents/GitHub/AGF-DArT/data/sst.rda")
+```
+
+```{r}
+north<- rbind(swi_sst2, jew_sst2,  par_sst2)
+north2<- north |>
+  dplyr::group_by(date) |>
+  dplyr::summarise(SST) |>
+  mutate(Region = "North")
+
+central<- rbind(dav_sst2, pal_sst2)
+central2<- central |>
+  dplyr::group_by(date) |>
+  dplyr::summarise(SST) |>
+  mutate(Region = "Central")
+
+sst2<- rbind(central2, north2)
+```
+
+Plot SST
+```{r}
+sst_line<- sst2 |> 
+ggplot() +
+  geom_line(aes(x = date, y = SST, colour = Region)) +
+  theme_Publication() +
+  labs(x="Date", y="SST (°C)") +
+  theme(plot.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.border = element_blank()
+        ) +
+  scale_colour_manual(values = c("#0161b2", "#f74652"))
+```
+
+```{r}
+sst_dens<- sst2 |>
+ggplot() +
+  geom_density(aes(x = SST, fill = Region), alpha = 0.6) +
+  theme_Publication() +
+  labs(y="Density", x="SST (°C)") +
+  theme(plot.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.border = element_blank()
+        ) +
+  scale_fill_manual(values = c("#0161b2", "#f74652"))
+```
+
+```{r}
+library(patchwork)
+sst_plots<- sst_line / sst_dens + plot_annotation(tag_levels = "A") + plot_layout(nrow = 2, guides = "collect", widths = c(1,1))
+```
+
