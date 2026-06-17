@@ -1,0 +1,421 @@
+---
+title: "03_Aken_heritability"
+output: html_document
+date: "2025-07-30"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(brms)
+
+theme_Publication <- function(base_size=14, base_family="arial") {
+      library(grid)
+      library(ggthemes)
+      (theme_foundation(base_size=base_size, base_family=base_family)
+       + theme(plot.title = element_text(face = "bold",
+                                         size = rel(1.2), hjust = 0.5),
+               text = element_text(),
+               panel.background = element_rect(colour = NA),
+               plot.background = element_rect(colour = NA),
+               panel.border = element_rect(colour = NA),
+               axis.title = element_text(face = "bold",size = rel(1)),
+               axis.title.y = element_text(angle=90,vjust =2),
+               axis.title.x = element_text(vjust = -0.2),
+               axis.text = element_text(), 
+               axis.line = element_line(colour="black"),
+               axis.ticks = element_line(),
+               panel.grid.major = element_line(colour="#f0f0f0"),
+               panel.grid.minor = element_blank(),
+               legend.key = element_rect(colour = NA),
+               legend.position = "bottom",
+               legend.direction = "horizontal",
+               legend.key.size= unit(0.2, "cm"),
+               legend.margin = unit(0, "cm"),
+               legend.title = element_text(face="italic"),
+               plot.margin=unit(c(10,5,5,5),"mm"),
+               strip.background=element_rect(colour="#f0f0f0",fill="#f0f0f0"),
+               strip.text = element_text(face="bold")
+          ))
+      
+}
+
+scale_fill_Publication <- function(...){
+      library(scales)
+      discrete_scale("fill","Publication",manual_pal(values = c("#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")), ...)
+
+}
+
+scale_colour_Publication <- function(...){
+      library(scales)
+      discrete_scale("colour","Publication",manual_pal(values = c("#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")), ...)
+
+}
+```
+
+Larvae
+
+Binary
+```{r}
+#load data
+load("/Users/alexmacadam/Desktop/heritability/larvae/binary/brms_model_larv_binary_3.rda")
+larv_bin<- model
+```
+
+```{r}
+mcmc_plot(larv_bin, type = "acf")
+summary(larv_bin)
+```
+
+```{r}
+posterior <- as.data.frame(larv_bin)
+names(posterior)[grepl("sd_animal", names(posterior))]
+```
+
+```{r}
+va <- posterior$`sd_animal__Intercept`^2
+heritability <- va / (va + (pi^2 / 3))
+```
+
+```{r}
+mean(heritability)
+quantile(heritability, probs = c(0.025, 0.5, 0.975))
+```
+
+```{r}
+larv_bin_heritability<- as.data.frame(heritability)
+larv_bin_heritability$MCMC <- 1:nrow(larv_bin_heritability)
+```
+
+```{r}
+larv_bin_heritability |>
+  ggplot() +
+  geom_line(aes(x=MCMC, y=heritability)) +
+  geom_hline(yintercept = 0.8353671, color = "red")
+
+larv_bin_heritability |>
+  ggplot() +
+  geom_density(aes(heritability)) +
+ labs(y="Density")
+```
+
+Percent
+```{r}
+#load data
+load("/Users/alexmacadam/Desktop/heritability/larvae/percent/brms_model_larv_percent_1.rda")
+larv_per<- model
+```
+
+```{r}
+#summarisse model
+plot(larv_per)
+summary(larv_per)
+```
+
+```{r}
+#create posterior dataframe
+posterior <- as.data.frame(larv_per)
+#find column names
+names(posterior)[grepl("sd_animal", names(posterior))]
+```
+
+```{r}
+#calculate heritability
+va <- posterior$`sd_animal__Intercept`^2
+heritability <- va / (va + (pi^2 / 3))
+```
+
+```{r}
+#heritability mean and quantiles
+mean(heritability)
+quantile(heritability, probs = c(0.025, 0.5, 0.975))
+```
+
+```{r}
+#creaete dataaframe of heritability estimates
+larv_per_heritability<- as.data.frame(heritability)
+larv_per_heritability$MCMC <- 1:nrow(larv_per_heritability)
+```
+
+```{r}
+#plot heritability distribution
+larv_per_heritability |>
+  ggplot() +
+  geom_density(aes(heritability)) +
+ labs(y="Density")
+```
+
+Juveniles
+
+binary
+```{r}
+#load data
+load("/Users/alexmacadam/Desktop/heritability/juveniles/binary/brms_model_juv_binary_3.rda")
+juv_bin<- model
+```
+
+```{r}
+mcmc_plot(juv_bin, type = "acf")
+summary(juv_bin)
+```
+
+```{r}
+posterior <- as.data.frame(juv_bin)
+names(posterior)[grepl("sd_animal", names(posterior))]
+```
+
+```{r}
+va <- posterior$`sd_animal__Intercept`^2
+heritability <- va / (va + (pi^2 / 3))
+```
+
+```{r}
+mean(heritability)
+quantile(heritability, probs = c(0.025, 0.5, 0.975))
+```
+
+```{r}
+juv_bin_heritability<- as.data.frame(heritability)
+juv_bin_heritability$MCMC <- 1:nrow(juv_bin_heritability)
+```
+
+```{r}
+juv_bin_heritability |>
+  ggplot() +
+  geom_line(aes(x=MCMC, y=heritability)) +
+  geom_hline(yintercept = 0.8353671, color = "red")
+
+juv_bin_heritability |>
+  ggplot() +
+  geom_density(aes(heritability)) +
+ labs(y="Density")
+```
+
+##
+```{r}
+load("/Users/alexmacadam/Desktop/heritability/juveniles/percent/brms_model_juv_percent_1.rda")
+juv_per<- model
+```
+
+```{r}
+#summarisse model
+plot(juv_per)
+mcmc_plot(juv_per, type = "acf")
+summary(juv_per)
+```
+
+```{r}
+#create posterior dataframe
+posterior <- as.data.frame(juv_per)
+#find column names
+names(posterior)[grepl("sd_animal", names(posterior))]
+```
+
+```{r}
+#calculate heritability
+va <- posterior$`sd_animal__Intercept`^2
+heritability_juv <- va / (va + (pi^2 / 3))
+```
+
+```{r}
+#heritability mean and quantiles
+mean(heritability_juv)
+quantile(heritability_juv, probs = c(0.025, 0.5, 0.975))
+```
+
+```{r}
+#creaete dataaframe of heritability estimates
+heritability_juv2<- as.data.frame(heritability_juv)
+heritability_juv2$MCMC <- 1:nrow(heritability_juv2)
+```
+
+```{r}
+#plot heritability distribution
+heritability_juv2 |>
+  ggplot() +
+  geom_density(aes(heritability_juv)) +
+ labs(y="Density")
+```
+
+```{r}
+heritability_larv2 <- heritability_larv2 |> mutate(Method = "Larvae")
+heritability_juv2 <- heritability_juv2 |> mutate(Method = "Juveniles")
+
+#plot larvae and juveniles
+larv_her_plot<- heritability_larv2 |>
+  ggplot() +
+  geom_density(aes(heritability_larv, fill = Method), alpha = 0.8) +
+  geom_vline(aes(xintercept = 0.91462), colour = "#7fc97f", size = 1, linetype="dashed") +
+  facet_wrap(~Method, drop = T) +
+  theme_Publication() +
+  labs(y="Density") +
+  theme(plot.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.border = element_blank()
+        ) +
+  scale_fill_manual(values = c("#7fc97f"))
+larv_her_plot
+
+juv_her_plot<- heritability_juv2 |>
+  ggplot() +
+  geom_density(aes(heritability_juv, fill = Method), alpha = 0.8) +
+  geom_vline(aes(xintercept = 0.195), colour = "#fdb462", size = 1, linetype="dashed") +
+  facet_wrap(~Method, drop = T) +
+  theme_Publication() +
+  labs(y="Density") +
+  theme(plot.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.border = element_blank()
+        ) +
+  scale_fill_manual(values = c("#fdb462"))
+juv_her_plot
+```
+
+BayesR
+
+Larvae
+```{r}
+#load BayesR heritability
+hyp <- read.table("/Users/alexmacadam/Desktop/bayesR/larvae/aten_larvae_T0_adult_imp_out.hyp", header=TRUE)
+```
+
+```{r}
+#calculate heritability estimate
+gen_var <- hyp$Va  # Va: additive genetic variance
+res_var <- hyp$Ve  # Ve: residual variance
+h2 <- gen_var / (gen_var + res_var)
+
+summary(h2)
+hist(h2, main="Posterior distribution of heritability", xlab="h²")
+```
+
+```{r}
+#plot BayesR larvae heritability
+h2_2<- as.data.frame(h2)
+h2_2<- h2_2 |> mutate(Method = "BayesR")
+
+juv_bayesr_her_plot<- h2_2 |>
+  ggplot() +
+  geom_density(aes(h2, fill = Method), alpha = 0.8) +
+  geom_vline(aes(xintercept = 0.99), colour = "#984ea3", size = 1, linetype="dashed") +
+  theme_Publication() +
+  labs(y="Density") +
+  theme(plot.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.border = element_blank()
+        ) +
+  scale_fill_manual(values = c("#984ea3"))
+juv_bayesr_her_plot
+```
+
+```{r}
+#calculate breeding values
+gv <- read.table("/Users/alexmacadam/Desktop/bayesR/larvae/aten_larvae_T0_adult_imp_out.gv")
+colnames(gv) <- "GBV"
+hist(gv$GBV, main="Genomic Breeding Values", xlab="GBV")
+
+fam <- read.table("/Users/alexmacadam/Desktop/bayesR/larvae/aten_larvae_T0_adult_imp.fam")
+gv$ID <- paste(fam$V1, fam$V2, sep="_")
+```
+
+```{r}
+#find SNPs with largest effect
+param <- read.table("/Users/alexmacadam/Desktop/bayesR/larvae/aten_larvae_T0_adult_imp_out.param", header = TRUE)
+colnames(param) <- c("PIP1", "PIP2", "PIP3", "PIP4", "alpha")
+
+# Top SNPs with largest effects
+top_snps <- param[order(abs(param$alpha), decreasing = TRUE), ]
+head(top_snps, 10)
+
+param$nonzero_pip <- param$PIP2 + param$PIP3 + param$PIP4
+important_snps <- param[param$nonzero_pip > 0.5 & abs(param$alpha) > threshold, ]
+
+param$PIP_total <- param$PIP2 + param$PIP3 + param$PIP4
+
+# Choose a threshold (e.g. 0.5)
+important_snps <- param[param$PIP_total >= 0.5, ]
+
+####
+
+param$nonzero_pip <- param$PIP2 + param$PIP3 + param$PIP4
+threshold <- 0.02  # set based on your histogram
+important_snps <- param[param$nonzero_pip > 0.5 & abs(param$alpha) > threshold, ]
+
+```
+
+Juveniles
+```{r}
+#load BayesR heritability
+hyp <- read.table("/Users/alexmacadam/Desktop/bayesR/juveniles/aten_larvae_T0_juv_surv_adult_imp_out.hyp", header=TRUE)
+```
+
+```{r}
+#calculate heritability estimate
+gen_var <- hyp$Va  # Va: additive genetic variance
+res_var <- hyp$Ve  # Ve: residual variance
+h2 <- gen_var / (gen_var + res_var)
+
+summary(h2)
+hist(h2, main="Posterior distribution of heritability", xlab="h²")
+```
+
+```{r}
+#plot BayesR larvae heritability
+h2_2<- as.data.frame(h2)
+h2_2<- h2_2 |> mutate(Method = "BayesR")
+
+juv_bayesr_her_plot<- h2_2 |>
+  ggplot() +
+  geom_density(aes(h2, fill = Method), alpha = 0.8) +
+  geom_vline(aes(xintercept = 0.99), colour = "#984ea3", size = 1, linetype="dashed") +
+  theme_Publication() +
+  labs(y="Density") +
+  theme(plot.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.border = element_blank()
+        ) +
+  scale_fill_manual(values = c("#984ea3"))
+juv_bayesr_her_plot
+```
+
+```{r}
+#calculate breeding values
+gv <- read.table("/Users/alexmacadam/Desktop/bayesR/larvae/aten_larvae_T0_adult_imp_out.gv")
+colnames(gv) <- "GBV"
+hist(gv$GBV, main="Genomic Breeding Values", xlab="GBV")
+
+fam <- read.table("/Users/alexmacadam/Desktop/bayesR/larvae/aten_larvae_T0_adult_imp.fam")
+gv$ID <- paste(fam$V1, fam$V2, sep="_")
+```
+
+```{r}
+#find SNPs with largest effect
+param <- read.table("/Users/alexmacadam/Desktop/bayesR/larvae/aten_larvae_T0_adult_imp_out.param", header = TRUE)
+colnames(param) <- c("PIP1", "PIP2", "PIP3", "PIP4", "alpha")
+
+# Top SNPs with largest effects
+top_snps <- param[order(abs(param$alpha), decreasing = TRUE), ]
+head(top_snps, 10)
+
+param$nonzero_pip <- param$PIP2 + param$PIP3 + param$PIP4
+important_snps <- param[param$nonzero_pip > 0.5 & abs(param$alpha) > threshold, ]
+
+param$PIP_total <- param$PIP2 + param$PIP3 + param$PIP4
+
+# Choose a threshold (e.g. 0.5)
+important_snps <- param[param$PIP_total >= 0.5, ]
+
+####
+
+param$nonzero_pip <- param$PIP2 + param$PIP3 + param$PIP4
+threshold <- 0.02  # set based on your histogram
+important_snps <- param[param$nonzero_pip > 0.5 & abs(param$alpha) > threshold, ]
+
+```
