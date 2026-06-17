@@ -394,3 +394,44 @@ ks.test(ks_hybrid$amb, ks_hybrid$hot)
 ks_north<- af2_sig |> filter(Region == "North") |> dplyr::select(SNP, temp, alf) |> pivot_wider(names_from = temp, values_from = alf)
 ks.test(ks_north$amb, ks_north$hot)
 ```
+
+PCA
+```{r}
+ten_larvae<- gl.keep.pop(ten_larvae, pop.list = c('Amb', 'Hot'), as.pop = 'Temp', mono.rm = FALSE, recalc=TRUE)
+ten_larvae<- gl.keep.loc(ten_larvae, loc.list = sig)
+
+pcoa<- gl.pcoa(ten_larvae)
+pca<- gl.pcoa.plot(pcoa, ten_larvae, scale = T)
+explained_variance <- c(17.9, 10.7)  # % Variation for PC1 and PC2
+
+pcascore<- as.data.frame(pcoa$scores) |> rownames_to_column(var = "Labels")
+pops<- as.data.frame(ten_larvae$pop)|> dplyr::rename(pop = `ten_larvae$pop`)
+
+pcascore<- cbind(pops, pcascore)
+
+pcascore <- pcascore %>%
+  mutate(temp = case_when(
+    grepl("Hot", pop, ignore.case = TRUE) ~ "Hot",
+    grepl("Amb", pop, ignore.case = TRUE) ~ "Amb",
+    TRUE ~ NA_character_  # or "Unknown" for remaining cases
+  ))
+
+pcascore <- pcascore %>%
+  mutate(region = case_when(
+    grepl("DavxDav|PalxDav|PalxPal", pop, ignore.case = TRUE) ~ "Central",
+    grepl("JewxJew|ParxPar|SwixSwi", pop, ignore.case = TRUE) ~ "North",
+    grepl("JewxDav|JewxPal|ParxDav|SwixDav", pop, ignore.case = TRUE) ~ "Hybrid",
+    TRUE ~ NA_character_
+  ))
+
+# Plot PCA loadings for PC1 and PC2
+pca1<- ggplot(pcascore, aes(x = PC1, y = PC2, colour = pop, shape = temp)) +
+  geom_point(size = 3) +  # Add points
+  #geom_text(vjust = -0.5, hjust = 0.5) +  # Add labels near points
+  labs(x = paste0("PC1 (", explained_variance[1], "%)"), y = paste0("PC2 (", explained_variance[2], "%)"), colour = "Reef") +
+  #coord_fixed(ratio = explained_variance[2] / explained_variance[1]) +
+  theme_Publication() 
+  #scale_colour_manual(values = pal[c(1, 3, 5)])
+pca1
+```
+
