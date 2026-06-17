@@ -283,15 +283,23 @@ KOG_plot1<- ggplot(data = KOG, aes(x = reorder(term, nseqs), y = nseqs, fill = d
   theme_minimal()
 KOG_plot1
 
-KOG_plot3<- ggplot(data = KOG, aes(x = delta.rank, y = reorder(term, delta.rank), color = nseqs)) +
-  geom_point(size = 3) +
+KOG_plot2<- ggplot(data = KOG, aes(x = delta.rank, y = reorder(term, delta.rank), color = nseqs, size = nseqs)) +
+  geom_point() +
   scale_color_gradient(low = "red", high = "blue") +
-  labs(x = "Delta Rank", y = "KOG Term", color = "N seqs") +
+  labs(x = "Delta Rank", y = "KOG Term", color = "N Seqs", size = "N Seqs") +
   theme_minimal()
-KOG_plot3
+KOG_plot2
 
 KOG_plot<- KOG_plot1 + KOG_plot2
 KOG_plot
+```
+```{r}
+KOG_fisher<- ggplot(data = KOG, aes(x = delta.rank, y = reorder(term, delta.rank))) +
+  geom_bar(stat = "identity") +
+  scale_fill_gradient(low = "red", high = "blue") +
+  labs(x = "Delta Rank", y = "KOG Term") +
+  theme_Publication()
+KOG_fisher
 ```
 
 GO enrichment analysis
@@ -509,4 +517,6 @@ Plot
 library(patchwork)
 fisher_plots<- af_plot + mh_plot + KOG_plot3 + plot_layout(nrow = 3, heights = c(1,1,1.5)) + plot_annotation(tag_levels = 'A')
 fisher_plots
+
+mh_plot_fisher
 ```
