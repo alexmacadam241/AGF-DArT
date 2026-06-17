@@ -420,6 +420,137 @@ sire_effects <- apply(ranef_sire, 1, mean)  |> as.data.frame()
 dam_effects <- apply(ranef_dam, 1, mean) |> as.data.frame()
 ```
 
+#
+```{r}
+# Load necessary function
+inv_logit <- function(x) 1 / (1 + exp(-x))
+
+# Back-transform to predicted survival probability
+ranef_summary_larv <- ranef_summary_larv %>%
+  mutate(prob = inv_logit(mean))  # converts log-odds to probability
+
+# Calculate mean predicted survival for each region
+region_means <- ranef_summary_larv %>%
+  group_by(Region) %>%
+  dplyr::summarise(
+    mean_prob = mean(prob, na.rm = TRUE),
+    se_prob = sd(prob, na.rm = TRUE)
+  )
+
+# Calculate % greater survival of North vs Central
+north_mean <- region_means$mean_prob[region_means$Region == "North"]
+central_mean <- region_means$mean_prob[region_means$Region == "Central"]
+
+X_percent <- ((north_mean - central_mean) / central_mean) * 100
+X_percent
+
+```
+
+```{r}
+inv_logit <- function(x) 1 / (1 + exp(-x))
+
+# Posterior draws: intercept and sire REs (iterations x sires)
+draws_df <- as_draws_df(fit_larv)
+b_int <- as.numeric(dplyr::pull(draws_df, b_Intercept))  # length = n_draws
+
+re_sire_arr <- ranef(fit_larv, summary = FALSE)$Dad[, , "Intercept", drop = FALSE]
+sire_levels <- dimnames(re_sire_arr)[[2]]
+
+# Map sire levels to Region (reuse your pattern rules)
+sire_regions <- tibble(Dad = sire_levels) %>%
+  mutate(
+    Region = case_when(
+      grepl("^Davies[0-9]+|^Palms[0-9]+", Dad) ~ "Central",
+      grepl("^Jewell|^Parke|^Switzer", Dad)    ~ "North",
+      TRUE ~ NA_character_
+    )
+  )
+
+# Build predicted probabilities per draw per sire: logit = intercept + sire_RE
+# re_sire_mat: n_draws x n_sires
+re_sire_mat <- re_sire_arr[, , 1, drop = TRUE]
+if (is.vector(re_sire_mat)) re_sire_mat <- matrix(re_sire_mat, ncol = 1)
+logit_sire <- sweep(re_sire_mat, 1, b_int, `+`)
+prob_sire  <- inv_logit(logit_sire)
+
+# Indices by region
+idx_north   <- which(sire_regions$Region == "North")
+idx_central <- which(sire_regions$Region == "Central")
+
+# Per-draw regional means
+north_mean_draws   <- rowMeans(prob_sire[, idx_north,   drop = FALSE], na.rm = TRUE)
+central_mean_draws <- rowMeans(prob_sire[, idx_central, drop = FALSE], na.rm = TRUE)
+
+# Percent difference per draw and summary
+x_percent_sire_draws <- (north_mean_draws - central_mean_draws) / central_mean_draws * 100
+
+sire_summary <- tibble(
+  mean_percent = mean(x_percent_sire_draws, na.rm = TRUE),
+  l95 = quantile(x_percent_sire_draws, 0.025, na.rm = TRUE),
+  u95 = quantile(x_percent_sire_draws, 0.975, na.rm = TRUE),
+  north_mean_prob = mean(north_mean_draws, na.rm = TRUE),
+  central_mean_prob = mean(central_mean_draws, na.rm = TRUE)
+)
+sire_summary
+```
+
+```{r}
+##
+# Posterior draws for dam REs (iterations x dams)
+re_dam_arr <- ranef(fit_larv, summary = FALSE)$Mom[, , "Intercept", drop = FALSE]
+dam_levels <- dimnames(re_dam_arr)[[2]]
+
+dam_regions <- tibble(Mom = dam_levels) %>%
+  mutate(
+    Region = case_when(
+      grepl("^Davies[0-9]+|^Palms[0-9]+", Mom) ~ "Central",
+      grepl("^Jewell|^Parke|^Switzer", Mom)    ~ "North",
+      TRUE ~ NA_character_
+    )
+  )
+
+re_dam_mat <- re_dam_arr[, , 1, drop = TRUE]
+if (is.vector(re_dam_mat)) re_dam_mat <- matrix(re_dam_mat, ncol = 1)
+logit_dam <- sweep(re_dam_mat, 1, b_int, `+`)
+prob_dam  <- inv_logit(logit_dam)
+
+idx_north_d   <- which(dam_regions$Region == "North")
+idx_central_d <- which(dam_regions$Region == "Central")
+
+north_mean_draws_d   <- rowMeans(prob_dam[, idx_north_d,   drop = FALSE], na.rm = TRUE)
+central_mean_draws_d <- rowMeans(prob_dam[, idx_central_d, drop = FALSE], na.rm = TRUE)
+
+x_percent_dam_draws <- (north_mean_draws_d - central_mean_draws_d) / central_mean_draws_d * 100
+
+dam_summary <- tibble(
+  mean_percent = mean(x_percent_dam_draws, na.rm = TRUE),
+  l95 = quantile(x_percent_dam_draws, 0.025, na.rm = TRUE),
+  u95 = quantile(x_percent_dam_draws, 0.975, na.rm = TRUE),
+  north_mean_prob = mean(north_mean_draws_d, na.rm = TRUE),
+  central_mean_prob = mean(central_mean_draws_d, na.rm = TRUE)
+)
+dam_summary
+
+```
+
+```{r}
+# Posterior probability North > Central
+p_sire <- mean(x_percent_sire_draws > 0)
+p_dam  <- mean(x_percent_dam_draws  > 0)
+
+# Summary table
+tibble(
+  Group = c("Sires", "Dams"),
+  Mean_percent_difference = c(mean(x_percent_sire_draws),
+                              mean(x_percent_dam_draws)),
+  Lower_95 = c(quantile(x_percent_sire_draws, 0.025),
+               quantile(x_percent_dam_draws, 0.025)),
+  Upper_95 = c(quantile(x_percent_sire_draws, 0.975),
+               quantile(x_percent_dam_draws, 0.975)),
+  P_North_greater = c(p_sire, p_dam)
+)
+```
+
 ##############################
 parental contributions - Juveniles
 ```{r}
@@ -622,6 +753,212 @@ prop_var_dad_juv
 prop_var_mom_juv
 ```
 
+#calculate 
+```{r}
+# Load necessary function
+inv_logit <- function(x) 1 / (1 + exp(-x))
+
+# Back-transform to predicted survival probability
+ranef_summary_juv <- ranef_summary_juv %>%
+  mutate(prob = inv_logit(mean))  # converts log-odds to probability
+
+# Calculate mean predicted survival for each region
+region_means <- ranef_summary_juv %>%
+  group_by(Region) %>%
+  dplyr::summarise(
+    mean_prob = mean(prob, na.rm = TRUE),
+    se_prob = sd(prob, na.rm = TRUE)
+  )
+
+# Calculate % greater survival of North vs Central
+north_mean <- region_means$mean_prob[region_means$Region == "North"]
+central_mean <- region_means$mean_prob[region_means$Region == "Central"]
+
+X_percent <- ((north_mean - central_mean) / central_mean) * 100
+X_percent
+```
+
+```{r}
+library(tidyverse)
+library(tidybayes)
+
+inv_logit <- function(x) 1 / (1 + exp(-x))
+
+# Posterior draws for intercept
+
+draws_df <- as_draws_df(fit_juv)
+b_int    <- as.numeric(dplyr::pull(draws_df, b_Intercept))  # length = n_draws
+
+## ---------- Sires (Dad) ----------
+
+re_sire_arr <- ranef(fit_juv, summary = FALSE)$Dad[, , "Intercept", drop = FALSE]
+sire_levels <- dimnames(re_sire_arr)[[2]]
+
+sire_regions <- tibble(Dad = sire_levels) %>%
+mutate(
+Region = case_when(
+grepl("^Davies[0-9]+|^Palms[0-9]+", Dad) ~ "Central",
+grepl("^Jewell|^Parke|^Switzer", Dad)    ~ "North",
+TRUE ~ NA_character_
+)
+)
+
+re_sire_mat <- re_sire_arr[, , 1, drop = TRUE]
+if (is.vector(re_sire_mat)) re_sire_mat <- matrix(re_sire_mat, ncol = 1)
+
+logit_sire <- sweep(re_sire_mat, 1, b_int, `+`)
+prob_sire  <- inv_logit(logit_sire)
+
+idx_north_sire   <- which(sire_regions$Region == "North")
+idx_central_sire <- which(sire_regions$Region == "Central")
+
+north_mean_draws_sire   <- rowMeans(prob_sire[, idx_north_sire,   drop = FALSE], na.rm = TRUE)
+central_mean_draws_sire <- rowMeans(prob_sire[, idx_central_sire, drop = FALSE], na.rm = TRUE)
+
+x_percent_sire_draws <- (north_mean_draws_sire - central_mean_draws_sire) /
+central_mean_draws_sire * 100
+
+## ---------- Dams (Mum) ----------
+
+re_dam_arr <- ranef(fit_juv, summary = FALSE)$Mum[, , "Intercept", drop = FALSE]
+dam_levels <- dimnames(re_dam_arr)[[2]]
+
+dam_regions <- tibble(Mum = dam_levels) %>%
+mutate(
+Region = case_when(
+grepl("^Davies[0-9]+|^Palms[0-9]+", Mum) ~ "Central",
+grepl("^Jewell|^Parke|^Switzer", Mum)    ~ "North",
+TRUE ~ NA_character_
+)
+)
+
+re_dam_mat <- re_dam_arr[, , 1, drop = TRUE]
+if (is.vector(re_dam_mat)) re_dam_mat <- matrix(re_dam_mat, ncol = 1)
+
+logit_dam <- sweep(re_dam_mat, 1, b_int, `+`)
+prob_dam  <- inv_logit(logit_dam)
+
+idx_north_dam   <- which(dam_regions$Region == "North")
+idx_central_dam <- which(dam_regions$Region == "Central")
+
+north_mean_draws_dam   <- rowMeans(prob_dam[, idx_north_dam,   drop = FALSE], na.rm = TRUE)
+central_mean_draws_dam <- rowMeans(prob_dam[, idx_central_dam, drop = FALSE], na.rm = TRUE)
+
+x_percent_dam_draws <- (north_mean_draws_dam - central_mean_draws_dam) /
+central_mean_draws_dam * 100
+
+## ---------- Summary in same layout as larvae ----------
+
+p_sire <- mean(x_percent_sire_draws > 0, na.rm = TRUE)
+p_dam  <- mean(x_percent_dam_draws  > 0, na.rm = TRUE)
+
+juv_parent_region_summary <- tibble(
+Group = c("Sires", "Dams"),
+Mean_percent_difference = c(mean(x_percent_sire_draws, na.rm = TRUE),
+mean(x_percent_dam_draws,  na.rm = TRUE)),
+Lower_95 = c(quantile(x_percent_sire_draws, 0.025, na.rm = TRUE),
+quantile(x_percent_dam_draws,  0.025, na.rm = TRUE)),
+Upper_95 = c(quantile(x_percent_sire_draws, 0.975, na.rm = TRUE),
+quantile(x_percent_dam_draws,  0.975, na.rm = TRUE)),
+P_North_greater = c(p_sire, p_dam)
+)
+
+juv_parent_region_summary
+
+```
+
+```{r}
+library(tidyverse)
+library(tidybayes)
+
+inv_logit <- function(x) 1 / (1 + exp(-x))
+
+# Posterior draws (intercept)
+draws_df <- as_draws_df(fit_juv)
+b_int    <- as.numeric(dplyr::pull(draws_df, b_Intercept))  # length = n_draws
+
+### --- Sires (Dad) --- ###
+re_dad_arr <- ranef(fit_juv, summary = FALSE)$Dad[, , "Intercept", drop = FALSE]
+dad_levels <- dimnames(re_dad_arr)[[2]]
+
+dad_regions <- tibble(Dad = dad_levels) %>%
+  mutate(
+    Region = case_when(
+      grepl("^Davies[0-9]+|^Palms[0-9]+", Dad) ~ "Central",
+      grepl("^Jewell|^Parke|^Switzer", Dad)    ~ "North",
+      TRUE ~ NA_character_
+    )
+  )
+
+re_dad_mat <- re_dad_arr[, , 1, drop = TRUE]
+if (is.vector(re_dad_mat)) re_dad_mat <- matrix(re_dad_mat, ncol = 1)
+
+logit_dad <- sweep(re_dad_mat, 1, b_int, `+`)
+prob_dad  <- inv_logit(logit_dad)
+
+idx_north_dad   <- which(dad_regions$Region == "North")
+idx_central_dad <- which(dad_regions$Region == "Central")
+
+north_mean_draws_dad   <- rowMeans(prob_dad[, idx_north_dad,   drop = FALSE], na.rm = TRUE)
+central_mean_draws_dad <- rowMeans(prob_dad[, idx_central_dad, drop = FALSE], na.rm = TRUE)
+
+percent_diff_dad_draws <- (north_mean_draws_dad - central_mean_draws_dad) /
+                           central_mean_draws_dad * 100
+
+sire_summary_juv <- tibble(
+  group           = "Sires",
+  mean_percent    = mean(percent_diff_dad_draws, na.rm = TRUE),
+  l95             = quantile(percent_diff_dad_draws, 0.025, na.rm = TRUE),
+  u95             = quantile(percent_diff_dad_draws, 0.975, na.rm = TRUE),
+  p_north_greater = mean(percent_diff_dad_draws > 0, na.rm = TRUE),
+  north_mean_prob   = mean(north_mean_draws_dad, na.rm = TRUE),
+  central_mean_prob = mean(central_mean_draws_dad, na.rm = TRUE)
+)
+
+### --- Dams (Mum) --- ###
+re_mum_arr <- ranef(fit_juv, summary = FALSE)$Mum[, , "Intercept", drop = FALSE]
+mum_levels <- dimnames(re_mum_arr)[[2]]
+
+mum_regions <- tibble(Mum = mum_levels) %>%
+  mutate(
+    Region = case_when(
+      grepl("^Davies[0-9]+|^Palms[0-9]+", Mum) ~ "Central",
+      grepl("^Jewell|^Parke|^Switzer", Mum)    ~ "North",
+      TRUE ~ NA_character_
+    )
+  )
+
+re_mum_mat <- re_mum_arr[, , 1, drop = TRUE]
+if (is.vector(re_mum_mat)) re_mum_mat <- matrix(re_mum_mat, ncol = 1)
+
+logit_mum <- sweep(re_mum_mat, 1, b_int, `+`)
+prob_mum  <- inv_logit(logit_mum)
+
+idx_north_mum   <- which(mum_regions$Region == "North")
+idx_central_mum <- which(mum_regions$Region == "Central")
+
+north_mean_draws_mum   <- rowMeans(prob_mum[, idx_north_mum,   drop = FALSE], na.rm = TRUE)
+central_mean_draws_mum <- rowMeans(prob_mum[, idx_central_mum, drop = FALSE], na.rm = TRUE)
+
+percent_diff_mum_draws <- (north_mean_draws_mum - central_mean_draws_mum) /
+                           central_mean_draws_mum * 100
+
+dam_summary_juv <- tibble(
+  group           = "Dams",
+  mean_percent    = mean(percent_diff_mum_draws, na.rm = TRUE),
+  l95             = quantile(percent_diff_mum_draws, 0.025, na.rm = TRUE),
+  u95             = quantile(percent_diff_mum_draws, 0.975, na.rm = TRUE),
+  p_north_greater = mean(percent_diff_mum_draws > 0, na.rm = TRUE),
+  north_mean_prob   = mean(north_mean_draws_mum, na.rm = TRUE),
+  central_mean_prob = mean(central_mean_draws_mum, na.rm = TRUE)
+)
+
+### --- Combined clean summary table --- ###
+juv_parent_region_summary <- bind_rows(sire_summary_juv, dam_summary_juv)
+juv_parent_region_summary
+
+```
+
 ##########
 Plots
 ```{r}
@@ -716,7 +1053,7 @@ par_con_juv_box
 ```
 ```{r}
 library(patchwork)
-par<- par_con_lar_box / par_con_juv_box
+par<- par_con_lar_box + par_con_juv_box
 par
 ```
 
@@ -724,7 +1061,6 @@ par
 ranef_summary_larv<- ranef_summary_larv |> mutate(lifestage = "larv")
 ranef_summary_juv<- ranef_summary_juv |> mutate(lifestage = "juv")
 ranef_summary <- rbind(ranef_summary_larv, ranef_summary_juv)
-
 
 par_con_dam_box <- ranef_summary |> filter(group == "Dams") |>
   ggplot() +
@@ -776,8 +1112,75 @@ con_plot + par_con_sire_box + par_con_dam_box + plot_annotation(tag_levels = "A"
 ```
 
 ```{r}
+ranef_summary <- ranef_summary |> mutate(group = factor(group, levels = c("Dams", "Sires")))
+
+par_con_larv_box <- ranef_summary |> filter(lifestage == "larv") |>
+  ggplot(aes(x = group, y = mean, fill = Region)) +
+  geom_boxplot(aes(group = interaction(group, Region)), position = position_dodge(width = 0.75), width = 0.6) +
+  facet_wrap(~lifestage, drop = T) +
+  labs(y = "ICC") +
+  scale_color_manual(values=pal[c(1,5)]) +
+  scale_fill_manual(values = pal[c(1, 5)]) + 
+  labs(x='Parent', y="ICC")+
+  theme_Publication() +
+  theme(legend.key.height = unit(0.3, "cm"),
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(0,0,0,0),
+        plot.margin = margin(rep(0.5,4)),
+        legend.position="right",
+        legend.direction = "vertical",
+        axis.text.x = element_text(angle = 45),
+        axis.text.y = element_text(angle = 90),
+        strip.background = element_rect(fill = "white", color = "black")
+        ) 
+  #scale_y_continuous(limits = c(-2, 3),breaks = seq(-3, 3, 1))
+par_con_larv_box
+
+par_con_juv_box <- ranef_summary |> filter(lifestage == "juv") |>
+  ggplot(aes(x = group, y = mean, fill = Region)) +
+  geom_boxplot(aes(group = interaction(group, Region)), position = position_dodge(width = 0.75), width = 0.6) +
+  facet_wrap(~lifestage, drop = T) +
+  labs(y = "ICC") +
+  scale_color_manual(values=pal[c(1,5)]) +
+  scale_fill_manual(values = pal[c(1, 5)]) + 
+  labs(x='Parent', y="ICC")+
+  theme_Publication() +
+  theme(legend.key.height = unit(0.3, "cm"),
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(0,0,0,0),
+        plot.margin = margin(rep(0.5,4)),
+        legend.position="right",
+        legend.direction = "vertical",
+        axis.text.x = element_text(angle = 45),
+        axis.text.y = element_text(angle = 90),
+        strip.background = element_rect(fill = "white", color = "black")
+        ) 
+  #scale_y_continuous(limits = c(-2, 3),breaks = seq(-3, 3, 1))
+par_con_juv_box
+
+par_box <- par_con_larv_box + par_con_juv_box + plot_annotation(tag_levels = "A") + plot_layout(ncol = 2, guides = "collect", widths = c(1,1))
+par_box
+```
+
+```{r}
 summary_summary <- summarySE(ranef_summary, measurevar="mean",
                      groupvars=c("lifestage","Region"), na.rm=TRUE)
+
+summary_summary2 <- summarySE(ranef_summary, measurevar="mean",
+                     groupvars=c("lifestage","Region","group"), na.rm=TRUE)
+
+#percent difference
+A <- mean(juv_sire$mean[juv_sire$Region == "Central"], na.rm = TRUE)
+B <- mean(juv_sire$mean[juv_sire$Region == "North"], na.rm = TRUE)
+
+percent_diff <- abs(A - B) / ((abs(A) + abs(B)) / 2) * 100
+percent_diff
+
+k <- abs(min(juv_sire$mean)) + 1e-6   # small offset
+A2 <- A + k
+B2 <- B + k
+log_ratio <- log(B2 / A2)
+log_ratio
 ```
 
 ```{r}
@@ -789,6 +1192,61 @@ juv<- ranef_summary_juv |> mutate(Lifestage = "juv") |>
   dplyr::select(Lifestage, group, Region, parent, mean, se) 
 
 deviance<- rbind(larv, juv)
-write.csv(deviance, "/Users/alexmacadam/Documents/GitHub/AGF-DArT/data/pm_deviance.csv")
+#write.csv(deviance, "/Users/alexmacadam/Documents/GitHub/AGF-DArT/data/pm_deviance.csv")
 ```
 
+Stats for parent contributions
+```{r}
+#Filter data
+lar_dam<- ranef_summary_larv |> filter(group == "Dams")
+lar_sire<- ranef_summary_larv |> filter(group == "Sires")
+juv_dam<- ranef_summary_juv |> filter(group == "Dams")
+juv_sire<- ranef_summary_juv |> filter(group == "Sires")
+
+juv_dam_nor<- juv_dam |> filter(Region == "North")
+juv_dam_cen<- juv_dam |> filter(Region == "Central")
+juv_sir_nor<- juv_sire |> filter(Region == "North")
+juv_sir_cen<- juv_sire |> filter(Region == "Central")
+
+# Check normality (Shapiro-Wilk test)
+shapiro.test(lar_dam$mean) # p > 0.05 → normal = 0.19
+shapiro.test(lar_sire$mean) # p > 0.05 → normal = 0.02
+shapiro.test(juv_dam$mean) # p > 0.05 → normal = 0.61
+shapiro.test(juv_sire$mean) # p > 0.05 → normal = 0.99
+
+# Check equal variances (F-test)
+var.test(lar_dam$mean, lar_sire$mean) # p > 0.05 → equal variances
+
+# Wilcoxon rank-sum test (non-parametric)
+wilcox_dams_juvs_region <- wilcox.test(juv_sir_nor$mean, juv_sir_cen$mean, exact = FALSE)
+wilcox_dams_juvs_region
+```
+
+```{r}
+juv_sire
+wilcox.test(juv_sir_nor$mean, juv_sir_cen$mean, exact = FALSE)
+```
+
+```{r}
+#test all
+ranef_summary$Region_lifestage <- paste(ranef_summary$Region, ranef_summary$lifestage, sep = "_")
+kruskal.test(mean ~ Region_lifestage, data = ranef_summary)
+
+#test only juveniles sires
+kruskal.test(mean ~ Region, data = juv_sire)
+```
+```{r}
+t.test(juv_sir_nor$mean, juv_sir_cen$mean, var.equal = FALSE) #Welch’s t-test for normal distribution but unequal variance
+t.test(juv_dam_nor$mean, juv_dam_cen$mean, var.equal = FALSE) #Welch’s t-test for normal distribution but unequal variance
+
+juv_nor<- rbind(juv_sir_nor, juv_dam_nor)
+juv_cen<- rbind(juv_sir_cen, juv_dam_cen)
+
+t.test(juv_nor$mean, juv_cen$mean, var.equal = FALSE)
+
+wilcox.test(juv_nor$mean, juv_cen$mean)
+ks.test(juv_nor$mean, juv_cen$mean)
+t.test(juv_nor$mean, juv_cen$mean, var.equal = FALSE)
+
+##try using BRMS to tell if statistically different
+```
