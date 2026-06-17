@@ -1,0 +1,518 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-11-10"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+load packages
+```{r}
+# Install the latest version of dartR (v2)
+#install.packages("dartR")
+library(dartR)
+library(tidyverse)
+library(ggpubr)
+library(adegenet)
+library(poppr)
+library(hierfstat)
+library(reshape2)
+library(RColorBrewer)
+library(scales)
+library(LEA)
+library(wesanderson)
+```
+
+```{r}
+theme_Publication <- function(base_size=14, base_family="arial") {
+      library(grid)
+      library(ggthemes)
+      (theme_foundation(base_size=base_size, base_family=base_family)
+       + theme(plot.title = element_text(face = "bold",
+                                         size = rel(1.2), hjust = 0.5),
+               text = element_text(),
+               panel.background = element_rect(colour = NA),
+               plot.background = element_rect(colour = NA),
+               panel.border = element_rect(colour = NA),
+               axis.title = element_text(face = "bold",size = rel(1)),
+               axis.title.y = element_text(angle=90,vjust =2),
+               axis.title.x = element_text(vjust = -0.2),
+               axis.text = element_text(), 
+               axis.line = element_line(colour="black"),
+               axis.ticks = element_line(),
+               panel.grid.major = element_line(colour="#f0f0f0"),
+               panel.grid.minor = element_blank(),
+               legend.key = element_rect(colour = NA),
+               legend.position = "bottom",
+               legend.direction = "horizontal",
+               legend.key.size= unit(0.2, "cm"),
+               legend.margin = unit(0, "cm"),
+               legend.title = element_text(face="italic"),
+               plot.margin=unit(c(10,5,5,5),"mm"),
+               strip.background=element_rect(colour="#f0f0f0",fill="#f0f0f0"),
+               strip.text = element_text(face="bold")
+          ))
+      
+}
+
+scale_fill_Publication <- function(...){
+      library(scales)
+      discrete_scale("fill","Publication",manual_pal(values = c("#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")), ...)
+
+}
+
+scale_colour_Publication <- function(...){
+      library(scales)
+      discrete_scale("colour","Publication",manual_pal(values = c("#386cb0","#fdb462","#7fc97f","#ef3b2c","#662506","#a6cee3","#fb9a99","#984ea3","#ffff33")), ...)
+
+}
+
+pal <- wes_palette("Zissou1", 5, type = "discrete")
+```
+
+```{r}
+# Function for summarising standard error
+summarySE <- function(data=NULL, measurevar=NULL, groupvars=NULL, na.rm=FALSE,
+                      conf.interval=.95, .drop=TRUE) {
+  require(plyr)
+  
+  # New version of length which can handle NA's: if na.rm==T, don't count them
+  length2 <- function (x, na.rm=FALSE) {
+    if (na.rm==TRUE) sum(!is.na(x))
+    else       length(x)
+  }
+  
+  # This does the summary. For each group's data frame, return a vector with
+  # N, mean, and sd
+  datac <- ddply(data, groupvars, .drop=.drop,
+                 .fun = function(xx, col) {
+                   c(N    = length2(xx[[col]], na.rm=na.rm),
+                     mean = mean   (xx[[col]], na.rm=na.rm),
+                     sd   = sd     (xx[[col]], na.rm=na.rm)
+                   )
+                 },
+                 measurevar
+  )
+  
+  # Commenting this rename mean column line, as not assigning measurevar name properly
+  # # Rename the "mean" column    
+  # datac <- rename(datac, measurevar = mean)
+  
+  datac$se <- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
+  
+  # Confidence interval multiplier for standard error
+  # Calculate t-statistic for confidence interval: 
+  # e.g., if conf.interval is .95, use .975 (above/below), and use df=N-1
+  ciMult <- qt(conf.interval/2 + .5, datac$N-1)
+  datac$ci <- datac$se * ciMult
+  
+  return(datac)
+}
+```
+
+set working directory
+```{r, echo = FALSE, comment= FALSE, message=FALSE}
+#setwd("/Users/alexmacadam/Desktop/A_tenuis/larvae/allele_freq/assoc_files")
+```
+
+Fisher model
+#####
+```{r}
+ten_larvae <- readRDS("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data/ten_larvae_filter.RDS")
+#keep T0
+ten_larvae_pre<- gl.keep.pop(ten_larvae, pop.list = c('T0'), as.pop = 'Temp', mono.rm = FALSE, recalc=TRUE)
+ten_larvae_amb<- gl.keep.pop(ten_larvae, pop.list = c('Amb'), as.pop = 'Temp', mono.rm = FALSE, recalc=TRUE)
+ten_larvae_hot<- gl.keep.pop(ten_larvae, pop.list = c('Hot'), as.pop = 'Temp', mono.rm = FALSE, recalc=TRUE)
+
+#allele freq central pre
+pre_cen<- gl.keep.pop(ten_larvae_pre, pop.list= c("pure_south"), as.pop = "pure_hybrid", mono.rm = FALSE, recalc=TRUE)
+af_pre_cen<- gl.alf(pre_cen) |> rownames_to_column(var = "SNP") |> dplyr::rename(alf1_pre = alf1, alf2_pre = alf2)
+
+#allele freq hybrid pre
+pre_hyb<- gl.keep.pop(ten_larvae_pre, pop.list= c("hybrid_north_south"), as.pop = "pure_hybrid", mono.rm = FALSE, recalc=TRUE)
+af_pre_hyb<- gl.alf(pre_hyb) |> rownames_to_column(var = "SNP") |> dplyr::rename(alf1_pre = alf1, alf2_pre = alf2)
+
+#allele freq north pre
+pre_nor<- gl.keep.pop(ten_larvae_pre, pop.list= c("pure_north"), as.pop = "pure_hybrid", mono.rm = FALSE, recalc=TRUE)
+af_pre_nor<- gl.alf(pre_nor) |> rownames_to_column(var = "SNP") |> dplyr::rename(alf1_pre = alf1, alf2_pre = alf2)
+
+#allele freq central amb
+amb_cen<- gl.keep.pop(ten_larvae_amb, pop.list= c("pure_south"), as.pop = "pure_hybrid", mono.rm = FALSE, recalc=TRUE)
+af_amb_cen<- gl.alf(amb_cen) |> rownames_to_column(var = "SNP") |> dplyr::rename(alf1_amb = alf1, alf2_amb = alf2)
+
+#allele freq hybrid amb
+amb_hyb<- gl.keep.pop(ten_larvae_amb, pop.list= c("hybrid_north_south"), as.pop = "pure_hybrid", mono.rm = FALSE, recalc=TRUE)
+af_amb_hyb<- gl.alf(amb_hyb) |> rownames_to_column(var = "SNP") |> dplyr::rename(alf1_amb = alf1, alf2_amb = alf2)
+
+#allele freq north amb
+amb_nor<- gl.keep.pop(ten_larvae_amb, pop.list= c("pure_north"), as.pop = "pure_hybrid", mono.rm = FALSE, recalc=TRUE)
+af_amb_nor<- gl.alf(amb_nor) |> rownames_to_column(var = "SNP") |> dplyr::rename(alf1_amb = alf1, alf2_amb = alf2)
+
+#allele freq central hot
+hot_cen<- gl.keep.pop(ten_larvae_hot, pop.list= c("pure_south"), as.pop = "pure_hybrid", mono.rm = FALSE, recalc=TRUE)
+af_hot_cen<- gl.alf(hot_cen) |> rownames_to_column(var = "SNP") |> dplyr::rename(alf1_hot = alf1, alf2_hot = alf2)
+
+#allele freq hybrid hot
+hot_hyb<- gl.keep.pop(ten_larvae_hot, pop.list= c("hybrid_north_south"), as.pop = "pure_hybrid", mono.rm = FALSE, recalc=TRUE)
+af_hot_hyb<- gl.alf(hot_hyb) |> rownames_to_column(var = "SNP") |> dplyr::rename(alf1_hot = alf1, alf2_hot = alf2)
+
+#allele freq north hot
+hot_nor<- gl.keep.pop(ten_larvae_hot, pop.list= c("pure_north"), as.pop = "pure_hybrid", mono.rm = FALSE, recalc=TRUE)
+af_hot_nor<- gl.alf(hot_nor) |> rownames_to_column(var = "SNP") |> dplyr::rename(alf1_hot = alf1, alf2_hot = alf2)
+
+#Join pre, ambient and hot datat for each region cross
+af_cen<- left_join(af_pre_cen, af_amb_cen, by = "SNP")
+af_cen<- left_join(af_cen, af_hot_cen, by = "SNP") |> mutate(Region = "Central")
+
+af_hyb<- left_join(af_pre_hyb, af_amb_hyb, by = "SNP")
+af_hyb<- left_join(af_hyb, af_hot_hyb, by = "SNP") |> mutate(Region = "Hybrid")
+
+af_nor<- left_join(af_pre_nor, af_amb_nor, by = "SNP")
+af_nor<- left_join(af_nor, af_hot_nor, by = "SNP") |> mutate(Region = "North")
+
+#combine all data
+af<- rbind(af_cen, af_hyb, af_nor)
+```
+
+Central
+```{r}
+# Load necessary library
+library(dplyr)
+
+# Set total count for each group (e.g., 100 alleles per group)
+total_count <- 100
+
+# Convert allele frequencies to counts based on total_count
+af_cen2<- af_cen %>%
+  mutate(
+    alf1_pre = round(alf1_pre * total_count),
+    alf2_pre = round(alf2_pre * total_count),  
+    alf1_amb = round(alf1_amb * total_count),
+    alf2_amb = round(alf2_amb * total_count),
+    alf1_hot = round(alf1_hot * total_count),
+    alf2_hot = round(alf2_hot * total_count)
+  )
+
+# Ensure the data exists and columns are correctly named
+if (!all(c("alf1_pre", "alf2_pre", "alf1_amb", "alf2_amb", "alf1_hot", "alf2_hot") %in% names(af_cen2))) {
+  stop("Column names do not match. Please ensure they are: alf1_pre, alf2_pre, alf1_amb, alf2_amb, alf1_hot, alf2_hot")
+}
+
+# Initialize an empty vector to store p-values
+p_vals <- c()
+
+# Loop through each SNP
+for (i in 1:nrow(af_cen2)) {
+    # Extract counts for each SNP
+    count1_allele <- af_cen2$alf1_pre[i]
+    count1_non_allele <- af_cen2$alf2_pre[i]  
+    count1_allele <- af_cen2$alf1_amb[i]
+    count1_non_allele <- af_cen2$alf2_amb[i]
+    count2_allele <- af_cen2$alf1_hot[i]
+    count2_non_allele <- af_cen2$alf2_hot[i]
+    
+    # Ensure counts are not NULL
+    if (is.null(count1_allele) || is.null(count1_non_allele) || is.null(count2_allele) || is.null(count2_non_allele)) {
+        stop("Some allele counts are NULL. Please check your data.")
+    }
+    
+    # Create a 2x2 table for Fisher's test
+    contingency_table <- matrix(c(count1_allele, count1_non_allele,
+                                  count2_allele, count2_non_allele), nrow = 2)
+    
+    # Perform Fisher's exact test
+    result <- fisher.test(contingency_table)
+    
+    # Append the p-value to the vector
+    p_vals <- c(p_vals, result$p.value)
+}
+
+# Store p-values back into the dataframe for reference
+af_cen2$p_value <- p_vals
+
+# Apply Benjamini-Hochberg correction
+af_cen2$p_adj <- p.adjust(af_cen2$p_value, method = "BH")
+```
+
+Hybrid
+```{r}
+# Set total count for each group (e.g., 100 alleles per group)
+total_count <- 100
+
+# Convert allele frequencies to counts based on total_count
+af_hyb2<- af_hyb %>%
+  mutate(
+    alf1_amb = round(alf1_amb * total_count),
+    alf2_amb = round(alf2_amb * total_count),
+    alf1_hot = round(alf1_hot * total_count),
+    alf2_hot = round(alf2_hot * total_count)
+  )
+
+# Ensure the data exists and columns are correctly named
+if (!all(c("alf1_amb", "alf2_amb", "alf1_hot", "alf2_hot") %in% names(af_hyb2))) {
+  stop("Column names do not match. Please ensure they are: alf1_amb, alf2_amb, alf1_hot, alf2_hot")
+}
+
+# Initialize an empty vector to store p-values
+p_vals <- c()
+
+# Loop through each SNP
+for (i in 1:nrow(af_hyb2)) {
+    # Extract counts for each SNP
+    count1_allele <- af_hyb2$alf1_amb[i]
+    count1_non_allele <- af_hyb2$alf2_amb[i]
+    count2_allele <- af_hyb2$alf1_hot[i]
+    count2_non_allele <- af_hyb2$alf2_hot[i]
+    
+    # Ensure counts are not NULL
+    if (is.null(count1_allele) || is.null(count1_non_allele) || is.null(count2_allele) || is.null(count2_non_allele)) {
+        stop("Some allele counts are NULL. Please check your data.")
+    }
+    
+    # Create a 2x2 table for Fisher's test
+    contingency_table <- matrix(c(count1_allele, count1_non_allele,
+                                  count2_allele, count2_non_allele), nrow = 2)
+    
+    # Perform Fisher's exact test
+    result <- fisher.test(contingency_table)
+    
+    # Append the p-value to the vector
+    p_vals <- c(p_vals, result$p.value)
+}
+
+# Store p-values back into the dataframe for reference
+af_hyb2$p_value <- p_vals
+
+# Apply Benjamini-Hochberg correction
+af_hyb2$p_adj <- p.adjust(af_hyb2$p_value, method = "BH")
+```
+
+North
+```{r}
+# Set total count for each group (e.g., 100 alleles per group)
+total_count <- 100
+
+# Convert allele frequencies to counts based on total_count
+af_nor2<- af_nor %>%
+  mutate(
+    alf1_amb = round(alf1_amb * total_count),
+    alf2_amb = round(alf2_amb * total_count),
+    alf1_hot = round(alf1_hot * total_count),
+    alf2_hot = round(alf2_hot * total_count)
+  )
+
+# Ensure the data exists and columns are correctly named
+if (!all(c("alf1_amb", "alf2_amb", "alf1_hot", "alf2_hot") %in% names(af_nor2))) {
+  stop("Column names do not match. Please ensure they are: alf1_amb, alf2_amb, alf1_hot, alf2_hot")
+}
+
+# Initialize an empty vector to store p-values
+p_vals <- c()
+
+# Loop through each SNP
+for (i in 1:nrow(af_nor2)) {
+    # Extract counts for each SNP
+    count1_allele <- af_nor2$alf1_amb[i]
+    count1_non_allele <- af_nor2$alf2_amb[i]
+    count2_allele <- af_nor2$alf1_hot[i]
+    count2_non_allele <- af_nor2$alf2_hot[i]
+    
+    # Ensure counts are not NULL
+    if (is.null(count1_allele) || is.null(count1_non_allele) || is.null(count2_allele) || is.null(count2_non_allele)) {
+        stop("Some allele counts are NULL. Please check your data.")
+    }
+    
+    # Create a 2x2 table for Fisher's test
+    contingency_table <- matrix(c(count1_allele, count1_non_allele,
+                                  count2_allele, count2_non_allele), nrow = 2)
+    
+    # Perform Fisher's exact test
+    result <- fisher.test(contingency_table)
+    
+    # Append the p-value to the vector
+    p_vals <- c(p_vals, result$p.value)
+}
+
+# Store p-values back into the dataframe for reference
+af_nor2$p_value <- p_vals
+
+# Apply Benjamini-Hochberg correction
+af_nor2$p_adj <- p.adjust(af_nor2$p_value, method = "BH")
+```
+
+#extract the significant SNPs
+```{r}
+sig1<- af_cen2 |> filter(p_adj < 0.05) |> pull(SNP)
+sig2<- af_hyb2 |> filter(p_adj < 0.05) |> pull(SNP)
+sig<- c(sig1, sig2)
+```
+
+##
+Rerun with pre
+```{r}
+ten_larvae <- readRDS("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data/ten_larvae_filter.RDS")
+#keep T0
+ten_larvae_pre<- gl.keep.pop(ten_larvae, pop.list = c('T0'), as.pop = 'Temp', mono.rm = FALSE, recalc=TRUE)
+ten_larvae_amb<- gl.keep.pop(ten_larvae, pop.list = c('Amb'), as.pop = 'Temp', mono.rm = FALSE, recalc=TRUE)
+ten_larvae_hot<- gl.keep.pop(ten_larvae, pop.list = c('Hot'), as.pop = 'Temp', mono.rm = FALSE, recalc=TRUE)
+
+#allele freq central pre
+pre_cen<- gl.keep.pop(ten_larvae_pre, pop.list= c("pure_south"), as.pop = "pure_hybrid", mono.rm = FALSE, recalc=TRUE)
+af_pre_cen<- gl.alf(pre_cen) |> rownames_to_column(var = "SNP") |> dplyr::rename(alf1_pre = alf1, alf2_pre = alf2)
+
+#allele freq hybrid pre
+pre_hyb<- gl.keep.pop(ten_larvae_pre, pop.list= c("hybrid_north_south"), as.pop = "pure_hybrid", mono.rm = FALSE, recalc=TRUE)
+af_pre_hyb<- gl.alf(pre_hyb) |> rownames_to_column(var = "SNP") |> dplyr::rename(alf1_pre = alf1, alf2_pre = alf2)
+
+#allele freq north pre
+pre_nor<- gl.keep.pop(ten_larvae_pre, pop.list= c("pure_north"), as.pop = "pure_hybrid", mono.rm = FALSE, recalc=TRUE)
+af_pre_nor<- gl.alf(pre_nor) |> rownames_to_column(var = "SNP") |> dplyr::rename(alf1_pre = alf1, alf2_pre = alf2)
+
+#allele freq central amb
+amb_cen<- gl.keep.pop(ten_larvae_amb, pop.list= c("pure_south"), as.pop = "pure_hybrid", mono.rm = FALSE, recalc=TRUE)
+af_amb_cen<- gl.alf(amb_cen) |> rownames_to_column(var = "SNP") |> dplyr::rename(alf1_amb = alf1, alf2_amb = alf2)
+
+#allele freq hybrid amb
+amb_hyb<- gl.keep.pop(ten_larvae_amb, pop.list= c("hybrid_north_south"), as.pop = "pure_hybrid", mono.rm = FALSE, recalc=TRUE)
+af_amb_hyb<- gl.alf(amb_hyb) |> rownames_to_column(var = "SNP") |> dplyr::rename(alf1_amb = alf1, alf2_amb = alf2)
+
+#allele freq north amb
+amb_nor<- gl.keep.pop(ten_larvae_amb, pop.list= c("pure_north"), as.pop = "pure_hybrid", mono.rm = FALSE, recalc=TRUE)
+af_amb_nor<- gl.alf(amb_nor) |> rownames_to_column(var = "SNP") |> dplyr::rename(alf1_amb = alf1, alf2_amb = alf2)
+
+#allele freq central hot
+hot_cen<- gl.keep.pop(ten_larvae_hot, pop.list= c("pure_south"), as.pop = "pure_hybrid", mono.rm = FALSE, recalc=TRUE)
+af_hot_cen<- gl.alf(hot_cen) |> rownames_to_column(var = "SNP") |> dplyr::rename(alf1_hot = alf1, alf2_hot = alf2)
+
+#allele freq hybrid hot
+hot_hyb<- gl.keep.pop(ten_larvae_hot, pop.list= c("hybrid_north_south"), as.pop = "pure_hybrid", mono.rm = FALSE, recalc=TRUE)
+af_hot_hyb<- gl.alf(hot_hyb) |> rownames_to_column(var = "SNP") |> dplyr::rename(alf1_hot = alf1, alf2_hot = alf2)
+
+#allele freq north hot
+hot_nor<- gl.keep.pop(ten_larvae_hot, pop.list= c("pure_north"), as.pop = "pure_hybrid", mono.rm = FALSE, recalc=TRUE)
+af_hot_nor<- gl.alf(hot_nor) |> rownames_to_column(var = "SNP") |> dplyr::rename(alf1_hot = alf1, alf2_hot = alf2)
+
+#Join pre, ambient and hot datat for each region cross
+af_cen<- left_join(af_pre_cen, af_amb_cen, by = "SNP")
+af_cen<- left_join(af_cen, af_hot_cen, by = "SNP") |> mutate(Region = "Central")
+
+af_hyb<- left_join(af_pre_hyb, af_amb_hyb, by = "SNP")
+af_hyb<- left_join(af_hyb, af_hot_hyb, by = "SNP") |> mutate(Region = "Hybrid")
+
+af_nor<- left_join(af_pre_nor, af_amb_nor, by = "SNP")
+af_nor<- left_join(af_nor, af_hot_nor, by = "SNP") |> mutate(Region = "North")
+
+#combine all data
+af<- rbind(af_cen, af_hyb, af_nor)
+```
+
+No filtering!
+```{r}
+af2_all<- af |>
+  dplyr::select(SNP, Region, alf1_pre, alf1_amb, alf1_hot) |> 
+  dplyr::rename(pre = alf1_pre, amb = alf1_amb, hot = alf1_hot) |>
+  pivot_longer(cols=c('pre', 'amb', 'hot'),
+                    names_to='temp',
+                    values_to='alf')
+
+# Assuming your original column is called 'alf'
+af2_all$alf_new <- ifelse(af2_all$alf > 0.5, 1 - af2_all$alf, af2_all$alf)
+```
+
+```{r}
+cols<- c("#277da1","#f94144","#43aa8b")
+
+af_plot_all<- af2_all |> 
+  ggplot() +
+  geom_density(aes(alf_new, fill = temp), adjust = 1.2, alpha = 0.5) +
+  facet_wrap(~Region, nrow = 1) +
+  theme_classic() +
+  scale_fill_manual(values=cols) +
+  labs(x="Allele Frequency", y="Density")
+af_plot_all
+```
+
+Filtered for significant SNPs
+```{r}
+af2_sig<- af |> filter(SNP %in% sig) |>
+  dplyr::select(SNP, Region, alf1_pre, alf1_amb, alf1_hot) |> 
+  dplyr::rename(pre = alf1_pre, amb = alf1_amb, hot = alf1_hot) |>
+  pivot_longer(cols=c('pre', 'amb', 'hot'),
+                    names_to='temp',
+                    values_to='alf')
+
+# change AF to MAF
+af2_sig$alf_new <- ifelse(af2_sig$alf > 0.5, 1 - af2_sig$alf, af2_sig$alf)
+```
+
+plot AF
+```{r}
+af_plot<- af2_sig |> 
+  ggplot() +
+  geom_density(aes(alf_new, fill = temp), adjust = 1, alpha = 0.5) +
+  facet_wrap(~Region, nrow = 1) +
+  theme_classic() +
+  scale_fill_manual(values=cols) +
+  labs(x="Allele Frequency", y="Density")
+af_plot
+```
+
+No difference in the hot, well heat adapted. the hybirds follow this so may have inherited some beneficial heat associated alleles. central has a big difference in the hot treatments. Many allele freqs move to nearer zero. however, some went towards 0.5, which may indicate heterozygote advantage or heterosis. overdominance, where the heterozygous genotype has a higher adaptive value than either homozygous genotype.
+
+KS test for distribution of significant SNPs
+```{r}
+#central
+ks_central<- af2_sig |> filter(Region == "Central") |> dplyr::select(SNP, temp, alf) |> pivot_wider(names_from = temp, values_from = alf)
+ks.test(ks_central$amb, ks_central$hot)
+
+#hybrid
+ks_hybrid<- af2_sig |> filter(Region == "Hybrid") |> dplyr::select(SNP, temp, alf) |> pivot_wider(names_from = temp, values_from = alf)
+ks.test(ks_hybrid$amb, ks_hybrid$hot)
+
+#north
+ks_north<- af2_sig |> filter(Region == "North") |> dplyr::select(SNP, temp, alf) |> pivot_wider(names_from = temp, values_from = alf)
+ks.test(ks_north$amb, ks_north$hot)
+```
+
+PCA
+```{r}
+ten_larvae<- gl.keep.pop(ten_larvae, pop.list = c('Amb', 'Hot'), as.pop = 'Temp', mono.rm = FALSE, recalc=TRUE)
+ten_larvae<- gl.keep.loc(ten_larvae, loc.list = sig)
+
+pcoa<- gl.pcoa(ten_larvae)
+pca<- gl.pcoa.plot(pcoa, ten_larvae, scale = T)
+explained_variance <- c(17.9, 10.7)  # % Variation for PC1 and PC2
+
+pcascore<- as.data.frame(pcoa$scores) |> rownames_to_column(var = "Labels")
+pops<- as.data.frame(ten_larvae$pop)|> dplyr::rename(pop = `ten_larvae$pop`)
+
+pcascore<- cbind(pops, pcascore)
+
+pcascore <- pcascore %>%
+  mutate(temp = case_when(
+    grepl("Hot", pop, ignore.case = TRUE) ~ "Hot",
+    grepl("Amb", pop, ignore.case = TRUE) ~ "Amb",
+    TRUE ~ NA_character_  # or "Unknown" for remaining cases
+  ))
+
+pcascore <- pcascore %>%
+  mutate(region = case_when(
+    grepl("DavxDav|PalxDav|PalxPal", pop, ignore.case = TRUE) ~ "Central",
+    grepl("JewxJew|ParxPar|SwixSwi", pop, ignore.case = TRUE) ~ "North",
+    grepl("JewxDav|JewxPal|ParxDav|SwixDav", pop, ignore.case = TRUE) ~ "Hybrid",
+    TRUE ~ NA_character_
+  ))
+
+# Plot PCA loadings for PC1 and PC2
+pca1<- ggplot(pcascore, aes(x = PC1, y = PC2, colour = pop, shape = temp)) +
+  geom_point(size = 3) +  # Add points
+  #geom_text(vjust = -0.5, hjust = 0.5) +  # Add labels near points
+  labs(x = paste0("PC1 (", explained_variance[1], "%)"), y = paste0("PC2 (", explained_variance[2], "%)"), colour = "Reef") +
+  #coord_fixed(ratio = explained_variance[2] / explained_variance[1]) +
+  theme_Publication() 
+  #scale_colour_manual(values = pal[c(1, 3, 5)])
+pca1
+```
+
