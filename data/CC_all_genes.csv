@@ -1,0 +1,2228 @@
+name	term	lev	seq	value
+"mitochondrial membrane"	GO:0031966	4	aten_0.1.m1.2990.m1	0
+"mitochondrial membrane"	GO:0031966	4	aten_0.1.m1.4305.m1	0
+"mitochondrial membrane"	GO:0031966	4	aten_0.1.m1.2095.m1	3
+"mitochondrial membrane"	GO:0031966	4	aten_0.1.m1.9863.m1	0
+"mitochondrial membrane"	GO:0031966	4	aten_0.1.m1.2380.m1	0
+"mitochondrial membrane"	GO:0031966	4	aten_0.1.m1.9419.m1	-6
+"mitochondrial membrane"	GO:0031966	4	aten_0.1.m1.33136.m1	0
+"endoplasmic reticulum membrane"	GO:0005789	4	aten_0.1.m1.10175.m1	-2
+"endoplasmic reticulum membrane"	GO:0005789	4	aten_0.1.m1.25865.m1	7
+"endoplasmic reticulum membrane"	GO:0005789	4	aten_0.1.m1.21124.m1	0
+"endoplasmic reticulum membrane"	GO:0005789	4	aten_0.1.m1.17402.m1	0
+"endoplasmic reticulum membrane"	GO:0005789	4	aten_0.1.m1.13104.m1	-5
+"endoplasmic reticulum membrane"	GO:0005789	4	aten_0.1.m1.28273.m1	-6
+"endoplasmic reticulum membrane"	GO:0005789	4	aten_0.1.m1.19538.m1	0
+"endoplasmic reticulum membrane"	GO:0005789	4	aten_0.1.m1.20362.m1	5
+"endoplasmic reticulum membrane"	GO:0005789	4	aten_0.1.m1.14936.m1	3
+"endoplasmic reticulum membrane"	GO:0005789	4	aten_0.1.m1.13216.m1	-24
+"endoplasmic reticulum membrane"	GO:0005789	4	aten_0.1.m1.28594.m1	6
+"endoplasmic reticulum membrane"	GO:0005789	4	aten_0.1.m1.5046.m1	0
+"endoplasmic reticulum membrane"	GO:0005789	4	aten_0.1.m1.25033.m1	0
+"endoplasmic reticulum membrane"	GO:0005789	4	aten_0.1.m1.451.m1	7
+"podosome"	GO:0002102	5	aten_0.1.m1.21013.m1	0
+"podosome"	GO:0002102	5	aten_0.1.m1.232.m1	0
+"podosome"	GO:0002102	5	aten_0.1.m1.32267.m1	-3
+"podosome"	GO:0002102	5	aten_0.1.m1.16184.m1	0
+"lytic vacuole membrane"	GO:0005765;GO:0098852	3	aten_0.1.m1.12121.m1	4
+"lytic vacuole membrane"	GO:0005765;GO:0098852	3	aten_0.1.m1.23099.m1	0
+"lytic vacuole membrane"	GO:0005765;GO:0098852	3	aten_0.1.m1.12339.m1	-1
+"lytic vacuole membrane"	GO:0005765;GO:0098852	3	aten_0.1.m1.31496.m1	0
+"lytic vacuole membrane"	GO:0005765;GO:0098852	3	aten_0.1.m1.19704.m1	0
+"lytic vacuole membrane"	GO:0005765;GO:0098852	3	aten_0.1.m1.21218.m1	0
+"lytic vacuole membrane"	GO:0005765;GO:0098852	3	aten_0.1.m1.14884.m1	0
+"lytic vacuole membrane"	GO:0005765;GO:0098852	3	aten_0.1.m1.5758.m1	0
+"lytic vacuole membrane"	GO:0005765;GO:0098852	3	aten_0.1.m1.28858.m1	-9
+"endoplasmic reticulum"	GO:0005783	3	aten_0.1.m1.6071.m1	0
+"endoplasmic reticulum"	GO:0005783	3	aten_0.1.m1.3855.m1	-6
+"endoplasmic reticulum"	GO:0005783	3	aten_0.1.m1.21271.m1	16
+"endoplasmic reticulum"	GO:0005783	3	aten_0.1.m1.1439.m1	19
+"endoplasmic reticulum"	GO:0005783	3	aten_0.1.m1.625.m1	20
+"endoplasmic reticulum"	GO:0005783	3	aten_0.1.m1.31479.m1	-15
+"endoplasmic reticulum"	GO:0005783	3	aten_0.1.m1.1843.m1	0
+"endoplasmic reticulum"	GO:0005783	3	aten_0.1.m1.11263.m1	-7
+"endoplasmic reticulum"	GO:0005783	3	aten_0.1.m1.21267.m1	0
+"endoplasmic reticulum"	GO:0005783	3	aten_0.1.m1.8643.m1	0
+"endoplasmic reticulum"	GO:0005783	3	aten_0.1.m1.1639.m1	1
+"endoplasmic reticulum"	GO:0005783	3	aten_0.1.m1.10686.m1	0
+"endoplasmic reticulum"	GO:0005783	3	aten_0.1.m1.21745.m1	13
+"endoplasmic reticulum"	GO:0005783	3	aten_0.1.m1.2648.m1	7
+"exosome (RNase complex)"	GO:0000178;GO:1905354	2	aten_0.1.m1.12704.m1	4
+"exosome (RNase complex)"	GO:0000178;GO:1905354	2	aten_0.1.m1.23607.m1	3
+"exosome (RNase complex)"	GO:0000178;GO:1905354	2	aten_0.1.m1.19860.m1	8
+"ruffle"	GO:0001726	4	aten_0.1.m1.19626.m1	0
+"ruffle"	GO:0001726	4	aten_0.1.m1.373.m1	0
+"ruffle"	GO:0001726	4	aten_0.1.m1.157.m1	-1
+"ruffle"	GO:0001726	4	aten_0.1.m1.19165.m1	-7
+"ruffle"	GO:0001726	4	aten_0.1.m1.27759.m1	6
+"ruffle"	GO:0001726	4	aten_0.1.m1.3847.m1	1
+"ruffle"	GO:0001726	4	aten_0.1.m1.15431.m1	16
+"ruffle"	GO:0001726	4	aten_0.1.m1.29532.m1	-1
+"ruffle"	GO:0001726	4	aten_0.1.m1.11303.m1	0
+"lipid droplet"	GO:0005811	2	aten_0.1.m1.10210.m1	16
+"lipid droplet"	GO:0005811	2	aten_0.1.m1.31277.m1	20
+"vacuole"	GO:0000323;GO:0005773	4	aten_0.1.m1.6342.m1	10
+"vacuole"	GO:0000323;GO:0005773	4	aten_0.1.m1.29533.m1	0
+"vacuole"	GO:0000323;GO:0005773	4	aten_0.1.m1.1608.m1	0
+"vacuole"	GO:0000323;GO:0005773	4	aten_0.1.m1.17247.m1	0
+"vacuole"	GO:0000323;GO:0005773	4	aten_0.1.m1.12725.m1	-2
+"vacuole"	GO:0000323;GO:0005773	4	aten_0.1.m1.22696.m1	12
+"vacuole"	GO:0000323;GO:0005773	4	aten_0.1.m1.16072.m1	-8
+"vacuole"	GO:0000323;GO:0005773	4	aten_0.1.m1.3934.m1	0
+"extracellular space"	GO:0005615	2	aten_0.1.m1.14046.m1	0
+"extracellular space"	GO:0005615	2	aten_0.1.m1.2251.m1	-22
+"extracellular space"	GO:0005615	2	aten_0.1.m1.3772.m1	2
+"extracellular space"	GO:0005615	2	aten_0.1.m1.33385.m1	0
+"extracellular space"	GO:0005615	2	aten_0.1.m1.21207.m1	0
+"extracellular space"	GO:0005615	2	aten_0.1.m1.1087.m1	2
+"extracellular space"	GO:0005615	2	aten_0.1.m1.18962.m1	-6
+"extracellular space"	GO:0005615	2	aten_0.1.m1.31255.m1	0
+"extracellular space"	GO:0005615	2	aten_0.1.m1.22564.m1	-8
+"extracellular space"	GO:0005615	2	aten_0.1.m1.8951.m1	0
+"extracellular space"	GO:0005615	2	aten_0.1.m1.10061.m1	17
+"extracellular space"	GO:0005615	2	aten_0.1.m1.18622.m1	0
+"extracellular space"	GO:0005615	2	aten_0.1.m1.17195.m1	2
+"extracellular space"	GO:0005615	2	aten_0.1.m1.9645.m1	10
+"extracellular space"	GO:0005615	2	aten_0.1.m1.14681.m1	0
+"extracellular space"	GO:0005615	2	aten_0.1.m1.23610.m1	0
+"extracellular space"	GO:0005615	2	aten_0.1.m1.612.m1	-5
+"Golgi apparatus"	GO:0005794	3	aten_0.1.m1.74.m1	7
+"Golgi apparatus"	GO:0005794	3	aten_0.1.m1.5040.m1	0
+"Golgi apparatus"	GO:0005794	3	aten_0.1.m1.10442.m1	9
+"Golgi apparatus"	GO:0005794	3	aten_0.1.m1.17026.m1	-3
+"Golgi apparatus"	GO:0005794	3	aten_0.1.m1.13947.m1	7
+"Golgi apparatus"	GO:0005794	3	aten_0.1.m1.19100.m1	-10
+"mitochondrion"	GO:0005739	3	aten_0.1.m1.9864.m1	0
+"mitochondrion"	GO:0005739	3	aten_0.1.m1.3209.m1	10
+"mitochondrion"	GO:0005739	3	aten_0.1.m1.5998.m1	0
+"mitochondrion"	GO:0005739	3	aten_0.1.m1.24843.m1	0
+"mitochondrion"	GO:0005739	3	aten_0.1.m1.25030.m1	0
+"mitochondrion"	GO:0005739	3	aten_0.1.m1.10956.m1	0
+"mitochondrion"	GO:0005739	3	aten_0.1.m1.22815.m1	-5
+"mitochondrion"	GO:0005739	3	aten_0.1.m1.32252.m1	5
+"mitochondrion"	GO:0005739	3	aten_0.1.m1.20005.m1	0
+"mitochondrion"	GO:0005739	3	aten_0.1.m1.16702.m1	8
+"mitochondrion"	GO:0005739	3	aten_0.1.m1.5996.m1	0
+"mitochondrion"	GO:0005739	3	aten_0.1.m1.9821.m1	11
+"mitochondrion"	GO:0005739	3	aten_0.1.m1.61.m1	0
+"mitochondrion"	GO:0005739	3	aten_0.1.m1.30277.m1	0
+"mitochondrion"	GO:0005739	3	aten_0.1.m1.22417.m1	3
+"mitochondrion"	GO:0005739	3	aten_0.1.m1.3481.m1	0
+"mitochondrion"	GO:0005739	3	aten_0.1.m1.12409.m1	-12
+"mitochondrion"	GO:0005739	3	aten_0.1.m1.12747.m1	1
+"mitochondrion"	GO:0005739	3	aten_0.1.m1.55.m1	21
+"mitochondrion"	GO:0005739	3	aten_0.1.m1.3443.m1	15
+"fungal-type vacuole"	GO:0000324;GO:0000322	2	aten_0.1.m1.29533.m1	0
+"fungal-type vacuole"	GO:0000324;GO:0000322	2	aten_0.1.m1.12725.m1	-2
+"fungal-type vacuole"	GO:0000324;GO:0000322	2	aten_0.1.m1.22696.m1	12
+"fungal-type vacuole"	GO:0000324;GO:0000322	2	aten_0.1.m1.16072.m1	-8
+"cytosol"	GO:0005829	2	aten_0.1.m1.15699.m1	0
+"cytosol"	GO:0005829	2	aten_0.1.m1.8228.m1	-5
+"cytosol"	GO:0005829	2	aten_0.1.m1.10858.m1	0
+"cytosol"	GO:0005829	2	aten_0.1.m1.13928.m1	12
+"cytosol"	GO:0005829	2	aten_0.1.m1.27295.m1	7
+"cytosol"	GO:0005829	2	aten_0.1.m1.554.m1	-4
+"cytosol"	GO:0005829	2	aten_0.1.m1.28460.m1	-27
+"cytosol"	GO:0005829	2	aten_0.1.m1.22415.m1	0
+"cytosol"	GO:0005829	2	aten_0.1.m1.7762.m1	4
+"cytosol"	GO:0005829	2	aten_0.1.m1.17648.m1	0
+"cytosol"	GO:0005829	2	aten_0.1.m1.23105.m1	-3
+"cytosol"	GO:0005829	2	aten_0.1.m1.32483.m1	3
+"cytosol"	GO:0005829	2	aten_0.1.m1.34120.m1	17
+"cytosol"	GO:0005829	2	aten_0.1.m1.15617.m1	0
+"cytosol"	GO:0005829	2	aten_0.1.m1.17633.m1	0
+"cytosol"	GO:0005829	2	aten_0.1.m1.24228.m1	-9
+"cytosol"	GO:0005829	2	aten_0.1.m1.12282.m1	-14
+"cytosol"	GO:0005829	2	aten_0.1.m1.7765.m1	0
+"cytosol"	GO:0005829	2	aten_0.1.m1.21872.m1	0
+"cytosol"	GO:0005829	2	aten_0.1.m1.24243.m1	0
+"cytosol"	GO:0005829	2	aten_0.1.m1.24039.m1	0
+"cytosol"	GO:0005829	2	aten_0.1.m1.17643.m1	12
+"cytosol"	GO:0005829	2	aten_0.1.m1.10104.m1	-7
+"cytosol"	GO:0005829	2	aten_0.1.m1.20888.m1	0
+"cytosol"	GO:0005829	2	aten_0.1.m1.24870.m1	-3
+"cytosol"	GO:0005829	2	aten_0.1.m1.443.m1	-7
+"cytosol"	GO:0005829	2	aten_0.1.m1.6037.m1	21
+"cytosol"	GO:0005829	2	aten_0.1.m1.6587.m1	0
+"cytosol"	GO:0005829	2	aten_0.1.m1.436.m1	4
+"cytosol"	GO:0005829	2	aten_0.1.m1.17491.m1	-1
+"cytosol"	GO:0005829	2	aten_0.1.m1.10025.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.1348.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.7411.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.19596.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.21536.m1	23
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.7754.m1	4
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.24952.m1	-16
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.4305.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.6744.m1	14
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.19765.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.19576.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.2724.m1	-1
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.22769.m1	-3
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.15373.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.29014.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.8562.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.1299.m1	-5
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.3122.m1	-18
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.12121.m1	4
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.26336.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.12677.m1	12
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.14824.m1	-16
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.6012.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.20010.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.16089.m1	-2
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.15351.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.28522.m1	-8
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.827.m1	1
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.33162.m1	8
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.12676.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.29498.m1	5
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.12059.m1	11
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.15022.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.2763.m1	1
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.12077.m1	7
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.3230.m1	-13
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.7758.m1	24
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.2195.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.22573.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.9622.m1	4
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.33212.m1	-5
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.21209.m1	4
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.9444.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.1444.m1	-4
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.14307.m1	-4
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.14284.m1	1
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.23099.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.12339.m1	-1
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.25195.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.7590.m1	-12
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.4369.m1	-6
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.18176.m1	7
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.31320.m1	-3
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.2769.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.19852.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.7317.m1	10
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.25746.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.20045.m1	8
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.7123.m1	3
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.3200.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.20007.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.3973.m1	3
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.1862.m1	8
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.6856.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.19464.m1	7
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.31496.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.14090.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.7464.m1	4
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.15578.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.12643.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.17032.m1	12
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.27535.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.2500.m1	-25
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.11034.m1	4
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.19704.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.20302.m1	2
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.11270.m1	3
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.9307.m1	11
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.8655.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.21218.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.6526.m1	-3
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.32363.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.11841.m1	7
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.7281.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.3215.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.2462.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.14884.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.6816.m1	8
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.31523.m1	-1
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.5225.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.23008.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.13096.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.2032.m1	-3
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.5758.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.27498.m1	3
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.27792.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.32148.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.21697.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.12633.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.14785.m1	-4
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.20586.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.1350.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.15354.m1	8
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.9419.m1	-6
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.25269.m1	7
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.5636.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.12222.m1	2
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.22305.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.3613.m1	-4
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.8405.m1	7
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.12732.m1	2
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.14213.m1	-2
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.28858.m1	-9
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.12674.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.7307.m1	10
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.11181.m1	-7
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.17865.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.2565.m1	6
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.1351.m1	1
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.22121.m1	-3
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.4578.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.22321.m1	8
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.12060.m1	-2
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.25177.m1	1
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.22830.m1	-15
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.17584.m1	-3
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.12678.m1	5
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.2990.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.10175.m1	-2
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.25865.m1	7
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.21124.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.17402.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.2095.m1	3
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.13104.m1	-5
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.28273.m1	-6
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.19538.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.20362.m1	5
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.9863.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.2380.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.17021.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.14936.m1	3
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.13216.m1	-24
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.33136.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.28594.m1	6
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.5046.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.25033.m1	0
+"organelle membrane"	GO:0098588;GO:0031090	4	aten_0.1.m1.451.m1	7
+"photoreceptor outer segment"	GO:0001750	2	aten_0.1.m1.22137.m1	0
+"photoreceptor outer segment"	GO:0001750	2	aten_0.1.m1.1441.m1	5
+"photoreceptor outer segment"	GO:0001750	2	aten_0.1.m1.2647.m1	-6
+"photoreceptor outer segment"	GO:0001750	2	aten_0.1.m1.10653.m1	0
+"photoreceptor outer segment"	GO:0001750	2	aten_0.1.m1.3098.m1	0
+"photoreceptor outer segment"	GO:0001750	2	aten_0.1.m1.3097.m1	0
+"inner mitochondrial membrane protein complex"	GO:0098800	2	aten_0.1.m1.20786.m1	0
+"inner mitochondrial membrane protein complex"	GO:0098800	2	aten_0.1.m1.19990.m1	0
+"inner mitochondrial membrane protein complex"	GO:0098800	2	aten_0.1.m1.30647.m1	16
+"manchette"	GO:0002177	2	aten_0.1.m1.29058.m1	10
+"manchette"	GO:0002177	2	aten_0.1.m1.18506.m1	24
+"cytoplasmic vesicle lumen"	GO:0043160;GO:0034774;GO:0043202;GO:0060205;GO:0031983;GO:0005775	5	aten_0.1.m1.29437.m1	2
+"cytoplasmic vesicle lumen"	GO:0043160;GO:0034774;GO:0043202;GO:0060205;GO:0031983;GO:0005775	5	aten_0.1.m1.16425.m1	0
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.31368.m1	-9
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.28865.m1	2
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.1374.m1	0
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.1985.m1	0
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.10210.m1	16
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.27694.m1	-2
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.1339.m1	11
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.1753.m1	1
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.5550.m1	0
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.2505.m1	1
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.5950.m1	0
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.26447.m1	15
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.13394.m1	7
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.10475.m1	2
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.27347.m1	0
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.16188.m1	2
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.29698.m1	2
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.22654.m1	-4
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.29526.m1	12
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.22643.m1	-7
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.21013.m1	0
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.23602.m1	-1
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.4010.m1	0
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.22768.m1	3
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.232.m1	0
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.3956.m1	6
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.7266.m1	-5
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.5467.m1	4
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.2550.m1	0
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.1375.m1	0
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.29699.m1	-13
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.1817.m1	-8
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.1734.m1	15
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.9159.m1	0
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.32267.m1	-3
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.31277.m1	20
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.12244.m1	0
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.2527.m1	10
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.13185.m1	0
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.19756.m1	-2
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.2014.m1	14
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.18848.m1	0
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.17649.m1	-10
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.34014.m1	16
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.32186.m1	0
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.31383.m1	-3
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.4370.m1	5
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.28379.m1	0
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.14453.m1	0
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.3252.m1	15
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.2519.m1	4
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.22661.m1	1
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.28057.m1	11
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.27795.m1	0
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.15203.m1	4
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.3491.m1	12
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.1301.m1	-20
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.23032.m1	7
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.3547.m1	5
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.32204.m1	0
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.3779.m1	-12
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.17631.m1	20
+"intracellular non-membrane-bounded organelle"	GO:0043232;GO:0043228	4	aten_0.1.m1.16184.m1	0
+"ESCRT complex"	GO:0036452	2	aten_0.1.m1.15797.m1	0
+"ESCRT complex"	GO:0036452	2	aten_0.1.m1.6888.m1	0
+"autophagosome membrane"	GO:0000421	6	aten_0.1.m1.8562.m1	0
+"autophagosome membrane"	GO:0000421	6	aten_0.1.m1.4369.m1	-6
+"ubiquitin ligase complex"	GO:0000151	2	aten_0.1.m1.15320.m1	-8
+"ubiquitin ligase complex"	GO:0000151	2	aten_0.1.m1.33314.m1	-17
+"ubiquitin ligase complex"	GO:0000151	2	aten_0.1.m1.16728.m1	0
+"ubiquitin ligase complex"	GO:0000151	2	aten_0.1.m1.21079.m1	0
+"ubiquitin ligase complex"	GO:0000151	2	aten_0.1.m1.29363.m1	-6
+"ubiquitin ligase complex"	GO:0000151	2	aten_0.1.m1.24348.m1	21
+"ubiquitin ligase complex"	GO:0000151	2	aten_0.1.m1.10487.m1	0
+"ubiquitin ligase complex"	GO:0000151	2	aten_0.1.m1.15156.m1	-11
+"ubiquitin ligase complex"	GO:0000151	2	aten_0.1.m1.11203.m1	0
+"ubiquitin ligase complex"	GO:0000151	2	aten_0.1.m1.11224.m1	0
+"ubiquitin ligase complex"	GO:0000151	2	aten_0.1.m1.30690.m1	0
+"ubiquitin ligase complex"	GO:0000151	2	aten_0.1.m1.14221.m1	0
+"ubiquitin ligase complex"	GO:0000151	2	aten_0.1.m1.1388.m1	9
+"spliceosomal complex"	GO:0005681;GO:1990904	3	aten_0.1.m1.18974.m1	0
+"spliceosomal complex"	GO:0005681;GO:1990904	3	aten_0.1.m1.28263.m1	13
+"ion channel complex"	GO:0098797;GO:0034703;GO:0034702;GO:1902495;GO:1990351	4	aten_0.1.m1.10679.m1	-6
+"ion channel complex"	GO:0098797;GO:0034703;GO:0034702;GO:1902495;GO:1990351	4	aten_0.1.m1.10682.m1	0
+"ion channel complex"	GO:0098797;GO:0034703;GO:0034702;GO:1902495;GO:1990351	4	aten_0.1.m1.9931.m1	-7
+"ion channel complex"	GO:0098797;GO:0034703;GO:0034702;GO:1902495;GO:1990351	4	aten_0.1.m1.10721.m1	0
+"ion channel complex"	GO:0098797;GO:0034703;GO:0034702;GO:1902495;GO:1990351	4	aten_0.1.m1.9930.m1	-3
+"ion channel complex"	GO:0098797;GO:0034703;GO:0034702;GO:1902495;GO:1990351	4	aten_0.1.m1.9866.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.27352.m1	-1
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.3593.m1	-10
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.19386.m1	-3
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.12763.m1	-7
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.15320.m1	-8
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.18754.m1	1
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.4755.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.25562.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.3807.m1	-11
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.33314.m1	-17
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.10893.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.2158.m1	4
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.20337.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.16728.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.23615.m1	12
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.14716.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.20786.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.21079.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.22879.m1	22
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.10679.m1	-6
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.16126.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.10682.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.27725.m1	-7
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.15797.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.19013.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.11514.m1	16
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.29363.m1	-6
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.12704.m1	4
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.6888.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.24348.m1	21
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.23607.m1	3
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.1992.m1	8
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.28819.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.10487.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.15156.m1	-11
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.15180.m1	-4
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.26377.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.8237.m1	1
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.9931.m1	-7
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.25809.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.23281.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.15782.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.28977.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.10213.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.7798.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.11203.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.9966.m1	2
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.18974.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.28863.m1	-16
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.10721.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.32905.m1	-7
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.22401.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.27726.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.14886.m1	2
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.1276.m1	-1
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.19990.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.10652.m1	-3
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.32164.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.30647.m1	16
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.30201.m1	4
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.11224.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.22428.m1	20
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.28263.m1	13
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.19659.m1	10
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.30690.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.9930.m1	-3
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.19860.m1	8
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.5084.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.14221.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.31418.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.20794.m1	-1
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.1388.m1	9
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.12099.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.9866.m1	0
+"protein-containing complex"	GO:0032991	1	aten_0.1.m1.15681.m1	-4
+"chromatin"	GO:0000785	2	aten_0.1.m1.10221.m1	7
+"chromatin"	GO:0000785	2	aten_0.1.m1.1271.m1	-6
+"chromatin"	GO:0000785	2	aten_0.1.m1.14432.m1	2
+"chromatin"	GO:0000785	2	aten_0.1.m1.27521.m1	9
+"chromatin"	GO:0000785	2	aten_0.1.m1.21553.m1	0
+"chromatin"	GO:0000785	2	aten_0.1.m1.18471.m1	0
+"chromatin"	GO:0000785	2	aten_0.1.m1.740.m1	0
+"chromatin"	GO:0000785	2	aten_0.1.m1.1016.m1	24
+"chromatin"	GO:0000785	2	aten_0.1.m1.19574.m1	0
+"mitochondrial outer membrane translocase complex"	GO:0005742;GO:0098799	3	aten_0.1.m1.10893.m1	0
+"mitochondrial outer membrane translocase complex"	GO:0005742;GO:0098799	3	aten_0.1.m1.15782.m1	0
+"retrotransposon nucleocapsid"	GO:0000943	2	aten_0.1.m1.9391.m1	-12
+"retrotransposon nucleocapsid"	GO:0000943	2	aten_0.1.m1.16413.m1	0
+"retrotransposon nucleocapsid"	GO:0000943	2	aten_0.1.m1.8189.m1	0
+"CatSper complex"	GO:0036128;GO:0005891;GO:0034704	3	aten_0.1.m1.9931.m1	-7
+"CatSper complex"	GO:0036128;GO:0005891;GO:0034704	3	aten_0.1.m1.9930.m1	-3
+"acetyltransferase complex"	GO:0000123;GO:0031248;GO:1902493	4	aten_0.1.m1.23615.m1	12
+"acetyltransferase complex"	GO:0000123;GO:0031248;GO:1902493	4	aten_0.1.m1.1992.m1	8
+"acetyltransferase complex"	GO:0000123;GO:0031248;GO:1902493	4	aten_0.1.m1.23281.m1	0
+"acetyltransferase complex"	GO:0000123;GO:0031248;GO:1902493	4	aten_0.1.m1.28863.m1	-16
+"acetyltransferase complex"	GO:0000123;GO:0031248;GO:1902493	4	aten_0.1.m1.32164.m1	0
+"acetyltransferase complex"	GO:0000123;GO:0031248;GO:1902493	4	aten_0.1.m1.22428.m1	20
+"acetyltransferase complex"	GO:0000123;GO:0031248;GO:1902493	4	aten_0.1.m1.12099.m1	0
+"centriole"	GO:0005814	2	aten_0.1.m1.26447.m1	15
+"centriole"	GO:0005814	2	aten_0.1.m1.22643.m1	-7
+"centriole"	GO:0005814	2	aten_0.1.m1.27795.m1	0
+"centriole"	GO:0005814	2	aten_0.1.m1.3547.m1	5
+"cilium"	GO:0005929	3	aten_0.1.m1.20244.m1	-12
+"cilium"	GO:0005929	3	aten_0.1.m1.28535.m1	3
+"cilium"	GO:0005929	3	aten_0.1.m1.5035.m1	-14
+"cilium"	GO:0005929	3	aten_0.1.m1.23771.m1	0
+"cilium"	GO:0005929	3	aten_0.1.m1.1449.m1	5
+"cilium"	GO:0005929	3	aten_0.1.m1.1112.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.4320.m1	4
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.21570.m1	7
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.21257.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.11160.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.27275.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.9987.m1	1
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.5135.m1	-6
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.25244.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.18880.m1	12
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.6532.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.27286.m1	-7
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.10186.m1	-25
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.32033.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.29692.m1	17
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.9302.m1	-2
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.1479.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.14883.m1	25
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.6240.m1	2
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.10862.m1	-4
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.11881.m1	-10
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.6533.m1	24
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.1189.m1	9
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.32245.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.10174.m1	3
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.21136.m1	-8
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.20133.m1	13
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.912.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.29674.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.10846.m1	-7
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.10966.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.12597.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.30524.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.2961.m1	6
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.2093.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.6188.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.6128.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.3350.m1	24
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.20746.m1	-6
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.12051.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.20605.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.17730.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.8275.m1	7
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.3858.m1	19
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.2253.m1	-22
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.10185.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.29466.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.4084.m1	-26
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.570.m1	15
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.10106.m1	-10
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.24219.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.92.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.33749.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.18445.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.1203.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.29020.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.22875.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.7487.m1	6
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.9424.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.6520.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.27443.m1	1
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.12498.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.26121.m1	1
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.7618.m1	12
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.17724.m1	4
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.1849.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.15044.m1	5
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.32178.m1	14
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.18439.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.4364.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.17424.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.8849.m1	-15
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.32419.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.32155.m1	10
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.22893.m1	6
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.26494.m1	-17
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.32896.m1	-1
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.31502.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.7614.m1	6
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.10567.m1	-1
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.8045.m1	-11
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.323.m1	-3
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.15716.m1	-9
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.31513.m1	-6
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.12333.m1	4
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.8852.m1	-1
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.407.m1	-5
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.7797.m1	10
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.17070.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.26325.m1	-2
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.26948.m1	7
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.7303.m1	18
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.16115.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.7619.m1	-9
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.16090.m1	19
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.11864.m1	6
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.32371.m1	2
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.28767.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.2057.m1	-2
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.29903.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.10125.m1	-10
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.15046.m1	-5
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.3110.m1	-7
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.18919.m1	-19
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.20753.m1	0
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.14947.m1	-3
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.2219.m1	5
+"integral component of membrane"	GO:0016021;GO:0031224	2	aten_0.1.m1.22393.m1	-3
+"endoplasmic reticulum protein-containing complex"	GO:0140534	2	aten_0.1.m1.27352.m1	-1
+"endoplasmic reticulum protein-containing complex"	GO:0140534	2	aten_0.1.m1.15180.m1	-4
+"endoplasmic reticulum protein-containing complex"	GO:0140534	2	aten_0.1.m1.30647.m1	16
+"contractile actin filament bundle"	GO:0001725;GO:0042641;GO:0097517;GO:0032432	3	aten_0.1.m1.27799.m1	4
+"contractile actin filament bundle"	GO:0001725;GO:0042641;GO:0097517;GO:0032432	3	aten_0.1.m1.9606.m1	0
+"contractile actin filament bundle"	GO:0001725;GO:0042641;GO:0097517;GO:0032432	3	aten_0.1.m1.1868.m1	0
+"contractile actin filament bundle"	GO:0001725;GO:0042641;GO:0097517;GO:0032432	3	aten_0.1.m1.16448.m1	0
+"contractile actin filament bundle"	GO:0001725;GO:0042641;GO:0097517;GO:0032432	3	aten_0.1.m1.14545.m1	10
+"trans-Golgi network"	GO:0005802	2	aten_0.1.m1.110.m1	0
+"trans-Golgi network"	GO:0005802	2	aten_0.1.m1.17675.m1	0
+"trans-Golgi network"	GO:0005802	2	aten_0.1.m1.14459.m1	-3
+"trans-Golgi network"	GO:0005802	2	aten_0.1.m1.4463.m1	0
+"pericentriolar material"	GO:0000242	2	aten_0.1.m1.627.m1	-2
+"pericentriolar material"	GO:0000242	2	aten_0.1.m1.23588.m1	-8
+"pericentriolar material"	GO:0000242	2	aten_0.1.m1.8864.m1	-1
+"pericentriolar material"	GO:0000242	2	aten_0.1.m1.3056.m1	-10
+"organelle inner membrane"	GO:0005743;GO:0019866	4	aten_0.1.m1.2990.m1	0
+"organelle inner membrane"	GO:0005743;GO:0019866	4	aten_0.1.m1.2095.m1	3
+"organelle inner membrane"	GO:0005743;GO:0019866	4	aten_0.1.m1.9863.m1	0
+"organelle inner membrane"	GO:0005743;GO:0019866	4	aten_0.1.m1.2380.m1	0
+"organelle inner membrane"	GO:0005743;GO:0019866	4	aten_0.1.m1.33136.m1	0
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.9809.m1	7
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.6365.m1	-13
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.12545.m1	0
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.33945.m1	0
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.25249.m1	0
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.32649.m1	5
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.24184.m1	2
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.3024.m1	0
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.6198.m1	-1
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.6361.m1	-1
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.19468.m1	0
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.1964.m1	4
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.2381.m1	-17
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.10831.m1	0
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.27037.m1	0
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.4326.m1	-10
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.5716.m1	-2
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.626.m1	0
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.10012.m1	-3
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.12125.m1	-19
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.3267.m1	0
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.25963.m1	2
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.4887.m1	0
+"nucleoplasm"	GO:0005654	2	aten_0.1.m1.7282.m1	2
+"axoneme"	GO:0005930	2	aten_0.1.m1.951.m1	0
+"axoneme"	GO:0005930	2	aten_0.1.m1.8063.m1	9
+"axoneme"	GO:0005930	2	aten_0.1.m1.2125.m1	14
+"axoneme"	GO:0005930	2	aten_0.1.m1.26355.m1	2
+"axoneme"	GO:0005930	2	aten_0.1.m1.10000.m1	2
+"cytoskeleton"	GO:0005856	2	aten_0.1.m1.13185.m1	0
+"cytoskeleton"	GO:0005856	2	aten_0.1.m1.4370.m1	5
+"cytoskeleton"	GO:0005856	2	aten_0.1.m1.28379.m1	0
+"cell junction"	GO:0070161;GO:0030054	3	aten_0.1.m1.31323.m1	23
+"cell junction"	GO:0070161;GO:0030054	3	aten_0.1.m1.12874.m1	5
+"cell junction"	GO:0070161;GO:0030054	3	aten_0.1.m1.19734.m1	-1
+"cell junction"	GO:0070161;GO:0030054	3	aten_0.1.m1.9393.m1	17
+"cell junction"	GO:0070161;GO:0030054	3	aten_0.1.m1.18716.m1	0
+"cell junction"	GO:0070161;GO:0030054	3	aten_0.1.m1.22689.m1	-1
+"cell junction"	GO:0070161;GO:0030054	3	aten_0.1.m1.32544.m1	0
+"Golgi cisterna"	GO:0031985	4	aten_0.1.m1.465.m1	4
+"Golgi cisterna"	GO:0031985	4	aten_0.1.m1.27354.m1	4
+"Golgi cisterna"	GO:0031985	4	aten_0.1.m1.5158.m1	-4
+"mitochondrial protein-containing complex"	GO:0098798	2	aten_0.1.m1.10893.m1	0
+"mitochondrial protein-containing complex"	GO:0098798	2	aten_0.1.m1.20786.m1	0
+"mitochondrial protein-containing complex"	GO:0098798	2	aten_0.1.m1.15782.m1	0
+"mitochondrial protein-containing complex"	GO:0098798	2	aten_0.1.m1.19990.m1	0
+"mitochondrial protein-containing complex"	GO:0098798	2	aten_0.1.m1.30647.m1	16
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.31368.m1	-9
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.28865.m1	2
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.27694.m1	-2
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.1753.m1	1
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.5950.m1	0
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.10475.m1	2
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.29698.m1	2
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.7663.m1	0
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.4155.m1	-5
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.18488.m1	11
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.23602.m1	-1
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.4010.m1	0
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.22768.m1	3
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.3956.m1	6
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.7266.m1	-5
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.2550.m1	0
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.13478.m1	0
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.29699.m1	-13
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.12191.m1	-26
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.2014.m1	14
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.18848.m1	0
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.17649.m1	-10
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.34014.m1	16
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.31383.m1	-3
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.14453.m1	0
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.7647.m1	0
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.22827.m1	4
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.15203.m1	4
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.3491.m1	12
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.23032.m1	7
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.7672.m1	-5
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.32008.m1	0
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.17631.m1	20
+"supramolecular complex"	GO:0099080	2	aten_0.1.m1.32991.m1	0
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.6261.m1	-12
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.19387.m1	6
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.6262.m1	-4
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.13985.m1	0
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.5198.m1	-4
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.6383.m1	1
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.6252.m1	-11
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.6395.m1	-6
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.2140.m1	-1
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.1399.m1	-6
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.13412.m1	0
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.20600.m1	0
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.9093.m1	6
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.29679.m1	0
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.6276.m1	16
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.9101.m1	15
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.11085.m1	-4
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.11037.m1	0
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.15511.m1	0
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.31057.m1	4
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.15501.m1	-13
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.872.m1	0
+"vesicle"	GO:0005768;GO:0031410;GO:0097708;GO:0031982	5	aten_0.1.m1.11132.m1	-11
+"early endosome"	GO:0005769	2	aten_0.1.m1.6261.m1	-12
+"early endosome"	GO:0005769	2	aten_0.1.m1.19387.m1	6
+"early endosome"	GO:0005769	2	aten_0.1.m1.6262.m1	-4
+"early endosome"	GO:0005769	2	aten_0.1.m1.13985.m1	0
+"early endosome"	GO:0005769	2	aten_0.1.m1.6252.m1	-11
+"early endosome"	GO:0005769	2	aten_0.1.m1.2140.m1	-1
+"early endosome"	GO:0005769	2	aten_0.1.m1.1399.m1	-6
+"early endosome"	GO:0005769	2	aten_0.1.m1.13412.m1	0
+"early endosome"	GO:0005769	2	aten_0.1.m1.20600.m1	0
+"early endosome"	GO:0005769	2	aten_0.1.m1.29679.m1	0
+"early endosome"	GO:0005769	2	aten_0.1.m1.6276.m1	16
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.1348.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.7411.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.19596.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.21536.m1	23
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.7754.m1	4
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.24952.m1	-16
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.6744.m1	14
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.19765.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.19576.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.2724.m1	-1
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.22769.m1	-3
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.15373.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.29014.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.1299.m1	-5
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.26336.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.12677.m1	12
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.14824.m1	-16
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.6012.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.20010.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.16089.m1	-2
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.15351.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.28522.m1	-8
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.827.m1	1
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.12676.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.12059.m1	11
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.15022.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.2763.m1	1
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.12077.m1	7
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.3230.m1	-13
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.7758.m1	24
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.2195.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.22573.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.9622.m1	4
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.33212.m1	-5
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.21209.m1	4
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.1444.m1	-4
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.14307.m1	-4
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.14284.m1	1
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.25195.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.7590.m1	-12
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.18176.m1	7
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.31320.m1	-3
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.2769.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.19852.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.7317.m1	10
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.25746.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.20045.m1	8
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.7123.m1	3
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.3200.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.20007.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.3973.m1	3
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.1862.m1	8
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.6856.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.19464.m1	7
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.14090.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.7464.m1	4
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.15578.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.12643.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.17032.m1	12
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.27535.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.2500.m1	-25
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.11034.m1	4
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.20302.m1	2
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.11270.m1	3
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.9307.m1	11
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.8655.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.6526.m1	-3
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.32363.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.11841.m1	7
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.7281.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.3215.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.2462.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.6816.m1	8
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.5225.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.23008.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.13096.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.2032.m1	-3
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.27498.m1	3
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.27792.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.32148.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.21697.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.12633.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.20586.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.1350.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.15354.m1	8
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.25269.m1	7
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.5636.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.12222.m1	2
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.22305.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.3613.m1	-4
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.8405.m1	7
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.12732.m1	2
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.14213.m1	-2
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.12674.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.7307.m1	10
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.11181.m1	-7
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.17865.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.2565.m1	6
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.1351.m1	1
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.22121.m1	-3
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.4578.m1	0
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.22321.m1	8
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.12060.m1	-2
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.25177.m1	1
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.22830.m1	-15
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.17584.m1	-3
+"Golgi membrane"	GO:0000139	2	aten_0.1.m1.12678.m1	5
+"kinetochore"	GO:0000776	2	aten_0.1.m1.31368.m1	-9
+"kinetochore"	GO:0000776	2	aten_0.1.m1.28865.m1	2
+"kinetochore"	GO:0000776	2	aten_0.1.m1.27694.m1	-2
+"kinetochore"	GO:0000776	2	aten_0.1.m1.1753.m1	1
+"kinetochore"	GO:0000776	2	aten_0.1.m1.5950.m1	0
+"kinetochore"	GO:0000776	2	aten_0.1.m1.10475.m1	2
+"kinetochore"	GO:0000776	2	aten_0.1.m1.23602.m1	-1
+"kinetochore"	GO:0000776	2	aten_0.1.m1.22768.m1	3
+"kinetochore"	GO:0000776	2	aten_0.1.m1.3956.m1	6
+"kinetochore"	GO:0000776	2	aten_0.1.m1.7266.m1	-5
+"kinetochore"	GO:0000776	2	aten_0.1.m1.2550.m1	0
+"kinetochore"	GO:0000776	2	aten_0.1.m1.2014.m1	14
+"kinetochore"	GO:0000776	2	aten_0.1.m1.18848.m1	0
+"kinetochore"	GO:0000776	2	aten_0.1.m1.34014.m1	16
+"kinetochore"	GO:0000776	2	aten_0.1.m1.31383.m1	-3
+"kinetochore"	GO:0000776	2	aten_0.1.m1.14453.m1	0
+"peptidase complex"	GO:1905368	2	aten_0.1.m1.1992.m1	8
+"peptidase complex"	GO:1905368	2	aten_0.1.m1.25809.m1	0
+"peptidase complex"	GO:1905368	2	aten_0.1.m1.23281.m1	0
+"peptidase complex"	GO:1905368	2	aten_0.1.m1.28977.m1	0
+"peptidase complex"	GO:1905368	2	aten_0.1.m1.10213.m1	0
+"peptidase complex"	GO:1905368	2	aten_0.1.m1.22401.m1	0
+"peptidase complex"	GO:1905368	2	aten_0.1.m1.20794.m1	-1
+"acrosomal vesicle"	GO:0001669;GO:0030141;GO:0099503	3	aten_0.1.m1.15511.m1	0
+"acrosomal vesicle"	GO:0001669;GO:0030141;GO:0099503	3	aten_0.1.m1.31057.m1	4
+"acrosomal vesicle"	GO:0001669;GO:0030141;GO:0099503	3	aten_0.1.m1.15501.m1	-13
+"acrosomal vesicle"	GO:0001669;GO:0030141;GO:0099503	3	aten_0.1.m1.872.m1	0
+"plasma membrane bounded cell projection"	GO:0120025;GO:0042995	2	aten_0.1.m1.19626.m1	0
+"plasma membrane bounded cell projection"	GO:0120025;GO:0042995	2	aten_0.1.m1.20244.m1	-12
+"plasma membrane bounded cell projection"	GO:0120025;GO:0042995	2	aten_0.1.m1.28535.m1	3
+"plasma membrane bounded cell projection"	GO:0120025;GO:0042995	2	aten_0.1.m1.208.m1	-7
+"plasma membrane bounded cell projection"	GO:0120025;GO:0042995	2	aten_0.1.m1.2671.m1	-1
+"plasma membrane bounded cell projection"	GO:0120025;GO:0042995	2	aten_0.1.m1.373.m1	0
+"plasma membrane bounded cell projection"	GO:0120025;GO:0042995	2	aten_0.1.m1.157.m1	-1
+"plasma membrane bounded cell projection"	GO:0120025;GO:0042995	2	aten_0.1.m1.19165.m1	-7
+"plasma membrane bounded cell projection"	GO:0120025;GO:0042995	2	aten_0.1.m1.27759.m1	6
+"plasma membrane bounded cell projection"	GO:0120025;GO:0042995	2	aten_0.1.m1.3847.m1	1
+"plasma membrane bounded cell projection"	GO:0120025;GO:0042995	2	aten_0.1.m1.5035.m1	-14
+"plasma membrane bounded cell projection"	GO:0120025;GO:0042995	2	aten_0.1.m1.15431.m1	16
+"plasma membrane bounded cell projection"	GO:0120025;GO:0042995	2	aten_0.1.m1.29532.m1	-1
+"plasma membrane bounded cell projection"	GO:0120025;GO:0042995	2	aten_0.1.m1.11303.m1	0
+"plasma membrane bounded cell projection"	GO:0120025;GO:0042995	2	aten_0.1.m1.23771.m1	0
+"plasma membrane bounded cell projection"	GO:0120025;GO:0042995	2	aten_0.1.m1.1449.m1	5
+"plasma membrane bounded cell projection"	GO:0120025;GO:0042995	2	aten_0.1.m1.1112.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.20210.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.18940.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.10827.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.11065.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.1800.m1	1
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.15708.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.18493.m1	3
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.30099.m1	1
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.3073.m1	24
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.1144.m1	-2
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.3404.m1	10
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.20558.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.27571.m1	11
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.2223.m1	-13
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.3666.m1	4
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.14855.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.19697.m1	10
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.3407.m1	-11
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.15709.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.4773.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.31489.m1	5
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.11531.m1	-3
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.21540.m1	7
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.16367.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.23914.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.23848.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.31456.m1	1
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.8412.m1	12
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.1884.m1	-2
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.757.m1	-10
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.1010.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.7698.m1	-11
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.2957.m1	7
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.26186.m1	-9
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.22716.m1	-4
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.1960.m1	-1
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.31136.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.14020.m1	-6
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.23920.m1	-14
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.15710.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.31817.m1	-5
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.3670.m1	-3
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.33316.m1	24
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.20215.m1	-7
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.20265.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.26174.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.16735.m1	7
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.22396.m1	6
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.24418.m1	9
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.29963.m1	-18
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.28627.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.32984.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.20990.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.27509.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.4717.m1	-6
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.7695.m1	7
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.1973.m1	23
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.12039.m1	13
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.6329.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.19510.m1	15
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.12842.m1	9
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.6336.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.19705.m1	-10
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.12273.m1	-24
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.19018.m1	-4
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.26185.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.15692.m1	-10
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.22403.m1	33
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.19650.m1	0
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.26195.m1	9
+"plasma membrane"	GO:0005886	2	aten_0.1.m1.5533.m1	4
+"uropod"	GO:0001931	3	aten_0.1.m1.208.m1	-7
+"uropod"	GO:0001931	3	aten_0.1.m1.2671.m1	-1
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.27352.m1	-1
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.15320.m1	-8
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.33314.m1	-17
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.16728.m1	0
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.23615.m1	12
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.21079.m1	0
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.19013.m1	0
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.11514.m1	16
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.29363.m1	-6
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.12704.m1	4
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.24348.m1	21
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.23607.m1	3
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.1992.m1	8
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.10487.m1	0
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.15156.m1	-11
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.8237.m1	1
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.25809.m1	0
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.23281.m1	0
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.28977.m1	0
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.10213.m1	0
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.11203.m1	0
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.28863.m1	-16
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.22401.m1	0
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.1276.m1	-1
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.19990.m1	0
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.32164.m1	0
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.11224.m1	0
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.22428.m1	20
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.19659.m1	10
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.30690.m1	0
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.19860.m1	8
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.14221.m1	0
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.20794.m1	-1
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.1388.m1	9
+"catalytic complex"	GO:1902494	2	aten_0.1.m1.12099.m1	0
+"mitochondrial outer membrane"	GO:0005741;GO:0031968;GO:0019867	2	aten_0.1.m1.4305.m1	0
+"mitochondrial outer membrane"	GO:0005741;GO:0031968;GO:0019867	2	aten_0.1.m1.9419.m1	-6
+"virion"	GO:0019012	1	aten_0.1.m1.26205.m1	12
+"virion"	GO:0019012	1	aten_0.1.m1.21535.m1	7
+"chromosome"	GO:0000228;GO:0005694	2	aten_0.1.m1.1374.m1	0
+"chromosome"	GO:0000228;GO:0005694	2	aten_0.1.m1.5550.m1	0
+"chromosome"	GO:0000228;GO:0005694	2	aten_0.1.m1.2505.m1	1
+"chromosome"	GO:0000228;GO:0005694	2	aten_0.1.m1.13394.m1	7
+"chromosome"	GO:0000228;GO:0005694	2	aten_0.1.m1.27347.m1	0
+"chromosome"	GO:0000228;GO:0005694	2	aten_0.1.m1.5467.m1	4
+"chromosome"	GO:0000228;GO:0005694	2	aten_0.1.m1.1375.m1	0
+"chromosome"	GO:0000228;GO:0005694	2	aten_0.1.m1.1817.m1	-8
+"chromosome"	GO:0000228;GO:0005694	2	aten_0.1.m1.1734.m1	15
+"chromosome"	GO:0000228;GO:0005694	2	aten_0.1.m1.12244.m1	0
+"chromosome"	GO:0000228;GO:0005694	2	aten_0.1.m1.2527.m1	10
+"chromosome"	GO:0000228;GO:0005694	2	aten_0.1.m1.2519.m1	4
+"chromosome"	GO:0000228;GO:0005694	2	aten_0.1.m1.1301.m1	-20
+"chromosome"	GO:0000228;GO:0005694	2	aten_0.1.m1.32204.m1	0
+"chromosome"	GO:0000228;GO:0005694	2	aten_0.1.m1.3779.m1	-12
+"chromosome"	GO:0000228;GO:0005694	2	aten_0.1.m1.29526.m1	12
+"chromosome"	GO:0000228;GO:0005694	2	aten_0.1.m1.19756.m1	-2
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.23615.m1	12
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.14716.m1	0
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.16126.m1	0
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.19013.m1	0
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.11514.m1	16
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.23607.m1	3
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.1992.m1	8
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.23281.m1	0
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.9966.m1	2
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.18974.m1	0
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.28863.m1	-16
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.32905.m1	-7
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.14886.m1	2
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.32164.m1	0
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.30201.m1	4
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.22428.m1	20
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.28263.m1	13
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.19659.m1	10
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.19860.m1	8
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.31418.m1	0
+"nuclear protein-containing complex"	GO:0140513	2	aten_0.1.m1.12099.m1	0
+"nuclear exosome (RNase complex)"	GO:0000176	3	aten_0.1.m1.23607.m1	3
+"nuclear exosome (RNase complex)"	GO:0000176	3	aten_0.1.m1.19860.m1	8
+"nucleotide-excision repair complex"	GO:0000109;GO:1990391	2	aten_0.1.m1.14716.m1	0
+"nucleotide-excision repair complex"	GO:0000109;GO:1990391	2	aten_0.1.m1.16126.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.21151.m1	-2
+"spindle pole"	GO:0000922	2	aten_0.1.m1.32651.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.15995.m1	-12
+"spindle pole"	GO:0000922	2	aten_0.1.m1.30317.m1	-5
+"spindle pole"	GO:0000922	2	aten_0.1.m1.5109.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.11634.m1	-5
+"spindle pole"	GO:0000922	2	aten_0.1.m1.10393.m1	-10
+"spindle pole"	GO:0000922	2	aten_0.1.m1.33674.m1	3
+"spindle pole"	GO:0000922	2	aten_0.1.m1.4558.m1	5
+"spindle pole"	GO:0000922	2	aten_0.1.m1.191.m1	10
+"spindle pole"	GO:0000922	2	aten_0.1.m1.16552.m1	-6
+"spindle pole"	GO:0000922	2	aten_0.1.m1.9226.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.5110.m1	-4
+"spindle pole"	GO:0000922	2	aten_0.1.m1.27041.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.22088.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.11774.m1	1
+"spindle pole"	GO:0000922	2	aten_0.1.m1.10391.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.11785.m1	4
+"spindle pole"	GO:0000922	2	aten_0.1.m1.11614.m1	-19
+"spindle pole"	GO:0000922	2	aten_0.1.m1.19309.m1	-12
+"spindle pole"	GO:0000922	2	aten_0.1.m1.33649.m1	24
+"spindle pole"	GO:0000922	2	aten_0.1.m1.30267.m1	6
+"spindle pole"	GO:0000922	2	aten_0.1.m1.11562.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.11604.m1	-2
+"spindle pole"	GO:0000922	2	aten_0.1.m1.20321.m1	6
+"spindle pole"	GO:0000922	2	aten_0.1.m1.32538.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.3831.m1	14
+"spindle pole"	GO:0000922	2	aten_0.1.m1.4262.m1	-3
+"spindle pole"	GO:0000922	2	aten_0.1.m1.30258.m1	1
+"spindle pole"	GO:0000922	2	aten_0.1.m1.28025.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.20373.m1	4
+"spindle pole"	GO:0000922	2	aten_0.1.m1.13626.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.19313.m1	-4
+"spindle pole"	GO:0000922	2	aten_0.1.m1.11650.m1	6
+"spindle pole"	GO:0000922	2	aten_0.1.m1.160.m1	18
+"spindle pole"	GO:0000922	2	aten_0.1.m1.16621.m1	-14
+"spindle pole"	GO:0000922	2	aten_0.1.m1.8372.m1	-8
+"spindle pole"	GO:0000922	2	aten_0.1.m1.26206.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.7901.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.5100.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.1545.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.11760.m1	-2
+"spindle pole"	GO:0000922	2	aten_0.1.m1.19412.m1	-5
+"spindle pole"	GO:0000922	2	aten_0.1.m1.13624.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.30255.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.30265.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.11576.m1	1
+"spindle pole"	GO:0000922	2	aten_0.1.m1.32313.m1	10
+"spindle pole"	GO:0000922	2	aten_0.1.m1.30266.m1	13
+"spindle pole"	GO:0000922	2	aten_0.1.m1.26466.m1	-10
+"spindle pole"	GO:0000922	2	aten_0.1.m1.10388.m1	-6
+"spindle pole"	GO:0000922	2	aten_0.1.m1.21152.m1	27
+"spindle pole"	GO:0000922	2	aten_0.1.m1.5086.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.11583.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.31834.m1	-17
+"spindle pole"	GO:0000922	2	aten_0.1.m1.30254.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.163.m1	8
+"spindle pole"	GO:0000922	2	aten_0.1.m1.34111.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.16824.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.14290.m1	-9
+"spindle pole"	GO:0000922	2	aten_0.1.m1.20785.m1	-16
+"spindle pole"	GO:0000922	2	aten_0.1.m1.20367.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.184.m1	-7
+"spindle pole"	GO:0000922	2	aten_0.1.m1.13906.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.20206.m1	5
+"spindle pole"	GO:0000922	2	aten_0.1.m1.24692.m1	-22
+"spindle pole"	GO:0000922	2	aten_0.1.m1.16623.m1	-10
+"spindle pole"	GO:0000922	2	aten_0.1.m1.3833.m1	2
+"spindle pole"	GO:0000922	2	aten_0.1.m1.7120.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.33661.m1	-2
+"spindle pole"	GO:0000922	2	aten_0.1.m1.13590.m1	-20
+"spindle pole"	GO:0000922	2	aten_0.1.m1.9072.m1	4
+"spindle pole"	GO:0000922	2	aten_0.1.m1.34109.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.5107.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.22090.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.11745.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.11667.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.22029.m1	-11
+"spindle pole"	GO:0000922	2	aten_0.1.m1.11645.m1	-17
+"spindle pole"	GO:0000922	2	aten_0.1.m1.11772.m1	9
+"spindle pole"	GO:0000922	2	aten_0.1.m1.30259.m1	-8
+"spindle pole"	GO:0000922	2	aten_0.1.m1.11813.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.33292.m1	3
+"spindle pole"	GO:0000922	2	aten_0.1.m1.5487.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.20902.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.26484.m1	-1
+"spindle pole"	GO:0000922	2	aten_0.1.m1.13564.m1	5
+"spindle pole"	GO:0000922	2	aten_0.1.m1.32979.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.8083.m1	-4
+"spindle pole"	GO:0000922	2	aten_0.1.m1.18879.m1	7
+"spindle pole"	GO:0000922	2	aten_0.1.m1.24863.m1	2
+"spindle pole"	GO:0000922	2	aten_0.1.m1.22031.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.11790.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.200.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.5108.m1	26
+"spindle pole"	GO:0000922	2	aten_0.1.m1.11747.m1	-9
+"spindle pole"	GO:0000922	2	aten_0.1.m1.10427.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.34115.m1	-13
+"spindle pole"	GO:0000922	2	aten_0.1.m1.22013.m1	0
+"spindle pole"	GO:0000922	2	aten_0.1.m1.24698.m1	-11
+"spindle pole"	GO:0000922	2	aten_0.1.m1.28591.m1	-14
+"spindle pole"	GO:0000922	2	aten_0.1.m1.33303.m1	-14
+"spindle pole"	GO:0000922	2	aten_0.1.m1.11044.m1	5
+"spindle pole"	GO:0000922	2	aten_0.1.m1.26475.m1	-3
+"spindle pole"	GO:0000922	2	aten_0.1.m1.11970.m1	-6
+"spindle pole"	GO:0000922	2	aten_0.1.m1.7102.m1	-5
+"spindle pole"	GO:0000922	2	aten_0.1.m1.30402.m1	1
+"spindle pole"	GO:0000922	2	aten_0.1.m1.30249.m1	-2
+"P-body"	GO:0000932;GO:0036464;GO:0035770	4	aten_0.1.m1.29698.m1	2
+"P-body"	GO:0000932;GO:0036464;GO:0035770	4	aten_0.1.m1.4010.m1	0
+"P-body"	GO:0000932;GO:0036464;GO:0035770	4	aten_0.1.m1.29699.m1	-13
+"P-body"	GO:0000932;GO:0036464;GO:0035770	4	aten_0.1.m1.17649.m1	-10
+"P-body"	GO:0000932;GO:0036464;GO:0035770	4	aten_0.1.m1.15203.m1	4
+"P-body"	GO:0000932;GO:0036464;GO:0035770	4	aten_0.1.m1.3491.m1	12
+"P-body"	GO:0000932;GO:0036464;GO:0035770	4	aten_0.1.m1.23032.m1	7
+"P-body"	GO:0000932;GO:0036464;GO:0035770	4	aten_0.1.m1.17631.m1	20
+"Golgi apparatus subcompartment"	GO:0098791;GO:0031984	3	aten_0.1.m1.465.m1	4
+"Golgi apparatus subcompartment"	GO:0098791;GO:0031984	3	aten_0.1.m1.27354.m1	4
+"Golgi apparatus subcompartment"	GO:0098791;GO:0031984	3	aten_0.1.m1.110.m1	0
+"Golgi apparatus subcompartment"	GO:0098791;GO:0031984	3	aten_0.1.m1.17675.m1	0
+"Golgi apparatus subcompartment"	GO:0098791;GO:0031984	3	aten_0.1.m1.14459.m1	-3
+"Golgi apparatus subcompartment"	GO:0098791;GO:0031984	3	aten_0.1.m1.4463.m1	0
+"Golgi apparatus subcompartment"	GO:0098791;GO:0031984	3	aten_0.1.m1.5158.m1	-4
+"photoreceptor inner segment"	GO:0001917	2	aten_0.1.m1.19844.m1	0
+"photoreceptor inner segment"	GO:0001917	2	aten_0.1.m1.14573.m1	0
+"photoreceptor inner segment"	GO:0001917	2	aten_0.1.m1.15606.m1	0
+"photoreceptor inner segment"	GO:0001917	2	aten_0.1.m1.24424.m1	-6
+"photoreceptor inner segment"	GO:0001917	2	aten_0.1.m1.7636.m1	-1
+"photoreceptor inner segment"	GO:0001917	2	aten_0.1.m1.6498.m1	0
+"photoreceptor inner segment"	GO:0001917	2	aten_0.1.m1.31146.m1	0
+"photoreceptor inner segment"	GO:0001917	2	aten_0.1.m1.17086.m1	8
+"photoreceptor inner segment"	GO:0001917	2	aten_0.1.m1.17081.m1	0
+"transcription regulator complex"	GO:0005667	2	aten_0.1.m1.14886.m1	2
+"transcription regulator complex"	GO:0005667	2	aten_0.1.m1.5084.m1	0
+"obsolete cell"	GO:0005623	-1	aten_0.1.m1.5142.m1	3
+"obsolete cell"	GO:0005623	-1	aten_0.1.m1.19544.m1	0
+"obsolete cell"	GO:0005623	-1	aten_0.1.m1.2384.m1	0
+"obsolete cell"	GO:0005623	-1	aten_0.1.m1.29673.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.815.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.1696.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.29581.m1	3
+"extracellular region"	GO:0005576	2	aten_0.1.m1.9186.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.1695.m1	-6
+"extracellular region"	GO:0005576	2	aten_0.1.m1.2714.m1	17
+"extracellular region"	GO:0005576	2	aten_0.1.m1.3042.m1	10
+"extracellular region"	GO:0005576	2	aten_0.1.m1.1715.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.5621.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.5532.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.27238.m1	-5
+"extracellular region"	GO:0005576	2	aten_0.1.m1.2040.m1	-4
+"extracellular region"	GO:0005576	2	aten_0.1.m1.31988.m1	-3
+"extracellular region"	GO:0005576	2	aten_0.1.m1.30248.m1	-1
+"extracellular region"	GO:0005576	2	aten_0.1.m1.24034.m1	-4
+"extracellular region"	GO:0005576	2	aten_0.1.m1.18507.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.2305.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.6779.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.2141.m1	-1
+"extracellular region"	GO:0005576	2	aten_0.1.m1.4291.m1	-7
+"extracellular region"	GO:0005576	2	aten_0.1.m1.9992.m1	-1
+"extracellular region"	GO:0005576	2	aten_0.1.m1.10204.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.17030.m1	-1
+"extracellular region"	GO:0005576	2	aten_0.1.m1.19819.m1	8
+"extracellular region"	GO:0005576	2	aten_0.1.m1.31702.m1	-4
+"extracellular region"	GO:0005576	2	aten_0.1.m1.9677.m1	-7
+"extracellular region"	GO:0005576	2	aten_0.1.m1.6596.m1	6
+"extracellular region"	GO:0005576	2	aten_0.1.m1.31331.m1	1
+"extracellular region"	GO:0005576	2	aten_0.1.m1.5163.m1	4
+"extracellular region"	GO:0005576	2	aten_0.1.m1.21176.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.10191.m1	7
+"extracellular region"	GO:0005576	2	aten_0.1.m1.23567.m1	4
+"extracellular region"	GO:0005576	2	aten_0.1.m1.1795.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.6068.m1	-16
+"extracellular region"	GO:0005576	2	aten_0.1.m1.816.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.2809.m1	1
+"extracellular region"	GO:0005576	2	aten_0.1.m1.10196.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.15108.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.19826.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.24338.m1	-1
+"extracellular region"	GO:0005576	2	aten_0.1.m1.13948.m1	-1
+"extracellular region"	GO:0005576	2	aten_0.1.m1.4339.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.9652.m1	-7
+"extracellular region"	GO:0005576	2	aten_0.1.m1.133.m1	17
+"extracellular region"	GO:0005576	2	aten_0.1.m1.6797.m1	12
+"extracellular region"	GO:0005576	2	aten_0.1.m1.18970.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.1770.m1	13
+"extracellular region"	GO:0005576	2	aten_0.1.m1.11529.m1	-7
+"extracellular region"	GO:0005576	2	aten_0.1.m1.9678.m1	-2
+"extracellular region"	GO:0005576	2	aten_0.1.m1.15558.m1	30
+"extracellular region"	GO:0005576	2	aten_0.1.m1.9651.m1	7
+"extracellular region"	GO:0005576	2	aten_0.1.m1.3902.m1	-17
+"extracellular region"	GO:0005576	2	aten_0.1.m1.2306.m1	14
+"extracellular region"	GO:0005576	2	aten_0.1.m1.33380.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.13354.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.6050.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.18969.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.11579.m1	19
+"extracellular region"	GO:0005576	2	aten_0.1.m1.27755.m1	-3
+"extracellular region"	GO:0005576	2	aten_0.1.m1.23021.m1	1
+"extracellular region"	GO:0005576	2	aten_0.1.m1.24911.m1	-6
+"extracellular region"	GO:0005576	2	aten_0.1.m1.2300.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.1928.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.2806.m1	3
+"extracellular region"	GO:0005576	2	aten_0.1.m1.5787.m1	13
+"extracellular region"	GO:0005576	2	aten_0.1.m1.17046.m1	-4
+"extracellular region"	GO:0005576	2	aten_0.1.m1.1705.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.16009.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.10543.m1	-5
+"extracellular region"	GO:0005576	2	aten_0.1.m1.3450.m1	7
+"extracellular region"	GO:0005576	2	aten_0.1.m1.9328.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.23042.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.10495.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.23570.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.23019.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.20743.m1	-9
+"extracellular region"	GO:0005576	2	aten_0.1.m1.23922.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.12234.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.13460.m1	-12
+"extracellular region"	GO:0005576	2	aten_0.1.m1.5571.m1	19
+"extracellular region"	GO:0005576	2	aten_0.1.m1.8272.m1	15
+"extracellular region"	GO:0005576	2	aten_0.1.m1.21177.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.3055.m1	-9
+"extracellular region"	GO:0005576	2	aten_0.1.m1.138.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.8841.m1	-9
+"extracellular region"	GO:0005576	2	aten_0.1.m1.2981.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.24942.m1	6
+"extracellular region"	GO:0005576	2	aten_0.1.m1.19735.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.13356.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.113.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.3054.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.6354.m1	-11
+"extracellular region"	GO:0005576	2	aten_0.1.m1.5309.m1	-5
+"extracellular region"	GO:0005576	2	aten_0.1.m1.18790.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.13431.m1	-10
+"extracellular region"	GO:0005576	2	aten_0.1.m1.13439.m1	-7
+"extracellular region"	GO:0005576	2	aten_0.1.m1.17039.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.31420.m1	1
+"extracellular region"	GO:0005576	2	aten_0.1.m1.30087.m1	-1
+"extracellular region"	GO:0005576	2	aten_0.1.m1.5314.m1	14
+"extracellular region"	GO:0005576	2	aten_0.1.m1.23154.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.28182.m1	-5
+"extracellular region"	GO:0005576	2	aten_0.1.m1.5355.m1	10
+"extracellular region"	GO:0005576	2	aten_0.1.m1.27757.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.23593.m1	7
+"extracellular region"	GO:0005576	2	aten_0.1.m1.24910.m1	10
+"extracellular region"	GO:0005576	2	aten_0.1.m1.13660.m1	-1
+"extracellular region"	GO:0005576	2	aten_0.1.m1.25568.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.6066.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.12474.m1	7
+"extracellular region"	GO:0005576	2	aten_0.1.m1.1018.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.10190.m1	-26
+"extracellular region"	GO:0005576	2	aten_0.1.m1.32004.m1	-6
+"extracellular region"	GO:0005576	2	aten_0.1.m1.19739.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.33357.m1	4
+"extracellular region"	GO:0005576	2	aten_0.1.m1.17719.m1	11
+"extracellular region"	GO:0005576	2	aten_0.1.m1.5310.m1	11
+"extracellular region"	GO:0005576	2	aten_0.1.m1.24155.m1	7
+"extracellular region"	GO:0005576	2	aten_0.1.m1.29602.m1	4
+"extracellular region"	GO:0005576	2	aten_0.1.m1.6438.m1	1
+"extracellular region"	GO:0005576	2	aten_0.1.m1.1716.m1	2
+"extracellular region"	GO:0005576	2	aten_0.1.m1.24148.m1	-24
+"extracellular region"	GO:0005576	2	aten_0.1.m1.6782.m1	1
+"extracellular region"	GO:0005576	2	aten_0.1.m1.20179.m1	-1
+"extracellular region"	GO:0005576	2	aten_0.1.m1.29592.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.1656.m1	-6
+"extracellular region"	GO:0005576	2	aten_0.1.m1.9801.m1	-11
+"extracellular region"	GO:0005576	2	aten_0.1.m1.7874.m1	21
+"extracellular region"	GO:0005576	2	aten_0.1.m1.31427.m1	22
+"extracellular region"	GO:0005576	2	aten_0.1.m1.1717.m1	7
+"extracellular region"	GO:0005576	2	aten_0.1.m1.23363.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.19736.m1	-3
+"extracellular region"	GO:0005576	2	aten_0.1.m1.14435.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.24924.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.2296.m1	0
+"extracellular region"	GO:0005576	2	aten_0.1.m1.1708.m1	3
+"extracellular region"	GO:0005576	2	aten_0.1.m1.26957.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.1797.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.4535.m1	21
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.7226.m1	1
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.9864.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.4935.m1	3
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.6071.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.19850.m1	2
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.13061.m1	-12
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.3209.m1	10
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.3855.m1	-6
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.10860.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.18786.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.2269.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.6399.m1	-1
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.21012.m1	2
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.26571.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.3357.m1	2
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.25785.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.4576.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.10930.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.21271.m1	16
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.5998.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.6111.m1	4
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.12082.m1	1
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.6791.m1	-11
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.24843.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.988.m1	10
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.22707.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.6342.m1	10
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.16563.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.11000.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.13909.m1	25
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.28811.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.24369.m1	8
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.16571.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.25046.m1	-4
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.1439.m1	19
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.74.m1	7
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.25030.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.28570.m1	-6
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.16641.m1	-5
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.10956.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.24377.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.1736.m1	-3
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.22815.m1	-5
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.14579.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.13898.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.1682.m1	15
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.8550.m1	-4
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.29533.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.1560.m1	10
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.1608.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.579.m1	13
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.6370.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.625.m1	20
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.29411.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.412.m1	2
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.16570.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.12194.m1	-8
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.17247.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.4547.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.32252.m1	5
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.35.m1	-26
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.5040.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.18499.m1	6
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.10874.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.12906.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.10442.m1	9
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.10872.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.16555.m1	7
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.18302.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.8415.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.25544.m1	-14
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.15259.m1	7
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.8370.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.32378.m1	9
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.12725.m1	-2
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.1192.m1	-6
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.31479.m1	-15
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.5749.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.20005.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.1605.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.6413.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.16702.m1	8
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.26348.m1	11
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.17605.m1	-3
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.22696.m1	12
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.1843.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.19439.m1	11
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.11263.m1	-7
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.11915.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.21195.m1	3
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.9510.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.3216.m1	-1
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.21190.m1	3
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.6665.m1	5
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.19307.m1	-16
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.21267.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.17026.m1	-3
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.11013.m1	2
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.5996.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.13947.m1	7
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.3654.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.33831.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.30925.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.848.m1	5
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.14331.m1	7
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.16578.m1	16
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.23386.m1	-2
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.11695.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.7739.m1	5
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.6129.m1	-7
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.28266.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.15654.m1	4
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.13391.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.9821.m1	11
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.61.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.14738.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.225.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.13002.m1	15
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.1048.m1	12
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.19586.m1	-13
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.7697.m1	-4
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.24040.m1	24
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.1738.m1	-12
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.18317.m1	4
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.30277.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.22417.m1	3
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.3481.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.24842.m1	3
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.5789.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.24844.m1	-11
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.3271.m1	-7
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.857.m1	-6
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.16631.m1	12
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.19100.m1	-10
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.19330.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.12409.m1	-12
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.3934.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.1262.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.8643.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.3259.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.1639.m1	1
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.26100.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.10686.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.12747.m1	1
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.28528.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.26037.m1	17
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.21745.m1	13
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.55.m1	21
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.10811.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.3155.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.17450.m1	24
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.12551.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.13922.m1	17
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.16564.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.3443.m1	15
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.17057.m1	-19
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.10226.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.7202.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.12466.m1	11
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.3084.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.33447.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.14185.m1	2
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.22860.m1	-1
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.13907.m1	-10
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.28806.m1	14
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.7941.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.23801.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.29573.m1	10
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.16072.m1	-8
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.32858.m1	2
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.32792.m1	-23
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.24835.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.5346.m1	14
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.26408.m1	-5
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.25291.m1	8
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.2648.m1	7
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.25994.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.9208.m1	6
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.10606.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.10232.m1	4
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.16562.m1	22
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.25049.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.18278.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.6261.m1	-12
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.19387.m1	6
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.6262.m1	-4
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.13985.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.15511.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.5198.m1	-4
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.31057.m1	4
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.15501.m1	-13
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.6383.m1	1
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.6252.m1	-11
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.11132.m1	-11
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.872.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.6395.m1	-6
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.2140.m1	-1
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.1399.m1	-6
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.13412.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.20600.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.9093.m1	6
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.29679.m1	0
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.6276.m1	16
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.9101.m1	15
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.11085.m1	-4
+"membrane-bounded organelle"	GO:0043231;GO:0043227	2	aten_0.1.m1.11037.m1	0
+"THO complex"	GO:0000347	3	aten_0.1.m1.9966.m1	2
+"THO complex"	GO:0000347	3	aten_0.1.m1.31418.m1	0
+"centrosome"	GO:0005813;GO:0005815	2	aten_0.1.m1.30473.m1	0
+"centrosome"	GO:0005813;GO:0005815	2	aten_0.1.m1.22603.m1	-16
+"centrosome"	GO:0005813;GO:0005815	2	aten_0.1.m1.20834.m1	0
+"centrosome"	GO:0005813;GO:0005815	2	aten_0.1.m1.26481.m1	0
+"centrosome"	GO:0005813;GO:0005815	2	aten_0.1.m1.29042.m1	0
+"centrosome"	GO:0005813;GO:0005815	2	aten_0.1.m1.4297.m1	4
+"centrosome"	GO:0005813;GO:0005815	2	aten_0.1.m1.25630.m1	10
+"centrosome"	GO:0005813;GO:0005815	2	aten_0.1.m1.3439.m1	-7
+"centrosome"	GO:0005813;GO:0005815	2	aten_0.1.m1.10319.m1	-14
+"organelle envelope lumen"	GO:0005758;GO:0031970	3	aten_0.1.m1.12761.m1	17
+"organelle envelope lumen"	GO:0005758;GO:0031970	3	aten_0.1.m1.33312.m1	1
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.27352.m1	-1
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.15320.m1	-8
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.33314.m1	-17
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.16728.m1	0
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.23615.m1	12
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.21079.m1	0
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.11514.m1	16
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.29363.m1	-6
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.24348.m1	21
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.1992.m1	8
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.10487.m1	0
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.15156.m1	-11
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.23281.m1	0
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.11203.m1	0
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.28863.m1	-16
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.32164.m1	0
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.11224.m1	0
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.22428.m1	20
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.30690.m1	0
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.14221.m1	0
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.1388.m1	9
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.12099.m1	0
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.25809.m1	0
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.28977.m1	0
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.10213.m1	0
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.22401.m1	0
+"intracellular protein-containing complex"	GO:1990234;GO:0140535	2	aten_0.1.m1.20794.m1	-1
+"sodium channel complex"	GO:0001518;GO:0034706	3	aten_0.1.m1.10679.m1	-6
+"sodium channel complex"	GO:0001518;GO:0034706	3	aten_0.1.m1.10682.m1	0
+"sodium channel complex"	GO:0001518;GO:0034706	3	aten_0.1.m1.10721.m1	0
+"sodium channel complex"	GO:0001518;GO:0034706	3	aten_0.1.m1.9866.m1	0
+"lysosome"	GO:0005764	2	aten_0.1.m1.6342.m1	10
+"lysosome"	GO:0005764	2	aten_0.1.m1.1608.m1	0
+"lysosome"	GO:0005764	2	aten_0.1.m1.17247.m1	0
+"organelle lumen"	GO:0043233;GO:0070013;GO:0031974	2	aten_0.1.m1.8939.m1	0
+"organelle lumen"	GO:0043233;GO:0070013;GO:0031974	2	aten_0.1.m1.2931.m1	-1
+"organelle lumen"	GO:0043233;GO:0070013;GO:0031974	2	aten_0.1.m1.31455.m1	-4
+"organelle lumen"	GO:0043233;GO:0070013;GO:0031974	2	aten_0.1.m1.29437.m1	2
+"organelle lumen"	GO:0043233;GO:0070013;GO:0031974	2	aten_0.1.m1.5202.m1	0
+"organelle lumen"	GO:0043233;GO:0070013;GO:0031974	2	aten_0.1.m1.12761.m1	17
+"organelle lumen"	GO:0043233;GO:0070013;GO:0031974	2	aten_0.1.m1.16425.m1	0
+"organelle lumen"	GO:0043233;GO:0070013;GO:0031974	2	aten_0.1.m1.33312.m1	1
+"organelle lumen"	GO:0043233;GO:0070013;GO:0031974	2	aten_0.1.m1.14078.m1	0
+"condensed chromosome kinetochore"	GO:0000777	2	aten_0.1.m1.31368.m1	-9
+"condensed chromosome kinetochore"	GO:0000777	2	aten_0.1.m1.1753.m1	1
+"condensed chromosome kinetochore"	GO:0000777	2	aten_0.1.m1.23602.m1	-1
+"condensed chromosome kinetochore"	GO:0000777	2	aten_0.1.m1.22768.m1	3
+"condensed chromosome kinetochore"	GO:0000777	2	aten_0.1.m1.7266.m1	-5
+"condensed chromosome kinetochore"	GO:0000777	2	aten_0.1.m1.2550.m1	0
+"condensed chromosome kinetochore"	GO:0000777	2	aten_0.1.m1.2014.m1	14
+"condensed chromosome kinetochore"	GO:0000777	2	aten_0.1.m1.34014.m1	16
+"condensed chromosome kinetochore"	GO:0000777	2	aten_0.1.m1.31383.m1	-3
+"proteasome complex"	GO:0000502;GO:1905369	3	aten_0.1.m1.25809.m1	0
+"proteasome complex"	GO:0000502;GO:1905369	3	aten_0.1.m1.28977.m1	0
+"proteasome complex"	GO:0000502;GO:1905369	3	aten_0.1.m1.10213.m1	0
+"proteasome complex"	GO:0000502;GO:1905369	3	aten_0.1.m1.22401.m1	0
+"proteasome complex"	GO:0000502;GO:1905369	3	aten_0.1.m1.20794.m1	-1
+"phagocytic cup"	GO:0001891	2	aten_0.1.m1.10736.m1	0
+"phagocytic cup"	GO:0001891	2	aten_0.1.m1.17776.m1	-6
+"exocyst"	GO:0000145;GO:0099023	3	aten_0.1.m1.12763.m1	-7
+"exocyst"	GO:0000145;GO:0099023	3	aten_0.1.m1.4755.m1	0
+"exocyst"	GO:0000145;GO:0099023	3	aten_0.1.m1.3807.m1	-11
+"exocyst"	GO:0000145;GO:0099023	3	aten_0.1.m1.22879.m1	22
+"exocyst"	GO:0000145;GO:0099023	3	aten_0.1.m1.28819.m1	0
+"exocyst"	GO:0000145;GO:0099023	3	aten_0.1.m1.26377.m1	0
+"nucleosome"	GO:0000786;GO:0032993;GO:0044815	3	aten_0.1.m1.19386.m1	-3
+"nucleosome"	GO:0000786;GO:0032993;GO:0044815	3	aten_0.1.m1.25562.m1	0
+"nucleosome"	GO:0000786;GO:0032993;GO:0044815	3	aten_0.1.m1.20337.m1	0
+"nucleosome"	GO:0000786;GO:0032993;GO:0044815	3	aten_0.1.m1.15681.m1	-4
+"semaphorin receptor complex"	GO:0002116;GO:0043235	2	aten_0.1.m1.27725.m1	-7
+"semaphorin receptor complex"	GO:0002116;GO:0043235	2	aten_0.1.m1.27726.m1	0
+"focal adhesion"	GO:0005925;GO:0030055	5	aten_0.1.m1.12874.m1	5
+"focal adhesion"	GO:0005925;GO:0030055	5	aten_0.1.m1.18716.m1	0
+"supramolecular fiber"	GO:0001527;GO:0099512;GO:0099081	2	aten_0.1.m1.7663.m1	0
+"supramolecular fiber"	GO:0001527;GO:0099512;GO:0099081	2	aten_0.1.m1.4155.m1	-5
+"supramolecular fiber"	GO:0001527;GO:0099512;GO:0099081	2	aten_0.1.m1.13478.m1	0
+"supramolecular fiber"	GO:0001527;GO:0099512;GO:0099081	2	aten_0.1.m1.12191.m1	-26
+"supramolecular fiber"	GO:0001527;GO:0099512;GO:0099081	2	aten_0.1.m1.7647.m1	0
+"supramolecular fiber"	GO:0001527;GO:0099512;GO:0099081	2	aten_0.1.m1.22827.m1	4
+"supramolecular fiber"	GO:0001527;GO:0099512;GO:0099081	2	aten_0.1.m1.7672.m1	-5
+"supramolecular fiber"	GO:0001527;GO:0099512;GO:0099081	2	aten_0.1.m1.32008.m1	0
+"supramolecular fiber"	GO:0001527;GO:0099512;GO:0099081	2	aten_0.1.m1.32991.m1	0
+"supramolecular fiber"	GO:0001527;GO:0099512;GO:0099081	2	aten_0.1.m1.18488.m1	11
+"condensed chromosome"	GO:0000794;GO:0000793	2	aten_0.1.m1.1374.m1	0
+"condensed chromosome"	GO:0000794;GO:0000793	2	aten_0.1.m1.5550.m1	0
+"condensed chromosome"	GO:0000794;GO:0000793	2	aten_0.1.m1.2505.m1	1
+"condensed chromosome"	GO:0000794;GO:0000793	2	aten_0.1.m1.27347.m1	0
+"condensed chromosome"	GO:0000794;GO:0000793	2	aten_0.1.m1.5467.m1	4
+"condensed chromosome"	GO:0000794;GO:0000793	2	aten_0.1.m1.1375.m1	0
+"condensed chromosome"	GO:0000794;GO:0000793	2	aten_0.1.m1.1734.m1	15
+"condensed chromosome"	GO:0000794;GO:0000793	2	aten_0.1.m1.2527.m1	10
+"condensed chromosome"	GO:0000794;GO:0000793	2	aten_0.1.m1.2519.m1	4
+"condensed chromosome"	GO:0000794;GO:0000793	2	aten_0.1.m1.1301.m1	-20
+"condensed chromosome"	GO:0000794;GO:0000793	2	aten_0.1.m1.32204.m1	0
+"condensed chromosome"	GO:0000794;GO:0000793	2	aten_0.1.m1.29526.m1	12
+"membrane"	GO:0016020	2	aten_0.1.m1.1348.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.20210.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.18813.m1	-4
+"membrane"	GO:0016020	2	aten_0.1.m1.7411.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.19596.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.21536.m1	23
+"membrane"	GO:0016020	2	aten_0.1.m1.2990.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.18940.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.7754.m1	4
+"membrane"	GO:0016020	2	aten_0.1.m1.24952.m1	-16
+"membrane"	GO:0016020	2	aten_0.1.m1.10827.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.10175.m1	-2
+"membrane"	GO:0016020	2	aten_0.1.m1.4305.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.6744.m1	14
+"membrane"	GO:0016020	2	aten_0.1.m1.11065.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.19765.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.19576.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.2724.m1	-1
+"membrane"	GO:0016020	2	aten_0.1.m1.22769.m1	-3
+"membrane"	GO:0016020	2	aten_0.1.m1.15373.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.1800.m1	1
+"membrane"	GO:0016020	2	aten_0.1.m1.15708.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.29014.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.8562.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.25865.m1	7
+"membrane"	GO:0016020	2	aten_0.1.m1.18493.m1	3
+"membrane"	GO:0016020	2	aten_0.1.m1.1299.m1	-5
+"membrane"	GO:0016020	2	aten_0.1.m1.3122.m1	-18
+"membrane"	GO:0016020	2	aten_0.1.m1.30099.m1	1
+"membrane"	GO:0016020	2	aten_0.1.m1.12121.m1	4
+"membrane"	GO:0016020	2	aten_0.1.m1.26336.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.12677.m1	12
+"membrane"	GO:0016020	2	aten_0.1.m1.3073.m1	24
+"membrane"	GO:0016020	2	aten_0.1.m1.21124.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.1144.m1	-2
+"membrane"	GO:0016020	2	aten_0.1.m1.3404.m1	10
+"membrane"	GO:0016020	2	aten_0.1.m1.14824.m1	-16
+"membrane"	GO:0016020	2	aten_0.1.m1.20558.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.17402.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.27571.m1	11
+"membrane"	GO:0016020	2	aten_0.1.m1.2223.m1	-13
+"membrane"	GO:0016020	2	aten_0.1.m1.6012.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.3666.m1	4
+"membrane"	GO:0016020	2	aten_0.1.m1.20010.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.14855.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.16089.m1	-2
+"membrane"	GO:0016020	2	aten_0.1.m1.15351.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.28522.m1	-8
+"membrane"	GO:0016020	2	aten_0.1.m1.19697.m1	10
+"membrane"	GO:0016020	2	aten_0.1.m1.827.m1	1
+"membrane"	GO:0016020	2	aten_0.1.m1.33162.m1	8
+"membrane"	GO:0016020	2	aten_0.1.m1.12676.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.3407.m1	-11
+"membrane"	GO:0016020	2	aten_0.1.m1.29498.m1	5
+"membrane"	GO:0016020	2	aten_0.1.m1.12059.m1	11
+"membrane"	GO:0016020	2	aten_0.1.m1.15709.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.4773.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.15022.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.2763.m1	1
+"membrane"	GO:0016020	2	aten_0.1.m1.12077.m1	7
+"membrane"	GO:0016020	2	aten_0.1.m1.31489.m1	5
+"membrane"	GO:0016020	2	aten_0.1.m1.11531.m1	-3
+"membrane"	GO:0016020	2	aten_0.1.m1.2095.m1	3
+"membrane"	GO:0016020	2	aten_0.1.m1.3230.m1	-13
+"membrane"	GO:0016020	2	aten_0.1.m1.21540.m1	7
+"membrane"	GO:0016020	2	aten_0.1.m1.7758.m1	24
+"membrane"	GO:0016020	2	aten_0.1.m1.2195.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.22573.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.16367.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.23914.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.13104.m1	-5
+"membrane"	GO:0016020	2	aten_0.1.m1.23848.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.9622.m1	4
+"membrane"	GO:0016020	2	aten_0.1.m1.31456.m1	1
+"membrane"	GO:0016020	2	aten_0.1.m1.33212.m1	-5
+"membrane"	GO:0016020	2	aten_0.1.m1.21209.m1	4
+"membrane"	GO:0016020	2	aten_0.1.m1.9444.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.1444.m1	-4
+"membrane"	GO:0016020	2	aten_0.1.m1.11043.m1	6
+"membrane"	GO:0016020	2	aten_0.1.m1.14307.m1	-4
+"membrane"	GO:0016020	2	aten_0.1.m1.14284.m1	1
+"membrane"	GO:0016020	2	aten_0.1.m1.23099.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.12339.m1	-1
+"membrane"	GO:0016020	2	aten_0.1.m1.28273.m1	-6
+"membrane"	GO:0016020	2	aten_0.1.m1.25195.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.19538.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.7590.m1	-12
+"membrane"	GO:0016020	2	aten_0.1.m1.4369.m1	-6
+"membrane"	GO:0016020	2	aten_0.1.m1.18176.m1	7
+"membrane"	GO:0016020	2	aten_0.1.m1.31320.m1	-3
+"membrane"	GO:0016020	2	aten_0.1.m1.2769.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.19852.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.7317.m1	10
+"membrane"	GO:0016020	2	aten_0.1.m1.20362.m1	5
+"membrane"	GO:0016020	2	aten_0.1.m1.25746.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.20045.m1	8
+"membrane"	GO:0016020	2	aten_0.1.m1.9863.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.8412.m1	12
+"membrane"	GO:0016020	2	aten_0.1.m1.1884.m1	-2
+"membrane"	GO:0016020	2	aten_0.1.m1.757.m1	-10
+"membrane"	GO:0016020	2	aten_0.1.m1.7123.m1	3
+"membrane"	GO:0016020	2	aten_0.1.m1.1010.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.3200.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.20007.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.3973.m1	3
+"membrane"	GO:0016020	2	aten_0.1.m1.7698.m1	-11
+"membrane"	GO:0016020	2	aten_0.1.m1.1862.m1	8
+"membrane"	GO:0016020	2	aten_0.1.m1.6856.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.19464.m1	7
+"membrane"	GO:0016020	2	aten_0.1.m1.31496.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.14090.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.7464.m1	4
+"membrane"	GO:0016020	2	aten_0.1.m1.15578.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.12643.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.2957.m1	7
+"membrane"	GO:0016020	2	aten_0.1.m1.26186.m1	-9
+"membrane"	GO:0016020	2	aten_0.1.m1.17032.m1	12
+"membrane"	GO:0016020	2	aten_0.1.m1.22716.m1	-4
+"membrane"	GO:0016020	2	aten_0.1.m1.1960.m1	-1
+"membrane"	GO:0016020	2	aten_0.1.m1.31136.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.2380.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.27535.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.2500.m1	-25
+"membrane"	GO:0016020	2	aten_0.1.m1.11034.m1	4
+"membrane"	GO:0016020	2	aten_0.1.m1.17021.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.19704.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.14020.m1	-6
+"membrane"	GO:0016020	2	aten_0.1.m1.20302.m1	2
+"membrane"	GO:0016020	2	aten_0.1.m1.23920.m1	-14
+"membrane"	GO:0016020	2	aten_0.1.m1.1487.m1	-4
+"membrane"	GO:0016020	2	aten_0.1.m1.11270.m1	3
+"membrane"	GO:0016020	2	aten_0.1.m1.15710.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.9307.m1	11
+"membrane"	GO:0016020	2	aten_0.1.m1.8655.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.31817.m1	-5
+"membrane"	GO:0016020	2	aten_0.1.m1.21218.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.3670.m1	-3
+"membrane"	GO:0016020	2	aten_0.1.m1.14936.m1	3
+"membrane"	GO:0016020	2	aten_0.1.m1.33316.m1	24
+"membrane"	GO:0016020	2	aten_0.1.m1.20215.m1	-7
+"membrane"	GO:0016020	2	aten_0.1.m1.20265.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.26174.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.6526.m1	-3
+"membrane"	GO:0016020	2	aten_0.1.m1.16735.m1	7
+"membrane"	GO:0016020	2	aten_0.1.m1.22396.m1	6
+"membrane"	GO:0016020	2	aten_0.1.m1.32363.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.24418.m1	9
+"membrane"	GO:0016020	2	aten_0.1.m1.29963.m1	-18
+"membrane"	GO:0016020	2	aten_0.1.m1.11841.m1	7
+"membrane"	GO:0016020	2	aten_0.1.m1.7281.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.28627.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.3215.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.32984.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.2462.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.20990.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.14884.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.6816.m1	8
+"membrane"	GO:0016020	2	aten_0.1.m1.31523.m1	-1
+"membrane"	GO:0016020	2	aten_0.1.m1.5225.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.27509.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.23008.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.13096.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.2032.m1	-3
+"membrane"	GO:0016020	2	aten_0.1.m1.5758.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.4717.m1	-6
+"membrane"	GO:0016020	2	aten_0.1.m1.7695.m1	7
+"membrane"	GO:0016020	2	aten_0.1.m1.27498.m1	3
+"membrane"	GO:0016020	2	aten_0.1.m1.1973.m1	23
+"membrane"	GO:0016020	2	aten_0.1.m1.12039.m1	13
+"membrane"	GO:0016020	2	aten_0.1.m1.27792.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.32148.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.6329.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.13216.m1	-24
+"membrane"	GO:0016020	2	aten_0.1.m1.21697.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.12633.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.14785.m1	-4
+"membrane"	GO:0016020	2	aten_0.1.m1.20586.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.1350.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.15354.m1	8
+"membrane"	GO:0016020	2	aten_0.1.m1.9419.m1	-6
+"membrane"	GO:0016020	2	aten_0.1.m1.19510.m1	15
+"membrane"	GO:0016020	2	aten_0.1.m1.25269.m1	7
+"membrane"	GO:0016020	2	aten_0.1.m1.5636.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.33136.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.12222.m1	2
+"membrane"	GO:0016020	2	aten_0.1.m1.12842.m1	9
+"membrane"	GO:0016020	2	aten_0.1.m1.6336.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.28594.m1	6
+"membrane"	GO:0016020	2	aten_0.1.m1.22305.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.3613.m1	-4
+"membrane"	GO:0016020	2	aten_0.1.m1.5046.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.8405.m1	7
+"membrane"	GO:0016020	2	aten_0.1.m1.19705.m1	-10
+"membrane"	GO:0016020	2	aten_0.1.m1.12273.m1	-24
+"membrane"	GO:0016020	2	aten_0.1.m1.19018.m1	-4
+"membrane"	GO:0016020	2	aten_0.1.m1.12732.m1	2
+"membrane"	GO:0016020	2	aten_0.1.m1.14213.m1	-2
+"membrane"	GO:0016020	2	aten_0.1.m1.28858.m1	-9
+"membrane"	GO:0016020	2	aten_0.1.m1.12674.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.7307.m1	10
+"membrane"	GO:0016020	2	aten_0.1.m1.11181.m1	-7
+"membrane"	GO:0016020	2	aten_0.1.m1.26185.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.17865.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.2565.m1	6
+"membrane"	GO:0016020	2	aten_0.1.m1.1351.m1	1
+"membrane"	GO:0016020	2	aten_0.1.m1.22121.m1	-3
+"membrane"	GO:0016020	2	aten_0.1.m1.4578.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.22321.m1	8
+"membrane"	GO:0016020	2	aten_0.1.m1.15692.m1	-10
+"membrane"	GO:0016020	2	aten_0.1.m1.22403.m1	33
+"membrane"	GO:0016020	2	aten_0.1.m1.12060.m1	-2
+"membrane"	GO:0016020	2	aten_0.1.m1.19650.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.26195.m1	9
+"membrane"	GO:0016020	2	aten_0.1.m1.25177.m1	1
+"membrane"	GO:0016020	2	aten_0.1.m1.25033.m1	0
+"membrane"	GO:0016020	2	aten_0.1.m1.22830.m1	-15
+"membrane"	GO:0016020	2	aten_0.1.m1.17584.m1	-3
+"membrane"	GO:0016020	2	aten_0.1.m1.5533.m1	4
+"membrane"	GO:0016020	2	aten_0.1.m1.451.m1	7
+"membrane"	GO:0016020	2	aten_0.1.m1.12678.m1	5
+"organelle envelope"	GO:0005635;GO:0031967;GO:0031975	3	aten_0.1.m1.6657.m1	-1
+"organelle envelope"	GO:0005635;GO:0031967;GO:0031975	3	aten_0.1.m1.17787.m1	1
+"organelle envelope"	GO:0005635;GO:0031967;GO:0031975	3	aten_0.1.m1.694.m1	17
+"organelle envelope"	GO:0005635;GO:0031967;GO:0031975	3	aten_0.1.m1.7593.m1	0
+"organelle envelope"	GO:0005635;GO:0031967;GO:0031975	3	aten_0.1.m1.27241.m1	0
+"membrane protein complex"	GO:0098796	2	aten_0.1.m1.27352.m1	-1
+"membrane protein complex"	GO:0098796	2	aten_0.1.m1.18754.m1	1
+"membrane protein complex"	GO:0098796	2	aten_0.1.m1.10893.m1	0
+"membrane protein complex"	GO:0098796	2	aten_0.1.m1.20786.m1	0
+"membrane protein complex"	GO:0098796	2	aten_0.1.m1.10679.m1	-6
+"membrane protein complex"	GO:0098796	2	aten_0.1.m1.10682.m1	0
+"membrane protein complex"	GO:0098796	2	aten_0.1.m1.15797.m1	0
+"membrane protein complex"	GO:0098796	2	aten_0.1.m1.6888.m1	0
+"membrane protein complex"	GO:0098796	2	aten_0.1.m1.15180.m1	-4
+"membrane protein complex"	GO:0098796	2	aten_0.1.m1.9931.m1	-7
+"membrane protein complex"	GO:0098796	2	aten_0.1.m1.15782.m1	0
+"membrane protein complex"	GO:0098796	2	aten_0.1.m1.10721.m1	0
+"membrane protein complex"	GO:0098796	2	aten_0.1.m1.19990.m1	0
+"membrane protein complex"	GO:0098796	2	aten_0.1.m1.30647.m1	16
+"membrane protein complex"	GO:0098796	2	aten_0.1.m1.9930.m1	-3
+"membrane protein complex"	GO:0098796	2	aten_0.1.m1.9866.m1	0
+"microbody"	GO:0005777;GO:0042579	3	aten_0.1.m1.13061.m1	-12
+"microbody"	GO:0005777;GO:0042579	3	aten_0.1.m1.5749.m1	0
+"cell-cell junction"	GO:0005920;GO:0005918;GO:0070160;GO:0005911	6	aten_0.1.m1.31323.m1	23
+"cell-cell junction"	GO:0005920;GO:0005918;GO:0070160;GO:0005911	6	aten_0.1.m1.9393.m1	17
+"cell-cell junction"	GO:0005920;GO:0005918;GO:0070160;GO:0005911	6	aten_0.1.m1.22689.m1	-1
+"cell-cell junction"	GO:0005920;GO:0005918;GO:0070160;GO:0005911	6	aten_0.1.m1.19734.m1	-1
+"fibrillar center"	GO:0001650	2	aten_0.1.m1.11938.m1	9
+"fibrillar center"	GO:0001650	2	aten_0.1.m1.22734.m1	0
+"fibrillar center"	GO:0001650	2	aten_0.1.m1.29514.m1	8
+"fibrillar center"	GO:0001650	2	aten_0.1.m1.29459.m1	0
+"fibrillar center"	GO:0001650	2	aten_0.1.m1.33444.m1	0
+"fibrillar center"	GO:0001650	2	aten_0.1.m1.29513.m1	-19
+"endoplasmic reticulum lumen"	GO:0005788	4	aten_0.1.m1.31455.m1	-4
+"endoplasmic reticulum lumen"	GO:0005788	4	aten_0.1.m1.5202.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.17819.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.9350.m1	1
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.9237.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.24218.m1	-7
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.1461.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.26991.m1	-5
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.11764.m1	9
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.21253.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.27263.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.4791.m1	-13
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.24742.m1	1
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.33637.m1	16
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.6645.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.14442.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.1095.m1	-4
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.3884.m1	24
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.10354.m1	7
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.21144.m1	21
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.21871.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.24798.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.7625.m1	-9
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.13969.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.28920.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.15464.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.22640.m1	-4
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.30075.m1	3
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.25869.m1	12
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.17619.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.11602.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.2072.m1	-15
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.32181.m1	19
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.14735.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.29525.m1	8
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.11565.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.9355.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.22162.m1	-4
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.15516.m1	11
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.7310.m1	-7
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.19664.m1	7
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.17791.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.4618.m1	12
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.723.m1	7
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.3088.m1	1
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.3522.m1	-7
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.5768.m1	21
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.2478.m1	2
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.27793.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.31120.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.3894.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.12045.m1	-1
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.10565.m1	-1
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.33168.m1	8
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.12432.m1	-6
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.7502.m1	-2
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.13608.m1	12
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.24083.m1	2
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.17507.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.13425.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.7628.m1	7
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.2466.m1	-5
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.20144.m1	2
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.7865.m1	-12
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.11743.m1	-5
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.6352.m1	-2
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.18478.m1	-1
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.10710.m1	-6
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.186.m1	12
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.21712.m1	4
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.19480.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.11786.m1	-20
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.24736.m1	-1
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.28090.m1	-1
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.32982.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.6537.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.5584.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.8955.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.33644.m1	-1
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.20205.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.10090.m1	-13
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.15100.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.30816.m1	13
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.26505.m1	-7
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.4966.m1	6
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.24801.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.11578.m1	3
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.5769.m1	2
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.3474.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.3467.m1	10
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.13408.m1	-18
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.7596.m1	-1
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.11630.m1	-5
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.28921.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.25138.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.10412.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.17435.m1	-8
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.22630.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.4504.m1	0
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.11042.m1	18
+"cytoplasm"	GO:0005737	2	aten_0.1.m1.10931.m1	-5
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.4320.m1	4
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.21570.m1	7
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.11160.m1	0
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.9987.m1	1
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.25244.m1	0
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.18880.m1	12
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.6532.m1	0
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.29692.m1	17
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.9302.m1	-2
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.10862.m1	-4
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.6533.m1	24
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.1189.m1	9
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.20133.m1	13
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.912.m1	0
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.10846.m1	-7
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.2961.m1	6
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.6128.m1	0
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.20746.m1	-6
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.8275.m1	7
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.2253.m1	-22
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.570.m1	15
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.18445.m1	0
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.22875.m1	0
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.7487.m1	6
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.27443.m1	1
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.12498.m1	0
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.26121.m1	1
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.15044.m1	5
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.18439.m1	0
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.32419.m1	0
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.32155.m1	10
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.22893.m1	6
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.8045.m1	-11
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.323.m1	-3
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.407.m1	-5
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.26325.m1	-2
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.26948.m1	7
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.7303.m1	18
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.29903.m1	0
+"intrinsic component of plasma membrane"	GO:0005887;GO:0031226	3	aten_0.1.m1.20753.m1	0
+"SAGA complex"	GO:0000124;GO:0070461	5	aten_0.1.m1.1992.m1	8
+"SAGA complex"	GO:0000124;GO:0070461	5	aten_0.1.m1.23281.m1	0
+"nucleolus"	GO:0005730	2	aten_0.1.m1.1985.m1	0
+"nucleolus"	GO:0005730	2	aten_0.1.m1.1339.m1	11
+"nucleolus"	GO:0005730	2	aten_0.1.m1.16188.m1	2
+"nucleolus"	GO:0005730	2	aten_0.1.m1.22654.m1	-4
+"nucleolus"	GO:0005730	2	aten_0.1.m1.9159.m1	0
+"nucleolus"	GO:0005730	2	aten_0.1.m1.32186.m1	0
+"nucleolus"	GO:0005730	2	aten_0.1.m1.3252.m1	15
+"nucleolus"	GO:0005730	2	aten_0.1.m1.22661.m1	1
+"nucleolus"	GO:0005730	2	aten_0.1.m1.28057.m1	11
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.26523.m1	3
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.1167.m1	-12
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.10002.m1	4
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.8944.m1	11
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.3514.m1	-18
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.1200.m1	0
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.1168.m1	0
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.7235.m1	0
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.499.m1	0
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.9445.m1	0
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.3513.m1	4
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.1425.m1	-4
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.3518.m1	-15
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.32841.m1	7
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.28933.m1	0
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.31375.m1	0
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.14294.m1	0
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.7412.m1	0
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.14296.m1	0
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.25770.m1	0
+"chromosomal region"	GO:0000775;GO:0098687	2	aten_0.1.m1.16018.m1	0
+"proton-transporting two-sector ATPase complex, proton-transporting domain"	GO:0033177	3	aten_0.1.m1.18754.m1	1
+"proton-transporting two-sector ATPase complex, proton-transporting domain"	GO:0033177	3	aten_0.1.m1.20786.m1	0
+"endosome membrane"	GO:0010008	2	aten_0.1.m1.3122.m1	-18
+"endosome membrane"	GO:0010008	2	aten_0.1.m1.31523.m1	-1
+"endosome membrane"	GO:0010008	2	aten_0.1.m1.14785.m1	-4
+"collagen trimer"	GO:0005581	2	aten_0.1.m1.2158.m1	4
+"collagen trimer"	GO:0005581	2	aten_0.1.m1.10652.m1	-3
+"mitochondrial matrix"	GO:0005759	4	aten_0.1.m1.8939.m1	0
+"mitochondrial matrix"	GO:0005759	4	aten_0.1.m1.2931.m1	-1
+"mitochondrial matrix"	GO:0005759	4	aten_0.1.m1.14078.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.1797.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.4535.m1	21
+"nucleus"	GO:0005634	3	aten_0.1.m1.7226.m1	1
+"nucleus"	GO:0005634	3	aten_0.1.m1.4935.m1	3
+"nucleus"	GO:0005634	3	aten_0.1.m1.19850.m1	2
+"nucleus"	GO:0005634	3	aten_0.1.m1.10860.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.18786.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.2269.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.6399.m1	-1
+"nucleus"	GO:0005634	3	aten_0.1.m1.21012.m1	2
+"nucleus"	GO:0005634	3	aten_0.1.m1.26571.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.3357.m1	2
+"nucleus"	GO:0005634	3	aten_0.1.m1.25785.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.4576.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.10930.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.6111.m1	4
+"nucleus"	GO:0005634	3	aten_0.1.m1.12082.m1	1
+"nucleus"	GO:0005634	3	aten_0.1.m1.6791.m1	-11
+"nucleus"	GO:0005634	3	aten_0.1.m1.988.m1	10
+"nucleus"	GO:0005634	3	aten_0.1.m1.22707.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.16563.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.11000.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.13909.m1	25
+"nucleus"	GO:0005634	3	aten_0.1.m1.28811.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.24369.m1	8
+"nucleus"	GO:0005634	3	aten_0.1.m1.16571.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.25046.m1	-4
+"nucleus"	GO:0005634	3	aten_0.1.m1.28570.m1	-6
+"nucleus"	GO:0005634	3	aten_0.1.m1.16641.m1	-5
+"nucleus"	GO:0005634	3	aten_0.1.m1.24377.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.1736.m1	-3
+"nucleus"	GO:0005634	3	aten_0.1.m1.14579.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.13898.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.1682.m1	15
+"nucleus"	GO:0005634	3	aten_0.1.m1.8550.m1	-4
+"nucleus"	GO:0005634	3	aten_0.1.m1.1560.m1	10
+"nucleus"	GO:0005634	3	aten_0.1.m1.579.m1	13
+"nucleus"	GO:0005634	3	aten_0.1.m1.6370.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.29411.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.412.m1	2
+"nucleus"	GO:0005634	3	aten_0.1.m1.16570.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.12194.m1	-8
+"nucleus"	GO:0005634	3	aten_0.1.m1.4547.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.35.m1	-26
+"nucleus"	GO:0005634	3	aten_0.1.m1.18499.m1	6
+"nucleus"	GO:0005634	3	aten_0.1.m1.10874.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.12906.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.10872.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.16555.m1	7
+"nucleus"	GO:0005634	3	aten_0.1.m1.18302.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.8415.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.25544.m1	-14
+"nucleus"	GO:0005634	3	aten_0.1.m1.15259.m1	7
+"nucleus"	GO:0005634	3	aten_0.1.m1.8370.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.32378.m1	9
+"nucleus"	GO:0005634	3	aten_0.1.m1.1192.m1	-6
+"nucleus"	GO:0005634	3	aten_0.1.m1.1605.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.6413.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.26348.m1	11
+"nucleus"	GO:0005634	3	aten_0.1.m1.17605.m1	-3
+"nucleus"	GO:0005634	3	aten_0.1.m1.19439.m1	11
+"nucleus"	GO:0005634	3	aten_0.1.m1.11915.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.21195.m1	3
+"nucleus"	GO:0005634	3	aten_0.1.m1.9510.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.3216.m1	-1
+"nucleus"	GO:0005634	3	aten_0.1.m1.21190.m1	3
+"nucleus"	GO:0005634	3	aten_0.1.m1.6665.m1	5
+"nucleus"	GO:0005634	3	aten_0.1.m1.19307.m1	-16
+"nucleus"	GO:0005634	3	aten_0.1.m1.11013.m1	2
+"nucleus"	GO:0005634	3	aten_0.1.m1.3654.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.33831.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.30925.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.848.m1	5
+"nucleus"	GO:0005634	3	aten_0.1.m1.14331.m1	7
+"nucleus"	GO:0005634	3	aten_0.1.m1.16578.m1	16
+"nucleus"	GO:0005634	3	aten_0.1.m1.23386.m1	-2
+"nucleus"	GO:0005634	3	aten_0.1.m1.11695.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.7739.m1	5
+"nucleus"	GO:0005634	3	aten_0.1.m1.6129.m1	-7
+"nucleus"	GO:0005634	3	aten_0.1.m1.28266.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.15654.m1	4
+"nucleus"	GO:0005634	3	aten_0.1.m1.13391.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.14738.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.225.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.13002.m1	15
+"nucleus"	GO:0005634	3	aten_0.1.m1.1048.m1	12
+"nucleus"	GO:0005634	3	aten_0.1.m1.19586.m1	-13
+"nucleus"	GO:0005634	3	aten_0.1.m1.7697.m1	-4
+"nucleus"	GO:0005634	3	aten_0.1.m1.24040.m1	24
+"nucleus"	GO:0005634	3	aten_0.1.m1.1738.m1	-12
+"nucleus"	GO:0005634	3	aten_0.1.m1.18317.m1	4
+"nucleus"	GO:0005634	3	aten_0.1.m1.24842.m1	3
+"nucleus"	GO:0005634	3	aten_0.1.m1.5789.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.24844.m1	-11
+"nucleus"	GO:0005634	3	aten_0.1.m1.3271.m1	-7
+"nucleus"	GO:0005634	3	aten_0.1.m1.857.m1	-6
+"nucleus"	GO:0005634	3	aten_0.1.m1.16631.m1	12
+"nucleus"	GO:0005634	3	aten_0.1.m1.19330.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.1262.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.3259.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.26100.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.28528.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.26037.m1	17
+"nucleus"	GO:0005634	3	aten_0.1.m1.10811.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.3155.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.17450.m1	24
+"nucleus"	GO:0005634	3	aten_0.1.m1.12551.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.13922.m1	17
+"nucleus"	GO:0005634	3	aten_0.1.m1.16564.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.17057.m1	-19
+"nucleus"	GO:0005634	3	aten_0.1.m1.10226.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.7202.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.12466.m1	11
+"nucleus"	GO:0005634	3	aten_0.1.m1.3084.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.33447.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.14185.m1	2
+"nucleus"	GO:0005634	3	aten_0.1.m1.22860.m1	-1
+"nucleus"	GO:0005634	3	aten_0.1.m1.13907.m1	-10
+"nucleus"	GO:0005634	3	aten_0.1.m1.28806.m1	14
+"nucleus"	GO:0005634	3	aten_0.1.m1.7941.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.23801.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.29573.m1	10
+"nucleus"	GO:0005634	3	aten_0.1.m1.32858.m1	2
+"nucleus"	GO:0005634	3	aten_0.1.m1.32792.m1	-23
+"nucleus"	GO:0005634	3	aten_0.1.m1.24835.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.5346.m1	14
+"nucleus"	GO:0005634	3	aten_0.1.m1.26408.m1	-5
+"nucleus"	GO:0005634	3	aten_0.1.m1.25291.m1	8
+"nucleus"	GO:0005634	3	aten_0.1.m1.25994.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.9208.m1	6
+"nucleus"	GO:0005634	3	aten_0.1.m1.10606.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.10232.m1	4
+"nucleus"	GO:0005634	3	aten_0.1.m1.16562.m1	22
+"nucleus"	GO:0005634	3	aten_0.1.m1.25049.m1	0
+"nucleus"	GO:0005634	3	aten_0.1.m1.18278.m1	0
+"vacuolar membrane"	GO:0005774	2	aten_0.1.m1.8562.m1	0
+"vacuolar membrane"	GO:0005774	2	aten_0.1.m1.12121.m1	4
+"vacuolar membrane"	GO:0005774	2	aten_0.1.m1.33162.m1	8
+"vacuolar membrane"	GO:0005774	2	aten_0.1.m1.29498.m1	5
+"vacuolar membrane"	GO:0005774	2	aten_0.1.m1.9444.m1	0
+"vacuolar membrane"	GO:0005774	2	aten_0.1.m1.23099.m1	0
+"vacuolar membrane"	GO:0005774	2	aten_0.1.m1.12339.m1	-1
+"vacuolar membrane"	GO:0005774	2	aten_0.1.m1.4369.m1	-6
+"vacuolar membrane"	GO:0005774	2	aten_0.1.m1.31496.m1	0
+"vacuolar membrane"	GO:0005774	2	aten_0.1.m1.19704.m1	0
+"vacuolar membrane"	GO:0005774	2	aten_0.1.m1.21218.m1	0
+"vacuolar membrane"	GO:0005774	2	aten_0.1.m1.14884.m1	0
+"vacuolar membrane"	GO:0005774	2	aten_0.1.m1.5758.m1	0
+"vacuolar membrane"	GO:0005774	2	aten_0.1.m1.28858.m1	-9
