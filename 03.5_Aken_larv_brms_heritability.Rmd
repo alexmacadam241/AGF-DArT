@@ -1,0 +1,112 @@
+---
+title: "Untitled"
+output: html_document
+date: "2025-07-23"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+```
+
+Genomic values
+```{r}
+gv <- read.table("/Users/alexmacadam/Desktop/bayesR/aten_larvae_T0_adult_imp_out.gv")
+gv <- gv |> dplyr::rename(GV = V1)
+samples <- read.table("/Users/alexmacadam/Desktop/bayesR/aten_larvae_T0_adult_imp.fam")
+samples <- samples[, c(1, 6)]
+samples <- samples |> dplyr::rename(ID = V1, Survival = V6)
+
+gv2<- cbind(samples, gv)
+adults <- gv2[175:217, ]
+adults<- adults |> dplyr::select(ID, GV)
+
+larvae <- gv2[1:174, ]
+```
+
+Larvae breeding values
+```{r}
+larvae$ID <- sub("-Cn.*", "", larvae$ID)
+larvae$ID <- sub(".*-", "", larvae$ID)
+larvae$reefcross <- gsub("[0-9]", "", larvae$ID)
+
+larvae |> ggplot() +
+  geom_boxplot(aes(x = reefcross, y = GV)) +
+  geom_point(aes(x = reefcross, y = GV))
+```
+
+Adult breding values
+```{r}
+adults$ID <- sub(".*A\\.ten-", "", adults$ID)
+adults$Reef <- sub("-.*", "", adults$ID)
+
+adults |> ggplot() +
+  geom_boxplot(aes(x = Reef, y = GV)) +
+  geom_point(aes(x = Reef, y = GV))
+```
+
+Heritability estimate
+```{r}
+hyp <- read.table("/Users/alexmacadam/Desktop/bayesR/aten_larvae_T0_adult_imp_out.hyp", header=TRUE)
+gen_var <- hyp$Va  # Va: additive genetic variance
+res_var <- hyp$Ve  # Ve: residual variance
+h2 <- gen_var / (gen_var + res_var)
+
+summary(h2)
+hist(h2, main="Posterior distribution of heritability", xlab="h²")
+
+#It tells you what proportion of phenotypic variance is explained by all the observed SNPs in your dataset.
+
+model <- read.table("/Users/alexmacadam/Desktop/bayesR/aten_larvae_T0_adult_imp_out_model.txt", header=FALSE)
+
+h2 <- 1.520914e+02 / (1.520914e+02 + 1.219891e+02)
+```
+
+Proportion of phenotypic variance explained by SNPs
+
+This is the same as the heritability estimate in BayesR, because it only uses SNP effects (i.e., narrow-sense h², not total broad-sense h²).
+It tells you what proportion of phenotypic variance is explained by all the observed SNPs in your dataset.
+
+.Param SNP effect size
+```{r}
+param<- read.table("/Users/alexmacadam/Desktop/bayesR/aten_larvae_T0_adult_imp_out_param.txt", header = TRUE)
+SNPs<- read.table("/Users/alexmacadam/Desktop/bayesR/aten_larvae_T0_adult_imp.bim", header = FALSE)
+param2<- cbind(SNPs, param)
+
+hist(param2$alpha, breaks = 10)
+threshold <- quantile(abs(param2$alpha), 0.95)
+param2$nonzero_pip <- param2$PIP2 + param2$PIP3 + param2$PIP4
+important_snps <- param2[param2$nonzero_pip > 0.2 & abs(param2$alpha) > threshold, ]
+```
+
+```{r}
+hyp <- read.table("/Users/alexmacadam/Desktop/bayesR/aten_larvae_T0_adult_imp_out.hyp", header=TRUE)
+h2 <- hyp$Va / (hyp$Va + hyp$Ve)
+
+# Summarize or plot it:
+summary(h2)
+hist(h2, main="Posterior distribution of heritability", xlab="h²")
+
+#uncertainty in variance
+quantile(h2, probs = c(0.025, 0.5, 0.975))  # 95% credible interval
+
+```
+
+```{r}
+# Average number of SNPs in each class
+colMeans(hyp[, grep("^Nk", names(hyp))])
+
+# Average variance explained by each class
+colMeans(hyp[, grep("^Vk", names(hyp))])
+
+library(reshape2)
+nk_data <- hyp[, grep("^Nk", names(hyp))]
+nk_melt <- reshape2::melt(nk_data, variable.name="Mixture", value.name="Count")
+boxplot(Count ~ Mixture, data=nk_melt, main="SNP Counts in Mixture Components")
+
+plot(hyp$Nk4, type = "l", main = "Traceplot: Number of SNPs in High-Effect Class (Nk4)")
+```
+
