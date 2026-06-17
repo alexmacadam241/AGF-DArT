@@ -1,0 +1,185 @@
+---
+title: "Untitled"
+output: html_document
+date: "2025-07-24"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# Load required packages
+library(brms)
+library(nadiv)  # For makeA()
+library(Matrix)
+```
+
+```{r}
+# 1. Prepare data
+Data <- read.table("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data/aten_larv_survival_heritability_binary.txt", header = TRUE)  # Replace with actual file path
+Data$animal <- as.factor(Data$animal)
+Data$culture<-as.factor(Data$culture)
+Data$mother<-as.factor(Data$mother)
+Data$father<-as.factor(Data$father)
+```
+
+```{r}
+# 2. Prepare pedigree
+Ped <- read.table("/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data/aten_larv_binary_ped.txt", header = TRUE)  # Replace with actual path
+colnames(Ped) <- c("id", "mother", "father")
+Ped[] <- lapply(Ped, as.factor)
+```
+
+```{r}
+# 3. Create numerator relationship matrix (A matrix)
+Amat <- as.matrix(nadiv::makeA(Ped))
+```
+
+```{r}
+get_prior(
+  survival ~ 1 + (1 | gr(animal, cov = Amat)),
+  data = Data,
+  family = bernoulli(),
+  data2 = list(Amat = Amat)
+)
+```
+
+```{r}
+priors <- c(
+  prior(normal(0, 1), class = "Intercept"),
+  prior(student_t(3, 0, 1), class = "sd", group = "animal")
+)
+```
+
+```{r}
+# 4. Fit the animal model using brms
+model <- brm(
+  survival ~ 1 + (1 | gr(animal, cov = Amat)),
+  data = Data,
+  data2 = list(Amat = Amat),
+  family = bernoulli(link = "logit"),
+  chains = 3,
+  cores = 3,
+  thin = 25,
+  iter = 4000,
+  warmup = 1000,
+  control = list(adapt_delta = 0.9999, max_treedepth = 20),
+  save_pars = save_pars(all = TRUE),
+  seed = 123,
+  refresh = 100
+)
+
+#save(model, file = "/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/Final analysis/Data/brms_model_larv_binary_1.rda")
+
+model <- brm(
+  survival ~ 1 + (1 | gr(animal, cov = Amat)),
+  data = Data,
+  data2 = list(Amat = Amat),
+  family = bernoulli(link = "logit"),
+  chains = 3,
+  cores = 3,
+  thin = 50,
+  iter = 500000,
+  warmup = 5000,
+  control = list(adapt_delta = 0.9999, max_treedepth = 20),
+  save_pars = save_pars(all = TRUE),
+  seed = 123,
+  refresh = 100
+)
+```
+
+```{r}
+pp_check(model)
+```
+
+```{r}
+plot(model)
+```
+
+```{r}
+mcmc_plot(model, type = "acf")
+```
+
+```{r}
+posterior_summary(model)
+```
+
+```{r}
+summary(model)
+```
+
+```{r}
+v_animal <- (VarCorr(model, summary = FALSE)$animal$sd)^2
+v_r <- (VarCorr(model, summary = FALSE)$residual$sd)^2
+h.bwt.1_larv <- as.mcmc(v_animal / (v_animal + v_r))
+summary(h.bwt.1_larv)
+```
+
+```{r}
+plot(h.bwt.1_larv)
+```
+
+```{r}
+Var.table <- as_draws_df(model)
+Var.table$h.bwt.1_larv <- as.mcmc((Var.table$sd_animal__Intercept)^2 / ((Var.table$sd_animal__Intercept)^2 + (Var.table$sigma)^2))
+summary(Var.table$h.bwt.1_larv)
+plot(Var.table$h.bwt.1_larv)
+```
+
+```{r}
+h.bwt.2_larv<- as.data.frame(h.bwt.1_larv)
+h.bwt.2_larv<- rownames_to_column(h.bwt.2_larv, var = "MCMC") |> dplyr::rename(Heritability = Intercept) |>
+  dplyr::mutate(MCMC = as.integer(MCMC))
+```
+
+OR
+```{r}
+# or
+Var.table <- as_draws_df(model)
+Var.table$h.bwt.1_larv <- as.mcmc((Var.table$sd_animal__Intercept)^2 / ((Var.table$sd_animal__Intercept)^2 + (Var.table$sigma)^2))
+summary(Var.table$h.bwt.1_larv)
+```
+
+```{r}
+plot(Var.table$h.bwt.1_larv)
+```
+
+```{r}
+brms_her_line<- h.bwt.2_larv|>
+  ggplot() +
+  geom_line(aes(x=MCMC, y=Heritability)) +
+  geom_hline(yintercept = 0.91462, color = "red") +
+  theme_Publication() +
+  theme(plot.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.border = element_blank()
+        )
+brms_her_line
+
+brms_her_dens<- h.bwt.2_larv|>
+  ggplot() +
+  geom_density(aes(Heritability)) +
+  theme_Publication() +
+  labs(y="Density") +
+  theme(plot.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      panel.border = element_blank()
+        )
+brms_her_dens
+```
+
+```{r}
+# Extract variance components
+posterior <- posterior_samples(model)
+var_animal <- posterior$`sd_gr_animal__Intercept`^2
+
+# For binary traits (logistic link), residual variance is fixed to π²/3 ≈ 3.29
+h2_liability <- var_animal / (var_animal + (pi^2 / 3))
+
+# Summarise heritability
+summary(h2_liability)
+hist(h2_liability, main = "Posterior distribution of h² (liability scale)", xlab = "h²")
+```
