@@ -1,0 +1,1165 @@
+name	term	lev	seq	value
+"lyase activity"	GO:0016829	2	aten_0.1.m1.4392.m1	-0.000524544
+"lyase activity"	GO:0016829	2	aten_0.1.m1.27231.m1	0
+"lyase activity"	GO:0016829	2	aten_0.1.m1.32232.m1	-0.068335004
+"lyase activity"	GO:0016829	2	aten_0.1.m1.18878.m1	0
+"lyase activity"	GO:0016829	2	aten_0.1.m1.32384.m1	0
+"lyase activity"	GO:0016829	2	aten_0.1.m1.18877.m1	0
+"lyase activity"	GO:0016829	2	aten_0.1.m1.20866.m1	0.079713588
+"lyase activity"	GO:0016829	2	aten_0.1.m1.4856.m1	0
+"GTPase regulator activity"	GO:0030695;GO:0060589	4	aten_0.1.m1.6159.m1	0
+"GTPase regulator activity"	GO:0030695;GO:0060589	4	aten_0.1.m1.15800.m1	5.55E-17
+"GTPase regulator activity"	GO:0030695;GO:0060589	4	aten_0.1.m1.9161.m1	0
+"GTPase regulator activity"	GO:0030695;GO:0060589	4	aten_0.1.m1.24298.m1	0
+"GTPase regulator activity"	GO:0030695;GO:0060589	4	aten_0.1.m1.4543.m1	0
+"GTPase regulator activity"	GO:0030695;GO:0060589	4	aten_0.1.m1.5799.m1	0
+"transporter activity"	GO:0005215;GO:0005216;GO:0015075;GO:0015267;GO:0015318;GO:0022857;GO:0022803	1	aten_0.1.m1.1789.m1	0
+"transporter activity"	GO:0005215;GO:0005216;GO:0015075;GO:0015267;GO:0015318;GO:0022857;GO:0022803	1	aten_0.1.m1.10100.m1	0.048805792
+"transporter activity"	GO:0005215;GO:0005216;GO:0015075;GO:0015267;GO:0015318;GO:0022857;GO:0022803	1	aten_0.1.m1.24349.m1	0
+"transporter activity"	GO:0005215;GO:0005216;GO:0015075;GO:0015267;GO:0015318;GO:0022857;GO:0022803	1	aten_0.1.m1.1674.m1	-0.024827103
+"transporter activity"	GO:0005215;GO:0005216;GO:0015075;GO:0015267;GO:0015318;GO:0022857;GO:0022803	1	aten_0.1.m1.9224.m1	0.045278678
+"transporter activity"	GO:0005215;GO:0005216;GO:0015075;GO:0015267;GO:0015318;GO:0022857;GO:0022803	1	aten_0.1.m1.21246.m1	0.150872919
+"transporter activity"	GO:0005215;GO:0005216;GO:0015075;GO:0015267;GO:0015318;GO:0022857;GO:0022803	1	aten_0.1.m1.22508.m1	0
+"transporter activity"	GO:0005215;GO:0005216;GO:0015075;GO:0015267;GO:0015318;GO:0022857;GO:0022803	1	aten_0.1.m1.26537.m1	0.320642426
+"transporter activity"	GO:0005215;GO:0005216;GO:0015075;GO:0015267;GO:0015318;GO:0022857;GO:0022803	1	aten_0.1.m1.13368.m1	0
+"transporter activity"	GO:0005215;GO:0005216;GO:0015075;GO:0015267;GO:0015318;GO:0022857;GO:0022803	1	aten_0.1.m1.11169.m1	0
+"transporter activity"	GO:0005215;GO:0005216;GO:0015075;GO:0015267;GO:0015318;GO:0022857;GO:0022803	1	aten_0.1.m1.34856.m1	0
+"transporter activity"	GO:0005215;GO:0005216;GO:0015075;GO:0015267;GO:0015318;GO:0022857;GO:0022803	1	aten_0.1.m1.19011.m1	0
+"transporter activity"	GO:0005215;GO:0005216;GO:0015075;GO:0015267;GO:0015318;GO:0022857;GO:0022803	1	aten_0.1.m1.15280.m1	-0.021247911
+"transporter activity"	GO:0005215;GO:0005216;GO:0015075;GO:0015267;GO:0015318;GO:0022857;GO:0022803	1	aten_0.1.m1.6157.m1	0
+"transporter activity"	GO:0005215;GO:0005216;GO:0015075;GO:0015267;GO:0015318;GO:0022857;GO:0022803	1	aten_0.1.m1.1675.m1	-0.024827103
+"phosphoric ester hydrolase activity"	GO:0042578	4	aten_0.1.m1.7828.m1	0
+"phosphoric ester hydrolase activity"	GO:0042578	4	aten_0.1.m1.5645.m1	0
+"phosphoric ester hydrolase activity"	GO:0042578	4	aten_0.1.m1.12764.m1	0.005437712
+"phosphoric ester hydrolase activity"	GO:0042578	4	aten_0.1.m1.13999.m1	0
+"phosphoric ester hydrolase activity"	GO:0042578	4	aten_0.1.m1.21070.m1	0.037870814
+"guanyl-nucleotide exchange factor activity"	GO:0005085	5	aten_0.1.m1.6159.m1	0
+"guanyl-nucleotide exchange factor activity"	GO:0005085	5	aten_0.1.m1.15800.m1	5.55E-17
+"guanyl-nucleotide exchange factor activity"	GO:0005085	5	aten_0.1.m1.9161.m1	0
+"guanyl-nucleotide exchange factor activity"	GO:0005085	5	aten_0.1.m1.24298.m1	0
+"calcium ion binding"	GO:0005509	4	aten_0.1.m1.24974.m1	0
+"calcium ion binding"	GO:0005509	4	aten_0.1.m1.36640.m1	0
+"calcium ion binding"	GO:0005509	4	aten_0.1.m1.5028.m1	0.244284963
+"calcium ion binding"	GO:0005509	4	aten_0.1.m1.19373.m1	0.755728152
+"calcium ion binding"	GO:0005509	4	aten_0.1.m1.22581.m1	0
+"calcium ion binding"	GO:0005509	4	aten_0.1.m1.3472.m1	0
+"calcium ion binding"	GO:0005509	4	aten_0.1.m1.30321.m1	-0.288657483
+"calcium ion binding"	GO:0005509	4	aten_0.1.m1.2255.m1	0
+"calcium ion binding"	GO:0005509	4	aten_0.1.m1.22585.m1	0
+"calcium ion binding"	GO:0005509	4	aten_0.1.m1.13252.m1	0
+"GABA receptor activity"	GO:0016917	2	aten_0.1.m1.30060.m1	0.002886451
+"GABA receptor activity"	GO:0016917	2	aten_0.1.m1.10260.m1	0
+"double-stranded DNA binding"	GO:0000977;GO:0000976;GO:0001067;GO:1990837;GO:0003690;GO:0043565	5	aten_0.1.m1.10101.m1	0.048805792
+"double-stranded DNA binding"	GO:0000977;GO:0000976;GO:0001067;GO:1990837;GO:0003690;GO:0043565	5	aten_0.1.m1.22545.m1	0
+"double-stranded DNA binding"	GO:0000977;GO:0000976;GO:0001067;GO:1990837;GO:0003690;GO:0043565	5	aten_0.1.m1.22467.m1	0
+"double-stranded DNA binding"	GO:0000977;GO:0000976;GO:0001067;GO:1990837;GO:0003690;GO:0043565	5	aten_0.1.m1.1003.m1	0
+"RNA polymerase II cis-regulatory region sequence-specific DNA binding"	GO:0000978;GO:0000987	5	aten_0.1.m1.10101.m1	0.048805792
+"RNA polymerase II cis-regulatory region sequence-specific DNA binding"	GO:0000978;GO:0000987	5	aten_0.1.m1.22545.m1	0
+"3',5'-cyclic-nucleotide phosphodiesterase activity"	GO:0004114;GO:0004112;GO:0008081	7	aten_0.1.m1.7828.m1	0
+"3',5'-cyclic-nucleotide phosphodiesterase activity"	GO:0004114;GO:0004112;GO:0008081	7	aten_0.1.m1.13999.m1	0
+"carboxy-lyase activity"	GO:0016831	2	aten_0.1.m1.32384.m1	0
+"carboxy-lyase activity"	GO:0016831	2	aten_0.1.m1.20866.m1	0.079713588
+"hydrolase activity, acting on carbon-nitrogen (but not peptide) bonds"	GO:0016810	3	aten_0.1.m1.2830.m1	-0.050439911
+"hydrolase activity, acting on carbon-nitrogen (but not peptide) bonds"	GO:0016810	3	aten_0.1.m1.18761.m1	0.030771677
+"hydrolase activity, acting on carbon-nitrogen (but not peptide) bonds"	GO:0016810	3	aten_0.1.m1.1231.m1	0.049995696
+"nucleoside phosphate binding"	GO:0005524;GO:0032559;GO:0035639;GO:0030554;GO:0032555;GO:0043168;GO:1901265;GO:0017076;GO:0000166;GO:0036094;GO:0032553;GO:0097367	5	aten_0.1.m1.22547.m1	0
+"nucleoside phosphate binding"	GO:0005524;GO:0032559;GO:0035639;GO:0030554;GO:0032555;GO:0043168;GO:1901265;GO:0017076;GO:0000166;GO:0036094;GO:0032553;GO:0097367	5	aten_0.1.m1.29917.m1	0
+"nucleoside phosphate binding"	GO:0005524;GO:0032559;GO:0035639;GO:0030554;GO:0032555;GO:0043168;GO:1901265;GO:0017076;GO:0000166;GO:0036094;GO:0032553;GO:0097367	5	aten_0.1.m1.32962.m1	0
+"nucleoside phosphate binding"	GO:0005524;GO:0032559;GO:0035639;GO:0030554;GO:0032555;GO:0043168;GO:1901265;GO:0017076;GO:0000166;GO:0036094;GO:0032553;GO:0097367	5	aten_0.1.m1.7269.m1	0
+"nucleoside phosphate binding"	GO:0005524;GO:0032559;GO:0035639;GO:0030554;GO:0032555;GO:0043168;GO:1901265;GO:0017076;GO:0000166;GO:0036094;GO:0032553;GO:0097367	5	aten_0.1.m1.27545.m1	0
+"nucleoside phosphate binding"	GO:0005524;GO:0032559;GO:0035639;GO:0030554;GO:0032555;GO:0043168;GO:1901265;GO:0017076;GO:0000166;GO:0036094;GO:0032553;GO:0097367	5	aten_0.1.m1.28894.m1	0
+"nucleoside phosphate binding"	GO:0005524;GO:0032559;GO:0035639;GO:0030554;GO:0032555;GO:0043168;GO:1901265;GO:0017076;GO:0000166;GO:0036094;GO:0032553;GO:0097367	5	aten_0.1.m1.4312.m1	0
+"nucleoside phosphate binding"	GO:0005524;GO:0032559;GO:0035639;GO:0030554;GO:0032555;GO:0043168;GO:1901265;GO:0017076;GO:0000166;GO:0036094;GO:0032553;GO:0097367	5	aten_0.1.m1.2171.m1	0
+"nucleoside phosphate binding"	GO:0005524;GO:0032559;GO:0035639;GO:0030554;GO:0032555;GO:0043168;GO:1901265;GO:0017076;GO:0000166;GO:0036094;GO:0032553;GO:0097367	5	aten_0.1.m1.24256.m1	0
+"nucleoside phosphate binding"	GO:0005524;GO:0032559;GO:0035639;GO:0030554;GO:0032555;GO:0043168;GO:1901265;GO:0017076;GO:0000166;GO:0036094;GO:0032553;GO:0097367	5	aten_0.1.m1.4195.m1	0
+"nucleoside phosphate binding"	GO:0005524;GO:0032559;GO:0035639;GO:0030554;GO:0032555;GO:0043168;GO:1901265;GO:0017076;GO:0000166;GO:0036094;GO:0032553;GO:0097367	5	aten_0.1.m1.30203.m1	0
+"nucleoside phosphate binding"	GO:0005524;GO:0032559;GO:0035639;GO:0030554;GO:0032555;GO:0043168;GO:1901265;GO:0017076;GO:0000166;GO:0036094;GO:0032553;GO:0097367	5	aten_0.1.m1.37543.m1	0
+"nucleoside phosphate binding"	GO:0005524;GO:0032559;GO:0035639;GO:0030554;GO:0032555;GO:0043168;GO:1901265;GO:0017076;GO:0000166;GO:0036094;GO:0032553;GO:0097367	5	aten_0.1.m1.22874.m1	0
+"nucleoside phosphate binding"	GO:0005524;GO:0032559;GO:0035639;GO:0030554;GO:0032555;GO:0043168;GO:1901265;GO:0017076;GO:0000166;GO:0036094;GO:0032553;GO:0097367	5	aten_0.1.m1.2169.m1	0
+"nucleoside phosphate binding"	GO:0005524;GO:0032559;GO:0035639;GO:0030554;GO:0032555;GO:0043168;GO:1901265;GO:0017076;GO:0000166;GO:0036094;GO:0032553;GO:0097367	5	aten_0.1.m1.20666.m1	0.07155023
+"nucleoside phosphate binding"	GO:0005524;GO:0032559;GO:0035639;GO:0030554;GO:0032555;GO:0043168;GO:1901265;GO:0017076;GO:0000166;GO:0036094;GO:0032553;GO:0097367	5	aten_0.1.m1.12001.m1	0
+"nucleoside phosphate binding"	GO:0005524;GO:0032559;GO:0035639;GO:0030554;GO:0032555;GO:0043168;GO:1901265;GO:0017076;GO:0000166;GO:0036094;GO:0032553;GO:0097367	5	aten_0.1.m1.22484.m1	0
+"nucleoside phosphate binding"	GO:0005524;GO:0032559;GO:0035639;GO:0030554;GO:0032555;GO:0043168;GO:1901265;GO:0017076;GO:0000166;GO:0036094;GO:0032553;GO:0097367	5	aten_0.1.m1.36636.m1	0
+"nucleoside phosphate binding"	GO:0005524;GO:0032559;GO:0035639;GO:0030554;GO:0032555;GO:0043168;GO:1901265;GO:0017076;GO:0000166;GO:0036094;GO:0032553;GO:0097367	5	aten_0.1.m1.13285.m1	0.066385928
+"transmembrane receptor protein kinase activity"	GO:0004714;GO:0019199	4	aten_0.1.m1.8151.m1	0
+"transmembrane receptor protein kinase activity"	GO:0004714;GO:0019199	4	aten_0.1.m1.1268.m1	0
+"transmembrane receptor protein kinase activity"	GO:0004714;GO:0019199	4	aten_0.1.m1.35526.m1	0
+"ErbB-2 class receptor binding"	GO:0005176	2	aten_0.1.m1.36629.m1	0
+"ErbB-2 class receptor binding"	GO:0005176	2	aten_0.1.m1.5912.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.29654.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.24974.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.16220.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.26093.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.29522.m1	0.173083904
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.24046.m1	0.032269261
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.36640.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.5028.m1	0.244284963
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.30349.m1	0.392059194
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.16196.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.7909.m1	0.24260453
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.36337.m1	0.100615815
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.21000.m1	0.40659765
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.19373.m1	0.755728152
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.22581.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.3472.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.21309.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.3732.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.36338.m1	0.100615815
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.7200.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.30321.m1	-0.288657483
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.16223.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.7119.m1	0.425786892
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.2255.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.16215.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.28953.m1	0.461171372
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.22585.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.24774.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.3641.m1	0.114978923
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.13929.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.27989.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.30847.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.4855.m1	0
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.18366.m1	2.083206992
+"metal ion binding"	GO:0046872;GO:0043169	3	aten_0.1.m1.13252.m1	0
+"transferase activity, transferring pentosyl groups"	GO:0003950;GO:0016763	4	aten_0.1.m1.9137.m1	0
+"transferase activity, transferring pentosyl groups"	GO:0003950;GO:0016763	4	aten_0.1.m1.9142.m1	0
+"transferase activity, transferring pentosyl groups"	GO:0003950;GO:0016763	4	aten_0.1.m1.3880.m1	0
+"transferase activity, transferring pentosyl groups"	GO:0003950;GO:0016763	4	aten_0.1.m1.9203.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.7828.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.2436.m1	-0.010309662
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.3333.m1	0.232208353
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.6469.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.28581.m1	0.177961615
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.28038.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.635.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.19332.m1	0.080282765
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.20449.m1	1.11E-16
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.5645.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.2830.m1	-0.050439911
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.12764.m1	0.005437712
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.36661.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.14924.m1	0.04480393
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.18761.m1	0.030771677
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.5024.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.28934.m1	0.053048727
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.16268.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.28579.m1	0.177961615
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.13999.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.4482.m1	0.001278719
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.21070.m1	0.037870814
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.34762.m1	0.078817065
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.15275.m1	0.202732304
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.1231.m1	0.049995696
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.10225.m1	0.246032782
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.15151.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.20716.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.3080.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.19865.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.16895.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.31765.m1	0.503804398
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.8452.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.36804.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.28558.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.32765.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.632.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.19696.m1	0.30199703
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.16630.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.31432.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.3960.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.34853.m1	0
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.9278.m1	-0.036018298
+"hydrolase activity"	GO:0016787	2	aten_0.1.m1.36631.m1	0
+"voltage-gated calcium channel activity"	GO:0005245;GO:0022843	4	aten_0.1.m1.13368.m1	0
+"voltage-gated calcium channel activity"	GO:0005245;GO:0022843	4	aten_0.1.m1.15280.m1	-0.021247911
+"threonine aldolase activity"	GO:0004793;GO:0016832	5	aten_0.1.m1.18878.m1	0
+"threonine aldolase activity"	GO:0004793;GO:0016832	5	aten_0.1.m1.18877.m1	0
+"chloride transmembrane transporter activity"	GO:0005254;GO:0005253;GO:0015108;GO:0015103;GO:0008509	4	aten_0.1.m1.9224.m1	0.045278678
+"chloride transmembrane transporter activity"	GO:0005254;GO:0005253;GO:0015108;GO:0015103;GO:0008509	4	aten_0.1.m1.26537.m1	0.320642426
+"chloride transmembrane transporter activity"	GO:0005254;GO:0005253;GO:0015108;GO:0015103;GO:0008509	4	aten_0.1.m1.19011.m1	0
+"SNARE binding"	GO:0000149	2	aten_0.1.m1.8942.m1	-0.000978447
+"SNARE binding"	GO:0000149	2	aten_0.1.m1.28117.m1	0
+"SNARE binding"	GO:0000149	2	aten_0.1.m1.8941.m1	-0.000978447
+"oxidoreductase activity, acting on the CH-CH group of donors"	GO:0016627	3	aten_0.1.m1.14966.m1	0
+"oxidoreductase activity, acting on the CH-CH group of donors"	GO:0016627	3	aten_0.1.m1.30089.m1	0.030876293
+"antioxidant activity"	GO:0004601;GO:0016209;GO:0016684	2	aten_0.1.m1.2874.m1	0.010493163
+"antioxidant activity"	GO:0004601;GO:0016209;GO:0016684	2	aten_0.1.m1.28036.m1	0
+"antioxidant activity"	GO:0004601;GO:0016209;GO:0016684	2	aten_0.1.m1.7112.m1	0
+"antioxidant activity"	GO:0004601;GO:0016209;GO:0016684	2	aten_0.1.m1.35850.m1	0
+"antioxidant activity"	GO:0004601;GO:0016209;GO:0016684	2	aten_0.1.m1.3043.m1	0
+"antioxidant activity"	GO:0004601;GO:0016209;GO:0016684	2	aten_0.1.m1.35851.m1	0
+"antioxidant activity"	GO:0004601;GO:0016209;GO:0016684	2	aten_0.1.m1.7139.m1	0
+"antioxidant activity"	GO:0004601;GO:0016209;GO:0016684	2	aten_0.1.m1.14728.m1	0
+"magnesium ion binding"	GO:0000287	2	aten_0.1.m1.29654.m1	0
+"magnesium ion binding"	GO:0000287	2	aten_0.1.m1.16220.m1	0
+"magnesium ion binding"	GO:0000287	2	aten_0.1.m1.29522.m1	0.173083904
+"magnesium ion binding"	GO:0000287	2	aten_0.1.m1.24046.m1	0.032269261
+"magnesium ion binding"	GO:0000287	2	aten_0.1.m1.30349.m1	0.392059194
+"magnesium ion binding"	GO:0000287	2	aten_0.1.m1.16196.m1	0
+"magnesium ion binding"	GO:0000287	2	aten_0.1.m1.7909.m1	0.24260453
+"magnesium ion binding"	GO:0000287	2	aten_0.1.m1.36337.m1	0.100615815
+"magnesium ion binding"	GO:0000287	2	aten_0.1.m1.21000.m1	0.40659765
+"magnesium ion binding"	GO:0000287	2	aten_0.1.m1.21309.m1	0
+"magnesium ion binding"	GO:0000287	2	aten_0.1.m1.3732.m1	0
+"magnesium ion binding"	GO:0000287	2	aten_0.1.m1.36338.m1	0.100615815
+"magnesium ion binding"	GO:0000287	2	aten_0.1.m1.16223.m1	0
+"magnesium ion binding"	GO:0000287	2	aten_0.1.m1.7119.m1	0.425786892
+"magnesium ion binding"	GO:0000287	2	aten_0.1.m1.16215.m1	0
+"magnesium ion binding"	GO:0000287	2	aten_0.1.m1.28953.m1	0.461171372
+"magnesium ion binding"	GO:0000287	2	aten_0.1.m1.24774.m1	0
+"magnesium ion binding"	GO:0000287	2	aten_0.1.m1.27989.m1	0
+"magnesium ion binding"	GO:0000287	2	aten_0.1.m1.4855.m1	0
+"magnesium ion binding"	GO:0000287	2	aten_0.1.m1.18366.m1	2.083206992
+"oxidoreductase activity, acting on the CH-OH group of donors, NAD or NADP as acceptor"	GO:0016616;GO:0016614	4	aten_0.1.m1.1977.m1	0
+"oxidoreductase activity, acting on the CH-OH group of donors, NAD or NADP as acceptor"	GO:0016616;GO:0016614	4	aten_0.1.m1.16091.m1	0
+"oxidoreductase activity, acting on the CH-OH group of donors, NAD or NADP as acceptor"	GO:0016616;GO:0016614	4	aten_0.1.m1.35194.m1	0
+"carbon-carbon lyase activity"	GO:0016830	2	aten_0.1.m1.18878.m1	0
+"carbon-carbon lyase activity"	GO:0016830	2	aten_0.1.m1.32384.m1	0
+"carbon-carbon lyase activity"	GO:0016830	2	aten_0.1.m1.18877.m1	0
+"carbon-carbon lyase activity"	GO:0016830	2	aten_0.1.m1.20866.m1	0.079713588
+"carbon-carbon lyase activity"	GO:0016830	2	aten_0.1.m1.4856.m1	0
+"protein tyrosine kinase activity"	GO:0004713	3	aten_0.1.m1.8857.m1	0
+"protein tyrosine kinase activity"	GO:0004713	3	aten_0.1.m1.3459.m1	0
+"protein tyrosine kinase activity"	GO:0004713	3	aten_0.1.m1.28807.m1	0
+"protein tyrosine kinase activity"	GO:0004713	3	aten_0.1.m1.8151.m1	0
+"protein tyrosine kinase activity"	GO:0004713	3	aten_0.1.m1.1268.m1	0
+"protein tyrosine kinase activity"	GO:0004713	3	aten_0.1.m1.28778.m1	0
+"protein tyrosine kinase activity"	GO:0004713	3	aten_0.1.m1.35526.m1	0
+"protein tyrosine kinase activity"	GO:0004713	3	aten_0.1.m1.35404.m1	-0.115636566
+"oxidoreductase activity"	GO:0016491	2	aten_0.1.m1.36905.m1	0.090202561
+"oxidoreductase activity"	GO:0016491	2	aten_0.1.m1.1977.m1	0
+"oxidoreductase activity"	GO:0016491	2	aten_0.1.m1.12833.m1	0
+"oxidoreductase activity"	GO:0016491	2	aten_0.1.m1.2874.m1	0.010493163
+"oxidoreductase activity"	GO:0016491	2	aten_0.1.m1.14966.m1	0
+"oxidoreductase activity"	GO:0016491	2	aten_0.1.m1.13577.m1	0
+"oxidoreductase activity"	GO:0016491	2	aten_0.1.m1.28036.m1	0
+"oxidoreductase activity"	GO:0016491	2	aten_0.1.m1.7112.m1	0
+"oxidoreductase activity"	GO:0016491	2	aten_0.1.m1.35850.m1	0
+"oxidoreductase activity"	GO:0016491	2	aten_0.1.m1.16091.m1	0
+"oxidoreductase activity"	GO:0016491	2	aten_0.1.m1.14104.m1	0
+"oxidoreductase activity"	GO:0016491	2	aten_0.1.m1.14728.m1	0
+"oxidoreductase activity"	GO:0016491	2	aten_0.1.m1.35194.m1	0
+"oxidoreductase activity"	GO:0016491	2	aten_0.1.m1.966.m1	-0.037870814
+"oxidoreductase activity"	GO:0016491	2	aten_0.1.m1.3043.m1	0
+"oxidoreductase activity"	GO:0016491	2	aten_0.1.m1.35851.m1	0
+"oxidoreductase activity"	GO:0016491	2	aten_0.1.m1.7139.m1	0
+"oxidoreductase activity"	GO:0016491	2	aten_0.1.m1.28898.m1	0
+"oxidoreductase activity"	GO:0016491	2	aten_0.1.m1.29399.m1	0
+"oxidoreductase activity"	GO:0016491	2	aten_0.1.m1.30089.m1	0.030876293
+"protein phosphatase regulator activity"	GO:0004864;GO:0019212;GO:0019888;GO:0019208	4	aten_0.1.m1.10742.m1	0
+"protein phosphatase regulator activity"	GO:0004864;GO:0019212;GO:0019888;GO:0019208	4	aten_0.1.m1.14930.m1	0.04480393
+"G protein-coupled amine receptor activity"	GO:0008227	4	aten_0.1.m1.6017.m1	-0.197327036
+"G protein-coupled amine receptor activity"	GO:0008227	4	aten_0.1.m1.12802.m1	0.016394939
+"G protein-coupled amine receptor activity"	GO:0008227	4	aten_0.1.m1.34710.m1	0
+"G protein-coupled amine receptor activity"	GO:0008227	4	aten_0.1.m1.12620.m1	0
+"G protein-coupled amine receptor activity"	GO:0008227	4	aten_0.1.m1.22683.m1	0.051139232
+"protein binding"	GO:0005515	2	aten_0.1.m1.8942.m1	-0.000978447
+"protein binding"	GO:0005515	2	aten_0.1.m1.2588.m1	0
+"protein binding"	GO:0005515	2	aten_0.1.m1.13159.m1	0
+"protein binding"	GO:0005515	2	aten_0.1.m1.27864.m1	0.450223442
+"protein binding"	GO:0005515	2	aten_0.1.m1.28117.m1	0
+"protein binding"	GO:0005515	2	aten_0.1.m1.36629.m1	0
+"protein binding"	GO:0005515	2	aten_0.1.m1.8941.m1	-0.000978447
+"protein binding"	GO:0005515	2	aten_0.1.m1.12604.m1	-0.005848016
+"protein binding"	GO:0005515	2	aten_0.1.m1.24142.m1	0.508584128
+"protein binding"	GO:0005515	2	aten_0.1.m1.28987.m1	0
+"protein binding"	GO:0005515	2	aten_0.1.m1.25817.m1	0
+"protein binding"	GO:0005515	2	aten_0.1.m1.13406.m1	0
+"protein binding"	GO:0005515	2	aten_0.1.m1.1464.m1	0.01785929
+"protein binding"	GO:0005515	2	aten_0.1.m1.37917.m1	0
+"protein binding"	GO:0005515	2	aten_0.1.m1.6153.m1	0.076828954
+"protein binding"	GO:0005515	2	aten_0.1.m1.20041.m1	0
+"protein binding"	GO:0005515	2	aten_0.1.m1.5912.m1	0
+"protein binding"	GO:0005515	2	aten_0.1.m1.27227.m1	0
+"protein binding"	GO:0005515	2	aten_0.1.m1.8486.m1	0
+"monooxygenase activity"	GO:0004497;GO:0016705	2	aten_0.1.m1.36905.m1	0.090202561
+"monooxygenase activity"	GO:0004497;GO:0016705	2	aten_0.1.m1.12833.m1	0
+"monooxygenase activity"	GO:0004497;GO:0016705	2	aten_0.1.m1.14104.m1	0
+"monooxygenase activity"	GO:0004497;GO:0016705	2	aten_0.1.m1.29399.m1	0
+"monooxygenase activity"	GO:0004497;GO:0016705	2	aten_0.1.m1.13577.m1	0
+"trace-amine receptor activity"	GO:0001594	2	aten_0.1.m1.6017.m1	-0.197327036
+"trace-amine receptor activity"	GO:0001594	2	aten_0.1.m1.34710.m1	0
+"trace-amine receptor activity"	GO:0001594	2	aten_0.1.m1.22683.m1	0.051139232
+"transition metal ion binding"	GO:0046914	4	aten_0.1.m1.26093.m1	0
+"transition metal ion binding"	GO:0046914	4	aten_0.1.m1.7200.m1	0
+"transition metal ion binding"	GO:0046914	4	aten_0.1.m1.3641.m1	0.114978923
+"transition metal ion binding"	GO:0046914	4	aten_0.1.m1.13929.m1	0
+"transition metal ion binding"	GO:0046914	4	aten_0.1.m1.30847.m1	0
+"motor activity"	GO:0003774	4	aten_0.1.m1.3080.m1	0
+"motor activity"	GO:0003774	4	aten_0.1.m1.16630.m1	0
+"structural constituent of ribosome"	GO:0003735	2	aten_0.1.m1.14748.m1	0
+"structural constituent of ribosome"	GO:0003735	2	aten_0.1.m1.18869.m1	0
+"structural constituent of ribosome"	GO:0003735	2	aten_0.1.m1.5529.m1	0.02819968
+"G protein-coupled peptide receptor activity"	GO:0008528;GO:0001653	2	aten_0.1.m1.964.m1	-0.037870814
+"G protein-coupled peptide receptor activity"	GO:0008528;GO:0001653	2	aten_0.1.m1.353.m1	-0.068066105
+"G protein-coupled peptide receptor activity"	GO:0008528;GO:0001653	2	aten_0.1.m1.36111.m1	0.310436447
+"G protein-coupled peptide receptor activity"	GO:0008528;GO:0001653	2	aten_0.1.m1.12013.m1	0
+"exopeptidase activity"	GO:0008238	2	aten_0.1.m1.2436.m1	-0.010309662
+"exopeptidase activity"	GO:0008238	2	aten_0.1.m1.28934.m1	0.053048727
+"exopeptidase activity"	GO:0008238	2	aten_0.1.m1.3960.m1	0
+"nuclease activity"	GO:0004518	4	aten_0.1.m1.3333.m1	0.232208353
+"nuclease activity"	GO:0004518	4	aten_0.1.m1.28038.m1	0
+"nuclease activity"	GO:0004518	4	aten_0.1.m1.19332.m1	0.080282765
+"nuclease activity"	GO:0004518	4	aten_0.1.m1.20449.m1	1.11E-16
+"nuclease activity"	GO:0004518	4	aten_0.1.m1.20716.m1	0
+"nuclease activity"	GO:0004518	4	aten_0.1.m1.31765.m1	0.503804398
+"copper ion binding"	GO:0005507	2	aten_0.1.m1.26093.m1	0
+"copper ion binding"	GO:0005507	2	aten_0.1.m1.3641.m1	0.114978923
+"aminopeptidase activity"	GO:0004177	5	aten_0.1.m1.28934.m1	0.053048727
+"aminopeptidase activity"	GO:0004177	5	aten_0.1.m1.3960.m1	0
+"non-membrane spanning protein tyrosine kinase activity"	GO:0004715	2	aten_0.1.m1.8857.m1	0
+"non-membrane spanning protein tyrosine kinase activity"	GO:0004715	2	aten_0.1.m1.28778.m1	0
+"nucleoside monophosphate kinase activity"	GO:0004017;GO:0050145;GO:0016776;GO:0019205	3	aten_0.1.m1.36674.m1	0.363870772
+"nucleoside monophosphate kinase activity"	GO:0004017;GO:0050145;GO:0016776;GO:0019205	3	aten_0.1.m1.15569.m1	0.070272682
+"transferase activity, transferring glycosyl groups"	GO:0016757	2	aten_0.1.m1.357.m1	-0.068066105
+"transferase activity, transferring glycosyl groups"	GO:0016757	2	aten_0.1.m1.30354.m1	0.392059194
+"transferase activity, transferring glycosyl groups"	GO:0016757	2	aten_0.1.m1.30347.m1	0.163412455
+"transferase activity, transferring glycosyl groups"	GO:0016757	2	aten_0.1.m1.9137.m1	0
+"transferase activity, transferring glycosyl groups"	GO:0016757	2	aten_0.1.m1.9142.m1	0
+"transferase activity, transferring glycosyl groups"	GO:0016757	2	aten_0.1.m1.3880.m1	0
+"transferase activity, transferring glycosyl groups"	GO:0016757	2	aten_0.1.m1.5867.m1	-0.07155023
+"transferase activity, transferring glycosyl groups"	GO:0016757	2	aten_0.1.m1.9203.m1	0
+"extracellular matrix structural constituent"	GO:0005201	2	aten_0.1.m1.1704.m1	0
+"extracellular matrix structural constituent"	GO:0005201	2	aten_0.1.m1.32767.m1	0
+"extracellular matrix structural constituent"	GO:0005201	2	aten_0.1.m1.36638.m1	0
+"extracellular matrix structural constituent"	GO:0005201	2	aten_0.1.m1.5053.m1	0.328389991
+"extracellular matrix structural constituent"	GO:0005201	2	aten_0.1.m1.5480.m1	0.103642664
+"extracellular matrix structural constituent"	GO:0005201	2	aten_0.1.m1.13483.m1	0
+"extracellular matrix structural constituent"	GO:0005201	2	aten_0.1.m1.2096.m1	0
+"extracellular matrix structural constituent"	GO:0005201	2	aten_0.1.m1.7726.m1	0.040021546
+"extracellular matrix structural constituent"	GO:0005201	2	aten_0.1.m1.32190.m1	0
+"extracellular matrix structural constituent"	GO:0005201	2	aten_0.1.m1.3378.m1	0
+"extracellular matrix structural constituent"	GO:0005201	2	aten_0.1.m1.8855.m1	0
+"extracellular matrix structural constituent"	GO:0005201	2	aten_0.1.m1.2540.m1	0
+"extracellular matrix structural constituent"	GO:0005201	2	aten_0.1.m1.29350.m1	0
+"extracellular matrix structural constituent"	GO:0005201	2	aten_0.1.m1.29356.m1	0.126879538
+"transferase activity"	GO:0016740	2	aten_0.1.m1.8857.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.1458.m1	0.01785929
+"transferase activity"	GO:0016740	2	aten_0.1.m1.24872.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.24689.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.36674.m1	0.363870772
+"transferase activity"	GO:0016740	2	aten_0.1.m1.15569.m1	0.070272682
+"transferase activity"	GO:0016740	2	aten_0.1.m1.3459.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.30132.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.17765.m1	0.02594734
+"transferase activity"	GO:0016740	2	aten_0.1.m1.28807.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.17752.m1	0.02594734
+"transferase activity"	GO:0016740	2	aten_0.1.m1.24688.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.8151.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.1268.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.357.m1	-0.068066105
+"transferase activity"	GO:0016740	2	aten_0.1.m1.21277.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.7877.m1	0.048015919
+"transferase activity"	GO:0016740	2	aten_0.1.m1.24908.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.30354.m1	0.392059194
+"transferase activity"	GO:0016740	2	aten_0.1.m1.30347.m1	0.163412455
+"transferase activity"	GO:0016740	2	aten_0.1.m1.12832.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.28778.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.9137.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.35526.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.9142.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.22867.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.6373.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.7215.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.24696.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.3880.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.7195.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.30851.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.35853.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.3140.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.5867.m1	-0.07155023
+"transferase activity"	GO:0016740	2	aten_0.1.m1.10349.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.24720.m1	-0.023674168
+"transferase activity"	GO:0016740	2	aten_0.1.m1.9203.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.21076.m1	0.037870814
+"transferase activity"	GO:0016740	2	aten_0.1.m1.35404.m1	-0.115636566
+"transferase activity"	GO:0016740	2	aten_0.1.m1.29807.m1	0.01529025
+"transferase activity"	GO:0016740	2	aten_0.1.m1.24683.m1	0
+"transferase activity"	GO:0016740	2	aten_0.1.m1.3628.m1	2.083206992
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.1362.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.26033.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.26338.m1	0.223716009
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.5342.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.24431.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.12009.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.10101.m1	0.048805792
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.12340.m1	0.202122756
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.22545.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.33095.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.31139.m1	0.036160308
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.35201.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.18886.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.14776.m1	0.062343945
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.15087.m1	0.089840922
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.16709.m1	0.027474616
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.15784.m1	0.101663651
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.4314.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.31138.m1	0.036160308
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.38290.m1	0.129373193
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.28592.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.34330.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.6374.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.14160.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.25204.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.8859.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.11102.m1	0.170216217
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.25818.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.3955.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.2871.m1	0.010493163
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.16830.m1	0.3857538
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.33110.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.15276.m1	0.202732304
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.14962.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.13235.m1	0.049067047
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.18469.m1	0.242753595
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.22467.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.1003.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.34955.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.14660.m1	0
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.27378.m1	-5.55E-17
+"nucleic acid binding"	GO:0003676	3	aten_0.1.m1.8946.m1	-0.000978447
+"frizzled binding"	GO:0005109;GO:0001664	3	aten_0.1.m1.25817.m1	0
+"frizzled binding"	GO:0005109;GO:0001664	3	aten_0.1.m1.20041.m1	0
+"transferase activity, transferring alkyl or aryl (other than methyl) groups"	GO:0016765	3	aten_0.1.m1.24908.m1	0
+"transferase activity, transferring alkyl or aryl (other than methyl) groups"	GO:0016765	3	aten_0.1.m1.29807.m1	0.01529025
+"gated channel activity"	GO:0022836	2	aten_0.1.m1.9224.m1	0.045278678
+"gated channel activity"	GO:0022836	2	aten_0.1.m1.26537.m1	0.320642426
+"gated channel activity"	GO:0022836	2	aten_0.1.m1.13368.m1	0
+"gated channel activity"	GO:0022836	2	aten_0.1.m1.19011.m1	0
+"gated channel activity"	GO:0022836	2	aten_0.1.m1.15280.m1	-0.021247911
+"serine-type endopeptidase activity"	GO:0004252;GO:0008236;GO:0017171	5	aten_0.1.m1.28581.m1	0.177961615
+"serine-type endopeptidase activity"	GO:0004252;GO:0008236;GO:0017171	5	aten_0.1.m1.16268.m1	0
+"serine-type endopeptidase activity"	GO:0004252;GO:0008236;GO:0017171	5	aten_0.1.m1.28579.m1	0.177961615
+"serine-type endopeptidase activity"	GO:0004252;GO:0008236;GO:0017171	5	aten_0.1.m1.15151.m1	0
+"serine-type endopeptidase activity"	GO:0004252;GO:0008236;GO:0017171	5	aten_0.1.m1.8452.m1	0
+"serine-type endopeptidase activity"	GO:0004252;GO:0008236;GO:0017171	5	aten_0.1.m1.28558.m1	0
+"serine-type endopeptidase activity"	GO:0004252;GO:0008236;GO:0017171	5	aten_0.1.m1.32765.m1	0
+"serine-type endopeptidase activity"	GO:0004252;GO:0008236;GO:0017171	5	aten_0.1.m1.19696.m1	0.30199703
+"serine-type endopeptidase activity"	GO:0004252;GO:0008236;GO:0017171	5	aten_0.1.m1.31432.m1	0
+"serine-type endopeptidase activity"	GO:0004252;GO:0008236;GO:0017171	5	aten_0.1.m1.36631.m1	0
+"zinc ion binding"	GO:0008270	5	aten_0.1.m1.7200.m1	0
+"zinc ion binding"	GO:0008270	5	aten_0.1.m1.13929.m1	0
+"mannosyl-oligosaccharide 1,2-alpha-mannosidase activity"	GO:0004571;GO:0015924;GO:0004559;GO:0015923	5	aten_0.1.m1.15275.m1	0.202732304
+"mannosyl-oligosaccharide 1,2-alpha-mannosidase activity"	GO:0004571;GO:0015924;GO:0004559;GO:0015923	5	aten_0.1.m1.19865.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.7828.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.8857.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.1458.m1	0.01785929
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.36905.m1	0.090202561
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.4392.m1	-0.000524544
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.27231.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.24872.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.2436.m1	-0.010309662
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.3333.m1	0.232208353
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.6469.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.24689.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.1977.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.36674.m1	0.363870772
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.12833.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.15569.m1	0.070272682
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.28581.m1	0.177961615
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.28038.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.3459.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.635.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.19332.m1	0.080282765
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.20449.m1	1.11E-16
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.5645.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.2830.m1	-0.050439911
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.12764.m1	0.005437712
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.36661.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.30132.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.17765.m1	0.02594734
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.14924.m1	0.04480393
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.38298.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.28807.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.18761.m1	0.030771677
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.17752.m1	0.02594734
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.24688.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.5024.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.8151.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.28934.m1	0.053048727
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.1268.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.357.m1	-0.068066105
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.6464.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.16268.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.2874.m1	0.010493163
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.28579.m1	0.177961615
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.21277.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.13999.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.4482.m1	0.001278719
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.7877.m1	0.048015919
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.14966.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.21070.m1	0.037870814
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.3440.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.34762.m1	0.078817065
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.15275.m1	0.202732304
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.13577.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.24908.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.33031.m1	0.615094269
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.30354.m1	0.392059194
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.1231.m1	0.049995696
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.30347.m1	0.163412455
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.12832.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.34860.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.10225.m1	0.246032782
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.15151.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.28036.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.28778.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.20716.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.7112.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.35850.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.3080.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.9137.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.35526.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.32232.m1	-0.068335004
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.19865.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.9142.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.22867.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.16895.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.16091.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.6373.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.7215.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.24696.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.3880.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.7195.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.30851.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.18878.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.35853.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.3140.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.5867.m1	-0.07155023
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.32384.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.31765.m1	0.503804398
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.8452.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.14104.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.36804.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.28558.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.32765.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.14728.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.632.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.19696.m1	0.30199703
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.18877.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.20866.m1	0.079713588
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.16630.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.35194.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.10349.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.31432.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.3960.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.24720.m1	-0.023674168
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.4856.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.34853.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.9278.m1	-0.036018298
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.966.m1	-0.037870814
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.3043.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.20757.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.9203.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.21076.m1	0.037870814
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.35404.m1	-0.115636566
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.35851.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.29807.m1	0.01529025
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.24683.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.7139.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.36631.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.28898.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.3628.m1	2.083206992
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.29399.m1	0
+"catalytic activity"	GO:0003824	1	aten_0.1.m1.30089.m1	0.030876293
+"hydrolase activity, acting on ester bonds"	GO:0016788	3	aten_0.1.m1.7828.m1	0
+"hydrolase activity, acting on ester bonds"	GO:0016788	3	aten_0.1.m1.3333.m1	0.232208353
+"hydrolase activity, acting on ester bonds"	GO:0016788	3	aten_0.1.m1.28038.m1	0
+"hydrolase activity, acting on ester bonds"	GO:0016788	3	aten_0.1.m1.19332.m1	0.080282765
+"hydrolase activity, acting on ester bonds"	GO:0016788	3	aten_0.1.m1.20449.m1	1.11E-16
+"hydrolase activity, acting on ester bonds"	GO:0016788	3	aten_0.1.m1.5645.m1	0
+"hydrolase activity, acting on ester bonds"	GO:0016788	3	aten_0.1.m1.12764.m1	0.005437712
+"hydrolase activity, acting on ester bonds"	GO:0016788	3	aten_0.1.m1.13999.m1	0
+"hydrolase activity, acting on ester bonds"	GO:0016788	3	aten_0.1.m1.4482.m1	0.001278719
+"hydrolase activity, acting on ester bonds"	GO:0016788	3	aten_0.1.m1.21070.m1	0.037870814
+"hydrolase activity, acting on ester bonds"	GO:0016788	3	aten_0.1.m1.20716.m1	0
+"hydrolase activity, acting on ester bonds"	GO:0016788	3	aten_0.1.m1.31765.m1	0.503804398
+"hydrolase activity, acting on ester bonds"	GO:0016788	3	aten_0.1.m1.36804.m1	0
+"DNA-binding transcription factor activity"	GO:0000981;GO:0003700;GO:0140110	2	aten_0.1.m1.12803.m1	0.016394939
+"DNA-binding transcription factor activity"	GO:0000981;GO:0003700;GO:0140110	2	aten_0.1.m1.17047.m1	0
+"DNA-binding transcription factor activity"	GO:0000981;GO:0003700;GO:0140110	2	aten_0.1.m1.9894.m1	0
+"DNA-binding transcription factor activity"	GO:0000981;GO:0003700;GO:0140110	2	aten_0.1.m1.9152.m1	0
+"DNA-binding transcription factor activity"	GO:0000981;GO:0003700;GO:0140110	2	aten_0.1.m1.23814.m1	-0.004784726
+"DNA-binding transcription factor activity"	GO:0000981;GO:0003700;GO:0140110	2	aten_0.1.m1.30624.m1	-0.172420493
+"DNA-binding transcription factor activity"	GO:0000981;GO:0003700;GO:0140110	2	aten_0.1.m1.13309.m1	0
+"DNA-binding transcription factor activity"	GO:0000981;GO:0003700;GO:0140110	2	aten_0.1.m1.33508.m1	0.396489003
+"DNA-binding transcription factor activity"	GO:0000981;GO:0003700;GO:0140110	2	aten_0.1.m1.13550.m1	0
+"DNA-binding transcription factor activity"	GO:0000981;GO:0003700;GO:0140110	2	aten_0.1.m1.30332.m1	-0.288657483
+"DNA-binding transcription factor activity"	GO:0000981;GO:0003700;GO:0140110	2	aten_0.1.m1.25734.m1	0
+"peptidase activity"	GO:0008233;GO:0004175	3	aten_0.1.m1.2436.m1	-0.010309662
+"peptidase activity"	GO:0008233;GO:0004175	3	aten_0.1.m1.6469.m1	0
+"peptidase activity"	GO:0008233;GO:0004175	3	aten_0.1.m1.28581.m1	0.177961615
+"peptidase activity"	GO:0008233;GO:0004175	3	aten_0.1.m1.5024.m1	0
+"peptidase activity"	GO:0008233;GO:0004175	3	aten_0.1.m1.28934.m1	0.053048727
+"peptidase activity"	GO:0008233;GO:0004175	3	aten_0.1.m1.16268.m1	0
+"peptidase activity"	GO:0008233;GO:0004175	3	aten_0.1.m1.28579.m1	0.177961615
+"peptidase activity"	GO:0008233;GO:0004175	3	aten_0.1.m1.34762.m1	0.078817065
+"peptidase activity"	GO:0008233;GO:0004175	3	aten_0.1.m1.15151.m1	0
+"peptidase activity"	GO:0008233;GO:0004175	3	aten_0.1.m1.16895.m1	0
+"peptidase activity"	GO:0008233;GO:0004175	3	aten_0.1.m1.8452.m1	0
+"peptidase activity"	GO:0008233;GO:0004175	3	aten_0.1.m1.28558.m1	0
+"peptidase activity"	GO:0008233;GO:0004175	3	aten_0.1.m1.32765.m1	0
+"peptidase activity"	GO:0008233;GO:0004175	3	aten_0.1.m1.632.m1	0
+"peptidase activity"	GO:0008233;GO:0004175	3	aten_0.1.m1.19696.m1	0.30199703
+"peptidase activity"	GO:0008233;GO:0004175	3	aten_0.1.m1.31432.m1	0
+"peptidase activity"	GO:0008233;GO:0004175	3	aten_0.1.m1.3960.m1	0
+"peptidase activity"	GO:0008233;GO:0004175	3	aten_0.1.m1.9278.m1	-0.036018298
+"peptidase activity"	GO:0008233;GO:0004175	3	aten_0.1.m1.36631.m1	0
+"mannosyltransferase activity"	GO:0000030	2	aten_0.1.m1.357.m1	-0.068066105
+"mannosyltransferase activity"	GO:0000030	2	aten_0.1.m1.5867.m1	-0.07155023
+"GTPase activator activity"	GO:0005096;GO:0008047	2	aten_0.1.m1.4543.m1	0
+"GTPase activator activity"	GO:0005096;GO:0008047	2	aten_0.1.m1.5799.m1	0
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.8857.m1	0
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.24689.m1	0
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.3459.m1	0
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.28807.m1	0
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.24688.m1	0
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.8151.m1	0
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.1268.m1	0
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.21277.m1	0
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.28778.m1	0
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.35526.m1	0
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.22867.m1	0
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.7215.m1	0
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.24696.m1	0
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.35853.m1	0
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.3140.m1	0
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.10349.m1	0
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.24720.m1	-0.023674168
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.35404.m1	-0.115636566
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.24683.m1	0
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.3628.m1	2.083206992
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.36674.m1	0.363870772
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.15569.m1	0.070272682
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.12832.m1	0
+"transferase activity, transferring phosphorus-containing groups"	GO:0004672;GO:0016301;GO:0016773;GO:0016772	2	aten_0.1.m1.6373.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.8857.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.24872.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.2436.m1	-0.010309662
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.6469.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.24689.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.28581.m1	0.177961615
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.3459.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.5645.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.30132.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.17765.m1	0.02594734
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.28807.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.17752.m1	0.02594734
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.24688.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.5024.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.8151.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.28934.m1	0.053048727
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.1268.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.6464.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.16268.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.28579.m1	0.177961615
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.21277.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.7877.m1	0.048015919
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.21070.m1	0.037870814
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.3440.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.34762.m1	0.078817065
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.13577.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.34860.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.15151.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.28778.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.35526.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.22867.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.16895.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.7215.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.24696.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.7195.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.35853.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.3140.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.8452.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.28558.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.32765.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.632.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.19696.m1	0.30199703
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.10349.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.31432.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.3960.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.24720.m1	-0.023674168
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.9278.m1	-0.036018298
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.35404.m1	-0.115636566
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.24683.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.36631.m1	0
+"catalytic activity, acting on a protein"	GO:0140096	2	aten_0.1.m1.3628.m1	2.083206992
+"transferase activity, transferring hexosyl groups"	GO:0016758	3	aten_0.1.m1.357.m1	-0.068066105
+"transferase activity, transferring hexosyl groups"	GO:0016758	3	aten_0.1.m1.30354.m1	0.392059194
+"transferase activity, transferring hexosyl groups"	GO:0016758	3	aten_0.1.m1.30347.m1	0.163412455
+"transferase activity, transferring hexosyl groups"	GO:0016758	3	aten_0.1.m1.5867.m1	-0.07155023
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.22547.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.1362.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.26033.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.26338.m1	0.223716009
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.5342.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.29917.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.24431.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.12009.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.10101.m1	0.048805792
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.20666.m1	0.07155023
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.12340.m1	0.202122756
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.32962.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.22545.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.33095.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.31139.m1	0.036160308
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.35201.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.18886.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.14776.m1	0.062343945
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.7269.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.15087.m1	0.089840922
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.16709.m1	0.027474616
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.15784.m1	0.101663651
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.4314.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.27545.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.28894.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.31138.m1	0.036160308
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.38290.m1	0.129373193
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.28592.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.4312.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.34330.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.6374.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.14160.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.25204.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.8859.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.12001.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.2171.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.11102.m1	0.170216217
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.25818.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.24256.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.4195.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.22484.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.3955.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.2871.m1	0.010493163
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.16830.m1	0.3857538
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.33110.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.15276.m1	0.202732304
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.30203.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.14962.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.13235.m1	0.049067047
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.18469.m1	0.242753595
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.22467.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.1003.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.34955.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.14660.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.37543.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.22874.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.2169.m1	0
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.27378.m1	-5.55E-17
+"organic cyclic compound binding"	GO:0097159;GO:1901363	2	aten_0.1.m1.8946.m1	-0.000978447
+"UDP-glycosyltransferase activity"	GO:0003980;GO:0035251;GO:0008194;GO:0046527	3	aten_0.1.m1.30354.m1	0.392059194
+"UDP-glycosyltransferase activity"	GO:0003980;GO:0035251;GO:0008194;GO:0046527	3	aten_0.1.m1.30347.m1	0.163412455
+"ion binding"	GO:0043167	2	aten_0.1.m1.29654.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.24974.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.22547.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.16220.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.26093.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.29917.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.29522.m1	0.173083904
+"ion binding"	GO:0043167	2	aten_0.1.m1.24046.m1	0.032269261
+"ion binding"	GO:0043167	2	aten_0.1.m1.36640.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.5028.m1	0.244284963
+"ion binding"	GO:0043167	2	aten_0.1.m1.30349.m1	0.392059194
+"ion binding"	GO:0043167	2	aten_0.1.m1.32962.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.16196.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.7909.m1	0.24260453
+"ion binding"	GO:0043167	2	aten_0.1.m1.36337.m1	0.100615815
+"ion binding"	GO:0043167	2	aten_0.1.m1.21000.m1	0.40659765
+"ion binding"	GO:0043167	2	aten_0.1.m1.19373.m1	0.755728152
+"ion binding"	GO:0043167	2	aten_0.1.m1.7269.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.22581.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.3472.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.21309.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.27545.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.28894.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.4312.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.3732.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.36338.m1	0.100615815
+"ion binding"	GO:0043167	2	aten_0.1.m1.7200.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.30321.m1	-0.288657483
+"ion binding"	GO:0043167	2	aten_0.1.m1.2171.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.16223.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.7119.m1	0.425786892
+"ion binding"	GO:0043167	2	aten_0.1.m1.2255.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.24256.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.4195.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.16215.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.30203.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.28953.m1	0.461171372
+"ion binding"	GO:0043167	2	aten_0.1.m1.22585.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.24774.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.3641.m1	0.114978923
+"ion binding"	GO:0043167	2	aten_0.1.m1.13929.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.27989.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.37543.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.30847.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.22874.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.4855.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.2169.m1	0
+"ion binding"	GO:0043167	2	aten_0.1.m1.18366.m1	2.083206992
+"ion binding"	GO:0043167	2	aten_0.1.m1.13252.m1	0
+"carboxylic ester hydrolase activity"	GO:0052689	4	aten_0.1.m1.4482.m1	0.001278719
+"carboxylic ester hydrolase activity"	GO:0052689	4	aten_0.1.m1.36804.m1	0
+"intracellular calcium activated chloride channel activity"	GO:0005229;GO:0022839;GO:0061778	6	aten_0.1.m1.9224.m1	0.045278678
+"intracellular calcium activated chloride channel activity"	GO:0005229;GO:0022839;GO:0061778	6	aten_0.1.m1.19011.m1	0
+"serine-type endopeptidase inhibitor activity"	GO:0004867	2	aten_0.1.m1.18509.m1	0
+"serine-type endopeptidase inhibitor activity"	GO:0004867	2	aten_0.1.m1.12760.m1	0.005437712
+"molecular function regulator"	GO:0030234;GO:0098772	2	aten_0.1.m1.3932.m1	0
+"molecular function regulator"	GO:0030234;GO:0098772	2	aten_0.1.m1.6159.m1	0
+"molecular function regulator"	GO:0030234;GO:0098772	2	aten_0.1.m1.18509.m1	0
+"molecular function regulator"	GO:0030234;GO:0098772	2	aten_0.1.m1.10742.m1	0
+"molecular function regulator"	GO:0030234;GO:0098772	2	aten_0.1.m1.15672.m1	0.020410997
+"molecular function regulator"	GO:0030234;GO:0098772	2	aten_0.1.m1.15800.m1	5.55E-17
+"molecular function regulator"	GO:0030234;GO:0098772	2	aten_0.1.m1.9161.m1	0
+"molecular function regulator"	GO:0030234;GO:0098772	2	aten_0.1.m1.24298.m1	0
+"molecular function regulator"	GO:0030234;GO:0098772	2	aten_0.1.m1.14930.m1	0.04480393
+"molecular function regulator"	GO:0030234;GO:0098772	2	aten_0.1.m1.12760.m1	0.005437712
+"molecular function regulator"	GO:0030234;GO:0098772	2	aten_0.1.m1.4543.m1	0
+"molecular function regulator"	GO:0030234;GO:0098772	2	aten_0.1.m1.5799.m1	0
+"molecular function regulator"	GO:0030234;GO:0098772	2	aten_0.1.m1.8486.m1	0
+"inorganic cation transmembrane transporter activity"	GO:0005261;GO:0022890;GO:0008324	3	aten_0.1.m1.10100.m1	0.048805792
+"inorganic cation transmembrane transporter activity"	GO:0005261;GO:0022890;GO:0008324	3	aten_0.1.m1.1674.m1	-0.024827103
+"inorganic cation transmembrane transporter activity"	GO:0005261;GO:0022890;GO:0008324	3	aten_0.1.m1.22508.m1	0
+"inorganic cation transmembrane transporter activity"	GO:0005261;GO:0022890;GO:0008324	3	aten_0.1.m1.13368.m1	0
+"inorganic cation transmembrane transporter activity"	GO:0005261;GO:0022890;GO:0008324	3	aten_0.1.m1.11169.m1	0
+"inorganic cation transmembrane transporter activity"	GO:0005261;GO:0022890;GO:0008324	3	aten_0.1.m1.15280.m1	-0.021247911
+"inorganic cation transmembrane transporter activity"	GO:0005261;GO:0022890;GO:0008324	3	aten_0.1.m1.6157.m1	0
+"protein disulfide isomerase activity"	GO:0003756;GO:0016864	2	aten_0.1.m1.3440.m1	0
+"protein disulfide isomerase activity"	GO:0003756;GO:0016864	2	aten_0.1.m1.34860.m1	0
+"phosphatase activity"	GO:0016791	5	aten_0.1.m1.5645.m1	0
+"phosphatase activity"	GO:0016791	5	aten_0.1.m1.12764.m1	0.005437712
+"phosphatase activity"	GO:0016791	5	aten_0.1.m1.21070.m1	0.037870814
+"RNA binding"	GO:0003723	2	aten_0.1.m1.1362.m1	0
+"RNA binding"	GO:0003723	2	aten_0.1.m1.5342.m1	0
+"RNA binding"	GO:0003723	2	aten_0.1.m1.24431.m1	0
+"RNA binding"	GO:0003723	2	aten_0.1.m1.31139.m1	0.036160308
+"RNA binding"	GO:0003723	2	aten_0.1.m1.35201.m1	0
+"RNA binding"	GO:0003723	2	aten_0.1.m1.14776.m1	0.062343945
+"RNA binding"	GO:0003723	2	aten_0.1.m1.15087.m1	0.089840922
+"RNA binding"	GO:0003723	2	aten_0.1.m1.15784.m1	0.101663651
+"RNA binding"	GO:0003723	2	aten_0.1.m1.4314.m1	0
+"RNA binding"	GO:0003723	2	aten_0.1.m1.31138.m1	0.036160308
+"RNA binding"	GO:0003723	2	aten_0.1.m1.14160.m1	0
+"RNA binding"	GO:0003723	2	aten_0.1.m1.25204.m1	0
+"RNA binding"	GO:0003723	2	aten_0.1.m1.11102.m1	0.170216217
+"RNA binding"	GO:0003723	2	aten_0.1.m1.25818.m1	0
+"RNA binding"	GO:0003723	2	aten_0.1.m1.15276.m1	0.202732304
+"RNA binding"	GO:0003723	2	aten_0.1.m1.13235.m1	0.049067047
+"RNA binding"	GO:0003723	2	aten_0.1.m1.18469.m1	0.242753595
+"RNA binding"	GO:0003723	2	aten_0.1.m1.34955.m1	0
+"enzyme inhibitor activity"	GO:0004857	2	aten_0.1.m1.3932.m1	0
+"enzyme inhibitor activity"	GO:0004857	2	aten_0.1.m1.18509.m1	0
+"enzyme inhibitor activity"	GO:0004857	2	aten_0.1.m1.10742.m1	0
+"enzyme inhibitor activity"	GO:0004857	2	aten_0.1.m1.15672.m1	0.020410997
+"enzyme inhibitor activity"	GO:0004857	2	aten_0.1.m1.14930.m1	0.04480393
+"enzyme inhibitor activity"	GO:0004857	2	aten_0.1.m1.12760.m1	0.005437712
+"protein serine/threonine kinase activity"	GO:0004674	3	aten_0.1.m1.24689.m1	0
+"protein serine/threonine kinase activity"	GO:0004674	3	aten_0.1.m1.24688.m1	0
+"protein serine/threonine kinase activity"	GO:0004674	3	aten_0.1.m1.21277.m1	0
+"protein serine/threonine kinase activity"	GO:0004674	3	aten_0.1.m1.22867.m1	0
+"protein serine/threonine kinase activity"	GO:0004674	3	aten_0.1.m1.7215.m1	0
+"protein serine/threonine kinase activity"	GO:0004674	3	aten_0.1.m1.24696.m1	0
+"protein serine/threonine kinase activity"	GO:0004674	3	aten_0.1.m1.35853.m1	0
+"protein serine/threonine kinase activity"	GO:0004674	3	aten_0.1.m1.3140.m1	0
+"protein serine/threonine kinase activity"	GO:0004674	3	aten_0.1.m1.10349.m1	0
+"protein serine/threonine kinase activity"	GO:0004674	3	aten_0.1.m1.24720.m1	-0.023674168
+"protein serine/threonine kinase activity"	GO:0004674	3	aten_0.1.m1.24683.m1	0
+"endopeptidase inhibitor activity"	GO:0004866;GO:0030414;GO:0061135;GO:0061134	3	aten_0.1.m1.3932.m1	0
+"endopeptidase inhibitor activity"	GO:0004866;GO:0030414;GO:0061135;GO:0061134	3	aten_0.1.m1.18509.m1	0
+"endopeptidase inhibitor activity"	GO:0004866;GO:0030414;GO:0061135;GO:0061134	3	aten_0.1.m1.15672.m1	0.020410997
+"endopeptidase inhibitor activity"	GO:0004866;GO:0030414;GO:0061135;GO:0061134	3	aten_0.1.m1.12760.m1	0.005437712
+"structural molecule activity"	GO:0005198	1	aten_0.1.m1.1704.m1	0
+"structural molecule activity"	GO:0005198	1	aten_0.1.m1.32767.m1	0
+"structural molecule activity"	GO:0005198	1	aten_0.1.m1.36638.m1	0
+"structural molecule activity"	GO:0005198	1	aten_0.1.m1.7936.m1	0.04138262
+"structural molecule activity"	GO:0005198	1	aten_0.1.m1.7908.m1	0.24260453
+"structural molecule activity"	GO:0005198	1	aten_0.1.m1.14748.m1	0
+"structural molecule activity"	GO:0005198	1	aten_0.1.m1.5053.m1	0.328389991
+"structural molecule activity"	GO:0005198	1	aten_0.1.m1.18869.m1	0
+"structural molecule activity"	GO:0005198	1	aten_0.1.m1.5480.m1	0.103642664
+"structural molecule activity"	GO:0005198	1	aten_0.1.m1.13483.m1	0
+"structural molecule activity"	GO:0005198	1	aten_0.1.m1.5529.m1	0.02819968
+"structural molecule activity"	GO:0005198	1	aten_0.1.m1.2096.m1	0
+"structural molecule activity"	GO:0005198	1	aten_0.1.m1.7726.m1	0.040021546
+"structural molecule activity"	GO:0005198	1	aten_0.1.m1.32190.m1	0
+"structural molecule activity"	GO:0005198	1	aten_0.1.m1.3378.m1	0
+"structural molecule activity"	GO:0005198	1	aten_0.1.m1.8855.m1	0
+"structural molecule activity"	GO:0005198	1	aten_0.1.m1.2540.m1	0
+"structural molecule activity"	GO:0005198	1	aten_0.1.m1.29385.m1	0
+"structural molecule activity"	GO:0005198	1	aten_0.1.m1.29350.m1	0
+"structural molecule activity"	GO:0005198	1	aten_0.1.m1.29356.m1	0.126879538
+"metallopeptidase activity"	GO:0004222;GO:0008237	4	aten_0.1.m1.6469.m1	0
+"metallopeptidase activity"	GO:0004222;GO:0008237	4	aten_0.1.m1.5024.m1	0
+"metallopeptidase activity"	GO:0004222;GO:0008237	4	aten_0.1.m1.16895.m1	0
+"metallopeptidase activity"	GO:0004222;GO:0008237	4	aten_0.1.m1.9278.m1	-0.036018298
+"bubble DNA binding"	GO:0000405;GO:0000217	2	aten_0.1.m1.16830.m1	0.3857538
+"bubble DNA binding"	GO:0000405;GO:0000217	2	aten_0.1.m1.33110.m1	0
+"protein tyrosine phosphatase activity"	GO:0004725;GO:0004721	5	aten_0.1.m1.5645.m1	0
+"protein tyrosine phosphatase activity"	GO:0004725;GO:0004721	5	aten_0.1.m1.21070.m1	0.037870814
+"signaling receptor binding"	GO:0005102	2	aten_0.1.m1.13159.m1	0
+"signaling receptor binding"	GO:0005102	2	aten_0.1.m1.36629.m1	0
+"signaling receptor binding"	GO:0005102	2	aten_0.1.m1.12604.m1	-0.005848016
+"signaling receptor binding"	GO:0005102	2	aten_0.1.m1.24142.m1	0.508584128
+"signaling receptor binding"	GO:0005102	2	aten_0.1.m1.25817.m1	0
+"signaling receptor binding"	GO:0005102	2	aten_0.1.m1.37917.m1	0
+"signaling receptor binding"	GO:0005102	2	aten_0.1.m1.6153.m1	0.076828954
+"signaling receptor binding"	GO:0005102	2	aten_0.1.m1.20041.m1	0
+"signaling receptor binding"	GO:0005102	2	aten_0.1.m1.5912.m1	0
+"signaling receptor binding"	GO:0005102	2	aten_0.1.m1.27227.m1	0
+"signaling receptor binding"	GO:0005102	2	aten_0.1.m1.8486.m1	0
+"isomerase activity"	GO:0016853;GO:0016860	2	aten_0.1.m1.38298.m1	0
+"isomerase activity"	GO:0016853;GO:0016860	2	aten_0.1.m1.3440.m1	0
+"isomerase activity"	GO:0016853;GO:0016860	2	aten_0.1.m1.34860.m1	0
+"isomerase activity"	GO:0016853;GO:0016860	2	aten_0.1.m1.20757.m1	0
+"hydrolase activity, acting on glycosyl bonds"	GO:0004553;GO:0016798	3	aten_0.1.m1.14924.m1	0.04480393
+"hydrolase activity, acting on glycosyl bonds"	GO:0004553;GO:0016798	3	aten_0.1.m1.15275.m1	0.202732304
+"hydrolase activity, acting on glycosyl bonds"	GO:0004553;GO:0016798	3	aten_0.1.m1.10225.m1	0.246032782
+"hydrolase activity, acting on glycosyl bonds"	GO:0004553;GO:0016798	3	aten_0.1.m1.19865.m1	0
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.21565.m1	0.046103096
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.30060.m1	0.002886451
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.10056.m1	0
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.28326.m1	0.087176694
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.19643.m1	0
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.6017.m1	-0.197327036
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.27599.m1	0.077075257
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.4682.m1	0
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.12802.m1	0.016394939
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.34710.m1	0
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.1467.m1	0.01785929
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.24154.m1	0
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.964.m1	-0.037870814
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.1228.m1	0.049995696
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.4763.m1	0
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.360.m1	-0.068066105
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.353.m1	-0.068066105
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.3332.m1	0
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.36111.m1	0.310436447
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.3292.m1	0.032430211
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.12669.m1	0
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.12620.m1	0
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.27597.m1	0.077075257
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.24934.m1	0
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.12696.m1	0
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.24134.m1	0.538961743
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.22683.m1	0.051139232
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.12649.m1	-0.010309662
+"G protein-coupled receptor activity"	GO:0004930	3	aten_0.1.m1.12013.m1	0
+"chromatin binding"	GO:0003682	2	aten_0.1.m1.36086.m1	-0.035700067
+"chromatin binding"	GO:0003682	2	aten_0.1.m1.14533.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.21565.m1	0.046103096
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.30060.m1	0.002886451
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.10056.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.5645.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.28326.m1	0.087176694
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.27866.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.19643.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.20721.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.8151.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.1268.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.6017.m1	-0.197327036
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.27599.m1	0.077075257
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.4682.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.12802.m1	0.016394939
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.34710.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.1467.m1	0.01785929
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.24154.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.27886.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.964.m1	-0.037870814
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.1228.m1	0.049995696
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.4763.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.360.m1	-0.068066105
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.353.m1	-0.068066105
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.35526.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.3332.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.36111.m1	0.310436447
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.3292.m1	0.032430211
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.10260.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.12669.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.12620.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.27885.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.27597.m1	0.077075257
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.24934.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.12696.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.24134.m1	0.538961743
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.22683.m1	0.051139232
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.12649.m1	-0.010309662
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.12013.m1	0
+"signaling receptor activity"	GO:0004888;GO:0038023;GO:0060089	2	aten_0.1.m1.12801.m1	0.016394939
+"hydrolase activity, acting on acid anhydrides, in phosphorus-containing anhydrides"	GO:0016462;GO:0016818;GO:0016817;GO:0017111	4	aten_0.1.m1.635.m1	0
+"hydrolase activity, acting on acid anhydrides, in phosphorus-containing anhydrides"	GO:0016462;GO:0016818;GO:0016817;GO:0017111	4	aten_0.1.m1.36661.m1	0
+"hydrolase activity, acting on acid anhydrides, in phosphorus-containing anhydrides"	GO:0016462;GO:0016818;GO:0016817;GO:0017111	4	aten_0.1.m1.3080.m1	0
+"hydrolase activity, acting on acid anhydrides, in phosphorus-containing anhydrides"	GO:0016462;GO:0016818;GO:0016817;GO:0017111	4	aten_0.1.m1.16630.m1	0
+"hydrolase activity, acting on acid anhydrides, in phosphorus-containing anhydrides"	GO:0016462;GO:0016818;GO:0016817;GO:0017111	4	aten_0.1.m1.34853.m1	0
+"scavenger receptor activity"	GO:0005044;GO:0038024	2	aten_0.1.m1.36918.m1	0
+"scavenger receptor activity"	GO:0005044;GO:0038024	2	aten_0.1.m1.29802.m1	0.01529025
+"scavenger receptor activity"	GO:0005044;GO:0038024	2	aten_0.1.m1.22686.m1	0.051139232
+"actin binding"	GO:0003779;GO:0008092	3	aten_0.1.m1.2588.m1	0
+"actin binding"	GO:0003779;GO:0008092	3	aten_0.1.m1.28987.m1	0
+"actin binding"	GO:0003779;GO:0008092	3	aten_0.1.m1.13406.m1	0
+"actin binding"	GO:0003779;GO:0008092	3	aten_0.1.m1.1464.m1	0.01785929
+"lipopolysaccharide binding"	GO:0001530;GO:0008289	3	aten_0.1.m1.36636.m1	0
+"lipopolysaccharide binding"	GO:0001530;GO:0008289	3	aten_0.1.m1.13285.m1	0.066385928
+"netrin receptor activity"	GO:0005042	3	aten_0.1.m1.27866.m1	0
+"netrin receptor activity"	GO:0005042	3	aten_0.1.m1.27886.m1	0
+"netrin receptor activity"	GO:0005042	3	aten_0.1.m1.27885.m1	0
+"metal ion transmembrane transporter activity"	GO:0005262;GO:0015085;GO:0046873;GO:0072509	3	aten_0.1.m1.10100.m1	0.048805792
+"metal ion transmembrane transporter activity"	GO:0005262;GO:0015085;GO:0046873;GO:0072509	3	aten_0.1.m1.13368.m1	0
+"metal ion transmembrane transporter activity"	GO:0005262;GO:0015085;GO:0046873;GO:0072509	3	aten_0.1.m1.11169.m1	0
+"metal ion transmembrane transporter activity"	GO:0005262;GO:0015085;GO:0046873;GO:0072509	3	aten_0.1.m1.15280.m1	-0.021247911
+"metal ion transmembrane transporter activity"	GO:0005262;GO:0015085;GO:0046873;GO:0072509	3	aten_0.1.m1.6157.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.29654.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.36086.m1	-0.035700067
+"binding"	GO:0005488	1	aten_0.1.m1.24974.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.22547.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.1362.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.26033.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.36636.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.8942.m1	-0.000978447
+"binding"	GO:0005488	1	aten_0.1.m1.26338.m1	0.223716009
+"binding"	GO:0005488	1	aten_0.1.m1.16220.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.26093.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.5342.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.29917.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.24431.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.12009.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.29522.m1	0.173083904
+"binding"	GO:0005488	1	aten_0.1.m1.10101.m1	0.048805792
+"binding"	GO:0005488	1	aten_0.1.m1.20666.m1	0.07155023
+"binding"	GO:0005488	1	aten_0.1.m1.2588.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.24046.m1	0.032269261
+"binding"	GO:0005488	1	aten_0.1.m1.36640.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.13159.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.5028.m1	0.244284963
+"binding"	GO:0005488	1	aten_0.1.m1.12340.m1	0.202122756
+"binding"	GO:0005488	1	aten_0.1.m1.30349.m1	0.392059194
+"binding"	GO:0005488	1	aten_0.1.m1.32962.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.27864.m1	0.450223442
+"binding"	GO:0005488	1	aten_0.1.m1.22545.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.16196.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.7909.m1	0.24260453
+"binding"	GO:0005488	1	aten_0.1.m1.36337.m1	0.100615815
+"binding"	GO:0005488	1	aten_0.1.m1.28117.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.21000.m1	0.40659765
+"binding"	GO:0005488	1	aten_0.1.m1.19373.m1	0.755728152
+"binding"	GO:0005488	1	aten_0.1.m1.33095.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.31139.m1	0.036160308
+"binding"	GO:0005488	1	aten_0.1.m1.35201.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.18886.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.14776.m1	0.062343945
+"binding"	GO:0005488	1	aten_0.1.m1.7269.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.15087.m1	0.089840922
+"binding"	GO:0005488	1	aten_0.1.m1.22581.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.36629.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.16709.m1	0.027474616
+"binding"	GO:0005488	1	aten_0.1.m1.15784.m1	0.101663651
+"binding"	GO:0005488	1	aten_0.1.m1.3472.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.21309.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.4314.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.27545.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.28894.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.31138.m1	0.036160308
+"binding"	GO:0005488	1	aten_0.1.m1.13283.m1	0.066385928
+"binding"	GO:0005488	1	aten_0.1.m1.38290.m1	0.129373193
+"binding"	GO:0005488	1	aten_0.1.m1.8941.m1	-0.000978447
+"binding"	GO:0005488	1	aten_0.1.m1.12604.m1	-0.005848016
+"binding"	GO:0005488	1	aten_0.1.m1.28592.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.4312.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.3732.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.34330.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.6374.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.36338.m1	0.100615815
+"binding"	GO:0005488	1	aten_0.1.m1.14160.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.25204.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.24142.m1	0.508584128
+"binding"	GO:0005488	1	aten_0.1.m1.8859.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.7200.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.12001.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.30321.m1	-0.288657483
+"binding"	GO:0005488	1	aten_0.1.m1.28987.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.25817.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.2171.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.16223.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.11102.m1	0.170216217
+"binding"	GO:0005488	1	aten_0.1.m1.7119.m1	0.425786892
+"binding"	GO:0005488	1	aten_0.1.m1.2255.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.25818.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.24256.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.4195.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.22484.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.14533.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.3955.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.2871.m1	0.010493163
+"binding"	GO:0005488	1	aten_0.1.m1.16215.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.13406.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.16830.m1	0.3857538
+"binding"	GO:0005488	1	aten_0.1.m1.33110.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.15276.m1	0.202732304
+"binding"	GO:0005488	1	aten_0.1.m1.30203.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.14962.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.1464.m1	0.01785929
+"binding"	GO:0005488	1	aten_0.1.m1.13235.m1	0.049067047
+"binding"	GO:0005488	1	aten_0.1.m1.28953.m1	0.461171372
+"binding"	GO:0005488	1	aten_0.1.m1.22585.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.18469.m1	0.242753595
+"binding"	GO:0005488	1	aten_0.1.m1.37917.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.22467.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.6153.m1	0.076828954
+"binding"	GO:0005488	1	aten_0.1.m1.24774.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.1003.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.34955.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.3641.m1	0.114978923
+"binding"	GO:0005488	1	aten_0.1.m1.13929.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.27989.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.20041.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.14660.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.37543.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.30847.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.5912.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.22874.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.4855.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.27227.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.8486.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.2169.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.18366.m1	2.083206992
+"binding"	GO:0005488	1	aten_0.1.m1.27378.m1	-5.55E-17
+"binding"	GO:0005488	1	aten_0.1.m1.13252.m1	0
+"binding"	GO:0005488	1	aten_0.1.m1.13285.m1	0.066385928
+"binding"	GO:0005488	1	aten_0.1.m1.8946.m1	-0.000978447
+"GTPase activity"	GO:0003924	4	aten_0.1.m1.36661.m1	0
+"GTPase activity"	GO:0003924	4	aten_0.1.m1.34853.m1	0
+"ubiquitin-like protein transferase activity"	GO:0004842;GO:0019787	3	aten_0.1.m1.24872.m1	0
+"ubiquitin-like protein transferase activity"	GO:0004842;GO:0019787	3	aten_0.1.m1.30132.m1	0
+"ubiquitin-like protein transferase activity"	GO:0004842;GO:0019787	3	aten_0.1.m1.17765.m1	0.02594734
+"ubiquitin-like protein transferase activity"	GO:0004842;GO:0019787	3	aten_0.1.m1.17752.m1	0.02594734
+"ubiquitin-like protein transferase activity"	GO:0004842;GO:0019787	3	aten_0.1.m1.7877.m1	0.048015919
+"ubiquitin-like protein transferase activity"	GO:0004842;GO:0019787	3	aten_0.1.m1.7195.m1	0
+"integrin binding"	GO:0005178;GO:0044877;GO:0050839	2	aten_0.1.m1.13159.m1	0
+"integrin binding"	GO:0005178;GO:0044877;GO:0050839	2	aten_0.1.m1.12604.m1	-0.005848016
+"integrin binding"	GO:0005178;GO:0044877;GO:0050839	2	aten_0.1.m1.37917.m1	0
+"integrin binding"	GO:0005178;GO:0044877;GO:0050839	2	aten_0.1.m1.27227.m1	0
+"voltage-gated channel activity"	GO:0005244;GO:0022832	3	aten_0.1.m1.26537.m1	0.320642426
+"voltage-gated channel activity"	GO:0005244;GO:0022832	3	aten_0.1.m1.13368.m1	0
+"voltage-gated channel activity"	GO:0005244;GO:0022832	3	aten_0.1.m1.15280.m1	-0.021247911
+"DNA binding"	GO:0003677	4	aten_0.1.m1.10101.m1	0.048805792
+"DNA binding"	GO:0003677	4	aten_0.1.m1.12340.m1	0.202122756
+"DNA binding"	GO:0003677	4	aten_0.1.m1.22545.m1	0
+"DNA binding"	GO:0003677	4	aten_0.1.m1.33095.m1	0
+"DNA binding"	GO:0003677	4	aten_0.1.m1.18886.m1	0
+"DNA binding"	GO:0003677	4	aten_0.1.m1.16709.m1	0.027474616
+"DNA binding"	GO:0003677	4	aten_0.1.m1.28592.m1	0
+"DNA binding"	GO:0003677	4	aten_0.1.m1.34330.m1	0
+"DNA binding"	GO:0003677	4	aten_0.1.m1.6374.m1	0
+"DNA binding"	GO:0003677	4	aten_0.1.m1.8859.m1	0
+"DNA binding"	GO:0003677	4	aten_0.1.m1.3955.m1	0
+"DNA binding"	GO:0003677	4	aten_0.1.m1.16830.m1	0.3857538
+"DNA binding"	GO:0003677	4	aten_0.1.m1.33110.m1	0
+"DNA binding"	GO:0003677	4	aten_0.1.m1.14962.m1	0
+"DNA binding"	GO:0003677	4	aten_0.1.m1.22467.m1	0
+"DNA binding"	GO:0003677	4	aten_0.1.m1.1003.m1	0
+"DNA binding"	GO:0003677	4	aten_0.1.m1.14660.m1	0
+"DNA binding"	GO:0003677	4	aten_0.1.m1.27378.m1	-5.55E-17
+"DNA binding"	GO:0003677	4	aten_0.1.m1.8946.m1	-0.000978447
+"tRNA binding"	GO:0000049	3	aten_0.1.m1.24431.m1	0
+"tRNA binding"	GO:0000049	3	aten_0.1.m1.31139.m1	0.036160308
+"tRNA binding"	GO:0000049	3	aten_0.1.m1.4314.m1	0
+"tRNA binding"	GO:0000049	3	aten_0.1.m1.31138.m1	0.036160308
+"tRNA binding"	GO:0000049	3	aten_0.1.m1.11102.m1	0.170216217
