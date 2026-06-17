@@ -40,6 +40,7 @@ library(tibble)
 library(purrr)
 library(ggthemes)
 library(vegan)
+library(rstatix)
 ```
 
 Load personal theme
@@ -168,7 +169,7 @@ ten_larvae_Amb<- gl.keep.pop(ten_larvae, pop.list = c('Amb'), as.pop = 'Temp', m
 ten_larvae_Hot<- gl.keep.pop(ten_larvae, pop.list = c('Hot'), as.pop = 'Temp', mono.rm = FALSE, recalc=TRUE)
 ten_larvae_T0<- gl.keep.pop(ten_larvae, pop.list = c('T0'), as.pop = 'Temp', mono.rm = FALSE, recalc=TRUE)
 ```
-
+Skip to line 
 #############
 By reef
 50 iterations of diversity metrics
@@ -545,7 +546,9 @@ diversity_summary <- rbind(diversity_pre, diversity_amb, diversity_hot) |>
 #saveRDS(diversity_summary, file = "/Users/alexmacadam/Dropbox/PhD/Chapter3_Genomics/A_tenuis/04_larvae/diversity_metrics/diversity_summary.rds")
 diversity_summary <- readRDS("/Users/alexmacadam/Documents/GitHub/AGF-DArT/data/diversity_summary.rds") |>
   mutate(Metric = factor(Metric, levels = c("Allelic Richness","Shannon Index","He")))
+```
 
+```{r}
 #create diversity by region
 div_sum_sum <- summarySE(diversity_summary, measurevar="mean",
                      groupvars=c("Temp","Metric","Region"), na.rm=TRUE) |>
@@ -555,6 +558,45 @@ div_sum_se <- summarySE(diversity_summary, measurevar="SE",
   dplyr::rename(SE = mean) |> dplyr::select(Temp, Metric, Region, SE)
 
 diversity_region <- left_join(div_sum_sum, div_sum_se, by = c("Temp", "Metric", "Region"))
+```
+
+```{r}
+# Add temperature labels to each dataset first
+long_diversity_T0 <- long_diversity_T0 %>% mutate(Temp = "Pre")
+long_diversity_Amb <- long_diversity_Amb %>% mutate(Temp = "Amb")
+long_diversity_Hot <- long_diversity_Hot %>% mutate(Temp = "Hot")
+
+# Combine all 50-iteration datasets
+diversity_long_all <- bind_rows(long_diversity_T0, long_diversity_Amb, long_diversity_Hot)
+
+diversity_long_all <- diversity_long_all %>%
+  mutate(Region = case_when(
+    grepl("DavxDav|PalxPal|PalxDav", Reefcross) ~ "Central",
+    grepl("JewxDav|JewxPal|SwixDav", Reefcross) ~ "Hybrid",
+    grepl("JewxJew|ParxPar|SwixSwi", Reefcross) ~ "North",
+    TRUE ~ NA_character_
+  )) %>%
+  filter(!is.na(Region))
+
+# Perform pairwise Wilcoxon tests by metric × temperature
+pairwise_iter_wilcox <- diversity_long_all %>%
+  group_by(Metric, Temp) %>%
+  rstatix::pairwise_wilcox_test(
+    Value ~ Region,
+    p.adjust.method = "BH"
+  )
+
+pairwise_iter_wilcox <- pairwise_iter_wilcox %>%
+  add_significance("p.adj") %>%
+  arrange(Metric, Temp, group1, group2)
+
+# Perform pairwise Wilcoxon tests by metric × Region
+pairwise_iter_wilcox2 <- diversity_long_all %>%
+  group_by(Metric, Region) %>%
+  rstatix::pairwise_wilcox_test(
+    Value ~ Temp,
+    p.adjust.method = "BH"
+  )
 ```
 
 ```{r}
